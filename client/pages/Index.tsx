@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Star, MapPin, Phone, Mail, Clock, Shield, Users, Award, ChevronRight, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Index() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
