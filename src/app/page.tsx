@@ -32,7 +32,7 @@ export default function Index() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center">
-              <div className="text-2xl font-bold text-primary">NotaryPro</div>
+              <div className="text-2xl font-bold text-primary">Notarized</div>
             </div>
 
             {/* Desktop Navigation */}
@@ -600,7 +600,7 @@ export default function Index() {
                 </div>
               </div>
               <p className="text-gray-700 italic">
-                "NotaryPro made the home buying process so much easier. The
+                "Notarized made the home buying process so much easier. The
                 notary arrived right on time and was incredibly professional.
                 I'll definitely use them again!"
               </p>
@@ -762,7 +762,7 @@ export default function Index() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="space-y-6">
-              <div className="text-2xl font-bold text-primary">NotaryPro</div>
+              <div className="text-2xl font-bold text-primary">Notarized</div>
               <p className="text-gray-400">
                 Connecting you with certified notaries nationwide. Fast,
                 reliable, and professional services.
@@ -875,7 +875,7 @@ export default function Index() {
           </div>
 
           <div className="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 NotaryPro. All rights reserved.</p>
+            <p>&copy; 2024 Notarized. All rights reserved.</p>
           </div>
         </div>
       </footer>

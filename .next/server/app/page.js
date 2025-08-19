@@ -239,7 +239,7 @@ function Index() {
                                     className: "flex items-center",
                                     children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)("div", {
                                         className: "text-2xl font-bold text-primary",
-                                        children: "NotaryPro"
+                                        children: "Notarized"
                                     }, void 0, false, {
                                         fileName: "/home/ubuntu/notarized_listing_platform/src/app/page.tsx",
                                         lineNumber: 35,
@@ -1725,7 +1725,7 @@ function Index() {
                                         }, this),
                                         /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)("p", {
                                             className: "text-gray-700 italic",
-                                            children: '"NotaryPro made the home buying process so much easier. The notary arrived right on time and was incredibly professional. I\'ll definitely use them again!"'
+                                            children: '"Notarized made the home buying process so much easier. The notary arrived right on time and was incredibly professional. I\'ll definitely use them again!"'
                                         }, void 0, false, {
                                             fileName: "/home/ubuntu/notarized_listing_platform/src/app/page.tsx",
                                             lineNumber: 602,
@@ -2149,7 +2149,7 @@ function Index() {
                                     children: [
                                         /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)("div", {
                                             className: "text-2xl font-bold text-primary",
-                                            children: "NotaryPro"
+                                            children: "Notarized"
                                         }, void 0, false, {
                                             fileName: "/home/ubuntu/notarized_listing_platform/src/app/page.tsx",
                                             lineNumber: 765,
@@ -2535,7 +2535,7 @@ function Index() {
                         /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)("div", {
                             className: "border-t border-gray-700 mt-12 pt-8 text-center text-gray-400",
                             children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)("p", {
-                                children: "\xa9 2024 NotaryPro. All rights reserved."
+                                children: "\xa9 2024 Notarized. All rights reserved."
                             }, void 0, false, {
                                 fileName: "/home/ubuntu/notarized_listing_platform/src/app/page.tsx",
                                 lineNumber: 878,
