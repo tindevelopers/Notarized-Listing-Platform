@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Header from "@/components/navigation/header";
+import Footer from "@/components/navigation/footer";
 import {
   Star,
   MapPin,
@@ -15,10 +17,7 @@ import {
   User,
   MessageCircle,
   ExternalLink,
-  Menu,
-  X,
 } from "lucide-react";
-import { useState } from "react";
 import Link from "next/link";
 
 interface PageProps {
@@ -26,107 +25,18 @@ interface PageProps {
 }
 
 export default function NotaryProfile({ params }: PageProps) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="w-full bg-white border-b border-gray-100 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <div className="flex items-center">
-              <Link href="/" className="text-2xl font-bold text-primary">
-                Notarized
-              </Link>
-            </div>
-
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-8">
-              <a
-                href="#"
-                className="text-gray-700 hover:text-primary transition-colors"
-              >
-                Notary Services
-              </a>
-              <a
-                href="#"
-                className="text-gray-700 hover:text-primary transition-colors"
-              >
-                Remote Services
-              </a>
-              <a
-                href="#"
-                className="text-gray-700 hover:text-primary transition-colors"
-              >
-                Deed Prep
-              </a>
-            </nav>
-
-            {/* Desktop Auth Buttons */}
-            <div className="hidden md:flex items-center space-x-4">
-              <Button variant="ghost" className="text-gray-700">
-                List your business
-              </Button>
-              <Button>Search Notaries</Button>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              className="md:hidden p-2"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
-            </button>
-          </div>
-
-          {/* Mobile Menu */}
-          {isMenuOpen && (
-            <div className="md:hidden border-t border-gray-100 py-4">
-              <nav className="flex flex-col space-y-4">
-                <a
-                  href="#"
-                  className="text-gray-700 hover:text-primary transition-colors"
-                >
-                  Notary Services
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-700 hover:text-primary transition-colors"
-                >
-                  Remote Services
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-700 hover:text-primary transition-colors"
-                >
-                  Deed Prep
-                </a>
-                <div className="pt-4 border-t border-gray-100 flex flex-col space-y-2">
-                  <Button
-                    variant="ghost"
-                    className="text-gray-700 justify-start"
-                  >
-                    List your business
-                  </Button>
-                  <Button className="justify-start">Search Notaries</Button>
-                </div>
-              </nav>
-            </div>
-          )}
-        </div>
-      </header>
+      <Header />
 
       {/* Gray background section */}
       <div className="bg-gray-50 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Back to Notarys */}
           <Link
-            href="/"
+            href="/california-notaries"
             className="inline-flex items-center space-x-2 text-gray-900 hover:text-primary mb-8"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -450,23 +360,7 @@ export default function NotaryProfile({ params }: PageProps) {
       </div>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="space-y-6">
-              <div className="text-2xl font-bold text-primary">Notarized</div>
-              <p className="text-gray-400">
-                Connecting you with certified notaries nationwide. Fast,
-                reliable, and professional services.
-              </p>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
-            <p>Copyright © Notarized Inc | Powered by TIN</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

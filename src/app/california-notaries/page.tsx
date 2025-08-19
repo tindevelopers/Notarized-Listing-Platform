@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Header from "@/components/navigation/header";
+import Footer from "@/components/navigation/footer";
 import {
   Select,
   SelectContent,
@@ -11,12 +13,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Star, MapPin, Menu, X, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { Star, MapPin, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 export default function CaliforniaNotaries() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Sample notary data - this would typically come from an API
   const notaries = [
@@ -78,104 +78,7 @@ export default function CaliforniaNotaries() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="w-full bg-white border-b border-gray-100 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <Link href="/" className="flex items-center">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">N</span>
-                </div>
-                <span className="text-xl font-bold text-gray-900">
-                  Notarized
-                </span>
-              </div>
-            </Link>
-
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-8">
-              <a
-                href="#"
-                className="text-gray-700 hover:text-blue-600 transition-colors"
-              >
-                Notary Services
-              </a>
-              <a
-                href="#"
-                className="text-gray-700 hover:text-blue-600 transition-colors"
-              >
-                Remote Services
-              </a>
-              <a
-                href="#"
-                className="text-gray-700 hover:text-blue-600 transition-colors"
-              >
-                Document Prep
-              </a>
-            </nav>
-
-            {/* Desktop Auth Buttons */}
-            <div className="hidden md:flex items-center space-x-4">
-              <Button variant="outline" className="text-gray-700">
-                List your business
-              </Button>
-              <Button className="bg-blue-600 hover:bg-blue-700">
-                Search Now
-              </Button>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              className="md:hidden p-2"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
-            </button>
-          </div>
-
-          {/* Mobile Menu */}
-          {isMenuOpen && (
-            <div className="md:hidden border-t border-gray-100 py-4">
-              <nav className="flex flex-col space-y-4">
-                <a
-                  href="#"
-                  className="text-gray-700 hover:text-blue-600 transition-colors"
-                >
-                  Notary Services
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-700 hover:text-blue-600 transition-colors"
-                >
-                  Remote Services
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-700 hover:text-blue-600 transition-colors"
-                >
-                  Document Prep
-                </a>
-                <div className="pt-4 border-t border-gray-100 flex flex-col space-y-2">
-                  <Button
-                    variant="outline"
-                    className="text-gray-700 justify-start"
-                  >
-                    List your business
-                  </Button>
-                  <Button className="bg-blue-600 hover:bg-blue-700 justify-start">
-                    Search Now
-                  </Button>
-                </div>
-              </nav>
-            </div>
-          )}
-        </div>
-      </header>
+      <Header />
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -279,9 +182,11 @@ export default function CaliforniaNotaries() {
                   >
                     Book
                   </Button>
-                  <Button variant="outline" size="sm" className="flex-1">
-                    More
-                  </Button>
+                  <Link href={`/notary/${notary.id}`}>
+                    <Button variant="outline" size="sm" className="flex-1">
+                      View Profile
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </Card>
@@ -344,47 +249,7 @@ export default function CaliforniaNotaries() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-gray-200 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {/* Footer content */}
-            <div className="space-y-4">
-              <h4 className="font-semibold text-gray-900">Main Pages</h4>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li>
-                  <Link
-                    href="/"
-                    className="hover:text-gray-900 transition-colors"
-                  >
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/about"
-                    className="hover:text-gray-900 transition-colors"
-                  >
-                    About
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/california-notaries"
-                    className="hover:text-gray-900 transition-colors"
-                  >
-                    California Notaries
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Copyright */}
-          <div className="border-t border-gray-200 mt-12 pt-8 text-center text-sm text-gray-600">
-            <p>Copyright © Notarized Inc | Powered by TIN</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

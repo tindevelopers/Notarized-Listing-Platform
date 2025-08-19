@@ -5,6 +5,8 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import DualSearchBanner from "@/components/DualSearchBanner";
+import Header from "@/components/navigation/header";
+import Footer from "@/components/navigation/footer";
 import {
   Star,
   MapPin,
@@ -15,129 +17,14 @@ import {
   Users,
   Award,
   ChevronRight,
-  Menu,
-  X,
 } from "lucide-react";
-import { useState } from "react";
 import Link from "next/link";
 
 export default function Index() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="w-full bg-white border-b border-gray-100 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <div className="flex items-center">
-              <div className="text-2xl font-bold text-primary">Notarized</div>
-            </div>
-
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-8">
-              <a
-                href="#"
-                className="text-gray-700 hover:text-primary transition-colors"
-              >
-                <strong></strong>Find a Notary
-              </a>
-              <a
-                href="#"
-                className="text-gray-700 hover:text-primary transition-colors"
-              >
-                Services
-              </a>
-              <a
-                href="#"
-                className="text-gray-700 hover:text-primary transition-colors"
-              >
-                How it works
-              </a>
-              <a
-                href="#"
-                className="text-gray-700 hover:text-primary transition-colors"
-              >
-                Pricing
-              </a>
-              <Link
-                href="/about"
-                className="text-gray-700 hover:text-primary transition-colors"
-              >
-                About
-              </Link>
-            </nav>
-
-            {/* Desktop Auth Buttons */}
-            <div className="hidden md:flex items-center space-x-4">
-              <Button variant="ghost" className="text-gray-700">
-                Sign in
-              </Button>
-              <Button>Get started</Button>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              className="md:hidden p-2"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
-            </button>
-          </div>
-
-          {/* Mobile Menu */}
-          {isMenuOpen && (
-            <div className="md:hidden border-t border-gray-100 py-4">
-              <nav className="flex flex-col space-y-4">
-                <a
-                  href="#"
-                  className="text-gray-700 hover:text-primary transition-colors"
-                >
-                  <strong></strong>Find a Notary
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-700 hover:text-primary transition-colors"
-                >
-                  Services
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-700 hover:text-primary transition-colors"
-                >
-                  How it works
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-700 hover:text-primary transition-colors"
-                >
-                  Pricing
-                </a>
-                <Link
-                  href="/about"
-                  className="text-gray-700 hover:text-primary transition-colors"
-                >
-                  About
-                </Link>
-                <div className="pt-4 border-t border-gray-100 flex flex-col space-y-2">
-                  <Button
-                    variant="ghost"
-                    className="text-gray-700 justify-start"
-                  >
-                    Sign in
-                  </Button>
-                  <Button className="justify-start">Get started</Button>
-                </div>
-              </nav>
-            </div>
-          )}
-        </div>
-      </header>
+      <Header />
 
       {/* Dual Search Banner */}
       <DualSearchBanner />
@@ -161,10 +48,12 @@ export default function Index() {
                 {/* Simplified US Map - Main states as blue shapes */}
                 <g fill="#0066FF" stroke="#ffffff" strokeWidth="2">
                   {/* California */}
-                  <path
-                    d="M50 150 L50 400 L150 450 L180 420 L160 380 L140 350 L120 300 L100 250 L80 200 Z"
-                    className="hover:fill-blue-600 cursor-pointer transition-colors"
-                  />
+                  <Link href="/california-notaries">
+                    <path
+                      d="M50 150 L50 400 L150 450 L180 420 L160 380 L140 350 L120 300 L100 250 L80 200 Z"
+                      className="hover:fill-blue-600 cursor-pointer transition-colors"
+                    />
+                  </Link>
                   {/* Texas */}
                   <path
                     d="M300 350 L450 340 L460 450 L420 480 L350 470 L320 440 Z"
@@ -273,7 +162,7 @@ export default function Index() {
       </section>
 
       {/* Services Showcase */}
-      <section className="py-20 bg-white">
+      <section id="services" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
@@ -440,22 +329,22 @@ export default function Index() {
                   <Button variant="outline" size="sm" className="flex-1">
                     Book Now
                   </Button>
-                  {index === 0 && (
-                    <Link href="/notary/lily-woods">
-                      <Button size="sm" className="px-4">
-                        View Profile
-                      </Button>
-                    </Link>
-                  )}
+                  <Link href={`/notary/${notary.name.toLowerCase().replace(/\s+/g, '-')}`}>
+                    <Button size="sm" className="px-4">
+                      View Profile
+                    </Button>
+                  </Link>
                 </div>
               </Card>
             ))}
           </div>
 
           <div className="text-center mt-12">
-            <Button variant="outline" size="lg">
-              View All Notaries
-            </Button>
+            <Link href="/california-notaries">
+              <Button variant="outline" size="lg">
+                View All Notaries
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -505,7 +394,7 @@ export default function Index() {
       </section>
 
       {/* How it Works */}
-      <section className="py-20 bg-gray-50">
+      <section id="how-it-works" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-4xl font-bold text-gray-900">How it works</h2>
@@ -758,127 +647,7 @@ export default function Index() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="space-y-6">
-              <div className="text-2xl font-bold text-primary">Notarized</div>
-              <p className="text-gray-400">
-                Connecting you with certified notaries nationwide. Fast,
-                reliable, and professional services.
-              </p>
-              <div className="flex space-x-4">
-                <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors cursor-pointer">
-                  <span className="text-sm">f</span>
-                </div>
-                <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors cursor-pointer">
-                  <span className="text-sm">t</span>
-                </div>
-                <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors cursor-pointer">
-                  <span className="text-sm">in</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              <h4 className="text-lg font-semibold">Services</h4>
-              <ul className="space-y-3 text-gray-400">
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Find a Notary
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Mobile Notary
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Online Notarization
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Real Estate
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Business Documents
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div className="space-y-6">
-              <h4 className="text-lg font-semibold">Company</h4>
-              <ul className="space-y-3 text-gray-400">
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    About Us
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    How it Works
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Pricing
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Blog
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Careers
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div className="space-y-6">
-              <h4 className="text-lg font-semibold">Support</h4>
-              <ul className="space-y-3 text-gray-400">
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Help Center
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Contact Us
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Privacy Policy
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Terms of Service
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Become a Notary
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 Notarized. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

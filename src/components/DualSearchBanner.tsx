@@ -13,9 +13,16 @@ import {
 } from "@/components/ui/select";
 import { Search, MapPin, MessageCircleQuestion } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 export default function DualSearchBanner() {
   const [activeTab, setActiveTab] = useState("find-notary");
+  const router = useRouter();
+
+  const handleSearch = () => {
+    // Navigate to California notaries page when search is clicked
+    router.push("/california-notaries");
+  };
 
   return (
     <section className="bg-[#005DFF] py-16">
@@ -154,7 +161,10 @@ export default function DualSearchBanner() {
 
                   {/* Search Button */}
                   <div className="lg:col-span-2">
-                    <Button className="w-full h-12 bg-[#FFC700] hover:bg-[#FFB800] text-gray-700 font-medium rounded-full">
+                    <Button 
+                      onClick={handleSearch}
+                      className="w-full h-12 bg-[#FFC700] hover:bg-[#FFB800] text-gray-700 font-medium rounded-full"
+                    >
                       <Search className="w-4 h-4 mr-2" />
                       Search
                     </Button>

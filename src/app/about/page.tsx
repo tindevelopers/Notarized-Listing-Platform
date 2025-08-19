@@ -3,6 +3,8 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Header from "@/components/navigation/header";
+import Footer from "@/components/navigation/footer";
 import {
   Star,
   MapPin,
@@ -13,8 +15,6 @@ import {
   Users,
   Award,
   ChevronRight,
-  Menu,
-  X,
   CheckCircle,
   TrendingUp,
   Trophy,
@@ -24,104 +24,13 @@ import {
   ArrowLeft,
   ArrowRight,
 } from "lucide-react";
-import { useState } from "react";
 import Link from "next/link";
 
 export default function About() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="w-full bg-white border-b border-gray-100 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <div className="flex items-center">
-              <Link href="/" className="text-2xl font-bold text-primary">
-                Notarized
-              </Link>
-            </div>
-
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-8">
-              <a
-                href="#"
-                className="text-gray-700 hover:text-primary transition-colors"
-              >
-                Notary Services
-              </a>
-              <a
-                href="#"
-                className="text-gray-700 hover:text-primary transition-colors"
-              >
-                Remote Services
-              </a>
-              <a
-                href="#"
-                className="text-gray-700 hover:text-primary transition-colors"
-              >
-                Deed Prep
-              </a>
-            </nav>
-
-            {/* Desktop Auth Buttons */}
-            <div className="hidden md:flex items-center space-x-4">
-              <Button variant="ghost" className="text-gray-700">
-                List your business
-              </Button>
-              <Button>Search Notaries</Button>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              className="md:hidden p-2"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
-            </button>
-          </div>
-
-          {/* Mobile Menu */}
-          {isMenuOpen && (
-            <div className="md:hidden border-t border-gray-100 py-4">
-              <nav className="flex flex-col space-y-4">
-                <a
-                  href="#"
-                  className="text-gray-700 hover:text-primary transition-colors"
-                >
-                  Notary Services
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-700 hover:text-primary transition-colors"
-                >
-                  Remote Services
-                </a>
-                <a
-                  href="#"
-                  className="text-gray-700 hover:text-primary transition-colors"
-                >
-                  Deed Prep
-                </a>
-                <div className="pt-4 border-t border-gray-100 flex flex-col space-y-2">
-                  <Button
-                    variant="ghost"
-                    className="text-gray-700 justify-start"
-                  >
-                    List your business
-                  </Button>
-                  <Button className="justify-start">Search Notaries</Button>
-                </div>
-              </nav>
-            </div>
-          )}
-        </div>
-      </header>
+      <Header />
 
       {/* About our company section */}
       <section className="py-20 bg-white">
@@ -502,166 +411,7 @@ export default function About() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="space-y-6">
-              <div className="text-2xl font-bold text-primary">Notarized</div>
-              <p className="text-gray-400">
-                Connecting you with certified notaries nationwide. Fast,
-                reliable, and professional services.
-              </p>
-              <div className="flex space-x-4">
-                <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors cursor-pointer">
-                  <span className="text-sm">f</span>
-                </div>
-                <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors cursor-pointer">
-                  <span className="text-sm">t</span>
-                </div>
-                <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors cursor-pointer">
-                  <span className="text-sm">in</span>
-                </div>
-                <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors cursor-pointer">
-                  <span className="text-sm">yt</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              <h4 className="text-lg font-semibold">Main Pages</h4>
-              <ul className="space-y-3 text-gray-400">
-                <li>
-                  <Link href="/" className="hover:text-white transition-colors">
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/about"
-                    className="hover:text-white transition-colors"
-                  >
-                    About
-                  </Link>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Blog
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Blog Post
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Notarys
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Notarys Single
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Skills Category
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div className="space-y-6">
-              <h4 className="text-lg font-semibold">Utility Pages</h4>
-              <ul className="space-y-3 text-gray-400">
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Start here
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Styleguide
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    404 Not Found
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Password Protected
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Licenses
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Changelog
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-white text-primary underline"
-                  >
-                    More Webflow Templates
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div className="space-y-6">
-              <h4 className="text-lg font-semibold">Freelance categories</h4>
-              <div className="space-y-4">
-                <div className="flex items-center space-x-3">
-                  <div className="w-16 h-16 bg-blue-500 rounded-xl flex items-center justify-center">
-                    <Award className="w-8 h-8 text-white" />
-                  </div>
-                  <div>
-                    <div className="font-bold">Design</div>
-                    <div className="text-gray-400 text-sm">
-                      Explore category →
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-3">
-                  <div className="w-16 h-16 bg-primary rounded-xl flex items-center justify-center">
-                    <Shield className="w-8 h-8 text-white" />
-                  </div>
-                  <div>
-                    <div className="font-bold">Development</div>
-                    <div className="text-gray-400 text-sm">
-                      Explore category →
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-3">
-                  <div className="w-16 h-16 bg-purple-500 rounded-xl flex items-center justify-center">
-                    <TrendingUp className="w-8 h-8 text-white" />
-                  </div>
-                  <div>
-                    <div className="font-bold">Marketing</div>
-                    <div className="text-gray-400 text-sm">
-                      Explore category →
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
-            <p>Copyright © Notarized Inc | Powered by TIN</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
