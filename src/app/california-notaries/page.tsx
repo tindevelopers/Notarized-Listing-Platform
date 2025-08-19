@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -352,17 +352,26 @@ export default function CaliforniaNotaries() {
               <h4 className="font-semibold text-gray-900">Main Pages</h4>
               <ul className="space-y-2 text-sm text-gray-600">
                 <li>
-                  <Link href="/" className="hover:text-gray-900 transition-colors">
+                  <Link
+                    href="/"
+                    className="hover:text-gray-900 transition-colors"
+                  >
                     Home
                   </Link>
                 </li>
                 <li>
-                  <Link href="/about" className="hover:text-gray-900 transition-colors">
+                  <Link
+                    href="/about"
+                    className="hover:text-gray-900 transition-colors"
+                  >
                     About
                   </Link>
                 </li>
                 <li>
-                  <Link href="/california-notaries" className="hover:text-gray-900 transition-colors">
+                  <Link
+                    href="/california-notaries"
+                    className="hover:text-gray-900 transition-colors"
+                  >
                     California Notaries
                   </Link>
                 </li>

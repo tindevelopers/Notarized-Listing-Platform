@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -22,7 +22,7 @@ import { useState } from "react";
 import Link from "next/link";
 
 interface PageProps {
-  params: { id: string }
+  params: { id: string };
 }
 
 export default function NotaryProfile({ params }: PageProps) {
