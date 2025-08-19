@@ -520,9 +520,18 @@ export default function Index() {
                     </span>
                   </div>
                 </div>
-                <Button variant="outline" size="sm" className="w-full">
-                  Book Now
-                </Button>
+                <div className="flex space-x-2">
+                  <Button variant="outline" size="sm" className="flex-1">
+                    Book Now
+                  </Button>
+                  {index === 0 && (
+                    <Link to="/notary/lily-woods">
+                      <Button size="sm" className="px-4">
+                        View Profile
+                      </Button>
+                    </Link>
+                  )}
+                </div>
               </Card>
             ))}
           </div>

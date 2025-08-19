@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import NotaryProfile from "./pages/NotaryProfile";
+import CaliforniaNotaries from "./pages/CaliforniaNotaries";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
+          <Route path="/california-notaries" element={<CaliforniaNotaries />} />
+          <Route path="/CaliforniaNotaries" element={<CaliforniaNotaries />} />
           <Route path="/notary/:id" element={<NotaryProfile />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
