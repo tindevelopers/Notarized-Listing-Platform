@@ -277,7 +277,7 @@ export default function Index() {
             <div className="space-y-8">
               <div className="space-y-6">
                 <h2 className="text-4xl font-bold text-gray-900">
-                  A mobile world of Notaryz
+                  Remote On-Line Notarization
                   <br />
                   at your fingertips.
                 </h2>
