@@ -22,7 +22,7 @@ import { useState } from "react";
 import Link from "next/link";
 
 interface PageProps {
-  params: Promise<{ id: string }>
+  params: { id: string }
 }
 
 export default function NotaryProfile({ params }: PageProps) {
@@ -155,7 +155,7 @@ export default function NotaryProfile({ params }: PageProps) {
                     <div className="space-y-2">
                       <div className="text-primary text-lg">California</div>
                       <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
-                        Lily Woods
+                        Lily Woods ({params.id})
                       </h1>
                       <p className="text-gray-600 text-lg leading-relaxed">
                         Lorem ipsum dolor sit amet consectetur adipiscing elit
