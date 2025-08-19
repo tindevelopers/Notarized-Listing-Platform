@@ -2,7 +2,13 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Search, MapPin, MessageCircleQuestion } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -18,30 +24,35 @@ export default function DualSearchBanner() {
             Your Notary Solution Hub
           </h1>
           <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-            Ask questions about notarization or find certified notaries in your area
+            Ask questions about notarization or find certified notaries in your
+            area
           </p>
         </div>
 
         {/* Dual Search Interface */}
         <div className="max-w-4xl mx-auto">
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <Tabs
+            value={activeTab}
+            onValueChange={setActiveTab}
+            className="w-full"
+          >
             {/* Tab Navigation */}
             <TabsList className="grid w-full grid-cols-2 mb-8 bg-white/10 border-none h-14">
-              <TabsTrigger 
-                value="find-notary" 
+              <TabsTrigger
+                value="find-notary"
                 className={cn(
                   "text-white data-[state=active]:text-gray-900 data-[state=active]:bg-white",
-                  "flex items-center gap-2 text-lg font-medium h-12"
+                  "flex items-center gap-2 text-lg font-medium h-12",
                 )}
               >
                 <MapPin className="w-5 h-5" />
                 Find a Notary
               </TabsTrigger>
-              <TabsTrigger 
-                value="ask-questions" 
+              <TabsTrigger
+                value="ask-questions"
                 className={cn(
                   "text-white data-[state=active]:text-gray-900 data-[state=active]:bg-white",
-                  "flex items-center gap-2 text-lg font-medium h-12"
+                  "flex items-center gap-2 text-lg font-medium h-12",
                 )}
               >
                 <MessageCircleQuestion className="w-5 h-5" />
@@ -128,7 +139,9 @@ export default function DualSearchBanner() {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="los-angeles">Los Angeles</SelectItem>
-                        <SelectItem value="san-francisco">San Francisco</SelectItem>
+                        <SelectItem value="san-francisco">
+                          San Francisco
+                        </SelectItem>
                         <SelectItem value="san-diego">San Diego</SelectItem>
                       </SelectContent>
                     </Select>
@@ -141,8 +154,8 @@ export default function DualSearchBanner() {
                     </label>
                     <div className="relative">
                       <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" />
-                      <Input 
-                        placeholder="ZIP Code" 
+                      <Input
+                        placeholder="ZIP Code"
                         className="h-12 rounded-full border-gray-200 pl-10"
                       />
                     </div>
@@ -150,9 +163,7 @@ export default function DualSearchBanner() {
 
                   {/* Search Button */}
                   <div className="lg:col-span-1">
-                    <Button 
-                      className="w-full h-12 bg-[#FFC700] hover:bg-[#FFB800] text-gray-700 font-medium rounded-full"
-                    >
+                    <Button className="w-full h-12 bg-[#FFC700] hover:bg-[#FFB800] text-gray-700 font-medium rounded-full">
                       <Search className="w-4 h-4 mr-2" />
                       Search
                     </Button>
@@ -161,7 +172,9 @@ export default function DualSearchBanner() {
 
                 {/* Quick Links */}
                 <div className="mt-6 flex flex-wrap gap-2 justify-center">
-                  <span className="text-sm text-gray-600">Popular searches:</span>
+                  <span className="text-sm text-gray-600">
+                    Popular searches:
+                  </span>
                   <button className="text-sm text-blue-600 hover:text-blue-800 underline">
                     Real Estate Notary
                   </button>
@@ -184,13 +197,11 @@ export default function DualSearchBanner() {
                   {/* Search Input */}
                   <div className="relative mb-6">
                     <MessageCircleQuestion className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" />
-                    <Input 
+                    <Input
                       placeholder="Ask anything about notarization... (e.g., 'What documents need to be notarized for a home sale?')"
                       className="h-16 rounded-full border-gray-200 pl-12 pr-32 text-lg"
                     />
-                    <Button 
-                      className="absolute right-2 top-1/2 transform -translate-y-1/2 h-12 bg-[#FFC700] hover:bg-[#FFB800] text-gray-700 font-medium rounded-full px-6"
-                    >
+                    <Button className="absolute right-2 top-1/2 transform -translate-y-1/2 h-12 bg-[#FFC700] hover:bg-[#FFB800] text-gray-700 font-medium rounded-full px-6">
                       Ask Question
                     </Button>
                   </div>
@@ -207,13 +218,15 @@ export default function DualSearchBanner() {
                         "Can I get documents notarized online?",
                         "What ID do I need for notarization?",
                         "How does mobile notary work?",
-                        "What is an apostille?"
+                        "What is an apostille?",
                       ].map((question, index) => (
                         <button
                           key={index}
                           className="text-left p-4 rounded-xl border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-colors"
                         >
-                          <span className="text-sm text-gray-700">{question}</span>
+                          <span className="text-sm text-gray-700">
+                            {question}
+                          </span>
                         </button>
                       ))}
                     </div>
@@ -226,9 +239,13 @@ export default function DualSearchBanner() {
                         <MessageCircleQuestion className="w-4 h-4 text-blue-600" />
                       </div>
                       <div>
-                        <h4 className="font-medium text-blue-900 mb-1">AI Notary Assistant</h4>
+                        <h4 className="font-medium text-blue-900 mb-1">
+                          AI Notary Assistant
+                        </h4>
                         <p className="text-sm text-blue-700">
-                          Get instant answers to your notarization questions from our AI assistant, backed by legal expertise and up-to-date regulations.
+                          Get instant answers to your notarization questions
+                          from our AI assistant, backed by legal expertise and
+                          up-to-date regulations.
                         </p>
                       </div>
                     </div>
