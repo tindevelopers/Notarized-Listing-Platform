@@ -26,7 +26,7 @@ export default function Index() {
               <a href="#" className="text-gray-700 hover:text-primary transition-colors">Services</a>
               <a href="#" className="text-gray-700 hover:text-primary transition-colors">How it works</a>
               <a href="#" className="text-gray-700 hover:text-primary transition-colors">Pricing</a>
-              <a href="#" className="text-gray-700 hover:text-primary transition-colors">About</a>
+              <Link to="/about" className="text-gray-700 hover:text-primary transition-colors">About</Link>
             </nav>
 
             {/* Desktop Auth Buttons */}
@@ -52,7 +52,7 @@ export default function Index() {
                 <a href="#" className="text-gray-700 hover:text-primary transition-colors">Services</a>
                 <a href="#" className="text-gray-700 hover:text-primary transition-colors">How it works</a>
                 <a href="#" className="text-gray-700 hover:text-primary transition-colors">Pricing</a>
-                <a href="#" className="text-gray-700 hover:text-primary transition-colors">About</a>
+                <Link to="/about" className="text-gray-700 hover:text-primary transition-colors">About</Link>
                 <div className="pt-4 border-t border-gray-100 flex flex-col space-y-2">
                   <Button variant="ghost" className="text-gray-700 justify-start">Sign in</Button>
                   <Button className="justify-start">Get started</Button>
