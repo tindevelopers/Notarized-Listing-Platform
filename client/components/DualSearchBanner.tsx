@@ -63,28 +63,9 @@ export default function DualSearchBanner() {
             {/* Find Notary Tab Content */}
             <TabsContent value="find-notary" className="mt-0">
               <div className="bg-white rounded-3xl p-6 shadow-2xl">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 items-end">
-                  {/* Country */}
-                  <div className="lg:col-span-1">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Country
-                    </label>
-                    <Select defaultValue="usa">
-                      <SelectTrigger className="h-12 rounded-full border-gray-200">
-                        <div className="flex items-center gap-2">
-                          <MapPin className="w-4 h-4 text-gray-500" />
-                          <SelectValue />
-                        </div>
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="usa">United States</SelectItem>
-                        <SelectItem value="canada">Canada</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 items-end">
                   {/* State */}
-                  <div className="lg:col-span-1">
+                  <div className="lg:col-span-3">
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       State
                     </label>
@@ -92,7 +73,7 @@ export default function DualSearchBanner() {
                       <SelectTrigger className="h-12 rounded-full border-gray-200">
                         <div className="flex items-center gap-2">
                           <MapPin className="w-4 h-4 text-gray-500" />
-                          <SelectValue placeholder="State" />
+                          <SelectValue placeholder="Select State" />
                         </div>
                       </SelectTrigger>
                       <SelectContent>
@@ -101,32 +82,17 @@ export default function DualSearchBanner() {
                         <SelectItem value="tx">Texas</SelectItem>
                         <SelectItem value="fl">Florida</SelectItem>
                         <SelectItem value="il">Illinois</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  {/* County */}
-                  <div className="lg:col-span-1">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      County
-                    </label>
-                    <Select>
-                      <SelectTrigger className="h-12 rounded-full border-gray-200">
-                        <div className="flex items-center gap-2">
-                          <MapPin className="w-4 h-4 text-gray-500" />
-                          <SelectValue placeholder="County" />
-                        </div>
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="los-angeles">Los Angeles</SelectItem>
-                        <SelectItem value="orange">Orange</SelectItem>
-                        <SelectItem value="san-diego">San Diego</SelectItem>
+                        <SelectItem value="pa">Pennsylvania</SelectItem>
+                        <SelectItem value="oh">Ohio</SelectItem>
+                        <SelectItem value="ga">Georgia</SelectItem>
+                        <SelectItem value="nc">North Carolina</SelectItem>
+                        <SelectItem value="mi">Michigan</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
 
                   {/* City */}
-                  <div className="lg:col-span-1">
+                  <div className="lg:col-span-3">
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       City
                     </label>
@@ -134,21 +100,23 @@ export default function DualSearchBanner() {
                       <SelectTrigger className="h-12 rounded-full border-gray-200">
                         <div className="flex items-center gap-2">
                           <MapPin className="w-4 h-4 text-gray-500" />
-                          <SelectValue placeholder="City" />
+                          <SelectValue placeholder="Select City" />
                         </div>
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="los-angeles">Los Angeles</SelectItem>
-                        <SelectItem value="san-francisco">
-                          San Francisco
-                        </SelectItem>
+                        <SelectItem value="san-francisco">San Francisco</SelectItem>
                         <SelectItem value="san-diego">San Diego</SelectItem>
+                        <SelectItem value="new-york">New York</SelectItem>
+                        <SelectItem value="chicago">Chicago</SelectItem>
+                        <SelectItem value="houston">Houston</SelectItem>
+                        <SelectItem value="miami">Miami</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
 
                   {/* ZIP Code */}
-                  <div className="lg:col-span-1">
+                  <div className="lg:col-span-2">
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       ZIP Code
                     </label>
@@ -161,13 +129,57 @@ export default function DualSearchBanner() {
                     </div>
                   </div>
 
+                  {/* Distance */}
+                  <div className="lg:col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Distance
+                    </label>
+                    <Select defaultValue="25">
+                      <SelectTrigger className="h-12 rounded-full border-gray-200">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="5">5 miles</SelectItem>
+                        <SelectItem value="10">10 miles</SelectItem>
+                        <SelectItem value="25">25 miles</SelectItem>
+                        <SelectItem value="50">50 miles</SelectItem>
+                        <SelectItem value="100">100 miles</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
                   {/* Search Button */}
-                  <div className="lg:col-span-1">
+                  <div className="lg:col-span-2">
                     <Button className="w-full h-12 bg-[#FFC700] hover:bg-[#FFB800] text-gray-700 font-medium rounded-full">
                       <Search className="w-4 h-4 mr-2" />
                       Search
                     </Button>
                   </div>
+                </div>
+
+                {/* Geolocation Button */}
+                <div className="mt-4 flex justify-center">
+                  <Button
+                    variant="outline"
+                    className="rounded-full border-gray-300 text-gray-600 hover:text-gray-800"
+                    onClick={() => {
+                      if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(
+                          (position) => {
+                            // Handle successful location
+                            console.log('Location:', position.coords);
+                            // TODO: Implement location-based search
+                          },
+                          (error) => {
+                            console.error('Error getting location:', error);
+                          }
+                        );
+                      }
+                    }}
+                  >
+                    <MapPin className="w-4 h-4 mr-2" />
+                    Use My Location
+                  </Button>
                 </div>
 
                 {/* Quick Links */}
