@@ -21,7 +21,7 @@ export default function Index() {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
-              <a href="#" className="text-gray-700 hover:text-primary transition-colors">Find a Notary</a>
+              <a href="#" className="text-gray-700 hover:text-primary transition-colors"><strong></strong>Find a Notary</a>
               <a href="#" className="text-gray-700 hover:text-primary transition-colors">Services</a>
               <a href="#" className="text-gray-700 hover:text-primary transition-colors">How it works</a>
               <a href="#" className="text-gray-700 hover:text-primary transition-colors">Pricing</a>
@@ -47,7 +47,7 @@ export default function Index() {
           {isMenuOpen && (
             <div className="md:hidden border-t border-gray-100 py-4">
               <nav className="flex flex-col space-y-4">
-                <a href="#" className="text-gray-700 hover:text-primary transition-colors">Find a Notary</a>
+                <a href="#" className="text-gray-700 hover:text-primary transition-colors"><strong></strong>Find a Notary</a>
                 <a href="#" className="text-gray-700 hover:text-primary transition-colors">Services</a>
                 <a href="#" className="text-gray-700 hover:text-primary transition-colors">How it works</a>
                 <a href="#" className="text-gray-700 hover:text-primary transition-colors">Pricing</a>
