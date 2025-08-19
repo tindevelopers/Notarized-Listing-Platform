@@ -589,7 +589,7 @@ export default function CaliforniaNotaries() {
                 </div>
                 <div>
                   <div className="font-medium text-gray-900">Design</div>
-                  <div className="text-sm text-gray-600">Explore category -></div>
+                  <div className="text-sm text-gray-600">Explore category →</div>
                 </div>
               </div>
 
@@ -601,7 +601,7 @@ export default function CaliforniaNotaries() {
                 </div>
                 <div>
                   <div className="font-medium text-gray-900">Development</div>
-                  <div className="text-sm text-gray-600">Explore category -></div>
+                  <div className="text-sm text-gray-600">Explore category →</div>
                 </div>
               </div>
 
@@ -613,7 +613,7 @@ export default function CaliforniaNotaries() {
                 </div>
                 <div>
                   <div className="font-medium text-gray-900">Marketing</div>
-                  <div className="text-sm text-gray-600">Explore category -></div>
+                  <div className="text-sm text-gray-600">Explore category →</div>
                 </div>
               </div>
             </div>
