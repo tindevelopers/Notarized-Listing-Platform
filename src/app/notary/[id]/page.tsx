@@ -21,7 +21,11 @@ import {
 import { useState } from "react";
 import Link from "next/link";
 
-export default function NotaryProfile({ params }: { params: { id: string } }) {
+interface PageProps {
+  params: Promise<{ id: string }>
+}
+
+export default function NotaryProfile({ params }: PageProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
