@@ -1,0 +1,38 @@
+
+# Dependencies
+node_modules
+.pnpm-store
+
+# Testing
+coverage
+.nyc_output
+
+# Local env files  
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Vercel build cache
+.vercel
+
+# Development files
+.git
+.gitignore
+README.md
+*.log
+
+# IDE files
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
