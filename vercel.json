@@ -6,7 +6,6 @@
   "installCommand": "pnpm install",
   "framework": "nextjs",
   "outputDirectory": ".next",
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD ./",
   "functions": {
     "src/app/api/**/*.ts": {
       "runtime": "nodejs20.x"
