@@ -22,135 +22,159 @@ export default function CaliforniaNotaries() {
       id: "matt-cannon",
       name: "Matt Cannon",
       rating: 5.0,
-      description: "Amet tincidunt non congue vel massa molestie magna eget, molestae magna eget.",
+      description:
+        "Amet tincidunt non congue vel massa molestie magna eget, molestae magna eget.",
       location: "680 High Newton Drive Brook, NY 10247",
       isTopRated: true,
       isExperienced: true,
       isInsured: true,
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+      image:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
     },
     {
       id: "andy-smith",
       name: "Andy Smith",
       rating: 5.0,
-      description: "Amet tincidunt non congue vel massa molestie magna eget, molestae magna eget.",
+      description:
+        "Amet tincidunt non congue vel massa molestie magna eget, molestae magna eget.",
       location: "680 High Newton Drive Brook, NY 10247",
       isTopRated: true,
       isExperienced: true,
       isInsured: true,
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
+      image:
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
     },
     {
       id: "john-carter",
       name: "John Carter",
       rating: 5.0,
-      description: "Amet tincidunt non congue vel massa molestie magna eget, molestae magna eget.",
+      description:
+        "Amet tincidunt non congue vel massa molestie magna eget, molestae magna eget.",
       location: "680 High Newton Drive Brook, NY 10247",
       isTopRated: true,
       isExperienced: true,
       isInsured: true,
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
+      image:
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
     },
     {
       id: "kathy-curl",
       name: "Kathy Curl",
       rating: 5.0,
-      description: "Amet tincidunt non congue vel massa molestie magna eget, molestae magna eget.",
+      description:
+        "Amet tincidunt non congue vel massa molestie magna eget, molestae magna eget.",
       location: "680 High Newton Drive Brook, NY 10247",
       isTopRated: true,
       isExperienced: true,
       isInsured: true,
-      image: "https://images.unsplash.com/photo-1494790108755-2616b39c0e6e?w=300&h=300&fit=crop&crop=face",
+      image:
+        "https://images.unsplash.com/photo-1494790108755-2616b39c0e6e?w=300&h=300&fit=crop&crop=face",
     },
     // Second row
     {
       id: "matt-cannon-2",
       name: "Matt Cannon",
       rating: 5.0,
-      description: "Amet tincidunt non congue vel massa molestie magna eget, molestae magna eget.",
+      description:
+        "Amet tincidunt non congue vel massa molestie magna eget, molestae magna eget.",
       location: "680 High Newton Drive Brook, NY 10247",
       isTopRated: true,
       isExperienced: true,
       isInsured: true,
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+      image:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
     },
     {
       id: "andy-smith-2",
       name: "Andy Smith",
       rating: 5.0,
-      description: "Amet tincidunt non congue vel massa molestie magna eget, molestae magna eget.",
+      description:
+        "Amet tincidunt non congue vel massa molestie magna eget, molestae magna eget.",
       location: "680 High Newton Drive Brook, NY 10247",
       isTopRated: true,
       isExperienced: true,
       isInsured: true,
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
+      image:
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
     },
     {
       id: "john-carter-2",
       name: "John Carter",
       rating: 5.0,
-      description: "Amet tincidunt non congue vel massa molestie magna eget, molestae magna eget.",
+      description:
+        "Amet tincidunt non congue vel massa molestie magna eget, molestae magna eget.",
       location: "680 High Newton Drive Brook, NY 10247",
       isTopRated: true,
       isExperienced: true,
       isInsured: true,
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
+      image:
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
     },
     {
       id: "kathy-curl-2",
       name: "Kathy Curl",
       rating: 5.0,
-      description: "Amet tincidunt non congue vel massa molestie magna eget, molestae magna eget.",
+      description:
+        "Amet tincidunt non congue vel massa molestie magna eget, molestae magna eget.",
       location: "680 High Newton Drive Brook, NY 10247",
       isTopRated: true,
       isExperienced: true,
       isInsured: true,
-      image: "https://images.unsplash.com/photo-1494790108755-2616b39c0e6e?w=300&h=300&fit=crop&crop=face",
+      image:
+        "https://images.unsplash.com/photo-1494790108755-2616b39c0e6e?w=300&h=300&fit=crop&crop=face",
     },
     // Third row
     {
       id: "matt-cannon-3",
       name: "Matt Cannon",
       rating: 5.0,
-      description: "Amet tincidunt non congue vel massa molestie magna eget, molestae magna eget.",
+      description:
+        "Amet tincidunt non congue vel massa molestie magna eget, molestae magna eget.",
       location: "680 High Newton Drive Brook, NY 10247",
       isTopRated: true,
       isExperienced: true,
       isInsured: true,
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+      image:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
     },
     {
       id: "andy-smith-3",
       name: "Andy Smith",
       rating: 5.0,
-      description: "Amet tincidunt non congue vel massa molestie magna eget, molestae magna eget.",
+      description:
+        "Amet tincidunt non congue vel massa molestie magna eget, molestae magna eget.",
       location: "680 High Newton Drive Brook, NY 10247",
       isTopRated: true,
       isExperienced: true,
       isInsured: true,
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
+      image:
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
     },
     {
       id: "john-carter-3",
       name: "John Carter",
       rating: 5.0,
-      description: "Amet tincidunt non congue vel massa molestie magna eget, molestae magna eget.",
+      description:
+        "Amet tincidunt non congue vel massa molestie magna eget, molestae magna eget.",
       location: "680 High Newton Drive Brook, NY 10247",
       isTopRated: true,
       isExperienced: true,
       isInsured: true,
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
+      image:
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
     },
     {
       id: "kathy-curl-3",
       name: "Kathy Curl",
       rating: 5.0,
-      description: "Amet tincidunt non congue vel massa molestie magna eget, molestae magna eget.",
+      description:
+        "Amet tincidunt non congue vel massa molestie magna eget, molestae magna eget.",
       location: "680 High Newton Drive Brook, NY 10247",
       isTopRated: true,
       isExperienced: true,
       isInsured: true,
-      image: "https://images.unsplash.com/photo-1494790108755-2616b39c0e6e?w=300&h=300&fit=crop&crop=face",
+      image:
+        "https://images.unsplash.com/photo-1494790108755-2616b39c0e6e?w=300&h=300&fit=crop&crop=face",
     },
     // Fourth row - silhouettes
     {
@@ -256,7 +280,9 @@ export default function CaliforniaNotaries() {
                 <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center">
                   <span className="text-white font-bold text-sm">N</span>
                 </div>
-                <span className="text-xl font-bold text-gray-900">Notarized</span>
+                <span className="text-xl font-bold text-gray-900">
+                  Notarized
+                </span>
               </div>
             </Link>
 
@@ -357,7 +383,7 @@ export default function CaliforniaNotaries() {
               vulputate tortor mauris molestie lorem tincidunt.
             </p>
           </div>
-          
+
           <div className="flex items-center space-x-4">
             <span className="text-sm text-gray-600">Filter by</span>
             <Select defaultValue="category">
@@ -377,7 +403,10 @@ export default function CaliforniaNotaries() {
         {/* Notaries Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {notaries.map((notary, index) => (
-            <Card key={notary.id} className="p-6 hover:shadow-lg transition-shadow">
+            <Card
+              key={notary.id}
+              className="p-6 hover:shadow-lg transition-shadow"
+            >
               <div className="text-center space-y-4">
                 {/* Avatar */}
                 <div className="mx-auto">
@@ -458,8 +487,8 @@ export default function CaliforniaNotaries() {
                   <Button
                     size="sm"
                     className={`flex-1 ${
-                      notary.image 
-                        ? "bg-blue-600 hover:bg-blue-700" 
+                      notary.image
+                        ? "bg-blue-600 hover:bg-blue-700"
                         : "bg-yellow-500 hover:bg-yellow-600"
                     }`}
                   >
@@ -476,7 +505,11 @@ export default function CaliforniaNotaries() {
 
         {/* Pagination */}
         <div className="flex items-center justify-center space-x-4 mb-16">
-          <Button variant="outline" size="sm" className="flex items-center space-x-2">
+          <Button
+            variant="outline"
+            size="sm"
+            className="flex items-center space-x-2"
+          >
             <ChevronLeft className="w-4 h-4" />
             <span>Previous</span>
           </Button>
@@ -514,7 +547,10 @@ export default function CaliforniaNotaries() {
               <Button className="bg-blue-600 hover:bg-blue-700">
                 Hire Notary
               </Button>
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-gray-900">
+              <Button
+                variant="outline"
+                className="border-white text-white hover:bg-white hover:text-gray-900"
+              >
                 Apply Now
               </Button>
             </div>
@@ -552,30 +588,100 @@ export default function CaliforniaNotaries() {
             <div className="space-y-4">
               <h4 className="font-semibold text-gray-900">Utility Pages</h4>
               <ul className="space-y-2 text-sm text-gray-600">
-                <li><a href="#" className="hover:text-gray-900 transition-colors">Home</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition-colors">Packages</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition-colors">Package Single</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition-colors">Blog</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition-colors">Blog Page</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition-colors">Contact</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition-colors">Coming Soon</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition-colors">Notarize</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition-colors">Counseling</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition-colors">Skills Category</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition-colors">More Workflow Templates</a></li>
+                <li>
+                  <a href="#" className="hover:text-gray-900 transition-colors">
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-gray-900 transition-colors">
+                    Packages
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-gray-900 transition-colors">
+                    Package Single
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-gray-900 transition-colors">
+                    Blog
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-gray-900 transition-colors">
+                    Blog Page
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-gray-900 transition-colors">
+                    Contact
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-gray-900 transition-colors">
+                    Coming Soon
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-gray-900 transition-colors">
+                    Notarize
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-gray-900 transition-colors">
+                    Counseling
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-gray-900 transition-colors">
+                    Skills Category
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-gray-900 transition-colors">
+                    More Workflow Templates
+                  </a>
+                </li>
               </ul>
             </div>
 
             {/* Freelance Categories */}
             <div className="space-y-4">
-              <h4 className="font-semibold text-gray-900">Freelance categories</h4>
+              <h4 className="font-semibold text-gray-900">
+                Freelance categories
+              </h4>
               <ul className="space-y-2 text-sm text-gray-600">
-                <li><a href="#" className="hover:text-gray-900 transition-colors">Staff front</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition-colors">Suggestive</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition-colors">404 Not Found</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition-colors">Password Protected</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition-colors">Licenses</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition-colors">Changelog</a></li>
+                <li>
+                  <a href="#" className="hover:text-gray-900 transition-colors">
+                    Staff front
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-gray-900 transition-colors">
+                    Suggestive
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-gray-900 transition-colors">
+                    404 Not Found
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-gray-900 transition-colors">
+                    Password Protected
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-gray-900 transition-colors">
+                    Licenses
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-gray-900 transition-colors">
+                    Changelog
+                  </a>
+                </li>
               </ul>
             </div>
 
@@ -583,37 +689,55 @@ export default function CaliforniaNotaries() {
             <div className="space-y-6">
               <div className="flex items-center space-x-3">
                 <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                  <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                  <svg
+                    className="w-5 h-5 text-blue-600"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                   </svg>
                 </div>
                 <div>
                   <div className="font-medium text-gray-900">Design</div>
-                  <div className="text-sm text-gray-600">Explore category →</div>
+                  <div className="text-sm text-gray-600">
+                    Explore category →
+                  </div>
                 </div>
               </div>
 
               <div className="flex items-center space-x-3">
                 <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                  <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                  <svg
+                    className="w-5 h-5 text-blue-600"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M9 11H7v9h2v-9zm4 0h-2v9h2v-9zm4 0h-2v9h2v-9zm2-7H3v2h1v11c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6h1V4zm-3 13H7V6h10v11z" />
                   </svg>
                 </div>
                 <div>
                   <div className="font-medium text-gray-900">Development</div>
-                  <div className="text-sm text-gray-600">Explore category →</div>
+                  <div className="text-sm text-gray-600">
+                    Explore category →
+                  </div>
                 </div>
               </div>
 
               <div className="flex items-center space-x-3">
                 <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                  <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                  <svg
+                    className="w-5 h-5 text-blue-600"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z" />
                   </svg>
                 </div>
                 <div>
                   <div className="font-medium text-gray-900">Marketing</div>
-                  <div className="text-sm text-gray-600">Explore category →</div>
+                  <div className="text-sm text-gray-600">
+                    Explore category →
+                  </div>
                 </div>
               </div>
             </div>
