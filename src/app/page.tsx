@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -17,7 +19,7 @@ import {
   X,
 } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 export default function Index() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -60,7 +62,7 @@ export default function Index() {
                 Pricing
               </a>
               <Link
-                to="/about"
+                href="/about"
                 className="text-gray-700 hover:text-primary transition-colors"
               >
                 About
@@ -117,7 +119,7 @@ export default function Index() {
                   Pricing
                 </a>
                 <Link
-                  to="/about"
+                  href="/about"
                   className="text-gray-700 hover:text-primary transition-colors"
                 >
                   About
@@ -439,7 +441,7 @@ export default function Index() {
                     Book Now
                   </Button>
                   {index === 0 && (
-                    <Link to="/notary/lily-woods">
+                    <Link href="/notary/lily-woods">
                       <Button size="sm" className="px-4">
                         View Profile
                       </Button>

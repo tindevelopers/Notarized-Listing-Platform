@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -17,9 +19,13 @@ import {
   X,
 } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
-export default function NotaryProfile() {
+interface PageProps {
+  params: { id: string };
+}
+
+export default function NotaryProfile({ params }: PageProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -30,7 +36,7 @@ export default function NotaryProfile() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center">
-              <Link to="/" className="text-2xl font-bold text-primary">
+              <Link href="/" className="text-2xl font-bold text-primary">
                 Notarized
               </Link>
             </div>
@@ -120,7 +126,7 @@ export default function NotaryProfile() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Back to Notarys */}
           <Link
-            to="/"
+            href="/"
             className="inline-flex items-center space-x-2 text-gray-900 hover:text-primary mb-8"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -149,7 +155,7 @@ export default function NotaryProfile() {
                     <div className="space-y-2">
                       <div className="text-primary text-lg">California</div>
                       <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
-                        Lily Woods
+                        Lily Woods ({params.id})
                       </h1>
                       <p className="text-gray-600 text-lg leading-relaxed">
                         Lorem ipsum dolor sit amet consectetur adipiscing elit
@@ -384,72 +390,6 @@ export default function NotaryProfile() {
                 </Card>
               </div>
             </section>
-
-            {/* Blogs Section */}
-            <section>
-              <div className="flex items-center space-x-3 mb-8">
-                <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
-                  <MessageCircle className="w-5 h-5 text-purple-600" />
-                </div>
-                <h2 className="text-3xl font-bold text-gray-900">Blogs</h2>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Blog 1 */}
-                <Card className="overflow-hidden">
-                  <div className="aspect-video bg-gradient-to-br from-blue-100 to-blue-200 relative">
-                    <img
-                      src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=240&fit=crop"
-                      alt="Sezane Stationary Brand Design"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="font-bold text-gray-900 mb-3">
-                      Sezane Stationary Brand Design
-                    </h3>
-                    <p className="text-gray-600 text-sm mb-4">
-                      Lorem ipsum dolor sit amet consectetur non adipiscing elit
-                      massa dignissim leo.
-                    </p>
-                    <Link
-                      to="#"
-                      className="inline-flex items-center text-primary font-bold hover:underline"
-                    >
-                      View more
-                      <ExternalLink className="w-4 h-4 ml-1" />
-                    </Link>
-                  </div>
-                </Card>
-
-                {/* Blog 2 */}
-                <Card className="overflow-hidden">
-                  <div className="aspect-video bg-gradient-to-br from-purple-100 to-purple-200 relative">
-                    <img
-                      src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=400&h=240&fit=crop"
-                      alt="Haus Packaging Brand Design"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="font-bold text-gray-900 mb-3">
-                      Haus Packaging Brand Design
-                    </h3>
-                    <p className="text-gray-600 text-sm mb-4">
-                      Lorem ipsum dolor sit amet consectetur non adipiscing elit
-                      massa dignissim leo.
-                    </p>
-                    <Link
-                      to="#"
-                      className="inline-flex items-center text-primary font-bold hover:underline"
-                    >
-                      View more
-                      <ExternalLink className="w-4 h-4 ml-1" />
-                    </Link>
-                  </div>
-                </Card>
-              </div>
-            </section>
           </div>
 
           {/* Right Column - Testimonials */}
@@ -509,93 +449,6 @@ export default function NotaryProfile() {
         </div>
       </div>
 
-      {/* More Notarys Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-12">
-            <h2 className="text-3xl font-bold text-gray-900">More Notarys</h2>
-            <Button variant="outline">Browse all Notarys</Button>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Notary 1 */}
-            <Card className="p-6 text-center">
-              <Avatar className="w-32 h-32 mx-auto mb-4">
-                <AvatarImage src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face" />
-                <AvatarFallback>JC</AvatarFallback>
-              </Avatar>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                John Carter
-              </h3>
-              <p className="text-gray-600 text-sm mb-4">
-                Lorem ipsum dolor sit amet id consectetur adipiscing elit.
-              </p>
-              <div className="flex justify-center space-x-3 mb-4">
-                <Badge className="bg-blue-500 text-white">Design</Badge>
-                <Badge variant="outline">$80/hr</Badge>
-              </div>
-            </Card>
-
-            {/* Notary 2 */}
-            <Card className="p-6 text-center">
-              <Avatar className="w-32 h-32 mx-auto mb-4">
-                <AvatarImage src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face" />
-                <AvatarFallback>SH</AvatarFallback>
-              </Avatar>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Sandy Hung
-              </h3>
-              <p className="text-gray-600 text-sm mb-4">
-                Ut nibh pulvinar nisi et sit ac venenatis at cursus semper.
-              </p>
-              <div className="flex justify-center space-x-3 mb-4">
-                <Badge className="bg-blue-500 text-white">Design</Badge>
-                <Badge variant="outline">$210/hr</Badge>
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-gray-800 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h2 className="text-3xl font-bold">
-                Find the talent needed to get your business growing.
-              </h2>
-              <p className="text-gray-300">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit egestas
-                et in egestas dui eget egestas a erat leo nec quam pretium.
-              </p>
-              <div className="flex">
-                <div className="flex-1 bg-white rounded-full p-1 flex items-center">
-                  <div className="flex items-center px-4 flex-1">
-                    <Mail className="w-5 h-5 text-gray-400 mr-3" />
-                    <input
-                      type="email"
-                      placeholder="Enter your business email"
-                      className="flex-1 text-gray-700 bg-transparent outline-none"
-                    />
-                  </div>
-                  <Button size="sm" className="rounded-full">
-                    Hire a Notary
-                  </Button>
-                </div>
-              </div>
-            </div>
-            <div className="relative">
-              <img
-                src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600&h=400&fit=crop"
-                alt="Professional woman"
-                className="rounded-lg"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Footer */}
       <footer className="bg-gray-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -606,116 +459,6 @@ export default function NotaryProfile() {
                 Connecting you with certified notaries nationwide. Fast,
                 reliable, and professional services.
               </p>
-              <div className="flex space-x-4">
-                <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors cursor-pointer">
-                  <span className="text-sm">f</span>
-                </div>
-                <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors cursor-pointer">
-                  <span className="text-sm">t</span>
-                </div>
-                <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors cursor-pointer">
-                  <span className="text-sm">in</span>
-                </div>
-                <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors cursor-pointer">
-                  <span className="text-sm">yt</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              <h4 className="text-lg font-semibold">Main Pages</h4>
-              <ul className="space-y-3 text-gray-400">
-                <li>
-                  <Link to="/" className="hover:text-white transition-colors">
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/about"
-                    className="hover:text-white transition-colors"
-                  >
-                    About
-                  </Link>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Blog
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Notarys
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div className="space-y-6">
-              <h4 className="text-lg font-semibold">Utility Pages</h4>
-              <ul className="space-y-3 text-gray-400">
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Start here
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Contact
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    404 Not Found
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Licenses
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div className="space-y-6">
-              <h4 className="text-lg font-semibold">Freelance categories</h4>
-              <div className="space-y-4">
-                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
-                    <span className="text-white">🎨</span>
-                  </div>
-                  <div>
-                    <div className="font-bold">Design</div>
-                    <div className="text-gray-400 text-sm">
-                      Explore category →
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
-                    <span className="text-white">⚙️</span>
-                  </div>
-                  <div>
-                    <div className="font-bold">Development</div>
-                    <div className="text-gray-400 text-sm">
-                      Explore category →
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center">
-                    <span className="text-white">📈</span>
-                  </div>
-                  <div>
-                    <div className="font-bold">Marketing</div>
-                    <div className="text-gray-400 text-sm">
-                      Explore category →
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
 

@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -23,7 +25,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 export default function About() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,7 +38,7 @@ export default function About() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center">
-              <Link to="/" className="text-2xl font-bold text-primary">
+              <Link href="/" className="text-2xl font-bold text-primary">
                 Notarized
               </Link>
             </div>
@@ -529,13 +531,13 @@ export default function About() {
               <h4 className="text-lg font-semibold">Main Pages</h4>
               <ul className="space-y-3 text-gray-400">
                 <li>
-                  <Link to="/" className="hover:text-white transition-colors">
+                  <Link href="/" className="hover:text-white transition-colors">
                     Home
                   </Link>
                 </li>
                 <li>
                   <Link
-                    to="/about"
+                    href="/about"
                     className="hover:text-white transition-colors"
                   >
                     About
