@@ -105,7 +105,9 @@ export default function DualSearchBanner() {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="los-angeles">Los Angeles</SelectItem>
-                        <SelectItem value="san-francisco">San Francisco</SelectItem>
+                        <SelectItem value="san-francisco">
+                          San Francisco
+                        </SelectItem>
                         <SelectItem value="san-diego">San Diego</SelectItem>
                         <SelectItem value="new-york">New York</SelectItem>
                         <SelectItem value="chicago">Chicago</SelectItem>
@@ -167,12 +169,12 @@ export default function DualSearchBanner() {
                         navigator.geolocation.getCurrentPosition(
                           (position) => {
                             // Handle successful location
-                            console.log('Location:', position.coords);
+                            console.log("Location:", position.coords);
                             // TODO: Implement location-based search
                           },
                           (error) => {
-                            console.error('Error getting location:', error);
-                          }
+                            console.error("Error getting location:", error);
+                          },
                         );
                       }
                     }}
