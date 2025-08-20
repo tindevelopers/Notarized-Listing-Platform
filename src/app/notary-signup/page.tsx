@@ -261,8 +261,8 @@ export default function NotarySignupPage() {
               </div>
 
               {/* Dashboard preview */}
-              <div className="flex-1 flex items-center justify-center">
-                <div className="w-full max-w-md h-[300px] bg-white rounded-xl shadow-lg overflow-hidden relative">
+              <div className="flex-1 flex items-center justify-center mb-6 lg:mb-0">
+                <div className="w-full max-w-md h-[200px] lg:h-[300px] bg-white rounded-xl shadow-lg overflow-hidden relative">
                   <img
                     src="https://api.builder.io/api/v1/image/assets/TEMP/2675737cf0d4b88a9d7b228710ad2190d0b50703?width=864"
                     alt="Dashboard preview"
