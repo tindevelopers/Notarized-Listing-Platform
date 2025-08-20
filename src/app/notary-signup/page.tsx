@@ -476,11 +476,23 @@ export default function NotarySignupPage() {
                     <Label className="text-sm text-black">
                       Notary state and county:<span className="text-[#E42B38] ml-0.5">*</span>
                     </Label>
-                    <div className="relative">
+                    <div
+                      className="relative cursor-pointer"
+                      onClick={() => {
+                        // For demo, set a default state/county if empty
+                        if (!profileData.notaryState) {
+                          setProfileData(prev => ({
+                            ...prev,
+                            notaryState: "California",
+                            notaryCounty: "Los Angeles"
+                          }));
+                        }
+                      }}
+                    >
                       <Input
                         value={`${profileData.notaryState} ${profileData.notaryCounty}`.trim()}
                         placeholder="Select state and county"
-                        className="h-11 border-[#949494] rounded-md pr-10"
+                        className="h-11 border-[#949494] rounded-md pr-10 cursor-pointer"
                         readOnly
                       />
                       <Plus className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5" />
