@@ -274,7 +274,7 @@ export default function CaliforniaNotaries() {
                     <AvatarFallback className="bg-primary text-primary-foreground">
                       {notary?.profiles?.full_name
                         ?.split(" ")
-                        ?.map((n) => n[0])
+                        ?.map((n: string) => n[0])
                         ?.join("")
                         ?.toUpperCase() || "N"}
                     </AvatarFallback>
