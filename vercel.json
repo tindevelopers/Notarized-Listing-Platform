@@ -6,11 +6,7 @@
   "installCommand": "pnpm install",
   "framework": "nextjs",
   "outputDirectory": ".next",
-  "functions": {
-    "src/app/api/**/*.ts": {
-      "runtime": "nodejs@18.x"
-    }
-  },
+
   "rewrites": [
     {
       "source": "/api/(.*)",
