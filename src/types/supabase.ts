@@ -1,4 +1,3 @@
-
 export type Json =
   | string
   | number
@@ -10,29 +9,264 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      profiles: {
+      bookings: {
         Row: {
-          id: string
-          email: string
-          full_name: string | null
-          avatar_url: string | null
+          client_id: string
           created_at: string
+          id: string
+          location: string | null
+          notary_id: string
+          notes: string | null
+          service_date: string
+          service_time: string
+          service_type: string
+          status: string | null
+          total_cost: number | null
           updated_at: string
         }
         Insert: {
-          id: string
-          email: string
-          full_name?: string | null
-          avatar_url?: string | null
+          client_id: string
           created_at?: string
+          id?: string
+          location?: string | null
+          notary_id: string
+          notes?: string | null
+          service_date: string
+          service_time: string
+          service_type: string
+          status?: string | null
+          total_cost?: number | null
           updated_at?: string
         }
         Update: {
+          client_id?: string
+          created_at?: string
           id?: string
-          email?: string
-          full_name?: string | null
+          location?: string | null
+          notary_id?: string
+          notes?: string | null
+          service_date?: string
+          service_time?: string
+          service_type?: string
+          status?: string | null
+          total_cost?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookings_notary_id_fkey"
+            columns: ["notary_id"]
+            isOneToOne: false
+            referencedRelation: "notaries"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notaries: {
+        Row: {
+          address: string | null
+          availability: Json | null
+          availability_schedule: Json | null
+          business_address: string | null
+          business_name: string | null
+          city: string
+          commission_expiry_date: string | null
+          commission_number: string | null
+          created_at: string
+          description: string | null
+          hourly_rate: number | null
+          id: string
+          is_mobile: boolean | null
+          is_online: boolean | null
+          is_verified: boolean | null
+          languages: string[] | null
+          latitude: number | null
+          longitude: number | null
+          notary_county: string | null
+          notary_type: string | null
+          phone: string | null
+          profile_completed: boolean | null
+          profile_id: string
+          rating: number | null
+          review_count: number | null
+          seal_image_url: string | null
+          services: string[] | null
+          signature_image_url: string | null
+          specializations: string[] | null
+          state: string
+          travel_radius: number | null
+          updated_at: string
+          verification_status: string | null
+          years_experience: number | null
+          zip_code: string | null
+        }
+        Insert: {
+          address?: string | null
+          availability?: Json | null
+          availability_schedule?: Json | null
+          business_address?: string | null
+          business_name?: string | null
+          city: string
+          commission_expiry_date?: string | null
+          commission_number?: string | null
+          created_at?: string
+          description?: string | null
+          hourly_rate?: number | null
+          id?: string
+          is_mobile?: boolean | null
+          is_online?: boolean | null
+          is_verified?: boolean | null
+          languages?: string[] | null
+          latitude?: number | null
+          longitude?: number | null
+          notary_county?: string | null
+          notary_type?: string | null
+          phone?: string | null
+          profile_completed?: boolean | null
+          profile_id: string
+          rating?: number | null
+          review_count?: number | null
+          seal_image_url?: string | null
+          services?: string[] | null
+          signature_image_url?: string | null
+          specializations?: string[] | null
+          state: string
+          travel_radius?: number | null
+          updated_at?: string
+          verification_status?: string | null
+          years_experience?: number | null
+          zip_code?: string | null
+        }
+        Update: {
+          address?: string | null
+          availability?: Json | null
+          availability_schedule?: Json | null
+          business_address?: string | null
+          business_name?: string | null
+          city?: string
+          commission_expiry_date?: string | null
+          commission_number?: string | null
+          created_at?: string
+          description?: string | null
+          hourly_rate?: number | null
+          id?: string
+          is_mobile?: boolean | null
+          is_online?: boolean | null
+          is_verified?: boolean | null
+          languages?: string[] | null
+          latitude?: number | null
+          longitude?: number | null
+          notary_county?: string | null
+          notary_type?: string | null
+          phone?: string | null
+          profile_completed?: boolean | null
+          profile_id?: string
+          rating?: number | null
+          review_count?: number | null
+          seal_image_url?: string | null
+          services?: string[] | null
+          signature_image_url?: string | null
+          specializations?: string[] | null
+          state?: string
+          travel_radius?: number | null
+          updated_at?: string
+          verification_status?: string | null
+          years_experience?: number | null
+          zip_code?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notaries_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notary_documents: {
+        Row: {
+          created_at: string
+          document_name: string
+          document_type: string
+          document_url: string
+          file_size: number | null
+          id: string
+          mime_type: string | null
+          notary_id: string | null
+          upload_date: string
+          updated_at: string
+          verification_notes: string | null
+          verification_status: string | null
+        }
+        Insert: {
+          created_at?: string
+          document_name: string
+          document_type: string
+          document_url: string
+          file_size?: number | null
+          id?: string
+          mime_type?: string | null
+          notary_id?: string | null
+          upload_date?: string
+          updated_at?: string
+          verification_notes?: string | null
+          verification_status?: string | null
+        }
+        Update: {
+          created_at?: string
+          document_name?: string
+          document_type?: string
+          document_url?: string
+          file_size?: number | null
+          id?: string
+          mime_type?: string | null
+          notary_id?: string | null
+          upload_date?: string
+          updated_at?: string
+          verification_notes?: string | null
+          verification_status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notary_documents_notary_id_fkey"
+            columns: ["notary_id"]
+            isOneToOne: false
+            referencedRelation: "notaries"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          email: string
+          full_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
           avatar_url?: string | null
           created_at?: string
+          email: string
+          full_name?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string | null
+          id?: string
           updated_at?: string
         }
         Relationships: [
@@ -42,196 +276,55 @@ export type Database = {
             isOneToOne: true
             referencedRelation: "users"
             referencedColumns: ["id"]
-          }
-        ]
-      }
-      notaries: {
-        Row: {
-          id: string
-          profile_id: string
-          business_name: string | null
-          description: string | null
-          phone: string | null
-          address: string | null
-          city: string
-          state: string
-          zip_code: string | null
-          latitude: number | null
-          longitude: number | null
-          languages: string[] | null
-          services: string[] | null
-          availability: Json | null
-          hourly_rate: number | null
-          travel_radius: number | null
-          is_mobile: boolean
-          is_online: boolean
-          is_verified: boolean
-          rating: number | null
-          review_count: number
-          created_at: string
-          updated_at: string
-        }
-        Insert: {
-          id?: string
-          profile_id: string
-          business_name?: string | null
-          description?: string | null
-          phone?: string | null
-          address?: string | null
-          city: string
-          state: string
-          zip_code?: string | null
-          latitude?: number | null
-          longitude?: number | null
-          languages?: string[] | null
-          services?: string[] | null
-          availability?: Json | null
-          hourly_rate?: number | null
-          travel_radius?: number | null
-          is_mobile?: boolean
-          is_online?: boolean
-          is_verified?: boolean
-          rating?: number | null
-          review_count?: number
-          created_at?: string
-          updated_at?: string
-        }
-        Update: {
-          id?: string
-          profile_id?: string
-          business_name?: string | null
-          description?: string | null
-          phone?: string | null
-          address?: string | null
-          city?: string
-          state?: string
-          zip_code?: string | null
-          latitude?: number | null
-          longitude?: number | null
-          languages?: string[] | null
-          services?: string[] | null
-          availability?: Json | null
-          hourly_rate?: number | null
-          travel_radius?: number | null
-          is_mobile?: boolean
-          is_online?: boolean
-          is_verified?: boolean
-          rating?: number | null
-          review_count?: number
-          created_at?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "notaries_profile_id_fkey"
-            columns: ["profile_id"]
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          }
+          },
         ]
       }
       reviews: {
         Row: {
+          comment: string | null
+          created_at: string
           id: string
           notary_id: string
-          reviewer_id: string
           rating: number
-          comment: string | null
+          reviewer_id: string
           service_date: string | null
-          created_at: string
           updated_at: string
         }
         Insert: {
+          comment?: string | null
+          created_at?: string
           id?: string
           notary_id: string
-          reviewer_id: string
           rating: number
-          comment?: string | null
+          reviewer_id: string
           service_date?: string | null
-          created_at?: string
           updated_at?: string
         }
         Update: {
+          comment?: string | null
+          created_at?: string
           id?: string
           notary_id?: string
-          reviewer_id?: string
           rating?: number
-          comment?: string | null
+          reviewer_id?: string
           service_date?: string | null
-          created_at?: string
           updated_at?: string
         }
         Relationships: [
           {
             foreignKeyName: "reviews_notary_id_fkey"
             columns: ["notary_id"]
+            isOneToOne: false
             referencedRelation: "notaries"
             referencedColumns: ["id"]
           },
           {
             foreignKeyName: "reviews_reviewer_id_fkey"
             columns: ["reviewer_id"]
+            isOneToOne: false
             referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
-      bookings: {
-        Row: {
-          id: string
-          notary_id: string
-          client_id: string
-          service_type: string
-          service_date: string
-          service_time: string
-          location: string | null
-          notes: string | null
-          status: 'pending' | 'confirmed' | 'completed' | 'cancelled'
-          total_cost: number | null
-          created_at: string
-          updated_at: string
-        }
-        Insert: {
-          id?: string
-          notary_id: string
-          client_id: string
-          service_type: string
-          service_date: string
-          service_time: string
-          location?: string | null
-          notes?: string | null
-          status?: 'pending' | 'confirmed' | 'completed' | 'cancelled'
-          total_cost?: number | null
-          created_at?: string
-          updated_at?: string
-        }
-        Update: {
-          id?: string
-          notary_id?: string
-          client_id?: string
-          service_type?: string
-          service_date?: string
-          service_time?: string
-          location?: string | null
-          notes?: string | null
-          status?: 'pending' | 'confirmed' | 'completed' | 'cancelled'
-          total_cost?: number | null
-          created_at?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "bookings_notary_id_fkey"
-            columns: ["notary_id"]
-            referencedRelation: "notaries"
             referencedColumns: ["id"]
           },
-          {
-            foreignKeyName: "bookings_client_id_fkey"
-            columns: ["client_id"]
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          }
         ]
       }
     }
@@ -257,7 +350,7 @@ export type Tables<
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
     ? keyof (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
         Database[PublicTableNameOrOptions["schema"]]["Views"])
-    : never = never
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
       Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
@@ -266,14 +359,14 @@ export type Tables<
     ? R
     : never
   : PublicTableNameOrOptions extends keyof (Database["public"]["Tables"] &
-      Database["public"]["Views"])
-  ? (Database["public"]["Tables"] &
-      Database["public"]["Views"])[PublicTableNameOrOptions] extends {
-      Row: infer R
-    }
-    ? R
+        Database["public"]["Views"])
+    ? (Database["public"]["Tables"] &
+        Database["public"]["Views"])[PublicTableNameOrOptions] extends {
+        Row: infer R
+      }
+      ? R
+      : never
     : never
-  : never
 
 export type TablesInsert<
   PublicTableNameOrOptions extends
@@ -281,7 +374,7 @@ export type TablesInsert<
     | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
     ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
-    : never = never
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
       Insert: infer I
@@ -289,12 +382,12 @@ export type TablesInsert<
     ? I
     : never
   : PublicTableNameOrOptions extends keyof Database["public"]["Tables"]
-  ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
-      Insert: infer I
-    }
-    ? I
+    ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
+        Insert: infer I
+      }
+      ? I
+      : never
     : never
-  : never
 
 export type TablesUpdate<
   PublicTableNameOrOptions extends
@@ -302,7 +395,7 @@ export type TablesUpdate<
     | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
     ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
-    : never = never
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
       Update: infer U
@@ -310,12 +403,12 @@ export type TablesUpdate<
     ? U
     : never
   : PublicTableNameOrOptions extends keyof Database["public"]["Tables"]
-  ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
-      Update: infer U
-    }
-    ? U
+    ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
+        Update: infer U
+      }
+      ? U
+      : never
     : never
-  : never
 
 export type Enums<
   PublicEnumNameOrOptions extends
@@ -323,23 +416,9 @@ export type Enums<
     | { schema: keyof Database },
   EnumName extends PublicEnumNameOrOptions extends { schema: keyof Database }
     ? keyof Database[PublicEnumNameOrOptions["schema"]]["Enums"]
-    : never = never
+    : never = never,
 > = PublicEnumNameOrOptions extends { schema: keyof Database }
   ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : PublicEnumNameOrOptions extends keyof Database["public"]["Enums"]
-  ? Database["public"]["Enums"][PublicEnumNameOrOptions]
-  : never
-
-// Helper types for the application
-export type NotaryWithProfile = Database["public"]["Tables"]["notaries"]["Row"] & {
-  profiles: Database["public"]["Tables"]["profiles"]["Row"]
-}
-
-export type ReviewWithProfile = Database["public"]["Tables"]["reviews"]["Row"] & {
-  profiles: Database["public"]["Tables"]["profiles"]["Row"]
-}
-
-export type BookingWithDetails = Database["public"]["Tables"]["bookings"]["Row"] & {
-  notaries: NotaryWithProfile
-  profiles: Database["public"]["Tables"]["profiles"]["Row"]
-}
+    ? Database["public"]["Enums"][PublicEnumNameOrOptions]
+    : never
