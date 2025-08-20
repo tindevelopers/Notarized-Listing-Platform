@@ -3,32 +3,60 @@
 import { useState, useEffect, useLayoutEffect } from "react";
 
 // Suppress ResizeObserver loop errors
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   const resizeObserverErrorHandler = (e: ErrorEvent) => {
-    if (e.message === 'ResizeObserver loop completed with undelivered notifications.') {
+    if (
+      e.message ===
+      "ResizeObserver loop completed with undelivered notifications."
+    ) {
       e.stopImmediatePropagation();
       return false;
     }
   };
 
-  window.addEventListener('error', resizeObserverErrorHandler);
+  window.addEventListener("error", resizeObserverErrorHandler);
 }
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { ChevronLeft, Upload, Plus, Calendar, PenTool, Camera, Type } from "lucide-react";
+import {
+  ChevronLeft,
+  Upload,
+  Plus,
+  Calendar,
+  PenTool,
+  Camera,
+  Type,
+} from "lucide-react";
 import Link from "next/link";
 import { suppressResizeObserverErrors } from "@/lib/resize-observer-fix";
 
-type SignupStep = "email" | "verification" | "details" | "profile" | "signature" | "credentials";
+type SignupStep =
+  | "email"
+  | "verification"
+  | "details"
+  | "profile"
+  | "signature"
+  | "credentials";
 
 export default function NotarySignupPage() {
   const [currentStep, setCurrentStep] = useState<SignupStep>("email");
@@ -149,7 +177,7 @@ export default function NotarySignupPage() {
 
   const handleDocumentSave = () => {
     if (uploadModal.file && uploadModal.expiryDate) {
-      setDocuments(prev => ({
+      setDocuments((prev) => ({
         ...prev,
         [uploadModal.documentType]: {
           file: uploadModal.file!,
@@ -159,7 +187,12 @@ export default function NotarySignupPage() {
 
       // Use requestAnimationFrame to prevent ResizeObserver conflicts when closing modal
       requestAnimationFrame(() => {
-        setUploadModal({ isOpen: false, documentType: "", file: null, expiryDate: "" });
+        setUploadModal({
+          isOpen: false,
+          documentType: "",
+          file: null,
+          expiryDate: "",
+        });
       });
     }
   };
@@ -175,8 +208,11 @@ export default function NotarySignupPage() {
     profileData.commissionNumber &&
     profileData.commissionExpiry &&
     profileData.notaryType;
-  const isSignatureValid = signatureData.signatureImage || signatureData.signatureText;
-  const isCredentialsValid = Object.values(documents).every(doc => doc !== null);
+  const isSignatureValid =
+    signatureData.signatureImage || signatureData.signatureText;
+  const isCredentialsValid = Object.values(documents).every(
+    (doc) => doc !== null,
+  );
 
   // Layout stabilization and ResizeObserver error handling
   useLayoutEffect(() => {
@@ -207,13 +243,21 @@ export default function NotarySignupPage() {
       </div>
 
       {/* Main card */}
-      <div className={`relative bg-white rounded-2xl border border-[#E5E7EB] shadow-sm overflow-hidden w-full min-h-[600px] flex flex-col lg:flex-row ${
-        currentStep === "signature" || currentStep === "credentials" ? "max-w-3xl" : "max-w-5xl"
-      }`}>
+      <div
+        className={`relative bg-white rounded-2xl border border-[#E5E7EB] shadow-sm overflow-hidden w-full min-h-[600px] flex flex-col lg:flex-row ${
+          currentStep === "signature" || currentStep === "credentials"
+            ? "max-w-3xl"
+            : "max-w-5xl"
+        }`}
+      >
         {/* Left Panel */}
-        <div className={`p-6 lg:p-12 flex flex-col ${
-          currentStep === "signature" || currentStep === "credentials" ? "w-full" : "w-full lg:w-1/2"
-        }`}>
+        <div
+          className={`p-6 lg:p-12 flex flex-col ${
+            currentStep === "signature" || currentStep === "credentials"
+              ? "w-full"
+              : "w-full lg:w-1/2"
+          }`}
+        >
           {/* Logo */}
           <div className="mb-8 lg:mb-16">
             <Link href="/" className="text-xl font-bold text-black">
@@ -465,7 +509,10 @@ export default function NotarySignupPage() {
           )}
 
           {currentStep === "profile" && (
-            <form onSubmit={handleProfileSubmit} className="flex-1 flex flex-col">
+            <form
+              onSubmit={handleProfileSubmit}
+              className="flex-1 flex flex-col"
+            >
               <div className="space-y-6 flex-1">
                 <div className="space-y-3">
                   <p className="text-sm text-[#575757]">Step 3 / 5</p>
@@ -478,13 +525,16 @@ export default function NotarySignupPage() {
                   {/* Profile Picture */}
                   <div className="space-y-2">
                     <Label className="text-sm text-black">
-                      Profile picture<span className="text-[#E42B38] ml-0.5">*</span>
+                      Profile picture
+                      <span className="text-[#E42B38] ml-0.5">*</span>
                     </Label>
                     <Button
                       type="button"
                       variant="outline"
                       className="h-11 rounded-full border-[#A1A1A1]"
-                      onClick={() => document.getElementById('profile-picture')?.click()}
+                      onClick={() =>
+                        document.getElementById("profile-picture")?.click()
+                      }
                     >
                       <Upload className="w-5 h-5 mr-2" />
                       Upload profile picture
@@ -497,7 +547,10 @@ export default function NotarySignupPage() {
                       onChange={(e) => {
                         const file = e.target.files?.[0];
                         if (file) {
-                          setProfileData(prev => ({ ...prev, profilePicture: file }));
+                          setProfileData((prev) => ({
+                            ...prev,
+                            profilePicture: file,
+                          }));
                         }
                       }}
                     />
@@ -505,10 +558,17 @@ export default function NotarySignupPage() {
 
                   {/* Business Name */}
                   <div className="space-y-1">
-                    <Label className="text-sm text-black">Business name (optional)</Label>
+                    <Label className="text-sm text-black">
+                      Business name (optional)
+                    </Label>
                     <Input
                       value={profileData.businessName}
-                      onChange={(e) => setProfileData(prev => ({ ...prev, businessName: e.target.value }))}
+                      onChange={(e) =>
+                        setProfileData((prev) => ({
+                          ...prev,
+                          businessName: e.target.value,
+                        }))
+                      }
                       className="h-11 border-[#949494] rounded-md"
                     />
                   </div>
@@ -516,17 +576,18 @@ export default function NotarySignupPage() {
                   {/* Notary State and County */}
                   <div className="space-y-1">
                     <Label className="text-sm text-black">
-                      Notary state and county:<span className="text-[#E42B38] ml-0.5">*</span>
+                      Notary state and county:
+                      <span className="text-[#E42B38] ml-0.5">*</span>
                     </Label>
                     <div
                       className="relative cursor-pointer"
                       onClick={() => {
                         // For demo, set a default state/county if empty
                         if (!profileData.notaryState) {
-                          setProfileData(prev => ({
+                          setProfileData((prev) => ({
                             ...prev,
                             notaryState: "California",
-                            notaryCounty: "Los Angeles"
+                            notaryCounty: "Los Angeles",
                           }));
                         }
                       }}
@@ -544,11 +605,17 @@ export default function NotarySignupPage() {
                   {/* Commission Number */}
                   <div className="space-y-1">
                     <Label className="text-sm text-black">
-                      Commission number<span className="text-[#E42B38] ml-0.5">*</span>
+                      Commission number
+                      <span className="text-[#E42B38] ml-0.5">*</span>
                     </Label>
                     <Input
                       value={profileData.commissionNumber}
-                      onChange={(e) => setProfileData(prev => ({ ...prev, commissionNumber: e.target.value }))}
+                      onChange={(e) =>
+                        setProfileData((prev) => ({
+                          ...prev,
+                          commissionNumber: e.target.value,
+                        }))
+                      }
                       className="h-11 border-[#949494] rounded-md"
                     />
                   </div>
@@ -556,18 +623,26 @@ export default function NotarySignupPage() {
                   {/* Commission Expiry */}
                   <div className="space-y-1">
                     <Label className="text-sm text-black">
-                      Commission expiration date:<span className="text-[#E42B38] ml-0.5">*</span>
+                      Commission expiration date:
+                      <span className="text-[#E42B38] ml-0.5">*</span>
                     </Label>
                     <div className="relative">
                       <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5" />
                       <Input
                         type="date"
                         value={profileData.commissionExpiry}
-                        onChange={(e) => setProfileData(prev => ({ ...prev, commissionExpiry: e.target.value }))}
+                        onChange={(e) =>
+                          setProfileData((prev) => ({
+                            ...prev,
+                            commissionExpiry: e.target.value,
+                          }))
+                        }
                         className="h-11 border-[#949494] rounded-md pl-10"
                       />
                     </div>
-                    <p className="text-xs text-[#575757]">You will need to upload proof of this later.</p>
+                    <p className="text-xs text-[#575757]">
+                      You will need to upload proof of this later.
+                    </p>
                   </div>
 
                   {/* Type */}
@@ -575,14 +650,28 @@ export default function NotarySignupPage() {
                     <Label className="text-sm text-black">
                       Type<span className="text-[#E42B38] ml-0.5">*</span>
                     </Label>
-                    <Select value={profileData.notaryType} onValueChange={(value) => setProfileData(prev => ({ ...prev, notaryType: value }))}>
+                    <Select
+                      value={profileData.notaryType}
+                      onValueChange={(value) =>
+                        setProfileData((prev) => ({
+                          ...prev,
+                          notaryType: value,
+                        }))
+                      }
+                    >
                       <SelectTrigger className="h-11 border-[#949494] rounded-md">
                         <SelectValue placeholder="Select type" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="traditional">Traditional Notary</SelectItem>
-                        <SelectItem value="electronic">Electronic Notary</SelectItem>
-                        <SelectItem value="remote">Remote Online Notary</SelectItem>
+                        <SelectItem value="traditional">
+                          Traditional Notary
+                        </SelectItem>
+                        <SelectItem value="electronic">
+                          Electronic Notary
+                        </SelectItem>
+                        <SelectItem value="remote">
+                          Remote Online Notary
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -590,14 +679,18 @@ export default function NotarySignupPage() {
                   {/* Languages */}
                   <div className="space-y-1">
                     <Label className="text-sm text-black">
-                      Languages you speak<span className="text-[#E42B38] ml-0.5">*</span>
+                      Languages you speak
+                      <span className="text-[#E42B38] ml-0.5">*</span>
                     </Label>
                     <div
                       className="relative cursor-pointer"
                       onClick={() => {
                         // For demo, add English if empty
                         if (profileData.languages.length === 0) {
-                          setProfileData(prev => ({ ...prev, languages: ["English"] }));
+                          setProfileData((prev) => ({
+                            ...prev,
+                            languages: ["English"],
+                          }));
                         }
                       }}
                     >
@@ -614,14 +707,18 @@ export default function NotarySignupPage() {
                   {/* Document Types */}
                   <div className="space-y-1">
                     <Label className="text-sm text-black">
-                      Document types you can notarize<span className="text-[#E42B38] ml-0.5">*</span>
+                      Document types you can notarize
+                      <span className="text-[#E42B38] ml-0.5">*</span>
                     </Label>
                     <div
                       className="relative cursor-pointer"
                       onClick={() => {
                         // For demo, add some document types if empty
                         if (profileData.documentTypes.length === 0) {
-                          setProfileData(prev => ({ ...prev, documentTypes: ["Real Estate", "Legal Documents"] }));
+                          setProfileData((prev) => ({
+                            ...prev,
+                            documentTypes: ["Real Estate", "Legal Documents"],
+                          }));
                         }
                       }}
                     >
@@ -643,7 +740,9 @@ export default function NotarySignupPage() {
                   <Button
                     type="button"
                     variant="outline"
-                    onClick={() => requestAnimationFrame(() => setCurrentStep("details"))}
+                    onClick={() =>
+                      requestAnimationFrame(() => setCurrentStep("details"))
+                    }
                     className="px-5 h-11 rounded-full border-[#A1A1A1]"
                   >
                     Back
@@ -682,27 +781,54 @@ export default function NotarySignupPage() {
                   <div className="grid grid-cols-3 gap-3">
                     <Button
                       type="button"
-                      variant={signatureData.signatureType === "draw" ? "default" : "outline"}
+                      variant={
+                        signatureData.signatureType === "draw"
+                          ? "default"
+                          : "outline"
+                      }
                       className="h-11 justify-start"
-                      onClick={() => setSignatureData(prev => ({ ...prev, signatureType: "draw" }))}
+                      onClick={() =>
+                        setSignatureData((prev) => ({
+                          ...prev,
+                          signatureType: "draw",
+                        }))
+                      }
                     >
                       <PenTool className="w-5 h-5 mr-2" />
                       Draw
                     </Button>
                     <Button
                       type="button"
-                      variant={signatureData.signatureType === "upload" ? "default" : "outline"}
+                      variant={
+                        signatureData.signatureType === "upload"
+                          ? "default"
+                          : "outline"
+                      }
                       className="h-11 justify-start"
-                      onClick={() => setSignatureData(prev => ({ ...prev, signatureType: "upload" }))}
+                      onClick={() =>
+                        setSignatureData((prev) => ({
+                          ...prev,
+                          signatureType: "upload",
+                        }))
+                      }
                     >
                       <Camera className="w-5 h-5 mr-2" />
                       Upload image
                     </Button>
                     <Button
                       type="button"
-                      variant={signatureData.signatureType === "type" ? "default" : "outline"}
+                      variant={
+                        signatureData.signatureType === "type"
+                          ? "default"
+                          : "outline"
+                      }
                       className="h-11 justify-start"
-                      onClick={() => setSignatureData(prev => ({ ...prev, signatureType: "type" }))}
+                      onClick={() =>
+                        setSignatureData((prev) => ({
+                          ...prev,
+                          signatureType: "type",
+                        }))
+                      }
                     >
                       <Type className="w-5 h-5 mr-2" />
                       Type
@@ -720,7 +846,12 @@ export default function NotarySignupPage() {
                     {signatureData.signatureType === "type" && (
                       <Input
                         value={signatureData.signatureText}
-                        onChange={(e) => setSignatureData(prev => ({ ...prev, signatureText: e.target.value }))}
+                        onChange={(e) =>
+                          setSignatureData((prev) => ({
+                            ...prev,
+                            signatureText: e.target.value,
+                          }))
+                        }
                         placeholder="Type your signature"
                         className="text-2xl border-none bg-transparent text-center"
                         style={{ fontFamily: "cursive" }}
@@ -730,7 +861,11 @@ export default function NotarySignupPage() {
 
                   {/* Signature controls */}
                   <div className="flex justify-between items-center">
-                    <Button type="button" variant="outline" className="border-[#E5E7EB]">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      className="border-[#E5E7EB]"
+                    >
                       Clear and draw again
                     </Button>
                     <div className="flex items-center gap-4">
@@ -750,7 +885,9 @@ export default function NotarySignupPage() {
                   <Button
                     type="button"
                     variant="outline"
-                    onClick={() => requestAnimationFrame(() => setCurrentStep("profile"))}
+                    onClick={() =>
+                      requestAnimationFrame(() => setCurrentStep("profile"))
+                    }
                     className="px-5 h-11 rounded-full border-[#A1A1A1]"
                   >
                     Back
@@ -773,7 +910,10 @@ export default function NotarySignupPage() {
           )}
 
           {currentStep === "credentials" && (
-            <form onSubmit={handleCredentialsSubmit} className="flex-1 flex flex-col">
+            <form
+              onSubmit={handleCredentialsSubmit}
+              className="flex-1 flex flex-col"
+            >
               <div className="space-y-6 flex-1">
                 <div className="space-y-3">
                   <p className="text-sm text-[#575757]">Step 5 / 5</p>
@@ -789,24 +929,41 @@ export default function NotarySignupPage() {
                 <div className="border border-[#E5E7EB] rounded-lg bg-white">
                   {/* Table header */}
                   <div className="flex justify-between items-center p-4 border-b border-[#E5E7EB]">
-                    <span className="text-sm text-[#575757]">Credential required</span>
-                    <span className="text-sm text-[#575757]">Document provided</span>
+                    <span className="text-sm text-[#575757]">
+                      Credential required
+                    </span>
+                    <span className="text-sm text-[#575757]">
+                      Document provided
+                    </span>
                   </div>
 
                   {/* Table rows */}
                   {[
                     { key: "identification", label: "Identification" },
                     { key: "w9", label: "W9" },
-                    { key: "commissionCertificate", label: "Commission Certificate" },
+                    {
+                      key: "commissionCertificate",
+                      label: "Commission Certificate",
+                    },
                     { key: "bond", label: "Bond" },
                     { key: "eo", label: "E&O" },
-                    { key: "backgroundCheck", label: "Background Check Report" },
+                    {
+                      key: "backgroundCheck",
+                      label: "Background Check Report",
+                    },
                   ].map((doc) => (
-                    <div key={doc.key} className="flex justify-between items-center p-4 border-b border-[#E5E7EB] last:border-b-0">
-                      <span className="text-sm font-semibold text-black">{doc.label}</span>
+                    <div
+                      key={doc.key}
+                      className="flex justify-between items-center p-4 border-b border-[#E5E7EB] last:border-b-0"
+                    >
+                      <span className="text-sm font-semibold text-black">
+                        {doc.label}
+                      </span>
                       <div className="flex items-center gap-2">
                         <span className="text-sm text-[#575757]">
-                          {documents[doc.key as keyof typeof documents] ? "✓ Uploaded" : "-"}
+                          {documents[doc.key as keyof typeof documents]
+                            ? "✓ Uploaded"
+                            : "-"}
                         </span>
                         <Button
                           type="button"
@@ -830,7 +987,9 @@ export default function NotarySignupPage() {
                   <Button
                     type="button"
                     variant="outline"
-                    onClick={() => requestAnimationFrame(() => setCurrentStep("signature"))}
+                    onClick={() =>
+                      requestAnimationFrame(() => setCurrentStep("signature"))
+                    }
                     className="px-5 h-11 rounded-full border-[#A1A1A1]"
                   >
                     Back
@@ -853,7 +1012,10 @@ export default function NotarySignupPage() {
         </div>
 
         {/* Right Panel - Only show for steps 1-3 */}
-        {(currentStep === "email" || currentStep === "verification" || currentStep === "details" || currentStep === "profile") && (
+        {(currentStep === "email" ||
+          currentStep === "verification" ||
+          currentStep === "details" ||
+          currentStep === "profile") && (
           <div className="w-full lg:w-1/2 bg-[#F7F9FC] p-6 lg:p-12 flex flex-col relative min-h-[400px] lg:min-h-[600px]">
             {/* Background blur effect for right panel */}
             {currentStep === "details" && (
@@ -920,8 +1082,8 @@ export default function NotarySignupPage() {
                       </svg>
                     </div>
                     <p className="text-sm font-bold text-black leading-relaxed">
-                      We use Notarized, Inc for our closings. We love the way they
-                      update us at every phase of the process.
+                      We use Notarized, Inc for our closings. We love the way
+                      they update us at every phase of the process.
                     </p>
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-[#E5E7EB] overflow-hidden">
@@ -975,11 +1137,15 @@ export default function NotarySignupPage() {
                     <div className="border-t border-[#E5E7EB] pt-4">
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <p className="text-[#575757] text-xs">Commission number:</p>
+                          <p className="text-[#575757] text-xs">
+                            Commission number:
+                          </p>
                           <p className="text-black">-</p>
                         </div>
                         <div>
-                          <p className="text-[#575757] text-xs">Commission expiration date:</p>
+                          <p className="text-[#575757] text-xs">
+                            Commission expiration date:
+                          </p>
                           <p className="text-black">-</p>
                         </div>
                         <div>
@@ -993,7 +1159,9 @@ export default function NotarySignupPage() {
                       </div>
                     </div>
                     <div className="border-t border-[#E5E7EB] pt-4 text-center">
-                      <p className="text-xs font-bold text-black">Document types notarized:</p>
+                      <p className="text-xs font-bold text-black">
+                        Document types notarized:
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -1004,7 +1172,12 @@ export default function NotarySignupPage() {
       </div>
 
       {/* Document Upload Modal */}
-      <Dialog open={uploadModal.isOpen} onOpenChange={(open) => setUploadModal(prev => ({ ...prev, isOpen: open }))}>
+      <Dialog
+        open={uploadModal.isOpen}
+        onOpenChange={(open) =>
+          setUploadModal((prev) => ({ ...prev, isOpen: open }))
+        }
+      >
         <DialogContent className="max-w-lg">
           <DialogHeader>
             <DialogTitle>Add document</DialogTitle>
@@ -1012,7 +1185,8 @@ export default function NotarySignupPage() {
 
           <div className="space-y-6">
             <p className="text-sm font-semibold text-black">
-              Upload your "{uploadModal.documentType}" document and add it's expiry date below.
+              Upload your "{uploadModal.documentType}" document and add it's
+              expiry date below.
             </p>
 
             {/* File upload area */}
@@ -1020,7 +1194,8 @@ export default function NotarySignupPage() {
               <Upload className="w-8 h-8 text-[#A1A1A1] mx-auto mb-4" />
               <div className="space-y-1">
                 <p className="text-sm font-semibold text-black">
-                  Drag file here, or <span className="underline">select file</span>
+                  Drag file here, or{" "}
+                  <span className="underline">select file</span>
                 </p>
                 <p className="text-xs text-[#575757]">PDF, DOC or ZIP.</p>
               </div>
@@ -1030,7 +1205,7 @@ export default function NotarySignupPage() {
                 onChange={(e) => {
                   const file = e.target.files?.[0];
                   if (file) {
-                    setUploadModal(prev => ({ ...prev, file }));
+                    setUploadModal((prev) => ({ ...prev, file }));
                   }
                 }}
               />
@@ -1046,13 +1221,19 @@ export default function NotarySignupPage() {
                 <Input
                   type="date"
                   value={uploadModal.expiryDate}
-                  onChange={(e) => setUploadModal(prev => ({ ...prev, expiryDate: e.target.value }))}
+                  onChange={(e) =>
+                    setUploadModal((prev) => ({
+                      ...prev,
+                      expiryDate: e.target.value,
+                    }))
+                  }
                   className="pl-10"
                   placeholder="MM/DD/YYYY"
                 />
               </div>
               <p className="text-xs text-[#575757]">
-                This must match any expiry date detailed in the uploaded document.
+                This must match any expiry date detailed in the uploaded
+                document.
               </p>
             </div>
 
@@ -1061,9 +1242,11 @@ export default function NotarySignupPage() {
               <Button
                 type="button"
                 variant="outline"
-                onClick={() => requestAnimationFrame(() =>
-                  setUploadModal(prev => ({ ...prev, isOpen: false }))
-                )}
+                onClick={() =>
+                  requestAnimationFrame(() =>
+                    setUploadModal((prev) => ({ ...prev, isOpen: false })),
+                  )
+                }
               >
                 Cancel
               </Button>
