@@ -45,6 +45,17 @@ export default function NotarySignupPage() {
   const isVerificationValid = verificationCode.length === 6;
   const isDetailsValid = formData.firstName && formData.lastName && formData.phoneNumber && formData.password;
 
+  // Auto-advance when verification code is complete
+  useEffect(() => {
+    if (verificationCode.length === 6) {
+      // Small delay to show the complete code before advancing
+      const timer = setTimeout(() => {
+        setCurrentStep("details");
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [verificationCode]);
+
   return (
     <div className="min-h-screen bg-[#F7F9FC] flex items-center justify-center p-4">
       {/* Background blur effect */}
