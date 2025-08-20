@@ -87,12 +87,16 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
       return
     }
 
-    const { error } = await signUp(signUpData.email, signUpData.password, signUpData.fullName)
+    const { error, requiresVerification } = await signUp(signUpData.email, signUpData.password, signUpData.fullName)
     
     if (error) {
       setError(error.message || 'An error occurred during sign up')
     } else {
-      setSuccess('Account created successfully! Please check your email to verify your account.')
+      if (requiresVerification) {
+        setSuccess('Account created successfully! Please check your email and click the verification link to activate your account.')
+      } else {
+        setSuccess('Account created successfully!')
+      }
       setSignUpData({ email: '', password: '', confirmPassword: '', fullName: '' })
     }
     
@@ -176,6 +180,20 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
                 {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 Sign In
               </Button>
+
+              <div className="text-center">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  className="text-sm text-blue-600 hover:text-blue-800"
+                  onClick={() => {
+                    onOpenChange(false)
+                    window.location.href = '/auth/reset-password'
+                  }}
+                >
+                  Forgot your password?
+                </Button>
+              </div>
             </form>
           </TabsContent>
 

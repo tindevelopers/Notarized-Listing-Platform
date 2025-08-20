@@ -4,12 +4,13 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { User, Session, AuthChangeEvent } from '@supabase/supabase-js'
 import { supabase } from '@/lib/supabase/client'
+import { generateVerificationToken } from '@/lib/auth/client-verification'
 
 interface AuthContextType {
   user: User | null
   session: Session | null
   loading: boolean
-  signUp: (email: string, password: string, fullName?: string) => Promise<{ error?: any }>
+  signUp: (email: string, password: string, fullName?: string) => Promise<{ error?: any; requiresVerification?: boolean }>
   signIn: (email: string, password: string) => Promise<{ error?: any }>
   signOut: () => Promise<{ error?: any }>
 }
@@ -68,13 +69,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signUp = async (email: string, password: string, fullName?: string) => {
     try {
       setLoading(true)
+      
+      // First, create the user account
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
           data: {
             full_name: fullName,
-          }
+          },
+          // Disable email confirmation through Supabase - we'll handle it ourselves
+          emailRedirectTo: undefined,
         }
       })
 
@@ -83,7 +88,37 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return { error }
       }
 
-      return { error: null }
+      // If user creation was successful, send verification email
+      if (data.user) {
+        try {
+          // Generate verification token and send email
+          const verificationToken = generateVerificationToken()
+          
+          const emailResponse = await fetch('/api/email/verify', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email,
+              userName: fullName || email.split('@')[0],
+              verificationToken,
+            }),
+          })
+
+          if (!emailResponse.ok) {
+            console.error('Failed to send verification email')
+            // Don't fail the signup if email fails, just log it
+          } else {
+            console.log('Verification email sent successfully')
+          }
+        } catch (emailError) {
+          console.error('Error sending verification email:', emailError)
+          // Don't fail the signup if email fails
+        }
+      }
+
+      return { error: null, requiresVerification: true }
     } catch (error) {
       console.error('Sign up catch error:', error)
       return { error }

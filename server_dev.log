@@ -1,0 +1,14 @@
+
+> fusion-starter-nextjs@0.1.0 dev
+> next dev
+
+  ▲ Next.js 14.2.8
+  - Local:        http://localhost:3000
+  - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 2.4s
+ ○ Compiling /notary-signup ...
+ ✓ Compiled /notary-signup in 6.2s (1005 modules)
+ GET /notary-signup 200 in 6886ms
+ ✓ Compiled in 672ms (499 modules)
