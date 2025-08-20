@@ -10,7 +10,8 @@
     "lint": "next lint",
     "test": "vitest --run",
     "format.fix": "prettier --write .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "vercel-build": "pnpm build"
   },
   "dependencies": {
     "next": "14.2.8",
