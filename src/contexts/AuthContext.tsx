@@ -91,8 +91,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // If user creation was successful, send verification email
       if (data.user) {
         try {
-          // Generate verification token and send email
-          const verificationToken = generateVerificationToken()
+          // Generate verification code and send email
+          const verificationCode = generateVerificationToken() // This now generates a 6-digit code
           
           const emailResponse = await fetch('/api/email/verify', {
             method: 'POST',
@@ -102,15 +102,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             body: JSON.stringify({
               email,
               userName: fullName || email.split('@')[0],
-              verificationToken,
+              verificationCode,
             }),
           })
 
           if (!emailResponse.ok) {
-            console.error('Failed to send verification email')
+            const errorData = await emailResponse.json().catch(() => ({}))
+            console.error('Failed to send verification email:', errorData)
             // Don't fail the signup if email fails, just log it
           } else {
-            console.log('Verification email sent successfully')
+            const responseData = await emailResponse.json().catch(() => ({}))
+            console.log('✅ Verification email processed:', responseData.message || 'Success')
+            
+            // Check if this is development mode
+            if (responseData.error?.includes('Development mode')) {
+              console.log('📧 Check the server console for the email content that would be sent')
+            }
           }
         } catch (emailError) {
           console.error('Error sending verification email:', emailError)

@@ -72,14 +72,18 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Create verification link
-    const baseUrl = request.headers.get('origin') || 'http://localhost:3000'
-    const verificationLink = `${baseUrl}/auth/verify-email?token=${verificationToken}&email=${encodeURIComponent(email)}`
+    // Store verification code in global store (15 minutes expiration)
+    ;(global as any).verificationCodes = (global as any).verificationCodes || new Map()
+    ;(global as any).verificationCodes.set(email.toLowerCase(), {
+      code: verificationToken, // This is now a 6-digit code
+      expiresAt: Date.now() + (15 * 60 * 1000), // 15 minutes
+      createdAt: Date.now()
+    })
 
     // Send email
     const result = await sendEmailVerification(email, {
       userName: profile.full_name || email.split('@')[0],
-      verificationLink,
+      verificationCode: verificationToken, // This is now a 6-digit code
       supportEmail: process.env.SUPPORT_EMAIL || 'support@notarized.com'
     })
 

@@ -20,13 +20,30 @@ export interface EmailResult {
 // Base email sending function
 async function sendEmail(to: string, subject: string, htmlBody: string, textBody: string): Promise<EmailResult> {
   if (!isSESConfigured()) {
-    console.warn('SES is not configured. Email would be sent to:', to)
-    console.warn('Subject:', subject)
-    console.warn('Body preview:', textBody.substring(0, 100) + '...')
+    // Development mode: log email instead of failing
+    console.log('\n📧 EMAIL WOULD BE SENT (SES not configured):')
+    console.log('═'.repeat(50))
+    console.log(`📬 To: ${to}`)
+    console.log(`📝 Subject: ${subject}`)
+    console.log(`🎯 From: ${SES_CONFIG.fromName} <${SES_CONFIG.fromEmail}>`)
+    console.log('─'.repeat(50))
+    console.log('📄 Text Content:')
+    console.log(textBody)
+    console.log('─'.repeat(50))
+    console.log('🌐 HTML Content Preview:')
+    console.log(htmlBody.substring(0, 200) + '...')
+    console.log('═'.repeat(50))
+    console.log('ℹ️  To send real emails, configure AWS SES:')
+    console.log('  - Set AWS_ACCESS_KEY_ID to your AWS access key')
+    console.log('  - Set AWS_SECRET_ACCESS_KEY to your AWS secret key') 
+    console.log('  - Set AWS_SES_FROM_EMAIL to your verified SES email')
+    console.log('═'.repeat(50))
     
+    // Return success in development mode so the flow continues
     return {
-      success: false,
-      error: 'SES not configured. Check environment variables: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_SES_FROM_EMAIL'
+      success: true,
+      messageId: 'dev-mode-' + Date.now(),
+      error: 'Development mode: Email logged to console instead of sent'
     }
   }
 

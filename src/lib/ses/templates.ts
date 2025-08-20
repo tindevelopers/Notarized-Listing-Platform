@@ -2,7 +2,7 @@
 
 export interface EmailVerificationData {
   userName: string
-  verificationLink: string
+  verificationCode: string
   supportEmail?: string
 }
 
@@ -22,10 +22,10 @@ export interface NotaryStatusData {
 
 // Email verification template
 export function getEmailVerificationTemplate(data: EmailVerificationData): { subject: string; html: string; text: string } {
-  const { userName, verificationLink, supportEmail = 'support@notarized.com' } = data
+  const { userName, verificationCode, supportEmail = 'support@notarized.com' } = data
 
   return {
-    subject: 'Verify Your Email Address - Notarized Platform',
+    subject: 'Your Verification Code - Notarized Platform',
     html: `
       <!DOCTYPE html>
       <html>
@@ -37,15 +37,21 @@ export function getEmailVerificationTemplate(data: EmailVerificationData): { sub
             body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; }
             .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
             .content { background: #f8f9fa; padding: 30px; border-radius: 0 0 8px 8px; }
-            .button { 
-              display: inline-block; 
-              padding: 14px 28px; 
-              background: #667eea; 
-              color: white; 
-              text-decoration: none; 
-              border-radius: 6px; 
-              font-weight: bold; 
-              margin: 20px 0;
+            .code-container { 
+              text-align: center;
+              margin: 30px 0;
+              padding: 20px;
+              background: white;
+              border-radius: 8px;
+              border: 2px solid #667eea;
+            }
+            .verification-code { 
+              font-size: 36px;
+              font-weight: bold;
+              color: #667eea;
+              letter-spacing: 8px;
+              font-family: 'Courier New', monospace;
+              margin: 10px 0;
             }
             .footer { text-align: center; margin-top: 30px; color: #666; font-size: 14px; }
             .warning { background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin: 20px 0; }
@@ -57,18 +63,24 @@ export function getEmailVerificationTemplate(data: EmailVerificationData): { sub
           </div>
           <div class="content">
             <h2>Hello ${userName}!</h2>
-            <p>Thank you for creating an account with Notarized Platform. To complete your registration and start using our services, please verify your email address.</p>
+            <p>Thank you for creating an account with Notarized Platform. To complete your registration and start using our services, please enter the verification code below in the app:</p>
             
-            <div style="text-align: center;">
-              <a href="${verificationLink}" class="button">Verify Email Address</a>
+            <div class="code-container">
+              <p style="margin: 0; color: #666; font-size: 14px;">Your verification code is:</p>
+              <div class="verification-code">${verificationCode}</div>
+              <p style="margin: 0; color: #666; font-size: 12px;">Enter this code in the verification form</p>
             </div>
             
             <div class="warning">
-              <strong>Important:</strong> This verification link will expire in 24 hours for security reasons.
+              <strong>Important:</strong> This verification code will expire in 15 minutes for security reasons.
             </div>
             
-            <p>If the button above doesn't work, you can copy and paste this link into your browser:</p>
-            <p style="word-break: break-all; background: #e9ecef; padding: 10px; border-radius: 4px;">${verificationLink}</p>
+            <p><strong>Instructions:</strong></p>
+            <ol>
+              <li>Return to the Notarized Platform app</li>
+              <li>Enter the 6-digit code above in the verification form</li>
+              <li>Click "Verify" to activate your account</li>
+            </ol>
             
             <p>If you didn't create an account with us, please ignore this email.</p>
           </div>
@@ -84,11 +96,16 @@ export function getEmailVerificationTemplate(data: EmailVerificationData): { sub
       
       Hello ${userName}!
       
-      Thank you for creating an account with Notarized Platform. To complete your registration and start using our services, please verify your email address.
+      Thank you for creating an account with Notarized Platform. To complete your registration and start using our services, please enter the verification code below in the app:
       
-      Verify your email by clicking this link: ${verificationLink}
+      YOUR VERIFICATION CODE: ${verificationCode}
       
-      Important: This verification link will expire in 24 hours for security reasons.
+      Instructions:
+      1. Return to the Notarized Platform app
+      2. Enter the 6-digit code above in the verification form  
+      3. Click "Verify" to activate your account
+      
+      Important: This verification code will expire in 15 minutes for security reasons.
       
       If you didn't create an account with us, please ignore this email.
       

@@ -22,6 +22,9 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
+  const [showVerification, setShowVerification] = useState(false)
+  const [verificationEmail, setVerificationEmail] = useState('')
+  const [verificationCode, setVerificationCode] = useState('')
 
   // Form states
   const [signInData, setSignInData] = useState({ email: '', password: '' })
@@ -39,6 +42,9 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
     setSignUpData({ email: '', password: '', confirmPassword: '', fullName: '' })
     setError(null)
     setSuccess(null)
+    setShowVerification(false)
+    setVerificationEmail('')
+    setVerificationCode('')
   }
 
   const handleSignIn = async (e: React.FormEvent) => {
@@ -93,11 +99,87 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
       setError(error.message || 'An error occurred during sign up')
     } else {
       if (requiresVerification) {
-        setSuccess('Account created successfully! Please check your email and click the verification link to activate your account.')
+        // Show verification code input instead of success message
+        setVerificationEmail(signUpData.email)
+        setShowVerification(true)
+        setSignUpData({ email: '', password: '', confirmPassword: '', fullName: '' })
       } else {
         setSuccess('Account created successfully!')
+        setSignUpData({ email: '', password: '', confirmPassword: '', fullName: '' })
       }
-      setSignUpData({ email: '', password: '', confirmPassword: '', fullName: '' })
+    }
+    
+    setLoading(false)
+  }
+
+  const handleVerifyCode = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    setError(null)
+    
+    if (!verificationCode || verificationCode.length !== 6) {
+      setError('Please enter a valid 6-digit verification code')
+      setLoading(false)
+      return
+    }
+
+    try {
+      const response = await fetch('/api/auth/verify-code', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: verificationEmail,
+          code: verificationCode,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setSuccess('Email verified successfully! You can now sign in to your account.')
+        setShowVerification(false)
+        setActiveTab('signin')
+      } else {
+        setError(data.error || 'Verification failed')
+      }
+    } catch (error) {
+      setError('An error occurred during verification. Please try again.')
+    }
+    
+    setLoading(false)
+  }
+
+  const handleResendCode = async () => {
+    setLoading(true)
+    setError(null)
+    
+    try {
+      // Generate a new verification code
+      const { generateVerificationCode } = await import('@/lib/auth/client-verification')
+      const newCode = generateVerificationCode()
+      
+      const response = await fetch('/api/email/verify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: verificationEmail,
+          userName: verificationEmail.split('@')[0],
+          verificationCode: newCode,
+        }),
+      })
+
+      if (response.ok) {
+        setSuccess('Verification code sent! Please check your email.')
+      } else {
+        const data = await response.json()
+        setError(data.error || 'Failed to resend verification code')
+      }
+    } catch (error) {
+      setError('An error occurred while resending the code. Please try again.')
     }
     
     setLoading(false)
@@ -115,31 +197,90 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
           </DialogTitle>
         </DialogHeader>
 
-        <Tabs value={activeTab} onValueChange={(value) => {
-          setActiveTab(value as 'signin' | 'signup')
-          setError(null)
-          setSuccess(null)
-        }}>
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="signin">Sign In</TabsTrigger>
-            <TabsTrigger value="signup">Sign Up</TabsTrigger>
-          </TabsList>
+        {error && (
+          <Alert variant="destructive">
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
 
-          {error && (
-            <Alert variant="destructive">
-              <AlertCircle className="h-4 w-4" />
-              <AlertDescription>{error}</AlertDescription>
-            </Alert>
-          )}
+        {success && (
+          <Alert className="border-green-200 bg-green-50 text-green-800">
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription>{success}</AlertDescription>
+          </Alert>
+        )}
 
-          {success && (
-            <Alert className="border-green-200 bg-green-50 text-green-800">
-              <AlertCircle className="h-4 w-4" />
-              <AlertDescription>{success}</AlertDescription>
-            </Alert>
-          )}
+        {/* Verification Code Form */}
+        {showVerification ? (
+            <div className="space-y-4">
+              <div className="text-center space-y-2">
+                <h3 className="text-lg font-semibold">Verify Your Email</h3>
+                <p className="text-sm text-gray-600">
+                  We've sent a 6-digit verification code to<br />
+                  <strong>{verificationEmail}</strong>
+                </p>
+              </div>
 
-          {/* Sign In Tab */}
+              <form onSubmit={handleVerifyCode} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="verification-code">Enter 6-digit code</Label>
+                  <Input
+                    id="verification-code"
+                    type="text"
+                    placeholder="000000"
+                    className="text-center text-xl tracking-widest font-mono"
+                    value={verificationCode}
+                    onChange={(e) => {
+                      const value = e.target.value.replace(/\D/g, '').slice(0, 6)
+                      setVerificationCode(value)
+                    }}
+                    maxLength={6}
+                    disabled={loading}
+                    required
+                  />
+                </div>
+
+                <Button type="submit" className="w-full" disabled={loading}>
+                  {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                  Verify Code
+                </Button>
+              </form>
+
+              <div className="text-center space-y-2">
+                <p className="text-sm text-gray-600">Didn't receive the code?</p>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  className="text-sm text-blue-600 hover:text-blue-800"
+                  onClick={handleResendCode}
+                  disabled={loading}
+                >
+                  Resend Code
+                </Button>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  className="text-sm text-gray-600 hover:text-gray-800"
+                  onClick={() => setShowVerification(false)}
+                  disabled={loading}
+                >
+                  Back to Sign Up
+                </Button>
+              </div>
+            </div>
+        ) : (
+          <Tabs value={activeTab} onValueChange={(value) => {
+            setActiveTab(value as 'signin' | 'signup')
+            setError(null)
+            setSuccess(null)
+          }}>
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="signin">Sign In</TabsTrigger>
+              <TabsTrigger value="signup">Sign Up</TabsTrigger>
+            </TabsList>
+
+            {/* Sign In Tab */}
           <TabsContent value="signin" className="space-y-4">
             <form onSubmit={handleSignIn} className="space-y-4">
               <div className="space-y-2">
@@ -273,7 +414,8 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
               </Button>
             </form>
           </TabsContent>
-        </Tabs>
+          </Tabs>
+        )}
       </DialogContent>
     </Dialog>
   )

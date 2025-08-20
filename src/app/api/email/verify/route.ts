@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic"
 const verifyEmailSchema = z.object({
   email: z.string().email("Invalid email address"),
   userName: z.string().min(1, "User name is required"),
-  verificationToken: z.string().min(1, "Verification token is required"),
+  verificationCode: z.string().length(6, "Verification code must be 6 digits").regex(/^\d{6}$/, "Verification code must contain only digits"),
 })
 
 export async function POST(request: NextRequest) {
@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const { email, userName, verificationToken } = validation.data
+    const { email, userName, verificationCode } = validation.data
 
     // Check rate limiting
     const rateCheck = checkEmailRateLimit(email)
@@ -42,18 +42,23 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Create verification link
-    const baseUrl = request.headers.get('origin') || 'http://localhost:3000'
-    const verificationLink = `${baseUrl}/auth/verify-email?token=${verificationToken}&email=${encodeURIComponent(email)}`
+    // Store verification code in a simple in-memory store with expiration (15 minutes)
+    ;(global as any).verificationCodes = (global as any).verificationCodes || new Map()
+    ;(global as any).verificationCodes.set(email.toLowerCase(), {
+      code: verificationCode,
+      expiresAt: Date.now() + (15 * 60 * 1000), // 15 minutes
+      createdAt: Date.now()
+    })
 
-    // Send email
+    // Send email with verification code
     const result = await sendEmailVerification(email, {
       userName,
-      verificationLink,
+      verificationCode,
       supportEmail: process.env.SUPPORT_EMAIL || 'support@notarized.com'
     })
 
-    if (!result.success) {
+    if (!result.success && !result.messageId) {
+      // Only fail if it's a real error, not development mode
       console.error('Failed to send verification email:', result.error)
       return NextResponse.json(
         { error: "Failed to send verification email", details: result.error },
@@ -62,11 +67,18 @@ export async function POST(request: NextRequest) {
     }
 
     // Log successful send (don't expose messageId to client for security)
-    console.log(`Verification email sent successfully to ${email}`)
+    if (result.messageId?.startsWith('dev-mode-')) {
+      console.log(`📧 Verification email logged to console for ${email} (development mode)`)
+    } else {
+      console.log(`✅ Verification email sent successfully to ${email}`)
+    }
 
     return NextResponse.json({
       success: true,
-      message: "Verification email sent successfully"
+      message: result.messageId?.startsWith('dev-mode-') 
+        ? "Verification email logged to console (development mode)" 
+        : "Verification email sent successfully",
+      error: result.error // Include development mode message if present
     })
 
   } catch (error) {
