@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -60,9 +59,11 @@ export default function Header() {
 
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" className="text-gray-700">
-              List Your Business
-            </Button>
+            <Link href="/notary-signup">
+              <Button variant="ghost" className="text-gray-700">
+                List Your Business
+              </Button>
+            </Link>
             <Link href="/california-notaries">
               <Button>Search Notaries</Button>
             </Link>
