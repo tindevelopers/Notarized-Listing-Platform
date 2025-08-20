@@ -163,6 +163,11 @@ export default function NotarySignupPage() {
   const isSignatureValid = signatureData.signatureImage || signatureData.signatureText;
   const isCredentialsValid = Object.values(documents).every(doc => doc !== null);
 
+  // Layout stabilization
+  useLayoutEffect(() => {
+    setIsLayoutReady(true);
+  }, []);
+
   // Auto-advance when verification code is complete
   useEffect(() => {
     if (verificationCode.length === 6) {
