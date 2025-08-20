@@ -148,7 +148,11 @@ export default function NotarySignupPage() {
           expiryDate: uploadModal.expiryDate,
         },
       }));
-      setUploadModal({ isOpen: false, documentType: "", file: null, expiryDate: "" });
+
+      // Use requestAnimationFrame to prevent ResizeObserver conflicts when closing modal
+      requestAnimationFrame(() => {
+        setUploadModal({ isOpen: false, documentType: "", file: null, expiryDate: "" });
+      });
     }
   };
 
