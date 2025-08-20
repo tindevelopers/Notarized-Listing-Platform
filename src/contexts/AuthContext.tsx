@@ -28,6 +28,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const { data: { session }, error } = await supabase.auth.getSession()
         if (error) {
           console.error('Error getting session:', error)
+          // If it's a configuration error, provide more helpful logging
+          if (error.message.includes('Supabase not configured')) {
+            console.error('🚨 Supabase Configuration Issue:')
+            console.error('This error indicates that Supabase environment variables are not properly configured.')
+            console.error('Required environment variables:')
+            console.error('- NEXT_PUBLIC_SUPABASE_URL')
+            console.error('- NEXT_PUBLIC_SUPABASE_ANON_KEY')
+            console.error('Please check your environment configuration in production.')
+          }
         } else {
           setSession(session)
           setUser(session?.user ?? null)

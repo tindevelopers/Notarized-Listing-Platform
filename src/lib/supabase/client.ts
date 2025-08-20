@@ -1,37 +1,66 @@
 
 import { createBrowserClient } from '@supabase/ssr'
 import { Database } from '@/types/supabase'
+import { 
+  env, 
+  isSupabaseConfigured, 
+  configValidation, 
+  logSupabaseConfig,
+  getSupabaseConfigInstructions
+} from './config'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-
-// Check if Supabase is properly configured
-const isSupabaseConfigured = 
-  supabaseUrl && 
-  supabaseKey && 
-  supabaseUrl !== 'your-supabase-url-here' && 
-  supabaseKey !== 'your-supabase-anon-key-here' &&
-  supabaseUrl.startsWith('https://')
+// Log configuration status for debugging
+logSupabaseConfig('client')
 
 export function createClient() {
   if (!isSupabaseConfigured) {
+    console.error('[Supabase Client] Configuration error:', configValidation.error)
+    
+    const instructions = getSupabaseConfigInstructions()
+    console.error('[Supabase Client] Fix instructions:', instructions)
+    
     // Return a mock client that throws helpful errors
+    const errorMessage = `Supabase not configured: ${configValidation.error}`
+    
     return {
       auth: {
-        getSession: async () => ({ data: { session: null }, error: new Error('Supabase not configured') }),
-        getUser: async () => ({ data: { user: null }, error: new Error('Supabase not configured') }),
-        signUp: async () => ({ data: { user: null }, error: new Error('Supabase not configured') }),
-        signInWithPassword: async () => ({ data: { user: null }, error: new Error('Supabase not configured') }),
-        signOut: async () => ({ error: new Error('Supabase not configured') }),
-        onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => {} } } }),
+        getSession: async () => ({ 
+          data: { session: null }, 
+          error: new Error(errorMessage) 
+        }),
+        getUser: async () => ({ 
+          data: { user: null }, 
+          error: new Error(errorMessage) 
+        }),
+        signUp: async () => ({ 
+          data: { user: null }, 
+          error: new Error(errorMessage) 
+        }),
+        signInWithPassword: async () => ({ 
+          data: { user: null }, 
+          error: new Error(errorMessage) 
+        }),
+        signOut: async () => ({ 
+          error: new Error(errorMessage) 
+        }),
+        onAuthStateChange: () => ({ 
+          data: { subscription: { unsubscribe: () => {} } } 
+        }),
       },
       from: () => ({
-        select: () => ({ eq: () => ({ single: async () => ({ data: null, error: new Error('Supabase not configured') }) }) }),
+        select: () => ({ 
+          eq: () => ({ 
+            single: async () => ({ 
+              data: null, 
+              error: new Error(errorMessage) 
+            }) 
+          }) 
+        }),
       })
     } as any
   }
 
-  return createBrowserClient<Database>(supabaseUrl, supabaseKey)
+  return createBrowserClient<Database>(env.supabaseUrl!, env.supabaseAnonKey!)
 }
 
 export const supabase = createClient()

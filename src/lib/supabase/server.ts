@@ -2,41 +2,63 @@
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { Database } from '@/types/supabase'
+import { 
+  env, 
+  isSupabaseConfigured, 
+  configValidation, 
+  logSupabaseConfig,
+  getSupabaseConfigInstructions
+} from './config'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-
-// Check if Supabase is properly configured
-const isSupabaseConfigured = 
-  supabaseUrl && 
-  supabaseKey && 
-  supabaseUrl !== 'your-supabase-url-here' && 
-  supabaseKey !== 'your-supabase-anon-key-here' &&
-  supabaseUrl.startsWith('https://')
+// Log configuration status for debugging (server-side)
+logSupabaseConfig('server')
 
 export async function createClient() {
   if (!isSupabaseConfigured) {
+    console.error('[Supabase Server] Configuration error:', configValidation.error)
+    
+    const instructions = getSupabaseConfigInstructions()
+    console.error('[Supabase Server] Fix instructions:', instructions)
+    
     // Return a mock client that provides fallback behavior
+    const errorMessage = `Supabase not configured: ${configValidation.error}`
+    
     return {
       auth: {
-        getSession: async () => ({ data: { session: null }, error: new Error('Supabase not configured') }),
-        getUser: async () => ({ data: { user: null }, error: new Error('Supabase not configured') }),
+        getSession: async () => ({ 
+          data: { session: null }, 
+          error: new Error(errorMessage) 
+        }),
+        getUser: async () => ({ 
+          data: { user: null }, 
+          error: new Error(errorMessage) 
+        }),
       },
       from: () => ({
         select: () => ({
           eq: () => ({ 
-            single: async () => ({ data: null, error: new Error('Supabase not configured') }),
-            order: () => ({
-              range: async () => ({ data: [], error: new Error('Supabase not configured'), count: 0 }),
+            single: async () => ({ 
+              data: null, 
+              error: new Error(errorMessage) 
             }),
-            limit: async () => ({ data: [], error: new Error('Supabase not configured') }),
+            order: () => ({
+              range: async () => ({ 
+                data: [], 
+                error: new Error(errorMessage), 
+                count: 0 
+              }),
+            }),
+            limit: async () => ({ 
+              data: [], 
+              error: new Error(errorMessage) 
+            }),
           }),
-          ilike: () => ({ eq: () => ({ single: async () => ({ data: null, error: new Error('Supabase not configured') }) }) }),
-          contains: () => ({ eq: () => ({ single: async () => ({ data: null, error: new Error('Supabase not configured') }) }) }),
-          or: () => ({ eq: () => ({ single: async () => ({ data: null, error: new Error('Supabase not configured') }) }) }),
+          ilike: () => ({ eq: () => ({ single: async () => ({ data: null, error: new Error(errorMessage) }) }) }),
+          contains: () => ({ eq: () => ({ single: async () => ({ data: null, error: new Error(errorMessage) }) }) }),
+          or: () => ({ eq: () => ({ single: async () => ({ data: null, error: new Error(errorMessage) }) }) }),
         }),
-        insert: () => ({ select: () => ({ single: async () => ({ data: null, error: new Error('Supabase not configured') }) }) }),
-        update: () => ({ eq: () => ({ select: () => ({ single: async () => ({ data: null, error: new Error('Supabase not configured') }) }) }) }),
+        insert: () => ({ select: () => ({ single: async () => ({ data: null, error: new Error(errorMessage) }) }) }),
+        update: () => ({ eq: () => ({ select: () => ({ single: async () => ({ data: null, error: new Error(errorMessage) }) }) }) }),
       })
     } as any
   }
@@ -44,8 +66,8 @@ export async function createClient() {
   const cookieStore = await cookies()
 
   return createServerClient<Database>(
-    supabaseUrl,
-    supabaseKey,
+    env.supabaseUrl!,
+    env.supabaseAnonKey!,
     {
       cookies: {
         getAll() {
