@@ -538,11 +538,19 @@ export default function NotarySignupPage() {
                     <Label className="text-sm text-black">
                       Languages you speak<span className="text-[#E42B38] ml-0.5">*</span>
                     </Label>
-                    <div className="relative">
+                    <div
+                      className="relative cursor-pointer"
+                      onClick={() => {
+                        // For demo, add English if empty
+                        if (profileData.languages.length === 0) {
+                          setProfileData(prev => ({ ...prev, languages: ["English"] }));
+                        }
+                      }}
+                    >
                       <Input
-                        value={profileData.languages.join(", ")}
+                        value={profileData.languages.join(", ") || ""}
                         placeholder="Select languages"
-                        className="h-11 border-[#949494] rounded-md pr-10"
+                        className="h-11 border-[#949494] rounded-md pr-10 cursor-pointer"
                         readOnly
                       />
                       <Plus className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5" />
@@ -554,11 +562,19 @@ export default function NotarySignupPage() {
                     <Label className="text-sm text-black">
                       Document types you can notarize<span className="text-[#E42B38] ml-0.5">*</span>
                     </Label>
-                    <div className="relative">
+                    <div
+                      className="relative cursor-pointer"
+                      onClick={() => {
+                        // For demo, add some document types if empty
+                        if (profileData.documentTypes.length === 0) {
+                          setProfileData(prev => ({ ...prev, documentTypes: ["Real Estate", "Legal Documents"] }));
+                        }
+                      }}
+                    >
                       <Input
-                        value={profileData.documentTypes.join(", ")}
+                        value={profileData.documentTypes.join(", ") || ""}
                         placeholder="Select document types"
-                        className="h-11 border-[#949494] rounded-md pr-10"
+                        className="h-11 border-[#949494] rounded-md pr-10 cursor-pointer"
                         readOnly
                       />
                       <Plus className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5" />
