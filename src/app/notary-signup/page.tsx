@@ -77,7 +77,7 @@ export default function NotarySignupPage() {
                 </button>
 
                 <div className="space-y-3">
-                  <h1 className="text-2xl font-bold text-black">Enter your email</h1>
+                  <h1 className="text-xl lg:text-2xl font-bold text-black">Enter your email</h1>
                   <p className="text-sm text-[#575757]">
                     This will be used to create your notary account.
                   </p>
