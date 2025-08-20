@@ -251,11 +251,11 @@ export default function NotarySignupPage() {
           {(currentStep === "email" || currentStep === "verification") && (
             <>
               {/* Title */}
-              <div className="mb-12">
-                <h2 className="text-3xl font-bold text-black leading-tight">
+              <div className="mb-6 lg:mb-12">
+                <h2 className="text-2xl lg:text-3xl font-bold text-black leading-tight">
                   Join the Ultimate
                 </h2>
-                <h2 className="text-3xl font-bold bg-gradient-to-r from-[#3632F5] to-[#22D2FA] bg-clip-text text-transparent leading-tight">
+                <h2 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-[#3632F5] to-[#22D2FA] bg-clip-text text-transparent leading-tight">
                   Notarization Platform
                 </h2>
               </div>
