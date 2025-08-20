@@ -28,6 +28,44 @@ export default function NotarySignupPage() {
     password: "",
   });
 
+  // Profile step data
+  const [profileData, setProfileData] = useState({
+    profilePicture: null as File | null,
+    businessName: "",
+    notaryState: "",
+    notaryCounty: "",
+    commissionNumber: "",
+    commissionExpiry: "",
+    notaryType: "",
+    languages: [] as string[],
+    documentTypes: [] as string[],
+  });
+
+  // Signature step data
+  const [signatureData, setSignatureData] = useState({
+    signatureType: "draw" as "draw" | "upload" | "type",
+    signatureImage: null as string | null,
+    signatureText: "",
+  });
+
+  // Document upload modal
+  const [uploadModal, setUploadModal] = useState({
+    isOpen: false,
+    documentType: "",
+    file: null as File | null,
+    expiryDate: "",
+  });
+
+  // Documents state
+  const [documents, setDocuments] = useState({
+    identification: null as { file: File; expiryDate: string } | null,
+    w9: null as { file: File; expiryDate: string } | null,
+    commissionCertificate: null as { file: File; expiryDate: string } | null,
+    bond: null as { file: File; expiryDate: string } | null,
+    eo: null as { file: File; expiryDate: string } | null,
+    backgroundCheck: null as { file: File; expiryDate: string } | null,
+  });
+
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
