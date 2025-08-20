@@ -890,7 +890,142 @@ export default function NotarySignupPage() {
             </div>
           )}
         </div>
+
+        {/* Right Panel */}
+        <div className="w-full lg:w-1/2 bg-[#F7F9FC] p-6 lg:p-12 flex flex-col relative min-h-[400px] lg:min-h-[600px]">
+          {/* Show preview card for profile step */}
+          {currentStep === "profile" && (
+            <div className="flex-1 flex items-center justify-center">
+              <div className="w-full max-w-sm bg-white rounded-xl shadow-lg p-6 border border-[#E5E7EB]">
+                {/* Avatar */}
+                <div className="w-24 h-24 bg-[#E5E7EB] rounded-full mx-auto mb-4"></div>
+
+                {/* Name */}
+                <h3 className="text-xl font-bold text-center bg-gradient-to-r from-[#3632F5] to-[#22D2FA] bg-clip-text text-transparent mb-6">
+                  {formData.firstName} {formData.lastName}
+                </h3>
+
+                {/* Info sections */}
+                <div className="space-y-4 text-sm">
+                  <div className="border-t border-[#E5E7EB] pt-4">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <p className="text-[#575757] text-xs">Commission number:</p>
+                        <p className="text-black">-</p>
+                      </div>
+                      <div>
+                        <p className="text-[#575757] text-xs">Commission expiration date:</p>
+                        <p className="text-black">-</p>
+                      </div>
+                      <div>
+                        <p className="text-[#575757] text-xs">Type:</p>
+                        <p className="text-black">-</p>
+                      </div>
+                      <div>
+                        <p className="text-[#575757] text-xs">Languages:</p>
+                        <p className="text-black">-</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="border-t border-[#E5E7EB] pt-4 text-center">
+                    <p className="text-xs font-bold text-black">Document types notarized:</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Empty or minimal content for signature and credentials steps */}
+          {(currentStep === "signature" || currentStep === "credentials") && (
+            <div className="flex-1 flex items-center justify-center">
+              <div className="text-center space-y-4">
+                <div className="w-16 h-16 bg-gradient-to-r from-[#3632F5] to-[#22D2FA] rounded-full mx-auto opacity-20"></div>
+                <p className="text-[#575757] text-sm">
+                  {currentStep === "signature"
+                    ? "Complete your signature setup to continue"
+                    : "Upload all required documents to finish registration"
+                  }
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
+
+      {/* Document Upload Modal */}
+      <Dialog open={uploadModal.isOpen} onOpenChange={(open) => setUploadModal(prev => ({ ...prev, isOpen: open }))}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle>Add document</DialogTitle>
+          </DialogHeader>
+
+          <div className="space-y-6">
+            <p className="text-sm font-semibold text-black">
+              Upload your "{uploadModal.documentType}" document and add it's expiry date below.
+            </p>
+
+            {/* File upload area */}
+            <div className="border-2 border-dashed border-[#A1A1A1] rounded-md p-8 text-center bg-[#F7F9FC]">
+              <Upload className="w-8 h-8 text-[#A1A1A1] mx-auto mb-4" />
+              <div className="space-y-1">
+                <p className="text-sm font-semibold text-black">
+                  Drag file here, or <span className="underline">select file</span>
+                </p>
+                <p className="text-xs text-[#575757]">PDF, DOC or ZIP.</p>
+              </div>
+              <input
+                type="file"
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    setUploadModal(prev => ({ ...prev, file }));
+                  }
+                }}
+              />
+            </div>
+
+            {/* Expiry date */}
+            <div className="space-y-2">
+              <Label className="text-sm text-black">
+                Document expiry date: <span className="text-[#E42B38]">*</span>
+              </Label>
+              <div className="relative">
+                <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5" />
+                <Input
+                  type="date"
+                  value={uploadModal.expiryDate}
+                  onChange={(e) => setUploadModal(prev => ({ ...prev, expiryDate: e.target.value }))}
+                  className="pl-10"
+                  placeholder="MM/DD/YYYY"
+                />
+              </div>
+              <p className="text-xs text-[#575757]">
+                This must match any expiry date detailed in the uploaded document.
+              </p>
+            </div>
+
+            {/* Modal buttons */}
+            <div className="flex justify-end gap-3 pt-4 border-t border-[#E5E7EB]">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setUploadModal(prev => ({ ...prev, isOpen: false }))}
+              >
+                Cancel
+              </Button>
+              <Button
+                type="button"
+                disabled={!uploadModal.file || !uploadModal.expiryDate}
+                onClick={handleDocumentSave}
+                className="bg-[#3632F5] hover:bg-[#3632F5]/90"
+              >
+                Add document
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
