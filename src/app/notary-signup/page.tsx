@@ -165,7 +165,7 @@ export default function NotarySignupPage() {
               <div className="space-y-6 flex-1">
                 <div className="space-y-3">
                   <p className="text-sm text-[#575757]">Step 1 / 5</p>
-                  <h1 className="text-2xl font-bold text-black">Add your details</h1>
+                  <h1 className="text-xl lg:text-2xl font-bold text-black">Add your details</h1>
                   <p className="text-sm text-[#575757]">
                     Enter your name and phone number, then choose a password for your account.
                   </p>
