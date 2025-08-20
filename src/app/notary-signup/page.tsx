@@ -648,7 +648,7 @@ export default function NotarySignupPage() {
                   <Button
                     type="button"
                     variant="outline"
-                    onClick={() => setCurrentStep("details")}
+                    onClick={() => requestAnimationFrame(() => setCurrentStep("details"))}
                     className="px-5 h-11 rounded-full border-[#A1A1A1]"
                   >
                     Back
