@@ -422,3 +422,17 @@ export type Enums<
   : PublicEnumNameOrOptions extends keyof Database["public"]["Enums"]
     ? Database["public"]["Enums"][PublicEnumNameOrOptions]
     : never
+
+// Custom types for joined data
+export type NotaryWithProfile = Tables<"notaries"> & {
+  profiles: Tables<"profiles">
+}
+
+export type ReviewWithProfile = Tables<"reviews"> & {
+  profiles: Tables<"profiles">
+}
+
+export type BookingWithDetails = Tables<"bookings"> & {
+  notaries: NotaryWithProfile
+  profiles: Tables<"profiles">
+}
