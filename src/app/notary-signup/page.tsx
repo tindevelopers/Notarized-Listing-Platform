@@ -53,7 +53,7 @@ export default function NotarySignupPage() {
       </div>
 
       {/* Main card */}
-      <div className="relative bg-white rounded-2xl border border-[#E5E7EB] shadow-sm overflow-hidden w-full max-w-5xl h-[600px] flex">
+      <div className="relative bg-white rounded-2xl border border-[#E5E7EB] shadow-sm overflow-hidden w-full max-w-5xl min-h-[600px] flex flex-col lg:flex-row">
         {/* Left Panel */}
         <div className="w-1/2 p-12 flex flex-col">
           {/* Logo */}
