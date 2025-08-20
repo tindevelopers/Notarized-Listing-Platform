@@ -852,171 +852,155 @@ export default function NotarySignupPage() {
           )}
         </div>
 
-        {/* Right Panel */}
-        <div className="w-full lg:w-1/2 bg-[#F7F9FC] p-6 lg:p-12 flex flex-col relative min-h-[400px] lg:min-h-[600px]">
-          {/* Background blur effect for right panel */}
-          {currentStep === "details" && (
-            <div className="absolute bottom-0 left-0 w-full h-[435px] rounded-full opacity-7 bg-gradient-to-r from-[#3632F5] to-[#22D2FA] blur-[100px]" />
-          )}
+        {/* Right Panel - Only show for steps 1-3 */}
+        {(currentStep === "email" || currentStep === "verification" || currentStep === "details" || currentStep === "profile") && (
+          <div className="w-full lg:w-1/2 bg-[#F7F9FC] p-6 lg:p-12 flex flex-col relative min-h-[400px] lg:min-h-[600px]">
+            {/* Background blur effect for right panel */}
+            {currentStep === "details" && (
+              <div className="absolute bottom-0 left-0 w-full h-[435px] rounded-full opacity-7 bg-gradient-to-r from-[#3632F5] to-[#22D2FA] blur-[100px]" />
+            )}
 
-          {(currentStep === "email" || currentStep === "verification") && (
-            <>
-              {/* Title */}
-              <div className="mb-6 lg:mb-12">
-                <h2 className="text-2xl lg:text-3xl font-bold text-black leading-tight">
-                  Join the Ultimate
-                </h2>
-                <h2 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-[#3632F5] to-[#22D2FA] bg-clip-text text-transparent leading-tight">
-                  Notarization Platform
-                </h2>
-              </div>
+            {(currentStep === "email" || currentStep === "verification") && (
+              <>
+                {/* Title */}
+                <div className="mb-6 lg:mb-12">
+                  <h2 className="text-2xl lg:text-3xl font-bold text-black leading-tight">
+                    Join the Ultimate
+                  </h2>
+                  <h2 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-[#3632F5] to-[#22D2FA] bg-clip-text text-transparent leading-tight">
+                    Notarization Platform
+                  </h2>
+                </div>
 
-              {/* Dashboard preview */}
-              <div className="flex-1 flex items-center justify-center mb-6 lg:mb-0">
-                <div className="w-full max-w-md h-[200px] lg:h-[300px] bg-white rounded-xl shadow-lg overflow-hidden relative">
+                {/* Dashboard preview */}
+                <div className="flex-1 flex items-center justify-center mb-6 lg:mb-0">
+                  <div className="w-full max-w-md h-[200px] lg:h-[300px] bg-white rounded-xl shadow-lg overflow-hidden relative">
+                    <img
+                      src="https://api.builder.io/api/v1/image/assets/TEMP/2675737cf0d4b88a9d7b228710ad2190d0b50703?width=864"
+                      alt="Dashboard preview"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+
+                {/* Bottom logos */}
+                <div className="flex justify-between items-center pt-8">
                   <img
-                    src="https://api.builder.io/api/v1/image/assets/TEMP/2675737cf0d4b88a9d7b228710ad2190d0b50703?width=864"
-                    alt="Dashboard preview"
-                    className="w-full h-full object-cover"
+                    src="https://api.builder.io/api/v1/image/assets/TEMP/7c54bfba527e2553d429e5960abffdf1292b9637?width=274"
+                    alt="Logo 1"
+                    className="h-6 opacity-60"
+                  />
+                  <img
+                    src="https://api.builder.io/api/v1/image/assets/TEMP/e821b593ab7debf9aea047f103e0ceb6ddd9fd43?width=284"
+                    alt="Logo 2"
+                    className="h-6 opacity-60"
                   />
                 </div>
-              </div>
+              </>
+            )}
 
-              {/* Bottom logos */}
-              <div className="flex justify-between items-center pt-8">
-                <img
-                  src="https://api.builder.io/api/v1/image/assets/TEMP/7c54bfba527e2553d429e5960abffdf1292b9637?width=274"
-                  alt="Logo 1"
-                  className="h-6 opacity-60"
-                />
-                <img
-                  src="https://api.builder.io/api/v1/image/assets/TEMP/e821b593ab7debf9aea047f103e0ceb6ddd9fd43?width=284"
-                  alt="Logo 2"
-                  className="h-6 opacity-60"
-                />
-              </div>
-            </>
-          )}
+            {currentStep === "details" && (
+              <div className="relative z-10">
+                {/* Title */}
+                <div className="mb-6 lg:mb-12">
+                  <h2 className="text-2xl lg:text-3xl font-bold text-black leading-tight">
+                    Simple, yet
+                  </h2>
+                  <h2 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-[#3632F5] to-[#22D2FA] bg-clip-text text-transparent leading-tight">
+                    powerful features
+                  </h2>
+                </div>
 
-          {currentStep === "details" && (
-            <div className="relative z-10">
-              {/* Title */}
-              <div className="mb-6 lg:mb-12">
-                <h2 className="text-2xl lg:text-3xl font-bold text-black leading-tight">
-                  Simple, yet
-                </h2>
-                <h2 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-[#3632F5] to-[#22D2FA] bg-clip-text text-transparent leading-tight">
-                  powerful features
-                </h2>
-              </div>
-
-              {/* Quote section */}
-              <div className="space-y-10">
-                <div className="space-y-3">
-                  <div className="w-5 h-4 text-[#22D2FA]">
-                    <svg viewBox="0 0 21 15" fill="currentColor">
-                      <path d="M0 9.68023C0 8.13953 0.530523 6.50436 1.59157 4.77471C2.66715 3.03052 4.60029 1.43895 7.39099 0L7.91424 0.981105C6.5189 1.96948 5.48692 2.79797 4.81831 3.46657C3.64099 4.67297 3.05233 5.82849 3.05233 6.93314C3.05233 7.31105 3.16134 7.55814 3.37936 7.67442C3.59738 7.80523 3.78634 7.87064 3.94622 7.87064C4.49855 7.79797 4.86192 7.76163 5.03634 7.76163C5.96657 7.76163 6.72965 8.1032 7.32558 8.78634C7.92151 9.45494 8.21948 10.2689 8.21948 11.2282C8.21948 12.3038 7.89244 13.2049 7.23837 13.9317C6.5843 14.6439 5.68314 15 4.53488 15C3.18314 15 2.08576 14.5203 1.24273 13.561C0.414244 12.5872 0 11.2936 0 9.68023ZM12.0349 9.68023C12.0349 8.05233 12.6017 6.37355 13.7355 4.6439C14.8692 2.91424 16.766 1.36628 19.4259 0L19.9491 0.981105C18.641 1.8968 17.6381 2.70349 16.9404 3.40116C15.7049 4.63663 15.0872 5.78488 15.0872 6.84593C15.0872 7.15116 15.1672 7.39826 15.327 7.58721C15.4869 7.77616 15.7049 7.87064 15.9811 7.87064C16.5334 7.79797 16.8968 7.76163 17.0712 7.76163C17.9869 7.76163 18.7427 8.09593 19.3387 8.76453C19.9491 9.43314 20.2544 10.2544 20.2544 11.2282C20.2544 12.3619 19.9201 13.2776 19.2515 13.9753C18.5828 14.6584 17.6744 15 16.5262 15C15.218 15 14.1424 14.5203 13.2994 13.561C12.4564 12.5872 12.0349 11.2936 12.0349 9.68023Z" />
-                    </svg>
+                {/* Quote section */}
+                <div className="space-y-10">
+                  <div className="space-y-3">
+                    <div className="w-5 h-4 text-[#22D2FA]">
+                      <svg viewBox="0 0 21 15" fill="currentColor">
+                        <path d="M0 9.68023C0 8.13953 0.530523 6.50436 1.59157 4.77471C2.66715 3.03052 4.60029 1.43895 7.39099 0L7.91424 0.981105C6.5189 1.96948 5.48692 2.79797 4.81831 3.46657C3.64099 4.67297 3.05233 5.82849 3.05233 6.93314C3.05233 7.31105 3.16134 7.55814 3.37936 7.67442C3.59738 7.80523 3.78634 7.87064 3.94622 7.87064C4.49855 7.79797 4.86192 7.76163 5.03634 7.76163C5.96657 7.76163 6.72965 8.1032 7.32558 8.78634C7.92151 9.45494 8.21948 10.2689 8.21948 11.2282C8.21948 12.3038 7.89244 13.2049 7.23837 13.9317C6.5843 14.6439 5.68314 15 4.53488 15C3.18314 15 2.08576 14.5203 1.24273 13.561C0.414244 12.5872 0 11.2936 0 9.68023ZM12.0349 9.68023C12.0349 8.05233 12.6017 6.37355 13.7355 4.6439C14.8692 2.91424 16.766 1.36628 19.4259 0L19.9491 0.981105C18.641 1.8968 17.6381 2.70349 16.9404 3.40116C15.7049 4.63663 15.0872 5.78488 15.0872 6.84593C15.0872 7.15116 15.1672 7.39826 15.327 7.58721C15.4869 7.77616 15.7049 7.87064 15.9811 7.87064C16.5334 7.79797 16.8968 7.76163 17.0712 7.76163C17.9869 7.76163 18.7427 8.09593 19.3387 8.76453C19.9491 9.43314 20.2544 10.2544 20.2544 11.2282C20.2544 12.3619 19.9201 13.2776 19.2515 13.9753C18.5828 14.6584 17.6744 15 16.5262 15C15.218 15 14.1424 14.5203 13.2994 13.561C12.4564 12.5872 12.0349 11.2936 12.0349 9.68023Z" />
+                      </svg>
+                    </div>
+                    <p className="text-sm font-bold text-black leading-relaxed">
+                      We use Notarized, Inc for our closings. We love the way they
+                      update us at every phase of the process.
+                    </p>
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-[#E5E7EB] overflow-hidden">
+                        <img
+                          src="https://api.builder.io/api/v1/image/assets/TEMP/33abbbf2752e43bf0ae07f58700d4d2036ea52ed?width=90"
+                          alt="User avatar"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div>
+                        <p className="text-xs font-bold text-black">J. Allen</p>
+                        <p className="text-xs text-black">Dallas, TX</p>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-sm font-bold text-black leading-relaxed">
-                    We use Notarized, Inc for our closings. We love the way they
-                    update us at every phase of the process.
-                  </p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#E5E7EB] overflow-hidden">
+
+                  {/* Logos */}
+                  <div className="space-y-5">
+                    <div className="w-full h-px bg-[#A1A1A1]" />
+                    <div className="flex justify-between items-center">
                       <img
-                        src="https://api.builder.io/api/v1/image/assets/TEMP/33abbbf2752e43bf0ae07f58700d4d2036ea52ed?width=90"
-                        alt="User avatar"
-                        className="w-full h-full object-cover"
+                        src="https://api.builder.io/api/v1/image/assets/TEMP/7c54bfba527e2553d429e5960abffdf1292b9637?width=274"
+                        alt="Logo 1"
+                        className="h-6 opacity-60"
+                      />
+                      <img
+                        src="https://api.builder.io/api/v1/image/assets/TEMP/e821b593ab7debf9aea047f103e0ceb6ddd9fd43?width=284"
+                        alt="Logo 2"
+                        className="h-6 opacity-60"
                       />
                     </div>
-                    <div>
-                      <p className="text-xs font-bold text-black">J. Allen</p>
-                      <p className="text-xs text-black">Dallas, TX</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Show preview card for profile step */}
+            {currentStep === "profile" && (
+              <div className="flex-1 flex items-center justify-center">
+                <div className="w-full max-w-sm bg-white rounded-xl shadow-lg p-6 border border-[#E5E7EB]">
+                  {/* Avatar */}
+                  <div className="w-24 h-24 bg-[#E5E7EB] rounded-full mx-auto mb-4"></div>
+
+                  {/* Name */}
+                  <h3 className="text-xl font-bold text-center bg-gradient-to-r from-[#3632F5] to-[#22D2FA] bg-clip-text text-transparent mb-6">
+                    {formData.firstName} {formData.lastName}
+                  </h3>
+
+                  {/* Info sections */}
+                  <div className="space-y-4 text-sm">
+                    <div className="border-t border-[#E5E7EB] pt-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <p className="text-[#575757] text-xs">Commission number:</p>
+                          <p className="text-black">-</p>
+                        </div>
+                        <div>
+                          <p className="text-[#575757] text-xs">Commission expiration date:</p>
+                          <p className="text-black">-</p>
+                        </div>
+                        <div>
+                          <p className="text-[#575757] text-xs">Type:</p>
+                          <p className="text-black">-</p>
+                        </div>
+                        <div>
+                          <p className="text-[#575757] text-xs">Languages:</p>
+                          <p className="text-black">-</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="border-t border-[#E5E7EB] pt-4 text-center">
+                      <p className="text-xs font-bold text-black">Document types notarized:</p>
                     </div>
                   </div>
                 </div>
-
-                {/* Logos */}
-                <div className="space-y-5">
-                  <div className="w-full h-px bg-[#A1A1A1]" />
-                  <div className="flex justify-between items-center">
-                    <img
-                      src="https://api.builder.io/api/v1/image/assets/TEMP/7c54bfba527e2553d429e5960abffdf1292b9637?width=274"
-                      alt="Logo 1"
-                      className="h-6 opacity-60"
-                    />
-                    <img
-                      src="https://api.builder.io/api/v1/image/assets/TEMP/e821b593ab7debf9aea047f103e0ceb6ddd9fd43?width=284"
-                      alt="Logo 2"
-                      className="h-6 opacity-60"
-                    />
-                  </div>
-                </div>
               </div>
-            </div>
-          )}
-        </div>
-
-        {/* Right Panel */}
-        <div className="w-full lg:w-1/2 bg-[#F7F9FC] p-6 lg:p-12 flex flex-col relative min-h-[400px] lg:min-h-[600px]">
-          {/* Show preview card for profile step */}
-          {currentStep === "profile" && (
-            <div className="flex-1 flex items-center justify-center">
-              <div className="w-full max-w-sm bg-white rounded-xl shadow-lg p-6 border border-[#E5E7EB]">
-                {/* Avatar */}
-                <div className="w-24 h-24 bg-[#E5E7EB] rounded-full mx-auto mb-4"></div>
-
-                {/* Name */}
-                <h3 className="text-xl font-bold text-center bg-gradient-to-r from-[#3632F5] to-[#22D2FA] bg-clip-text text-transparent mb-6">
-                  {formData.firstName} {formData.lastName}
-                </h3>
-
-                {/* Info sections */}
-                <div className="space-y-4 text-sm">
-                  <div className="border-t border-[#E5E7EB] pt-4">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <p className="text-[#575757] text-xs">Commission number:</p>
-                        <p className="text-black">-</p>
-                      </div>
-                      <div>
-                        <p className="text-[#575757] text-xs">Commission expiration date:</p>
-                        <p className="text-black">-</p>
-                      </div>
-                      <div>
-                        <p className="text-[#575757] text-xs">Type:</p>
-                        <p className="text-black">-</p>
-                      </div>
-                      <div>
-                        <p className="text-[#575757] text-xs">Languages:</p>
-                        <p className="text-black">-</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="border-t border-[#E5E7EB] pt-4 text-center">
-                    <p className="text-xs font-bold text-black">Document types notarized:</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Empty or minimal content for signature and credentials steps */}
-          {(currentStep === "signature" || currentStep === "credentials") && (
-            <div className="flex-1 flex items-center justify-center">
-              <div className="text-center space-y-4">
-                <div className="w-16 h-16 bg-gradient-to-r from-[#3632F5] to-[#22D2FA] rounded-full mx-auto opacity-20"></div>
-                <p className="text-[#575757] text-sm">
-                  {currentStep === "signature"
-                    ? "Complete your signature setup to continue"
-                    : "Upload all required documents to finish registration"
-                  }
-                </p>
-              </div>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Document Upload Modal */}
