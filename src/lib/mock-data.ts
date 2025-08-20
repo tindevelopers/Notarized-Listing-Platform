@@ -340,11 +340,30 @@ export function getMockNotariesResponse(params: any = {}) {
   };
 }
 
-export function getMockNotaryWithReviews(id: string) {
-  const notary = mockNotaries.find(n => n.id === id);
+// Helper function to generate slug from name
+function generateSlug(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '') // Remove special characters
+    .replace(/[\s_-]+/g, '-') // Replace spaces and underscores with hyphens
+    .replace(/^-+|-+$/g, '') // Remove leading/trailing hyphens
+}
+
+export function getMockNotaryWithReviews(identifier: string) {
+  // Try to find by ID first
+  let notary = mockNotaries.find(n => n.id === identifier);
+  
+  // If not found by ID, try to find by slug (generated from full_name)
+  if (!notary) {
+    notary = mockNotaries.find(n => {
+      const slug = generateSlug(n.profiles?.full_name || '');
+      return slug === identifier;
+    });
+  }
+  
   if (!notary) return null;
   
-  const reviews = mockReviews.filter(r => r.notary_id === id);
+  const reviews = mockReviews.filter(r => r.notary_id === notary.id);
   
   return {
     notary: {
