@@ -4,7 +4,11 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 
@@ -43,7 +47,11 @@ export default function NotarySignupPage() {
 
   const isEmailValid = email.length > 0;
   const isVerificationValid = verificationCode.length === 6;
-  const isDetailsValid = formData.firstName && formData.lastName && formData.phoneNumber && formData.password;
+  const isDetailsValid =
+    formData.firstName &&
+    formData.lastName &&
+    formData.phoneNumber &&
+    formData.password;
 
   // Auto-advance when verification code is complete
   useEffect(() => {
@@ -70,13 +78,17 @@ export default function NotarySignupPage() {
           {/* Logo */}
           <div className="mb-8 lg:mb-16">
             <Link href="/" className="text-xl font-bold text-black">
-              Notarized<span className="w-2 h-2 bg-[#22D2FA] rounded-full inline-block ml-1" />
+              Notarized
+              <span className="w-2 h-2 bg-[#22D2FA] rounded-full inline-block ml-1" />
             </Link>
           </div>
 
           {/* Content based on current step */}
           {currentStep === "email" && (
-            <form onSubmit={handleEmailSubmit} className="flex-1 flex flex-col justify-center">
+            <form
+              onSubmit={handleEmailSubmit}
+              className="flex-1 flex flex-col justify-center"
+            >
               <div className="space-y-6">
                 {/* Back button */}
                 <button
@@ -88,7 +100,9 @@ export default function NotarySignupPage() {
                 </button>
 
                 <div className="space-y-3">
-                  <h1 className="text-xl lg:text-2xl font-bold text-black">Enter your email</h1>
+                  <h1 className="text-xl lg:text-2xl font-bold text-black">
+                    Enter your email
+                  </h1>
                   <p className="text-sm text-[#575757]">
                     This will be used to create your notary account.
                   </p>
@@ -116,8 +130,13 @@ export default function NotarySignupPage() {
                   </Button>
 
                   <p className="text-sm">
-                    <span className="text-black">Already have an account? </span>
-                    <Link href="/signin" className="text-[#3632F5] font-semibold underline">
+                    <span className="text-black">
+                      Already have an account?{" "}
+                    </span>
+                    <Link
+                      href="/signin"
+                      className="text-[#3632F5] font-semibold underline"
+                    >
                       Sign in
                     </Link>
                   </p>
@@ -127,12 +146,19 @@ export default function NotarySignupPage() {
           )}
 
           {currentStep === "verification" && (
-            <form onSubmit={handleVerificationSubmit} className="flex-1 flex flex-col justify-center">
+            <form
+              onSubmit={handleVerificationSubmit}
+              className="flex-1 flex flex-col justify-center"
+            >
               <div className="space-y-6">
                 <div className="space-y-3">
-                  <h1 className="text-xl lg:text-2xl font-bold text-black">Check your emails</h1>
+                  <h1 className="text-xl lg:text-2xl font-bold text-black">
+                    Check your emails
+                  </h1>
                   <p className="text-sm">
-                    <span className="text-[#575757]">To continue, enter the 6 digit code we just sent to </span>
+                    <span className="text-[#575757]">
+                      To continue, enter the 6 digit code we just sent to{" "}
+                    </span>
                     <span className="text-black font-bold">{email}</span>
                   </p>
                 </div>
@@ -144,18 +170,36 @@ export default function NotarySignupPage() {
                     onChange={(value) => setVerificationCode(value)}
                   >
                     <InputOTPGroup className="gap-2">
-                      <InputOTPSlot index={0} className="w-11 h-11 border-[#E5E7EB] rounded" />
-                      <InputOTPSlot index={1} className="w-11 h-11 border-[#E5E7EB] rounded" />
-                      <InputOTPSlot index={2} className="w-11 h-11 border-[#E5E7EB] rounded" />
-                      <InputOTPSlot index={3} className="w-11 h-11 border-[#E5E7EB] rounded" />
-                      <InputOTPSlot index={4} className="w-11 h-11 border-[#E5E7EB] rounded" />
-                      <InputOTPSlot index={5} className="w-11 h-11 border-[#E5E7EB] rounded" />
+                      <InputOTPSlot
+                        index={0}
+                        className="w-11 h-11 border-[#E5E7EB] rounded"
+                      />
+                      <InputOTPSlot
+                        index={1}
+                        className="w-11 h-11 border-[#E5E7EB] rounded"
+                      />
+                      <InputOTPSlot
+                        index={2}
+                        className="w-11 h-11 border-[#E5E7EB] rounded"
+                      />
+                      <InputOTPSlot
+                        index={3}
+                        className="w-11 h-11 border-[#E5E7EB] rounded"
+                      />
+                      <InputOTPSlot
+                        index={4}
+                        className="w-11 h-11 border-[#E5E7EB] rounded"
+                      />
+                      <InputOTPSlot
+                        index={5}
+                        className="w-11 h-11 border-[#E5E7EB] rounded"
+                      />
                     </InputOTPGroup>
                   </InputOTP>
 
                   <p className="text-sm">
                     <span className="text-[#575757]">Code didn't arrive? </span>
-                    <button 
+                    <button
                       type="button"
                       className="text-[#3632F5] font-bold"
                       onClick={() => {
@@ -172,13 +216,19 @@ export default function NotarySignupPage() {
           )}
 
           {currentStep === "details" && (
-            <form onSubmit={handleDetailsSubmit} className="flex-1 flex flex-col">
+            <form
+              onSubmit={handleDetailsSubmit}
+              className="flex-1 flex flex-col"
+            >
               <div className="space-y-6 flex-1">
                 <div className="space-y-3">
                   <p className="text-sm text-[#575757]">Step 1 / 5</p>
-                  <h1 className="text-xl lg:text-2xl font-bold text-black">Add your details</h1>
+                  <h1 className="text-xl lg:text-2xl font-bold text-black">
+                    Add your details
+                  </h1>
                   <p className="text-sm text-[#575757]">
-                    Enter your name and phone number, then choose a password for your account.
+                    Enter your name and phone number, then choose a password for
+                    your account.
                   </p>
                 </div>
 
@@ -186,21 +236,33 @@ export default function NotarySignupPage() {
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-1">
                       <Label className="text-sm text-black">
-                        First name<span className="text-[#E42B38] ml-0.5">*</span>
+                        First name
+                        <span className="text-[#E42B38] ml-0.5">*</span>
                       </Label>
                       <Input
                         value={formData.firstName}
-                        onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
+                        onChange={(e) =>
+                          setFormData((prev) => ({
+                            ...prev,
+                            firstName: e.target.value,
+                          }))
+                        }
                         className="h-11 border-[#949494] rounded-md"
                       />
                     </div>
                     <div className="space-y-1">
                       <Label className="text-sm text-black">
-                        Last name<span className="text-[#E42B38] ml-0.5">*</span>
+                        Last name
+                        <span className="text-[#E42B38] ml-0.5">*</span>
                       </Label>
                       <Input
                         value={formData.lastName}
-                        onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
+                        onChange={(e) =>
+                          setFormData((prev) => ({
+                            ...prev,
+                            lastName: e.target.value,
+                          }))
+                        }
                         className="h-11 border-[#949494] rounded-md"
                       />
                     </div>
@@ -208,24 +270,36 @@ export default function NotarySignupPage() {
 
                   <div className="space-y-1">
                     <Label className="text-sm text-black">
-                      Phone number<span className="text-[#E42B38] ml-0.5">*</span>
+                      Phone number
+                      <span className="text-[#E42B38] ml-0.5">*</span>
                     </Label>
                     <Input
                       type="tel"
                       value={formData.phoneNumber}
-                      onChange={(e) => setFormData(prev => ({ ...prev, phoneNumber: e.target.value }))}
+                      onChange={(e) =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          phoneNumber: e.target.value,
+                        }))
+                      }
                       className="h-11 border-[#949494] rounded-md"
                     />
                   </div>
 
                   <div className="space-y-1">
                     <Label className="text-sm text-black">
-                      Create password<span className="text-[#E42B38] ml-0.5">*</span>
+                      Create password
+                      <span className="text-[#E42B38] ml-0.5">*</span>
                     </Label>
                     <Input
                       type="password"
                       value={formData.password}
-                      onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
+                      onChange={(e) =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          password: e.target.value,
+                        }))
+                      }
                       className="h-11 border-[#949494] rounded-md"
                     />
                   </div>
@@ -319,7 +393,8 @@ export default function NotarySignupPage() {
                     </svg>
                   </div>
                   <p className="text-sm font-bold text-black leading-relaxed">
-                    We use Notarized, Inc for our closings. We love the way they update us at every phase of the process.
+                    We use Notarized, Inc for our closings. We love the way they
+                    update us at every phase of the process.
                   </p>
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-[#E5E7EB] overflow-hidden">

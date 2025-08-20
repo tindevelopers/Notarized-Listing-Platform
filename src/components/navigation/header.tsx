@@ -133,7 +133,10 @@ export default function Header() {
                   </Button>
                 </Link>
                 <Link href="/california-notaries">
-                  <Button className="justify-start w-full" onClick={() => setIsMenuOpen(false)}>
+                  <Button
+                    className="justify-start w-full"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
                     Search Notaries
                   </Button>
                 </Link>
