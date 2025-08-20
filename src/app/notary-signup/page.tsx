@@ -128,11 +128,14 @@ export default function NotarySignupPage() {
   };
 
   const handleDocumentUpload = (documentType: string) => {
-    setUploadModal({
-      isOpen: true,
-      documentType,
-      file: null,
-      expiryDate: "",
+    // Use requestAnimationFrame to prevent ResizeObserver conflicts
+    requestAnimationFrame(() => {
+      setUploadModal({
+        isOpen: true,
+        documentType,
+        file: null,
+        expiryDate: "",
+      });
     });
   };
 
