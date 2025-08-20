@@ -146,10 +146,7 @@ export default function NotarySignupPage() {
   const isProfileValid =
     profileData.commissionNumber &&
     profileData.commissionExpiry &&
-    profileData.notaryState &&
-    profileData.notaryType &&
-    profileData.languages.length > 0 &&
-    profileData.documentTypes.length > 0;
+    profileData.notaryType;
   const isSignatureValid = signatureData.signatureImage || signatureData.signatureText;
   const isCredentialsValid = Object.values(documents).every(doc => doc !== null);
 
