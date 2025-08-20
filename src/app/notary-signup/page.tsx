@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 
 // Suppress ResizeObserver loop errors
 if (typeof window !== 'undefined') {
