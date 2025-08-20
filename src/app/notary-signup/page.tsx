@@ -182,20 +182,10 @@ export default function NotarySignupPage() {
   useLayoutEffect(() => {
     setIsLayoutReady(true);
 
-    // Additional ResizeObserver error suppression
-    const handleResizeObserverError = (event: ErrorEvent) => {
-      if (event.message?.includes('ResizeObserver loop')) {
-        event.preventDefault();
-        event.stopPropagation();
-        return false;
-      }
-    };
+    // Use comprehensive ResizeObserver error suppression
+    const cleanup = suppressResizeObserverErrors();
 
-    window.addEventListener('error', handleResizeObserverError);
-
-    return () => {
-      window.removeEventListener('error', handleResizeObserverError);
-    };
+    return cleanup;
   }, []);
 
   // Auto-advance when verification code is complete
