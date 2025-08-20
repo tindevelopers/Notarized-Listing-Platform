@@ -207,9 +207,13 @@ export default function NotarySignupPage() {
       </div>
 
       {/* Main card */}
-      <div className="relative bg-white rounded-2xl border border-[#E5E7EB] shadow-sm overflow-hidden w-full max-w-5xl min-h-[600px] flex flex-col lg:flex-row">
+      <div className={`relative bg-white rounded-2xl border border-[#E5E7EB] shadow-sm overflow-hidden w-full min-h-[600px] flex flex-col lg:flex-row ${
+        currentStep === "signature" || currentStep === "credentials" ? "max-w-3xl" : "max-w-5xl"
+      }`}>
         {/* Left Panel */}
-        <div className="w-full lg:w-1/2 p-6 lg:p-12 flex flex-col">
+        <div className={`p-6 lg:p-12 flex flex-col ${
+          currentStep === "signature" || currentStep === "credentials" ? "w-full" : "w-full lg:w-1/2"
+        }`}>
           {/* Logo */}
           <div className="mb-8 lg:mb-16">
             <Link href="/" className="text-xl font-bold text-black">
