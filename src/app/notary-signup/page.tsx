@@ -96,21 +96,28 @@ export default function NotarySignupPage() {
   const handleDetailsSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isDetailsValid) {
-      setCurrentStep("profile");
+      // Use requestAnimationFrame to smooth step transition
+      requestAnimationFrame(() => {
+        setCurrentStep("profile");
+      });
     }
   };
 
   const handleProfileSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isProfileValid) {
-      setCurrentStep("signature");
+      requestAnimationFrame(() => {
+        setCurrentStep("signature");
+      });
     }
   };
 
   const handleSignatureSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isSignatureValid) {
-      setCurrentStep("credentials");
+      requestAnimationFrame(() => {
+        setCurrentStep("credentials");
+      });
     }
   };
 
