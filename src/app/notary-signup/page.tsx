@@ -55,9 +55,9 @@ export default function NotarySignupPage() {
       {/* Main card */}
       <div className="relative bg-white rounded-2xl border border-[#E5E7EB] shadow-sm overflow-hidden w-full max-w-5xl min-h-[600px] flex flex-col lg:flex-row">
         {/* Left Panel */}
-        <div className="w-1/2 p-12 flex flex-col">
+        <div className="w-full lg:w-1/2 p-6 lg:p-12 flex flex-col">
           {/* Logo */}
-          <div className="mb-16">
+          <div className="mb-8 lg:mb-16">
             <Link href="/" className="text-xl font-bold text-black">
               Notarized<span className="w-2 h-2 bg-[#22D2FA] rounded-full inline-block ml-1" />
             </Link>
