@@ -242,7 +242,7 @@ export default function NotarySignupPage() {
         </div>
 
         {/* Right Panel */}
-        <div className="w-1/2 bg-[#F7F9FC] p-12 flex flex-col relative">
+        <div className="w-full lg:w-1/2 bg-[#F7F9FC] p-6 lg:p-12 flex flex-col relative min-h-[400px] lg:min-h-[600px]">
           {/* Background blur effect for right panel */}
           {currentStep === "details" && (
             <div className="absolute bottom-0 left-0 w-full h-[435px] rounded-full opacity-7 bg-gradient-to-r from-[#3632F5] to-[#22D2FA] blur-[100px]" />
