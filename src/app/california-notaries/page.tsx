@@ -77,7 +77,7 @@ export default function CaliforniaNotaries() {
   });
 
   const cities = Array.from(
-    new Set(data?.notaries?.map((notary) => notary?.city).filter(Boolean))
+    new Set(data?.notaries?.map((notary: any) => notary?.city).filter(Boolean))
   ).sort();
 
   return (
@@ -116,7 +116,7 @@ export default function CaliforniaNotaries() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="">All Services</SelectItem>
-                    {SERVICE_TYPES.map((service) => (
+                    {SERVICE_TYPES.map((service: string) => (
                       <SelectItem key={service} value={service}>
                         {service}
                       </SelectItem>
@@ -131,7 +131,7 @@ export default function CaliforniaNotaries() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="">All Cities</SelectItem>
-                    {cities.map((city) => (
+                    {cities.map((city: string) => (
                       <SelectItem key={city} value={city}>
                         {city}
                       </SelectItem>
@@ -260,7 +260,7 @@ export default function CaliforniaNotaries() {
         {/* Notaries Grid */}
         {!isLoading && !error && sortedNotaries.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {sortedNotaries.map((notary) => (
+            {sortedNotaries.map((notary: any) => (
               <Card
                 key={notary.id}
                 className="p-6 hover:shadow-lg transition-shadow cursor-pointer group"
@@ -320,7 +320,7 @@ export default function CaliforniaNotaries() {
                 {/* Services */}
                 <div className="mb-4">
                   <div className="flex flex-wrap gap-1">
-                    {notary?.services?.slice(0, 3)?.map((service) => (
+                    {notary?.services?.slice(0, 3)?.map((service: string) => (
                       <Badge
                         key={service}
                         variant="outline"
