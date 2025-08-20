@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 
 export default function Footer() {
@@ -9,8 +8,8 @@ export default function Footer() {
           <div className="space-y-6">
             <div className="text-2xl font-bold text-primary">Notarized</div>
             <p className="text-gray-400">
-              Connecting you with certified notaries nationwide. Fast,
-              reliable, and professional services.
+              Connecting you with certified notaries nationwide. Fast, reliable,
+              and professional services.
             </p>
             <div className="flex space-x-4">
               <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary transition-colors cursor-pointer">
@@ -53,7 +52,10 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="#services" className="hover:text-white transition-colors">
+                <a
+                  href="#services"
+                  className="hover:text-white transition-colors"
+                >
                   Services
                 </a>
               </li>
@@ -100,9 +102,12 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <Link
+                  href="/notary-signup"
+                  className="hover:text-white transition-colors"
+                >
                   List Your Business
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="#" className="hover:text-white transition-colors">
