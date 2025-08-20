@@ -119,7 +119,7 @@ export default function NotarySignupPage() {
             <form onSubmit={handleVerificationSubmit} className="flex-1 flex flex-col justify-center">
               <div className="space-y-6">
                 <div className="space-y-3">
-                  <h1 className="text-2xl font-bold text-black">Check your emails</h1>
+                  <h1 className="text-xl lg:text-2xl font-bold text-black">Check your emails</h1>
                   <p className="text-sm">
                     <span className="text-[#575757]">To continue, enter the 6 digit code we just sent to </span>
                     <span className="text-black font-bold">{email}</span>
