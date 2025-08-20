@@ -82,8 +82,58 @@ export default function NotarySignupPage() {
 
   const handleDetailsSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (isDetailsValid) {
+      setCurrentStep("profile");
+    }
+  };
+
+  const handleProfileSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isProfileValid) {
+      setCurrentStep("signature");
+    }
+  };
+
+  const handleSignatureSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isSignatureValid) {
+      setCurrentStep("credentials");
+    }
+  };
+
+  const handleCredentialsSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     // Handle final form submission
-    console.log("Form submitted:", { email, verificationCode, ...formData });
+    console.log("Complete signup data:", {
+      email,
+      verificationCode,
+      formData,
+      profileData,
+      signatureData,
+      documents,
+    });
+  };
+
+  const handleDocumentUpload = (documentType: string) => {
+    setUploadModal({
+      isOpen: true,
+      documentType,
+      file: null,
+      expiryDate: "",
+    });
+  };
+
+  const handleDocumentSave = () => {
+    if (uploadModal.file && uploadModal.expiryDate) {
+      setDocuments(prev => ({
+        ...prev,
+        [uploadModal.documentType]: {
+          file: uploadModal.file!,
+          expiryDate: uploadModal.expiryDate,
+        },
+      }));
+      setUploadModal({ isOpen: false, documentType: "", file: null, expiryDate: "" });
+    }
   };
 
   const isEmailValid = email.length > 0;
