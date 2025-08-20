@@ -163,9 +163,24 @@ export default function NotarySignupPage() {
   const isSignatureValid = signatureData.signatureImage || signatureData.signatureText;
   const isCredentialsValid = Object.values(documents).every(doc => doc !== null);
 
-  // Layout stabilization
+  // Layout stabilization and ResizeObserver error handling
   useLayoutEffect(() => {
     setIsLayoutReady(true);
+
+    // Additional ResizeObserver error suppression
+    const handleResizeObserverError = (event: ErrorEvent) => {
+      if (event.message?.includes('ResizeObserver loop')) {
+        event.preventDefault();
+        event.stopPropagation();
+        return false;
+      }
+    };
+
+    window.addEventListener('error', handleResizeObserverError);
+
+    return () => {
+      window.removeEventListener('error', handleResizeObserverError);
+    };
   }, []);
 
   // Auto-advance when verification code is complete
