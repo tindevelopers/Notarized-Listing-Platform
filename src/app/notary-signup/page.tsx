@@ -31,6 +31,7 @@ type SignupStep = "email" | "verification" | "details" | "profile" | "signature"
 
 export default function NotarySignupPage() {
   const [currentStep, setCurrentStep] = useState<SignupStep>("email");
+  const [isLayoutReady, setIsLayoutReady] = useState(false);
   const [email, setEmail] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
   const [formData, setFormData] = useState({
