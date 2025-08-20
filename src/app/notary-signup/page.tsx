@@ -143,6 +143,15 @@ export default function NotarySignupPage() {
     formData.lastName &&
     formData.phoneNumber &&
     formData.password;
+  const isProfileValid =
+    profileData.commissionNumber &&
+    profileData.commissionExpiry &&
+    profileData.notaryState &&
+    profileData.notaryType &&
+    profileData.languages.length > 0 &&
+    profileData.documentTypes.length > 0;
+  const isSignatureValid = signatureData.signatureImage || signatureData.signatureText;
+  const isCredentialsValid = Object.values(documents).every(doc => doc !== null);
 
   // Auto-advance when verification code is complete
   useEffect(() => {
