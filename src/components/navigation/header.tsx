@@ -123,12 +123,15 @@ export default function Header() {
                 How it Works
               </a>
               <div className="pt-4 border-t border-gray-100 flex flex-col space-y-2">
-                <Button
-                  variant="ghost"
-                  className="text-gray-700 justify-start"
-                >
-                  List Your Business
-                </Button>
+                <Link href="/notary-signup">
+                  <Button
+                    variant="ghost"
+                    className="text-gray-700 justify-start w-full"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    List Your Business
+                  </Button>
+                </Link>
                 <Link href="/california-notaries">
                   <Button className="justify-start w-full" onClick={() => setIsMenuOpen(false)}>
                     Search Notaries
