@@ -1082,7 +1082,9 @@ export default function NotarySignupPage() {
               <Button
                 type="button"
                 variant="outline"
-                onClick={() => setUploadModal(prev => ({ ...prev, isOpen: false }))}
+                onClick={() => requestAnimationFrame(() =>
+                  setUploadModal(prev => ({ ...prev, isOpen: false }))
+                )}
               >
                 Cancel
               </Button>
