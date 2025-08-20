@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/input-otp";
 import { ChevronLeft, Upload, Plus, Calendar, PenTool, Camera, Type } from "lucide-react";
 import Link from "next/link";
+import { suppressResizeObserverErrors } from "@/lib/resize-observer-fix";
 
 type SignupStep = "email" | "verification" | "details" | "profile" | "signature" | "credentials";
 
