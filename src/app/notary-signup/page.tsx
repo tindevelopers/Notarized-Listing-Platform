@@ -1,6 +1,18 @@
 "use client";
 
 import { useState, useEffect } from "react";
+
+// Suppress ResizeObserver loop errors
+if (typeof window !== 'undefined') {
+  const resizeObserverErrorHandler = (e: ErrorEvent) => {
+    if (e.message === 'ResizeObserver loop completed with undelivered notifications.') {
+      e.stopImmediatePropagation();
+      return false;
+    }
+  };
+
+  window.addEventListener('error', resizeObserverErrorHandler);
+}
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
