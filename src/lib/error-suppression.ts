@@ -165,13 +165,15 @@ export const suppressDevelopmentErrors = (
 
     // Third-party fetch promise rejections
     if (
-      config.suppressThirdPartyScripts &&
+      config.suppressFetchErrors &&
       (reason?.message?.includes("fullstory") ||
+        reason?.message?.includes("RobustFetchError") ||
+        reason?.message?.includes("Third-party script interference") ||
         (reason?.message?.includes("Failed to fetch") &&
-          reason?.stack?.includes("fullstory")))
+          (reason?.stack?.includes("fullstory") || reason?.stack?.includes("fetch-wrapper"))))
     ) {
       shouldSuppress = true;
-      suppressionReason = "Third-party Promise";
+      suppressionReason = "Third-party Fetch Promise";
     }
 
     if (shouldSuppress) {
