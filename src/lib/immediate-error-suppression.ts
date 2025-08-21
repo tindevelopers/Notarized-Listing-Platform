@@ -26,6 +26,15 @@ if (typeof window !== "undefined") {
       /resize.*observer/i.test(message || "") ||
       /observer.*loop/i.test(message || "")
     ) {
+      // Log the suppressed error
+      errorMonitor.logError({
+        type: 'error',
+        message: message || 'ResizeObserver error',
+        suppressed: true,
+        reason: 'ResizeObserver',
+        details: { error, filename: event.filename }
+      });
+
       event.preventDefault();
       event.stopImmediatePropagation();
       return false;
