@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 
 // ResizeObserver error suppression will be handled in useEffect
 import { Button } from "@/components/ui/button";
