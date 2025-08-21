@@ -1,16 +1,35 @@
-
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { AuthModal } from '@/components/auth/AuthModal'
 import { useAuth } from '@/contexts/AuthContext'
 import { ProfileDropdown } from '@/components/auth/ProfileDropdown'
 
 export default function AuthButtons() {
+  const searchParams = useSearchParams()
   const [authModalOpen, setAuthModalOpen] = useState(false)
   const [authModalTab, setAuthModalTab] = useState<'signin' | 'signup'>('signin')
   const { user, loading } = useAuth()
+
+  // Check URL parameters to auto-open auth modal
+  useEffect(() => {
+    const signupParam = searchParams.get('signup')
+    const authParam = searchParams.get('auth')
+
+    if (signupParam === 'true' || authParam === 'signup') {
+      setAuthModalTab('signup')
+      setAuthModalOpen(true)
+      // Clean up URL
+      window.history.replaceState({}, '', window.location.pathname)
+    } else if (authParam === 'signin') {
+      setAuthModalTab('signin')
+      setAuthModalOpen(true)
+      // Clean up URL
+      window.history.replaceState({}, '', window.location.pathname)
+    }
+  }, [searchParams])
 
   // Don't render during loading
   if (loading) {
