@@ -55,6 +55,15 @@ if (typeof window !== "undefined") {
       reason?.message?.includes("loop completed with undelivered") ||
       reason?.message?.includes("observer loop")
     ) {
+      // Log the suppressed promise rejection
+      errorMonitor.logError({
+        type: 'rejection',
+        message: reason?.message || reason?.toString?.() || 'ResizeObserver rejection',
+        suppressed: true,
+        reason: 'ResizeObserver',
+        details: { reason }
+      });
+
       event.preventDefault();
       return false;
     }
