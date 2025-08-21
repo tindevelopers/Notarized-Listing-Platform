@@ -41,7 +41,7 @@ interface CredentialsData {
 
 type Step = "profile" | "credentials";
 
-export default function CompleteProfilePage() {
+function CompleteProfileContent() {
   const { user, loading } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
