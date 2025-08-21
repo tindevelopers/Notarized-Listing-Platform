@@ -202,13 +202,29 @@ export default function NotarySignupPage() {
   );
 
   // Layout stabilization and ResizeObserver error handling
-  useLayoutEffect(() => {
+  useEffect(() => {
     setIsLayoutReady(true);
 
-    // Use comprehensive ResizeObserver error suppression
-    const cleanup = suppressResizeObserverErrors();
+    // Suppress ResizeObserver loop errors
+    const resizeObserverErrorHandler = (e: ErrorEvent) => {
+      if (
+        e.message ===
+        "ResizeObserver loop completed with undelivered notifications."
+      ) {
+        e.stopImmediatePropagation();
+        return false;
+      }
+    };
 
-    return cleanup;
+    if (typeof window !== "undefined") {
+      window.addEventListener("error", resizeObserverErrorHandler);
+    }
+
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener("error", resizeObserverErrorHandler);
+      }
+    };
   }, []);
 
   // Auto-advance when verification code is complete
