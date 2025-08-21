@@ -46,6 +46,12 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
 
   const { signIn, signUp } = useAuth()
 
+  // Suppress ResizeObserver errors
+  useEffect(() => {
+    const cleanup = suppressResizeObserverErrors()
+    return cleanup
+  }, [])
+
   const resetForms = () => {
     setSignInData({ email: '', password: '' })
     setSignUpData({ email: '', password: '', confirmPassword: '', fullName: '' })
