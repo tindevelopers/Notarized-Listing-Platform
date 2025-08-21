@@ -8,19 +8,21 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { 
-  Bell, 
-  Calendar, 
-  CheckCircle, 
-  ChevronRight, 
-  House, 
-  PencilSimpleLine, 
-  Files, 
-  CalendarBlank, 
-  BookBookmark, 
-  UserCircle,
+import {
+  Bell,
+  Calendar,
+  CheckCircle,
+  ChevronRight,
+  House,
   X
 } from "lucide-react";
+import {
+  PencilSimpleLine,
+  Files,
+  CalendarBlank,
+  BookBookmark,
+  UserCircle
+} from "@/components/icons/dashboard-icons";
 import Link from "next/link";
 
 interface ProfileCompletion {
