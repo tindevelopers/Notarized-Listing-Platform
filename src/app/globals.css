@@ -1,27 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto+Mono:wght@100..700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Ensure consistent font loading across all modes */
-@layer base {
-  * {
-    font-family: 'Inter', var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  }
-
-  html {
-    font-family: 'Inter', var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  }
-
-  body {
-    font-family: 'Inter', var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  }
-
-  .font-roboto-mono {
-    font-family: 'Roboto Mono', var(--font-roboto-mono), ui-monospace, 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace !important;
-  }
-}
 
 @layer base {
   /**
