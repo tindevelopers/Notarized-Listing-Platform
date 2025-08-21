@@ -47,6 +47,8 @@ type SignupStep =
   | "credentials";
 
 export default function NotarySignupPage() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const [currentStep, setCurrentStep] = useState<SignupStep>("email");
   const [isLayoutReady, setIsLayoutReady] = useState(false);
   const [email, setEmail] = useState("");
