@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 
 // ResizeObserver error suppression will be handled in useEffect
 import { Button } from "@/components/ui/button";
