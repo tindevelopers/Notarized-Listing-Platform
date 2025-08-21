@@ -50,21 +50,7 @@ export const suppressResizeObserverErrors = () => {
   };
 };
 
-/**
- * Hook to suppress ResizeObserver errors in React components
- * Import React in the component that uses this hook
- */
-export const useResizeObserverErrorSuppression = (useEffect: any) => {
-  if (typeof window !== "undefined") {
-    // Only run on client side
-    useEffect(() => {
-      const cleanup = suppressResizeObserverErrors();
-      return cleanup;
-    }, []);
-  }
-};
-
-// For environments without React hooks
+// For environments without React hooks - auto-suppress on client
 if (typeof window !== "undefined") {
   suppressResizeObserverErrors();
 }
