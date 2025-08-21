@@ -25,8 +25,6 @@ const nextConfig = {
       resolveExtensions: ['.tsx', '.ts', '.jsx', '.js', '.json'],
     },
   },
-  // Disable telemetry to reduce overhead
-  telemetry: false,
 };
 
 export default nextConfig;
