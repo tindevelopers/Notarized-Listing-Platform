@@ -178,7 +178,7 @@ export function NotaryProfileStep({ data, updateData, userName = "Steven Wakelin
           >
             {data.profilePictureUrl ? (
               <>
-                <ArrowsClockwise className="w-5 h-5" />
+                <RotateCw className="w-5 h-5" />
                 Change profile picture
               </>
             ) : (
