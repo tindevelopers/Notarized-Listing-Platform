@@ -13,7 +13,6 @@ import { useAuth } from "@/contexts/AuthContext";
 import { EmailVerificationPopup } from "./EmailVerificationPopup";
 import { OnboardingWizard } from "../onboarding/OnboardingWizard";
 import { DuplicateRegistrationPopup } from "./DuplicateRegistrationPopup";
-import { suppressResizeObserverErrors } from "@/lib/resize-observer-fix";
 import Link from "next/link";
 
 interface AuthModalProps {
