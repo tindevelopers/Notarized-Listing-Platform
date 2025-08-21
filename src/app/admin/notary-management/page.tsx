@@ -1,101 +1,99 @@
+"use client";
 
-
-"use client"
-
-import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
-import { Badge } from '@/components/ui/badge'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { 
-  CheckCircle, 
-  XCircle, 
-  Clock, 
-  Mail, 
-  User, 
-  MapPin, 
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Badge } from "@/components/ui/badge";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  CheckCircle,
+  XCircle,
+  Clock,
+  Mail,
+  User,
+  MapPin,
   Phone,
   Loader2,
-  AlertCircle 
-} from 'lucide-react'
-import { useAuth } from '@/contexts/AuthContext'
+  AlertCircle,
+} from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface NotaryApplication {
-  id: string
+  id: string;
   profiles: {
-    full_name: string
-    email: string
-  }
-  city: string
-  state: string
-  phone?: string
-  business_name?: string
-  verification_status: 'pending' | 'approved' | 'rejected'
-  is_verified: boolean
-  created_at: string
-  commission_number?: string
-  years_experience?: number
+    full_name: string;
+    email: string;
+  };
+  city: string;
+  state: string;
+  phone?: string;
+  business_name?: string;
+  verification_status: "pending" | "approved" | "rejected";
+  is_verified: boolean;
+  created_at: string;
+  commission_number?: string;
+  years_experience?: number;
 }
 
 export default function NotaryManagementPage() {
-  const [applications, setApplications] = useState<NotaryApplication[]>([])
-  const [loading, setLoading] = useState(true)
-  const [processingId, setProcessingId] = useState<string | null>(null)
-  const [error, setError] = useState<string | null>(null)
-  const [success, setSuccess] = useState<string | null>(null)
-  const { user } = useAuth()
+  const [applications, setApplications] = useState<NotaryApplication[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [processingId, setProcessingId] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+  const { user } = useAuth();
 
   // Status update form
-  const [selectedApplication, setSelectedApplication] = useState<NotaryApplication | null>(null)
+  const [selectedApplication, setSelectedApplication] =
+    useState<NotaryApplication | null>(null);
   const [statusUpdateForm, setStatusUpdateForm] = useState({
-    status: 'pending' as 'approved' | 'rejected' | 'pending',
-    message: '',
-    nextSteps: ''
-  })
+    status: "pending" as "approved" | "rejected" | "pending",
+    message: "",
+    nextSteps: "",
+  });
 
   useEffect(() => {
-    fetchApplications()
-  }, [])
+    fetchApplications();
+  }, []);
 
   const fetchApplications = async () => {
     try {
-      setLoading(true)
-      
-      const response = await fetch('/api/admin/notary-applications')
-      
+      setLoading(true);
+
+      const response = await fetch("/api/admin/notary-applications");
+
       if (!response.ok) {
-        throw new Error('Failed to fetch applications')
+        throw new Error("Failed to fetch applications");
       }
-      
-      const data = await response.json()
-      setApplications(data.applications || [])
-      
+
+      const data = await response.json();
+      setApplications(data.applications || []);
     } catch (error) {
-      console.error('Error fetching applications:', error)
-      setError('Failed to load notary applications')
+      console.error("Error fetching applications:", error);
+      setError("Failed to load notary applications");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const handleStatusUpdate = async (e: React.FormEvent) => {
-    e.preventDefault()
-    
-    if (!selectedApplication) return
+    e.preventDefault();
+
+    if (!selectedApplication) return;
 
     try {
-      setProcessingId(selectedApplication.id)
-      setError(null)
-      setSuccess(null)
-      
-      const response = await fetch('/api/email/notary-status', {
-        method: 'POST',
+      setProcessingId(selectedApplication.id);
+      setError(null);
+      setSuccess(null);
+
+      const response = await fetch("/api/email/notary-status", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email: selectedApplication.profiles.email,
@@ -104,63 +102,67 @@ export default function NotaryManagementPage() {
           message: statusUpdateForm.message,
           nextSteps: statusUpdateForm.nextSteps,
         }),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (response.ok && data.success) {
-        setSuccess(`Notary status updated to "${statusUpdateForm.status}" and notification sent!`)
-        
+        setSuccess(
+          `Notary status updated to "${statusUpdateForm.status}" and notification sent!`,
+        );
+
         // Update the local state
-        setApplications(prev => prev.map(app => 
-          app.id === selectedApplication.id 
-            ? { 
-                ...app, 
-                verification_status: statusUpdateForm.status,
-                is_verified: statusUpdateForm.status === 'approved'
-              }
-            : app
-        ))
-        
+        setApplications((prev) =>
+          prev.map((app) =>
+            app.id === selectedApplication.id
+              ? {
+                  ...app,
+                  verification_status: statusUpdateForm.status,
+                  is_verified: statusUpdateForm.status === "approved",
+                }
+              : app,
+          ),
+        );
+
         // Reset form
-        setSelectedApplication(null)
-        setStatusUpdateForm({ status: 'pending', message: '', nextSteps: '' })
+        setSelectedApplication(null);
+        setStatusUpdateForm({ status: "pending", message: "", nextSteps: "" });
       } else {
-        setError(data.error || 'Failed to update status')
+        setError(data.error || "Failed to update status");
       }
     } catch (error) {
-      console.error('Error updating status:', error)
-      setError('An error occurred while updating the status')
+      console.error("Error updating status:", error);
+      setError("An error occurred while updating the status");
     } finally {
-      setProcessingId(null)
+      setProcessingId(null);
     }
-  }
+  };
 
   const getStatusBadge = (status: string, isVerified: boolean) => {
     switch (status) {
-      case 'approved':
-        return <Badge className="bg-green-100 text-green-800">Approved</Badge>
-      case 'rejected':
-        return <Badge className="bg-red-100 text-red-800">Rejected</Badge>
-      case 'pending':
-        return <Badge className="bg-yellow-100 text-yellow-800">Pending</Badge>
+      case "approved":
+        return <Badge className="bg-green-100 text-green-800">Approved</Badge>;
+      case "rejected":
+        return <Badge className="bg-red-100 text-red-800">Rejected</Badge>;
+      case "pending":
+        return <Badge className="bg-yellow-100 text-yellow-800">Pending</Badge>;
       default:
-        return <Badge className="bg-gray-100 text-gray-800">Unknown</Badge>
+        return <Badge className="bg-gray-100 text-gray-800">Unknown</Badge>;
     }
-  }
+  };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'approved':
-        return <CheckCircle className="h-5 w-5 text-green-500" />
-      case 'rejected':
-        return <XCircle className="h-5 w-5 text-red-500" />
-      case 'pending':
-        return <Clock className="h-5 w-5 text-yellow-500" />
+      case "approved":
+        return <CheckCircle className="h-5 w-5 text-green-500" />;
+      case "rejected":
+        return <XCircle className="h-5 w-5 text-red-500" />;
+      case "pending":
+        return <Clock className="h-5 w-5 text-yellow-500" />;
       default:
-        return <AlertCircle className="h-5 w-5 text-gray-500" />
+        return <AlertCircle className="h-5 w-5 text-gray-500" />;
     }
-  }
+  };
 
   // Simple admin check - in production, implement proper role-based access
   if (!user) {
@@ -172,13 +174,15 @@ export default function NotaryManagementPage() {
           </CardContent>
         </Card>
       </div>
-    )
+    );
   }
 
   return (
     <div className="container mx-auto py-8 px-4 max-w-6xl">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Notary Application Management</h1>
+        <h1 className="text-3xl font-bold mb-2">
+          Notary Application Management
+        </h1>
         <p className="text-gray-600">Review and manage notary applications</p>
       </div>
 
@@ -217,7 +221,10 @@ export default function NotaryManagementPage() {
           ) : (
             <div className="grid gap-4">
               {applications.map((application) => (
-                <Card key={application.id} className="hover:shadow-lg transition-shadow">
+                <Card
+                  key={application.id}
+                  className="hover:shadow-lg transition-shadow"
+                >
                   <CardContent className="p-6">
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center space-x-3">
@@ -225,7 +232,8 @@ export default function NotaryManagementPage() {
                         <div>
                           <h3 className="text-lg font-semibold flex items-center">
                             <User className="mr-2 h-4 w-4" />
-                            {application.profiles.full_name || 'Unnamed Applicant'}
+                            {application.profiles.full_name ||
+                              "Unnamed Applicant"}
                           </h3>
                           <p className="text-sm text-gray-600 flex items-center">
                             <Mail className="mr-2 h-4 w-4" />
@@ -233,11 +241,15 @@ export default function NotaryManagementPage() {
                           </p>
                         </div>
                       </div>
-                      
+
                       <div className="text-right">
-                        {getStatusBadge(application.verification_status, application.is_verified)}
+                        {getStatusBadge(
+                          application.verification_status,
+                          application.is_verified,
+                        )}
                         <p className="text-sm text-gray-500 mt-1">
-                          Applied: {new Date(application.created_at).toLocaleDateString()}
+                          Applied:{" "}
+                          {application.created_at?.slice(0, 10) || "N/A"}
                         </p>
                       </div>
                     </div>
@@ -247,7 +259,7 @@ export default function NotaryManagementPage() {
                         <MapPin className="mr-2 h-4 w-4" />
                         {application.city}, {application.state}
                       </div>
-                      
+
                       {application.phone && (
                         <div className="flex items-center text-sm text-gray-600">
                           <Phone className="mr-2 h-4 w-4" />
@@ -263,13 +275,15 @@ export default function NotaryManagementPage() {
 
                       {application.commission_number && (
                         <div className="text-sm text-gray-600">
-                          <strong>Commission #:</strong> {application.commission_number}
+                          <strong>Commission #:</strong>{" "}
+                          {application.commission_number}
                         </div>
                       )}
 
                       {application.years_experience && (
                         <div className="text-sm text-gray-600">
-                          <strong>Experience:</strong> {application.years_experience} years
+                          <strong>Experience:</strong>{" "}
+                          {application.years_experience} years
                         </div>
                       )}
                     </div>
@@ -278,14 +292,19 @@ export default function NotaryManagementPage() {
                       <Button
                         size="sm"
                         onClick={() => {
-                          setSelectedApplication(application)
+                          setSelectedApplication(application);
                           setStatusUpdateForm({
-                            status: 'approved',
-                            message: 'Congratulations! Your notary application has been approved.',
-                            nextSteps: 'You can now start accepting bookings through our platform.'
-                          })
+                            status: "approved",
+                            message:
+                              "Congratulations! Your notary application has been approved.",
+                            nextSteps:
+                              "You can now start accepting bookings through our platform.",
+                          });
                         }}
-                        disabled={application.verification_status === 'approved' || processingId === application.id}
+                        disabled={
+                          application.verification_status === "approved" ||
+                          processingId === application.id
+                        }
                         className="bg-green-600 hover:bg-green-700"
                       >
                         <CheckCircle className="mr-1 h-4 w-4" />
@@ -296,14 +315,19 @@ export default function NotaryManagementPage() {
                         size="sm"
                         variant="destructive"
                         onClick={() => {
-                          setSelectedApplication(application)
+                          setSelectedApplication(application);
                           setStatusUpdateForm({
-                            status: 'rejected',
-                            message: 'Thank you for your application. Unfortunately, we cannot approve it at this time.',
-                            nextSteps: 'Please review our requirements and feel free to reapply when ready.'
-                          })
+                            status: "rejected",
+                            message:
+                              "Thank you for your application. Unfortunately, we cannot approve it at this time.",
+                            nextSteps:
+                              "Please review our requirements and feel free to reapply when ready.",
+                          });
                         }}
-                        disabled={application.verification_status === 'rejected' || processingId === application.id}
+                        disabled={
+                          application.verification_status === "rejected" ||
+                          processingId === application.id
+                        }
                       >
                         <XCircle className="mr-1 h-4 w-4" />
                         Reject
@@ -313,12 +337,14 @@ export default function NotaryManagementPage() {
                         size="sm"
                         variant="outline"
                         onClick={() => {
-                          setSelectedApplication(application)
+                          setSelectedApplication(application);
                           setStatusUpdateForm({
-                            status: 'pending',
-                            message: 'We are currently reviewing your notary application.',
-                            nextSteps: 'We will notify you once our review is complete.'
-                          })
+                            status: "pending",
+                            message:
+                              "We are currently reviewing your notary application.",
+                            nextSteps:
+                              "We will notify you once our review is complete.",
+                          });
                         }}
                         disabled={processingId === application.id}
                       >
@@ -342,7 +368,8 @@ export default function NotaryManagementPage() {
                   Update Status & Send Notification
                 </CardTitle>
                 <p className="text-sm text-gray-600">
-                  Notary: {selectedApplication.profiles.full_name} ({selectedApplication.profiles.email})
+                  Notary: {selectedApplication.profiles.full_name} (
+                  {selectedApplication.profiles.email})
                 </p>
               </CardHeader>
               <CardContent>
@@ -352,10 +379,15 @@ export default function NotaryManagementPage() {
                     <select
                       id="status"
                       value={statusUpdateForm.status}
-                      onChange={(e) => setStatusUpdateForm({
-                        ...statusUpdateForm,
-                        status: e.target.value as 'approved' | 'rejected' | 'pending'
-                      })}
+                      onChange={(e) =>
+                        setStatusUpdateForm({
+                          ...statusUpdateForm,
+                          status: e.target.value as
+                            | "approved"
+                            | "rejected"
+                            | "pending",
+                        })
+                      }
                       className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
                       <option value="pending">Pending</option>
@@ -370,10 +402,12 @@ export default function NotaryManagementPage() {
                       id="message"
                       placeholder="Additional message for the notary..."
                       value={statusUpdateForm.message}
-                      onChange={(e) => setStatusUpdateForm({
-                        ...statusUpdateForm,
-                        message: e.target.value
-                      })}
+                      onChange={(e) =>
+                        setStatusUpdateForm({
+                          ...statusUpdateForm,
+                          message: e.target.value,
+                        })
+                      }
                       rows={3}
                     />
                   </div>
@@ -384,17 +418,19 @@ export default function NotaryManagementPage() {
                       id="nextSteps"
                       placeholder="What should the notary do next..."
                       value={statusUpdateForm.nextSteps}
-                      onChange={(e) => setStatusUpdateForm({
-                        ...statusUpdateForm,
-                        nextSteps: e.target.value
-                      })}
+                      onChange={(e) =>
+                        setStatusUpdateForm({
+                          ...statusUpdateForm,
+                          nextSteps: e.target.value,
+                        })
+                      }
                       rows={3}
                     />
                   </div>
 
                   <div className="flex space-x-2">
-                    <Button 
-                      type="submit" 
+                    <Button
+                      type="submit"
                       disabled={processingId === selectedApplication.id}
                     >
                       {processingId === selectedApplication.id ? (
@@ -410,12 +446,16 @@ export default function NotaryManagementPage() {
                       )}
                     </Button>
 
-                    <Button 
-                      type="button" 
+                    <Button
+                      type="button"
                       variant="outline"
                       onClick={() => {
-                        setSelectedApplication(null)
-                        setStatusUpdateForm({ status: 'pending', message: '', nextSteps: '' })
+                        setSelectedApplication(null);
+                        setStatusUpdateForm({
+                          status: "pending",
+                          message: "",
+                          nextSteps: "",
+                        });
                       }}
                     >
                       Cancel
@@ -427,12 +467,15 @@ export default function NotaryManagementPage() {
           ) : (
             <Card>
               <CardContent className="p-6 text-center">
-                <p className="text-gray-500">Select an application from the Applications tab to update its status.</p>
+                <p className="text-gray-500">
+                  Select an application from the Applications tab to update its
+                  status.
+                </p>
               </CardContent>
             </Card>
           )}
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }
