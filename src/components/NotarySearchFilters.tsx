@@ -155,7 +155,7 @@ export default function NotarySearchFilters() {
               <Checkbox
                 id="online"
                 checked={isOnline}
-                onCheckedChange={setIsOnline}
+                onCheckedChange={(checked) => setIsOnline(checked === true)}
               />
               <Label htmlFor="online" className="text-sm text-gray-600">
                 Online Notarization
@@ -165,7 +165,7 @@ export default function NotarySearchFilters() {
               <Checkbox
                 id="mobile"
                 checked={isMobile}
-                onCheckedChange={setIsMobile}
+                onCheckedChange={(checked) => setIsMobile(checked === true)}
               />
               <Label htmlFor="mobile" className="text-sm text-gray-600">
                 Mobile Service
