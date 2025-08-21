@@ -57,7 +57,7 @@ export default function DocumentsPage() {
                 Upload your notary credentials to complete your profile setup.
               </p>
               <div className="space-y-4">
-                <Link href="/notary-signup?step=credentials">
+                <Link href="/complete-profile">
                   <Button className="bg-[#3632F5] hover:bg-[#3632F5]/90 text-white">
                     <Upload className="h-4 w-4 mr-2" />
                     Upload Credentials
