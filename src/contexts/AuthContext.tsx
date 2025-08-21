@@ -20,9 +20,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
+  const [isHydrated, setIsHydrated] = useState(false)
 
   useEffect(() => {
     let mounted = true
+    setIsHydrated(true)
 
     // Get initial session
     const getSession = async () => {
@@ -75,6 +77,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       subscription.unsubscribe()
     }
   }, [])
+
+  // Prevent hydration mismatch by not rendering auth-dependent content until hydrated
+  if (!isHydrated) {
+    return (
+      <AuthContext.Provider value={{
+        user: null,
+        session: null,
+        loading: true,
+        signUp: async () => ({ error: new Error('Not hydrated') }),
+        signIn: async () => ({ error: new Error('Not hydrated') }),
+        signOut: async () => ({ error: new Error('Not hydrated') })
+      }}>
+        {children}
+      </AuthContext.Provider>
+    )
+  }
 
   const signUp = async (email: string, password: string, fullName?: string) => {
     try {
