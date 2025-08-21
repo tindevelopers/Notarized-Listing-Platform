@@ -90,6 +90,20 @@ export function NotaryProfileStep({ data, updateData, userName = "Steven Wakelin
     }
   };
 
+  const setDemoData = () => {
+    updateData({
+      ...data,
+      businessName: "Your Top Notary",
+      notaryState: "New York",
+      notaryCounty: "Bronx County",
+      commissionNumber: "01234ABCDE56789",
+      commissionExpiry: "2027-01-01",
+      notaryType: "Parent/Child",
+      languages: ["English"],
+      documentTypes: ["First example", "Second example", "Third example", "Fourth example", "Fifth example", "Sixth example", "Seventh example"]
+    });
+  };
+
   const toggleLanguage = (language: string) => {
     const currentLanguages = data.languages || [];
     if (currentLanguages.includes(language)) {
