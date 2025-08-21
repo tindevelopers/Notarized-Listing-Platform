@@ -41,11 +41,35 @@ export default function About() {
                 <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
                   About our company
                 </h1>
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit donec
-                  magna pharetra dignissim nibh turpis pretium id leo sit dolor
-                  vitae mi arcu sit est sem fames integer placerat in magna
-                  laoreet nibh.
+                <p className="text-lg text-gray-600 leading-relaxed font-light text-left">
+                  <div className="mb-20">
+                    <div className="max-w-4xl mx-auto">
+                      <div className="text-center">
+                        <div className="max-w-3xl mx-auto">
+                          <p className="text-gray-600 mb-0">
+                            <span className="font-inter text-left">
+                              Notarized, Inc. is here to assist you with
+                              notaries for all your signings and notarization
+                              needs. Cultivated by Real Estate Industry
+                              Professionals with over 15 years of experience,
+                              we know and understand what it takes to complete
+                              closings properly, and we will be with you every
+                              step of the way. Our customer service team is
+                              available 24/7 for signing appointments and
+                              questions. At Notarized, Inc., we have a vast
+                              range of signing knowledge to support you, in
+                              combination with the experience and skill set to
+                              handle your signings properly the first time.
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="relative text-gray-600">
+                    <div className="max-w-3xl mx-auto">
+                    </div>
+                  </div>
                 </p>
               </div>
 
@@ -75,10 +99,18 @@ export default function About() {
 
               <div className="space-y-6">
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  Sit pellentesque eget arcu elementum phasellus et risus
-                  convallis nulla porttitor diam porttitor euismod quis senectus
-                  lobortis ut consequat neque tempor tortor tincidunt posuere
-                  tincidunt arcu.
+                  <div>
+                    Notarized, Inc. is here to assist you with notaries for
+                    all your signings and notarization needs. Cultivated by
+                    Real Estate Industry Professionals with over 15 years of
+                    experience, we know and understand what it takes to
+                    complete closings properly, and we will be with you every
+                    step of the way. Our customer service team is available
+                    24/7 for signing appointments and questions. At Notarized,
+                    Inc., we have a vast range of signing knowledge to support
+                    you, in combination with the experience and skill set to
+                    handle your signings properly the first time.
+                  </div>
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4">
@@ -117,8 +149,8 @@ export default function About() {
               <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto">
                 <Users className="w-6 h-6 text-white" />
               </div>
-              <div className="text-5xl font-bold text-gray-900">2,000</div>
-              <div className="text-xl font-bold text-gray-900">Notarys</div>
+              <div className="text-5xl font-bold text-gray-900">200K</div>
+              <div className="text-xl font-bold text-gray-900">Notaries</div>
               <p className="text-gray-600">
                 Lorem ipsum dolor sit amet consectetur adipiscing elit.
               </p>
@@ -128,9 +160,9 @@ export default function About() {
               <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto">
                 <CheckCircle className="w-6 h-6 text-white" />
               </div>
-              <div className="text-5xl font-bold text-gray-900">30,000+</div>
+              <div className="text-5xl font-bold text-gray-900">Over 1K</div>
               <div className="text-xl font-bold text-gray-900">
-                Successful projects
+                Active Clients
               </div>
               <p className="text-gray-600">
                 Lorem ipsum dolor sit amet consectetur adipiscing elit.
@@ -141,7 +173,7 @@ export default function About() {
               <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto">
                 <TrendingUp className="w-6 h-6 text-white" />
               </div>
-              <div className="text-5xl font-bold text-gray-900">1,500</div>
+              <div className="text-5xl font-bold text-gray-900">All 50 States</div>
               <div className="text-xl font-bold text-gray-900">
                 Happy clients
               </div>
@@ -154,9 +186,9 @@ export default function About() {
               <div className="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center mx-auto">
                 <Star className="w-6 h-6 text-white" />
               </div>
-              <div className="text-5xl font-bold text-gray-900">500</div>
+              <div className="text-5xl font-bold text-gray-900">20Y +</div>
               <div className="text-xl font-bold text-gray-900">
-                5 stars reviews
+                Experience
               </div>
               <p className="text-gray-600">
                 Lorem ipsum dolor sit amet consectetur adipiscing elit.
