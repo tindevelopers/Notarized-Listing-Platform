@@ -50,6 +50,7 @@ function SuperAdminContent() {
   const { user, loading } = useAuth();
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [authLoading, setAuthLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [stats, setStats] = useState<DashboardStats>({
     totalTransactions: 2500,
     totalInvoiceValue: 125000,
