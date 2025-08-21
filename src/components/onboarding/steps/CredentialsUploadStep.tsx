@@ -111,6 +111,51 @@ export function CredentialsUploadStep({ data, updateData }: CredentialsUploadSte
     return documentTypes.length;
   };
 
+  const addDemoDocuments = () => {
+    // Create demo file objects
+    const createDemoFile = (name: string) => {
+      const content = `Demo ${name} document content`;
+      const blob = new Blob([content], { type: 'application/pdf' });
+      const file = new File([blob], `${name.toLowerCase().replace(/\s+/g, '-')}.pdf`, { type: 'application/pdf' });
+      return file;
+    };
+
+    const demoData: CredentialsData = {
+      identification: {
+        file: createDemoFile('Identification'),
+        expiryDate: '2027-12-31',
+        uploadedAt: new Date(),
+      },
+      w9: {
+        file: createDemoFile('W9'),
+        expiryDate: '2025-12-31',
+        uploadedAt: new Date(),
+      },
+      commissionCertificate: {
+        file: createDemoFile('Commission Certificate'),
+        expiryDate: '2027-01-01',
+        uploadedAt: new Date(),
+      },
+      bond: {
+        file: createDemoFile('Bond'),
+        expiryDate: '2026-06-30',
+        uploadedAt: new Date(),
+      },
+      eo: {
+        file: createDemoFile('E&O Insurance'),
+        expiryDate: '2025-12-31',
+        uploadedAt: new Date(),
+      },
+      backgroundCheck: {
+        file: createDemoFile('Background Check Report'),
+        expiryDate: '2026-03-15',
+        uploadedAt: new Date(),
+      },
+    };
+
+    updateData(demoData);
+  };
+
   return (
     <div className="space-y-6">
       {/* Step indicator */}
