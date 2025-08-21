@@ -84,8 +84,8 @@ function SuperAdminContent() {
           'superadmin@notarized.com',
           'support@notarized.com'
         ];
-        
-        const isSuperAdmin = superAdminEmails.includes(user.email || '') || 
+
+        const isSuperAdmin = superAdminEmails.includes(user.email || '') ||
                            user.email?.endsWith('@notarized.com');
 
         if (!isSuperAdmin) {
@@ -94,8 +94,22 @@ function SuperAdminContent() {
         }
 
         setIsAuthorized(true);
+        // Fetch stats after authorization
+        fetchStats();
       }
       setAuthLoading(false);
+    };
+
+    const fetchStats = async () => {
+      try {
+        const response = await fetch('/api/superadmin/stats');
+        if (response.ok) {
+          const newStats = await response.json();
+          setStats(newStats);
+        }
+      } catch (error) {
+        console.error('Failed to fetch stats:', error);
+      }
     };
 
     checkAuthorization();
