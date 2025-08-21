@@ -69,7 +69,8 @@ const isThirdPartyInterference = (error: any): boolean => {
     errorStack.includes("google-analytics.com") ||
     errorMessage.includes("Extension context invalidated") ||
     errorMessage.includes("chrome.runtime") ||
-    (errorMessage.includes("Script error") && errorStack.includes("chrome-extension"))
+    (errorMessage.includes("Script error") &&
+      errorStack.includes("chrome-extension"))
   );
 };
 
@@ -88,7 +89,7 @@ const sleep = (ms: number): Promise<void> => {
 };
 
 // Store reference to original fetch
-const originalFetch = typeof window !== 'undefined' ? window.fetch : fetch;
+const originalFetch = typeof window !== "undefined" ? window.fetch : fetch;
 
 // Enhanced fetch with retry logic
 const fetchWithRetry = async (
@@ -116,13 +117,18 @@ const fetchWithRetry = async (
     // Check for third-party interference first and handle gracefully
     if (isThirdPartyInterference(error)) {
       if (!options.suppressErrors) {
-        console.debug('🔇 Third-party script interference detected, using fallback');
+        console.debug(
+          "🔇 Third-party script interference detected, using fallback",
+        );
       }
 
       // Try with original fetch as immediate fallback for third-party interference
       try {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), options.timeout!);
+        const timeoutId = setTimeout(
+          () => controller.abort(),
+          options.timeout!,
+        );
 
         const fallbackResponse = await Promise.race([
           originalFetch(url, {
@@ -298,12 +304,12 @@ export const installGlobalFetchWrapper = () => {
         } catch (originalError) {
           console.debug("🔇 Original fetch also failed, suppressing error");
           // Return a minimal successful response to prevent cascading errors
-          return new Response('{}', {
+          return new Response("{}", {
             status: 200,
-            statusText: 'OK',
+            statusText: "OK",
             headers: {
-              'Content-Type': 'application/json'
-            }
+              "Content-Type": "application/json",
+            },
           });
         }
       }

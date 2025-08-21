@@ -4,7 +4,13 @@ import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Upload, Plus, RotateCw, Pencil } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -30,39 +36,43 @@ interface NotaryProfileStepProps {
 
 const documentTypeOptions = [
   "First example",
-  "Second example", 
+  "Second example",
   "Third example",
   "Fourth example",
   "Fifth example",
   "Sixth example",
-  "Seventh example"
+  "Seventh example",
 ];
 
 const languageOptions = [
   "English",
-  "Spanish", 
+  "Spanish",
   "French",
   "Mandarin",
   "German",
   "Italian",
-  "Portuguese"
+  "Portuguese",
 ];
 
 const notaryTypeOptions = [
   "Parent/Child",
   "Traditional Notary",
   "Electronic Notary",
-  "Remote Online Notary"
+  "Remote Online Notary",
 ];
 
-export function NotaryProfileStep({ data, updateData, userName = "Steven Wakeling" }: NotaryProfileStepProps) {
+export function NotaryProfileStep({
+  data,
+  updateData,
+  userName = "Steven Wakeling",
+}: NotaryProfileStepProps) {
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleInputChange = (field: keyof NotaryProfileData, value: string) => {
     updateData({
       ...data,
-      [field]: value
+      [field]: value,
     });
   };
 
@@ -74,7 +84,7 @@ export function NotaryProfileStep({ data, updateData, userName = "Steven Wakelin
       updateData({
         ...data,
         profilePicture: file,
-        profilePictureUrl: url
+        profilePictureUrl: url,
       });
     } catch (error) {
       console.error("Error uploading photo:", error);
@@ -92,7 +102,8 @@ export function NotaryProfileStep({ data, updateData, userName = "Steven Wakelin
 
   const setDemoData = () => {
     // Create demo profile picture URL
-    const demoImageUrl = "https://api.builder.io/api/v1/image/assets/TEMP/a451632811dd5018fbcf03aa54327d1b4e59ca84?width=414";
+    const demoImageUrl =
+      "https://api.builder.io/api/v1/image/assets/TEMP/a451632811dd5018fbcf03aa54327d1b4e59ca84?width=414";
 
     updateData({
       ...data,
@@ -104,7 +115,15 @@ export function NotaryProfileStep({ data, updateData, userName = "Steven Wakelin
       commissionExpiry: "2027-01-01",
       notaryType: "Parent/Child",
       languages: ["English"],
-      documentTypes: ["First example", "Second example", "Third example", "Fourth example", "Fifth example", "Sixth example", "Seventh example"]
+      documentTypes: [
+        "First example",
+        "Second example",
+        "Third example",
+        "Fourth example",
+        "Fifth example",
+        "Sixth example",
+        "Seventh example",
+      ],
     });
   };
 
@@ -113,12 +132,12 @@ export function NotaryProfileStep({ data, updateData, userName = "Steven Wakelin
     if (currentLanguages.includes(language)) {
       updateData({
         ...data,
-        languages: currentLanguages.filter(l => l !== language)
+        languages: currentLanguages.filter((l) => l !== language),
       });
     } else {
       updateData({
         ...data,
-        languages: [...currentLanguages, language]
+        languages: [...currentLanguages, language],
       });
     }
   };
@@ -128,12 +147,12 @@ export function NotaryProfileStep({ data, updateData, userName = "Steven Wakelin
     if (currentTypes.includes(docType)) {
       updateData({
         ...data,
-        documentTypes: currentTypes.filter(t => t !== docType)
+        documentTypes: currentTypes.filter((t) => t !== docType),
       });
     } else {
       updateData({
         ...data,
-        documentTypes: [...currentTypes, docType]
+        documentTypes: [...currentTypes, docType],
       });
     }
   };
@@ -153,7 +172,9 @@ export function NotaryProfileStep({ data, updateData, userName = "Steven Wakelin
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-[#575757]">Step 3 / 5</p>
-              <h1 className="text-2xl font-bold text-black">Your notary profile</h1>
+              <h1 className="text-2xl font-bold text-black">
+                Your notary profile
+              </h1>
             </div>
             <Button
               type="button"
@@ -226,13 +247,17 @@ export function NotaryProfileStep({ data, updateData, userName = "Steven Wakelin
                 updateData({
                   ...data,
                   notaryState: "New York",
-                  notaryCounty: "Bronx County"
+                  notaryCounty: "Bronx County",
                 });
               }
             }}
           >
             <Input
-              value={data.notaryState && data.notaryCounty ? `${data.notaryState}, ${data.notaryCounty}` : ""}
+              value={
+                data.notaryState && data.notaryCounty
+                  ? `${data.notaryState}, ${data.notaryCounty}`
+                  : ""
+              }
               placeholder="Select state and county"
               className="h-11 border-[#949494] rounded-md pr-10 cursor-pointer"
               readOnly
@@ -249,7 +274,9 @@ export function NotaryProfileStep({ data, updateData, userName = "Steven Wakelin
           </Label>
           <Input
             value={data.commissionNumber}
-            onChange={(e) => handleInputChange("commissionNumber", e.target.value)}
+            onChange={(e) =>
+              handleInputChange("commissionNumber", e.target.value)
+            }
             className="h-11 border-[#949494] rounded-md"
             placeholder="01234ABCDE56789"
           />
@@ -266,7 +293,9 @@ export function NotaryProfileStep({ data, updateData, userName = "Steven Wakelin
             <Input
               type="date"
               value={data.commissionExpiry}
-              onChange={(e) => handleInputChange("commissionExpiry", e.target.value)}
+              onChange={(e) =>
+                handleInputChange("commissionExpiry", e.target.value)
+              }
               className="h-11 border-[#949494] rounded-md pl-10"
             />
           </div>
@@ -280,7 +309,10 @@ export function NotaryProfileStep({ data, updateData, userName = "Steven Wakelin
           <Label className="text-sm text-black">
             Type<span className="text-[#E42B38] ml-0.5">*</span>
           </Label>
-          <Select value={data.notaryType} onValueChange={(value) => handleInputChange("notaryType", value)}>
+          <Select
+            value={data.notaryType}
+            onValueChange={(value) => handleInputChange("notaryType", value)}
+          >
             <SelectTrigger className="h-11 border-[#949494] rounded-md">
               <SelectValue placeholder="Select type" />
             </SelectTrigger>
@@ -314,7 +346,9 @@ export function NotaryProfileStep({ data, updateData, userName = "Steven Wakelin
               <Button
                 key={language}
                 type="button"
-                variant={data.languages?.includes(language) ? "default" : "outline"}
+                variant={
+                  data.languages?.includes(language) ? "default" : "outline"
+                }
                 size="sm"
                 onClick={() => toggleLanguage(language)}
                 className="text-xs"
@@ -333,7 +367,10 @@ export function NotaryProfileStep({ data, updateData, userName = "Steven Wakelin
           </Label>
           <div className="relative">
             <Input
-              value={getDisplayValue(data.documentTypes, "Select document types")}
+              value={getDisplayValue(
+                data.documentTypes,
+                "Select document types",
+              )}
               className="h-11 border-[#949494] rounded-md pr-10"
               readOnly
             />
@@ -345,7 +382,9 @@ export function NotaryProfileStep({ data, updateData, userName = "Steven Wakelin
               <Button
                 key={docType}
                 type="button"
-                variant={data.documentTypes?.includes(docType) ? "default" : "outline"}
+                variant={
+                  data.documentTypes?.includes(docType) ? "default" : "outline"
+                }
                 size="sm"
                 onClick={() => toggleDocumentType(docType)}
                 className="text-xs"
@@ -365,7 +404,10 @@ export function NotaryProfileStep({ data, updateData, userName = "Steven Wakelin
             <Avatar className="w-28 h-28 mx-auto mb-4">
               <AvatarImage src={data.profilePictureUrl} alt={userName} />
               <AvatarFallback className="bg-[#E5E7EB] text-2xl">
-                {userName.split(' ').map(n => n[0]).join('')}
+                {userName
+                  .split(" ")
+                  .map((n) => n[0])
+                  .join("")}
               </AvatarFallback>
             </Avatar>
             <h3 className="text-xl font-bold bg-gradient-to-r from-[#3632F5] to-[#22D2FA] bg-clip-text text-transparent mb-2">
@@ -388,16 +430,18 @@ export function NotaryProfileStep({ data, updateData, userName = "Steven Wakelin
                 </p>
               </div>
               <div>
-                <p className="text-xs text-[#575757]">Commission expiration date:</p>
+                <p className="text-xs text-[#575757]">
+                  Commission expiration date:
+                </p>
                 <p className="text-sm text-black">
-                  {data.commissionExpiry ? new Date(data.commissionExpiry).toLocaleDateString() : "-"}
+                  {data.commissionExpiry
+                    ? new Date(data.commissionExpiry).toLocaleDateString()
+                    : "-"}
                 </p>
               </div>
               <div>
                 <p className="text-xs text-[#575757]">Type:</p>
-                <p className="text-sm text-black">
-                  {data.notaryType || "-"}
-                </p>
+                <p className="text-sm text-black">{data.notaryType || "-"}</p>
               </div>
               <div>
                 <p className="text-xs text-[#575757]">Languages:</p>

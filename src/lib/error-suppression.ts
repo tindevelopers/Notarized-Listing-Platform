@@ -92,8 +92,8 @@ export const suppressDevelopmentErrors = (
     if (
       config.suppressFetchErrors &&
       (message?.includes("Failed to fetch") ||
-       message?.includes("RobustFetchError") ||
-       message?.includes("Third-party script interference")) &&
+        message?.includes("RobustFetchError") ||
+        message?.includes("Third-party script interference")) &&
       (filename?.includes("chrome-extension://") ||
         filename?.includes("fullstory.com") ||
         filename?.includes("frame_ant.js") ||
@@ -170,7 +170,8 @@ export const suppressDevelopmentErrors = (
         reason?.message?.includes("RobustFetchError") ||
         reason?.message?.includes("Third-party script interference") ||
         (reason?.message?.includes("Failed to fetch") &&
-          (reason?.stack?.includes("fullstory") || reason?.stack?.includes("fetch-wrapper"))))
+          (reason?.stack?.includes("fullstory") ||
+            reason?.stack?.includes("fetch-wrapper"))))
     ) {
       shouldSuppress = true;
       suppressionReason = "Third-party Fetch Promise";

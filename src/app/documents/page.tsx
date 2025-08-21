@@ -37,12 +37,17 @@ export default function DocumentsPage() {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="mb-6">
-          <Link href="/dashboard" className="inline-flex items-center text-[#3632F5] hover:text-[#3632F5]/80 mb-4">
+          <Link
+            href="/dashboard"
+            className="inline-flex items-center text-[#3632F5] hover:text-[#3632F5]/80 mb-4"
+          >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Dashboard
           </Link>
           <h1 className="text-3xl font-bold text-black">Documents</h1>
-          <p className="text-[#575757] mt-2">Manage your notary documents and credentials</p>
+          <p className="text-[#575757] mt-2">
+            Manage your notary documents and credentials
+          </p>
         </div>
 
         {/* Empty State */}
@@ -52,7 +57,9 @@ export default function DocumentsPage() {
               <div className="w-20 h-20 bg-[#F7F9FC] rounded-full flex items-center justify-center mx-auto mb-6">
                 <FileText className="h-10 w-10 text-[#3632F5] opacity-50" />
               </div>
-              <h3 className="text-xl font-semibold text-black mb-2">No documents uploaded</h3>
+              <h3 className="text-xl font-semibold text-black mb-2">
+                No documents uploaded
+              </h3>
               <p className="text-[#575757] mb-6">
                 Upload your notary credentials to complete your profile setup.
               </p>

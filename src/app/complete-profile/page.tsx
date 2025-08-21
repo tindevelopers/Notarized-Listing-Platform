@@ -47,7 +47,7 @@ export default function CompleteProfilePage() {
   const searchParams = useSearchParams();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentStep, setCurrentStep] = useState<Step>("profile");
-  
+
   // Profile data state
   const [profileData, setProfileData] = useState<NotaryProfileData>({
     profilePicture: null,
@@ -94,7 +94,7 @@ export default function CompleteProfilePage() {
     try {
       // Here you would save the data to your backend
       // For now, we'll simulate an API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
       if (currentStep === "profile") {
         console.log("Saving profile data:", profileData);
@@ -120,10 +120,12 @@ export default function CompleteProfilePage() {
     profileData.languages.length > 0 &&
     profileData.documentTypes.length > 0;
 
-  const isCredentialsValid =
-    Object.values(credentialsData).every(doc => doc !== null);
+  const isCredentialsValid = Object.values(credentialsData).every(
+    (doc) => doc !== null,
+  );
 
-  const isCurrentStepValid = currentStep === "profile" ? isProfileValid : isCredentialsValid;
+  const isCurrentStepValid =
+    currentStep === "profile" ? isProfileValid : isCredentialsValid;
 
   const getBackHref = () => {
     if (currentStep === "credentials") {
@@ -160,7 +162,10 @@ export default function CompleteProfilePage() {
       <div className="bg-white border-b border-[#E5E7EB] px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link href={getBackHref()} className="inline-flex items-center text-[#3632F5] hover:text-[#3632F5]/80">
+            <Link
+              href={getBackHref()}
+              className="inline-flex items-center text-[#3632F5] hover:text-[#3632F5]/80"
+            >
               <ArrowLeft className="h-5 w-5 mr-2" />
               {getBackLabel()}
             </Link>
@@ -187,7 +192,11 @@ export default function CompleteProfilePage() {
                 <NotaryProfileStep
                   data={profileData}
                   updateData={setProfileData}
-                  userName={user.user_metadata?.full_name || user.email?.split('@')[0] || "User"}
+                  userName={
+                    user.user_metadata?.full_name ||
+                    user.email?.split("@")[0] ||
+                    "User"
+                  }
                 />
               ) : (
                 <CredentialsUploadStep
@@ -207,7 +216,7 @@ export default function CompleteProfilePage() {
                       {currentStep === "credentials" ? "Back" : "Cancel"}
                     </Button>
                   </Link>
-                  
+
                   <Button
                     onClick={handleSubmit}
                     disabled={!isCurrentStepValid || isSubmitting}
@@ -220,12 +229,16 @@ export default function CompleteProfilePage() {
                     {isSubmitting ? (
                       <>
                         <div className="w-4 h-4 animate-spin rounded-full border-2 border-current border-t-transparent mr-2" />
-                        {currentStep === "profile" ? "Saving Profile..." : "Submitting Documents..."}
+                        {currentStep === "profile"
+                          ? "Saving Profile..."
+                          : "Submitting Documents..."}
                       </>
                     ) : (
                       <>
                         <CheckCircle className="w-4 h-4 mr-2" />
-                        {currentStep === "profile" ? "Continue to Documents" : "Submit Documents"}
+                        {currentStep === "profile"
+                          ? "Continue to Documents"
+                          : "Submit Documents"}
                       </>
                     )}
                   </Button>

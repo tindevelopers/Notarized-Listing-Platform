@@ -17,14 +17,14 @@ import {
   House,
   X,
   AlertCircle,
-  User
+  User,
 } from "lucide-react";
 import {
   PencilSimpleLine,
   Files,
   CalendarBlank,
   BookBookmark,
-  UserCircle
+  UserCircle,
 } from "@/components/icons/dashboard-icons";
 import Link from "next/link";
 
@@ -51,22 +51,36 @@ interface NotaryProfile {
 export default function DashboardPage() {
   const { user, loading } = useAuth();
   const searchParams = useSearchParams();
-  const [profileCompletion, setProfileCompletion] = useState<ProfileCompletion>({
-    profileSetup: false,
-    signatureCreated: false,
-    credentialsUploaded: false,
-    paymentDetailsAdded: false,
-    firstTransactionAccepted: false,
-  });
+  const [profileCompletion, setProfileCompletion] = useState<ProfileCompletion>(
+    {
+      profileSetup: false,
+      signatureCreated: false,
+      credentialsUploaded: false,
+      paymentDetailsAdded: false,
+      firstTransactionAccepted: false,
+    },
+  );
   const [showSuccessBanner, setShowSuccessBanner] = useState(true);
   const [notaryProfileComplete, setNotaryProfileComplete] = useState(false);
   const [showProfileAlert, setShowProfileAlert] = useState(true);
 
   // Mock activity logs - in real app, fetch from API
   const [activityLogs] = useState([
-    { id: 1, date: "1 Oct 2024, 11:00 GMT", message: "This is an example activity log." },
-    { id: 2, date: "1 Oct 2024, 11:00 GMT", message: "This is an example activity log." },
-    { id: 3, date: "1 Oct 2024, 11:00 GMT", message: "This is an example activity log." },
+    {
+      id: 1,
+      date: "1 Oct 2024, 11:00 GMT",
+      message: "This is an example activity log.",
+    },
+    {
+      id: 2,
+      date: "1 Oct 2024, 11:00 GMT",
+      message: "This is an example activity log.",
+    },
+    {
+      id: 3,
+      date: "1 Oct 2024, 11:00 GMT",
+      message: "This is an example activity log.",
+    },
   ]);
 
   useEffect(() => {
@@ -78,14 +92,14 @@ export default function DashboardPage() {
   // Check profile completion status
   useEffect(() => {
     // Check if user just completed their profile
-    const profileCompleteParam = searchParams.get('profile-complete');
-    if (profileCompleteParam === 'true') {
+    const profileCompleteParam = searchParams.get("profile-complete");
+    if (profileCompleteParam === "true") {
       setNotaryProfileComplete(true);
       setShowProfileAlert(false);
       setShowSuccessBanner(true);
 
       // Clean up URL params
-      window.history.replaceState({}, '', '/dashboard');
+      window.history.replaceState({}, "", "/dashboard");
     } else {
       // Check if notary profile is complete
       // This would be replaced with actual API calls to check completion status
@@ -123,7 +137,9 @@ export default function DashboardPage() {
     return null;
   }
 
-  const completedTasks = Object.values(profileCompletion).filter(Boolean).length + (notaryProfileComplete ? 1 : 0);
+  const completedTasks =
+    Object.values(profileCompletion).filter(Boolean).length +
+    (notaryProfileComplete ? 1 : 0);
   const totalTasks = Object.keys(profileCompletion).length + 1; // +1 for notary profile
 
   return (
@@ -142,24 +158,39 @@ export default function DashboardPage() {
         <div className="flex-1 p-5">
           <nav className="space-y-1">
             <div className="bg-gradient-to-r from-[#22D2FA]/55 to-[#3632F5]/55 bg-white/5 rounded-md">
-              <Link href="/dashboard" className="flex items-center px-3 py-2.5 text-sm font-medium text-black rounded-md">
+              <Link
+                href="/dashboard"
+                className="flex items-center px-3 py-2.5 text-sm font-medium text-black rounded-md"
+              >
                 <House className="mr-3 h-5 w-5" />
                 Dashboard
               </Link>
             </div>
-            <Link href="/transactions" className="flex items-center px-3 py-2.5 text-sm font-medium text-white hover:bg-white/10 rounded-md">
+            <Link
+              href="/transactions"
+              className="flex items-center px-3 py-2.5 text-sm font-medium text-white hover:bg-white/10 rounded-md"
+            >
               <PencilSimpleLine className="mr-3 h-5 w-5 text-[#22D2FA]" />
               Transactions
             </Link>
-            <Link href="/documents" className="flex items-center px-3 py-2.5 text-sm font-medium text-white hover:bg-white/10 rounded-md">
+            <Link
+              href="/documents"
+              className="flex items-center px-3 py-2.5 text-sm font-medium text-white hover:bg-white/10 rounded-md"
+            >
               <Files className="mr-3 h-5 w-5 text-[#22D2FA]" />
               Documents
             </Link>
-            <Link href="/meetings" className="flex items-center px-3 py-2.5 text-sm font-medium text-white hover:bg-white/10 rounded-md">
+            <Link
+              href="/meetings"
+              className="flex items-center px-3 py-2.5 text-sm font-medium text-white hover:bg-white/10 rounded-md"
+            >
               <CalendarBlank className="mr-3 h-5 w-5 text-[#22D2FA]" />
               Meetings
             </Link>
-            <Link href="/journal" className="flex items-center px-3 py-2.5 text-sm font-medium text-white hover:bg-white/10 rounded-md">
+            <Link
+              href="/journal"
+              className="flex items-center px-3 py-2.5 text-sm font-medium text-white hover:bg-white/10 rounded-md"
+            >
               <BookBookmark className="mr-3 h-5 w-5 text-[#22D2FA]" />
               Journal
             </Link>
@@ -168,7 +199,10 @@ export default function DashboardPage() {
 
         {/* My Account */}
         <div className="p-5">
-          <Link href="/profile" className="flex items-center justify-between p-4 border border-white/50 rounded-md text-white hover:bg-white/10">
+          <Link
+            href="/profile"
+            className="flex items-center justify-between p-4 border border-white/50 rounded-md text-white hover:bg-white/10"
+          >
             <div className="flex items-center">
               <UserCircle className="mr-3 h-5 w-5 text-[#22D2FA]" />
               <span className="text-sm font-medium">My Account</span>
@@ -201,7 +235,8 @@ export default function DashboardPage() {
                       Complete your notary profile to get listed!
                     </AlertDescription>
                     <AlertDescription className="text-[#78350F] text-sm mt-1">
-                      Add your notary credentials, commission details, and services to start accepting clients.
+                      Add your notary credentials, commission details, and
+                      services to start accepting clients.
                     </AlertDescription>
                     <Link href="/complete-profile">
                       <Button className="bg-[#F59E0B] hover:bg-[#D97706] text-white mt-3 h-9">
@@ -234,7 +269,8 @@ export default function DashboardPage() {
                       Profile complete!
                     </AlertDescription>
                     <AlertDescription className="text-black text-sm mt-1">
-                      Your notary profile is now live and you can start accepting clients.
+                      Your notary profile is now live and you can start
+                      accepting clients.
                     </AlertDescription>
                   </div>
                 </div>
@@ -253,9 +289,15 @@ export default function DashboardPage() {
           {/* Header */}
           <div className="space-y-2">
             <h2 className="text-3xl font-semibold text-black">
-              Hello, {user.user_metadata?.full_name || user.email?.split('@')[0] || 'Steven'} 👋
+              Hello,{" "}
+              {user.user_metadata?.full_name ||
+                user.email?.split("@")[0] ||
+                "Steven"}{" "}
+              👋
             </h2>
-            <p className="text-[#575757]">Here's an overview of your activity.</p>
+            <p className="text-[#575757]">
+              Here's an overview of your activity.
+            </p>
           </div>
 
           {/* Cards Grid */}
@@ -263,7 +305,9 @@ export default function DashboardPage() {
             {/* Complete Setup Card */}
             <Card className="lg:col-span-2 border-[#E5E7EB]">
               <CardHeader className="border-b border-[#E5E7EB]">
-                <CardTitle className="text-black">Complete set up ({totalTasks - completedTasks})</CardTitle>
+                <CardTitle className="text-black">
+                  Complete set up ({totalTasks - completedTasks})
+                </CardTitle>
               </CardHeader>
               <CardContent className="p-5">
                 <div className="space-y-5">
@@ -272,21 +316,30 @@ export default function DashboardPage() {
                     <div className="w-7 h-7 bg-[#1A963F] rounded-full flex items-center justify-center">
                       <CheckCircle className="h-4 w-4 text-white" />
                     </div>
-                    <span className="text-black line-through">Credentials approved</span>
+                    <span className="text-black line-through">
+                      Credentials approved
+                    </span>
                   </div>
 
                   <div className="flex items-center gap-3">
                     <div className="w-7 h-7 bg-[#1A963F] rounded-full flex items-center justify-center">
                       <CheckCircle className="h-4 w-4 text-white" />
                     </div>
-                    <span className="text-black line-through">Subscribe to the platform</span>
+                    <span className="text-black line-through">
+                      Subscribe to the platform
+                    </span>
                   </div>
 
                   {/* Pending Tasks */}
                   {!notaryProfileComplete ? (
-                    <Link href="/complete-profile" className="flex items-center gap-3 hover:bg-gray-50 p-2 -m-2 rounded-md">
+                    <Link
+                      href="/complete-profile"
+                      className="flex items-center gap-3 hover:bg-gray-50 p-2 -m-2 rounded-md"
+                    >
                       <div className="w-7 h-7 border border-[#E5E7EB] rounded-full bg-white"></div>
-                      <span className="text-black">Complete your notary profile</span>
+                      <span className="text-black">
+                        Complete your notary profile
+                      </span>
                       <ChevronRight className="h-5 w-5 text-[#575757] ml-auto" />
                     </Link>
                   ) : (
@@ -294,7 +347,9 @@ export default function DashboardPage() {
                       <div className="w-7 h-7 bg-[#1A963F] rounded-full flex items-center justify-center">
                         <CheckCircle className="h-4 w-4 text-white" />
                       </div>
-                      <span className="text-black line-through">Complete your notary profile</span>
+                      <span className="text-black line-through">
+                        Complete your notary profile
+                      </span>
                     </div>
                   )}
 
@@ -303,25 +358,40 @@ export default function DashboardPage() {
                       <div className="w-7 h-7 bg-[#1A963F] rounded-full flex items-center justify-center">
                         <CheckCircle className="h-4 w-4 text-white" />
                       </div>
-                      <span className="text-black line-through">Upload credentials</span>
+                      <span className="text-black line-through">
+                        Upload credentials
+                      </span>
                     </div>
                   ) : (
-                    <Link href="/complete-profile?step=credentials" className="flex items-center gap-3 hover:bg-gray-50 p-2 -m-2 rounded-md">
+                    <Link
+                      href="/complete-profile?step=credentials"
+                      className="flex items-center gap-3 hover:bg-gray-50 p-2 -m-2 rounded-md"
+                    >
                       <div className="w-7 h-7 border border-[#E5E7EB] rounded-full bg-white"></div>
                       <span className="text-black">Upload credentials</span>
                       <ChevronRight className="h-5 w-5 text-[#575757] ml-auto" />
                     </Link>
                   )}
 
-                  <Link href="/complete-profile?step=credentials" className="flex items-center gap-3 hover:bg-gray-50 p-2 -m-2 rounded-md">
+                  <Link
+                    href="/complete-profile?step=credentials"
+                    className="flex items-center gap-3 hover:bg-gray-50 p-2 -m-2 rounded-md"
+                  >
                     <div className="w-7 h-7 border border-[#E5E7EB] rounded-full bg-white"></div>
-                    <span className="text-black">Add your earnings payment details</span>
+                    <span className="text-black">
+                      Add your earnings payment details
+                    </span>
                     <ChevronRight className="h-5 w-5 text-[#575757] ml-auto" />
                   </Link>
 
-                  <Link href="/transactions" className="flex items-center gap-3 hover:bg-gray-50 p-2 -m-2 rounded-md">
+                  <Link
+                    href="/transactions"
+                    className="flex items-center gap-3 hover:bg-gray-50 p-2 -m-2 rounded-md"
+                  >
                     <div className="w-7 h-7 border border-[#E5E7EB] rounded-full bg-white"></div>
-                    <span className="text-black">Accept your first transaction</span>
+                    <span className="text-black">
+                      Accept your first transaction
+                    </span>
                     <ChevronRight className="h-5 w-5 text-[#575757] ml-auto" />
                   </Link>
                 </div>
@@ -338,7 +408,9 @@ export default function DashboardPage() {
                   <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-sm mb-4">
                     <Calendar className="h-10 w-10 text-[#3632F5] opacity-50" />
                   </div>
-                  <p className="text-black text-center">Your meetings will appear here.</p>
+                  <p className="text-black text-center">
+                    Your meetings will appear here.
+                  </p>
                 </div>
               </CardContent>
             </Card>
@@ -359,7 +431,9 @@ export default function DashboardPage() {
                   <div key={log.id}>
                     <div className="space-y-1">
                       <p className="text-[#575757] text-xs">{log.date}</p>
-                      <p className="text-black font-semibold text-sm">{log.message}</p>
+                      <p className="text-black font-semibold text-sm">
+                        {log.message}
+                      </p>
                     </div>
                     {index < activityLogs.length - 1 && (
                       <div className="h-px bg-[#D9D9D9] mt-5" />

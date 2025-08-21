@@ -38,12 +38,17 @@ export default function TransactionsPage() {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="mb-6">
-          <Link href="/dashboard" className="inline-flex items-center text-[#3632F5] hover:text-[#3632F5]/80 mb-4">
+          <Link
+            href="/dashboard"
+            className="inline-flex items-center text-[#3632F5] hover:text-[#3632F5]/80 mb-4"
+          >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Dashboard
           </Link>
           <h1 className="text-3xl font-bold text-black">Transactions</h1>
-          <p className="text-[#575757] mt-2">Manage your notary transactions and earnings</p>
+          <p className="text-[#575757] mt-2">
+            Manage your notary transactions and earnings
+          </p>
         </div>
 
         {/* Empty State */}
@@ -53,13 +58,16 @@ export default function TransactionsPage() {
               <div className="w-20 h-20 bg-[#F7F9FC] rounded-full flex items-center justify-center mx-auto mb-6">
                 <FileText className="h-10 w-10 text-[#3632F5] opacity-50" />
               </div>
-              <h3 className="text-xl font-semibold text-black mb-2">No transactions yet</h3>
+              <h3 className="text-xl font-semibold text-black mb-2">
+                No transactions yet
+              </h3>
               <p className="text-[#575757] mb-6">
                 Complete your profile setup to start receiving notary requests.
               </p>
               <Alert className="bg-blue-50 border-blue-200 mb-6">
                 <AlertDescription className="text-blue-800">
-                  📋 Complete your profile setup to get listed and start accepting transactions.
+                  📋 Complete your profile setup to get listed and start
+                  accepting transactions.
                 </AlertDescription>
               </Alert>
               <div className="space-y-4">
@@ -77,7 +85,9 @@ export default function TransactionsPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
           <Card className="border-[#E5E7EB]">
             <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-[#575757]">Pending Requests</CardTitle>
+              <CardTitle className="text-sm font-medium text-[#575757]">
+                Pending Requests
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex items-center">
@@ -89,7 +99,9 @@ export default function TransactionsPage() {
 
           <Card className="border-[#E5E7EB]">
             <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-[#575757]">Completed</CardTitle>
+              <CardTitle className="text-sm font-medium text-[#575757]">
+                Completed
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex items-center">
@@ -101,7 +113,9 @@ export default function TransactionsPage() {
 
           <Card className="border-[#E5E7EB]">
             <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-[#575757]">Total Earnings</CardTitle>
+              <CardTitle className="text-sm font-medium text-[#575757]">
+                Total Earnings
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex items-center">

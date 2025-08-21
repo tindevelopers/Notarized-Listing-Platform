@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import { useState } from 'react'
-import { useAuth } from '@/contexts/AuthContext'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Button } from '@/components/ui/button'
+import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from "@/components/ui/dropdown-menu";
 import {
   User,
   Settings,
@@ -18,29 +18,32 @@ import {
   LogOut,
   ChevronDown,
   Loader2,
-  LayoutDashboard
-} from 'lucide-react'
-import Link from 'next/link'
+  LayoutDashboard,
+} from "lucide-react";
+import Link from "next/link";
 
 export function ProfileDropdown() {
-  const { user, signOut, loading } = useAuth()
-  const [isSigningOut, setIsSigningOut] = useState(false)
+  const { user, signOut, loading } = useAuth();
+  const [isSigningOut, setIsSigningOut] = useState(false);
 
   const handleSignOut = async () => {
-    setIsSigningOut(true)
-    await signOut()
-    setIsSigningOut(false)
-  }
+    setIsSigningOut(true);
+    await signOut();
+    setIsSigningOut(false);
+  };
 
-  if (!user) return null
+  if (!user) return null;
 
-  const userInitials = user?.user_metadata?.full_name
-    ?.split(' ')
-    ?.map((name: string) => name[0])
-    ?.join('')
-    ?.toUpperCase() || user?.email?.[0]?.toUpperCase() || 'U'
+  const userInitials =
+    user?.user_metadata?.full_name
+      ?.split(" ")
+      ?.map((name: string) => name[0])
+      ?.join("")
+      ?.toUpperCase() ||
+    user?.email?.[0]?.toUpperCase() ||
+    "U";
 
-  const displayName = user?.user_metadata?.full_name || user?.email || 'User'
+  const displayName = user?.user_metadata?.full_name || user?.email || "User";
 
   return (
     <DropdownMenu>
@@ -48,9 +51,9 @@ export function ProfileDropdown() {
         <Button variant="ghost" className="relative h-10 px-2 rounded-full">
           <div className="flex items-center space-x-2">
             <Avatar className="h-8 w-8">
-              <AvatarImage 
-                src={user?.user_metadata?.avatar_url} 
-                alt={displayName} 
+              <AvatarImage
+                src={user?.user_metadata?.avatar_url}
+                alt={displayName}
               />
               <AvatarFallback className="bg-primary text-primary-foreground text-sm">
                 {userInitials}
@@ -69,9 +72,7 @@ export function ProfileDropdown() {
         <div className="flex items-center justify-start gap-2 p-2">
           <div className="flex flex-col space-y-1 leading-none">
             <p className="font-medium">{displayName}</p>
-            <p className="text-xs text-muted-foreground">
-              {user?.email}
-            </p>
+            <p className="text-xs text-muted-foreground">{user?.email}</p>
           </div>
         </div>
         <DropdownMenuSeparator />
@@ -114,5 +115,5 @@ export function ProfileDropdown() {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

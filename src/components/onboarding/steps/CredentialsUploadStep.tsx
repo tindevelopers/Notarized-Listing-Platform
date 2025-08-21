@@ -4,7 +4,12 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Upload, Plus, Calendar, FileText, CheckCircle, X } from "lucide-react";
@@ -38,15 +43,30 @@ interface UploadModalData {
 }
 
 const documentTypes = [
-  { key: "identification" as keyof CredentialsData, label: "Identification", required: true },
+  {
+    key: "identification" as keyof CredentialsData,
+    label: "Identification",
+    required: true,
+  },
   { key: "w9" as keyof CredentialsData, label: "W9", required: true },
-  { key: "commissionCertificate" as keyof CredentialsData, label: "Commission Certificate", required: true },
+  {
+    key: "commissionCertificate" as keyof CredentialsData,
+    label: "Commission Certificate",
+    required: true,
+  },
   { key: "bond" as keyof CredentialsData, label: "Bond", required: true },
   { key: "eo" as keyof CredentialsData, label: "E&O", required: true },
-  { key: "backgroundCheck" as keyof CredentialsData, label: "Background Check Report", required: true },
+  {
+    key: "backgroundCheck" as keyof CredentialsData,
+    label: "Background Check Report",
+    required: true,
+  },
 ];
 
-export function CredentialsUploadStep({ data, updateData }: CredentialsUploadStepProps) {
+export function CredentialsUploadStep({
+  data,
+  updateData,
+}: CredentialsUploadStepProps) {
   const [uploadModal, setUploadModal] = useState<UploadModalData>({
     isOpen: false,
     documentType: "",
@@ -55,7 +75,10 @@ export function CredentialsUploadStep({ data, updateData }: CredentialsUploadSte
     expiryDate: "",
   });
 
-  const handleDocumentUpload = (documentType: keyof CredentialsData, label: string) => {
+  const handleDocumentUpload = (
+    documentType: keyof CredentialsData,
+    label: string,
+  ) => {
     setUploadModal({
       isOpen: true,
       documentType,
@@ -68,22 +91,26 @@ export function CredentialsUploadStep({ data, updateData }: CredentialsUploadSte
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      setUploadModal(prev => ({
+      setUploadModal((prev) => ({
         ...prev,
-        file
+        file,
       }));
     }
   };
 
   const handleSaveDocument = () => {
-    if (uploadModal.file && uploadModal.expiryDate && uploadModal.documentType) {
+    if (
+      uploadModal.file &&
+      uploadModal.expiryDate &&
+      uploadModal.documentType
+    ) {
       updateData({
         ...data,
         [uploadModal.documentType]: {
           file: uploadModal.file,
           expiryDate: uploadModal.expiryDate,
           uploadedAt: new Date(),
-        }
+        },
       });
 
       setUploadModal({
@@ -99,12 +126,12 @@ export function CredentialsUploadStep({ data, updateData }: CredentialsUploadSte
   const handleRemoveDocument = (documentType: keyof CredentialsData) => {
     updateData({
       ...data,
-      [documentType]: null
+      [documentType]: null,
     });
   };
 
   const getUploadedCount = () => {
-    return Object.values(data).filter(doc => doc !== null).length;
+    return Object.values(data).filter((doc) => doc !== null).length;
   };
 
   const getTotalCount = () => {
@@ -115,40 +142,44 @@ export function CredentialsUploadStep({ data, updateData }: CredentialsUploadSte
     // Create demo file objects
     const createDemoFile = (name: string) => {
       const content = `Demo ${name} document content`;
-      const blob = new Blob([content], { type: 'application/pdf' });
-      const file = new File([blob], `${name.toLowerCase().replace(/\s+/g, '-')}.pdf`, { type: 'application/pdf' });
+      const blob = new Blob([content], { type: "application/pdf" });
+      const file = new File(
+        [blob],
+        `${name.toLowerCase().replace(/\s+/g, "-")}.pdf`,
+        { type: "application/pdf" },
+      );
       return file;
     };
 
     const demoData: CredentialsData = {
       identification: {
-        file: createDemoFile('Identification'),
-        expiryDate: '2027-12-31',
+        file: createDemoFile("Identification"),
+        expiryDate: "2027-12-31",
         uploadedAt: new Date(),
       },
       w9: {
-        file: createDemoFile('W9'),
-        expiryDate: '2025-12-31',
+        file: createDemoFile("W9"),
+        expiryDate: "2025-12-31",
         uploadedAt: new Date(),
       },
       commissionCertificate: {
-        file: createDemoFile('Commission Certificate'),
-        expiryDate: '2027-01-01',
+        file: createDemoFile("Commission Certificate"),
+        expiryDate: "2027-01-01",
         uploadedAt: new Date(),
       },
       bond: {
-        file: createDemoFile('Bond'),
-        expiryDate: '2026-06-30',
+        file: createDemoFile("Bond"),
+        expiryDate: "2026-06-30",
         uploadedAt: new Date(),
       },
       eo: {
-        file: createDemoFile('E&O Insurance'),
-        expiryDate: '2025-12-31',
+        file: createDemoFile("E&O Insurance"),
+        expiryDate: "2025-12-31",
         uploadedAt: new Date(),
       },
       backgroundCheck: {
-        file: createDemoFile('Background Check Report'),
-        expiryDate: '2026-03-15',
+        file: createDemoFile("Background Check Report"),
+        expiryDate: "2026-03-15",
         uploadedAt: new Date(),
       },
     };
@@ -163,7 +194,9 @@ export function CredentialsUploadStep({ data, updateData }: CredentialsUploadSte
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm text-[#575757]">Step 4 / 5</p>
-            <h1 className="text-2xl font-bold text-black">Upload your credentials</h1>
+            <h1 className="text-2xl font-bold text-black">
+              Upload your credentials
+            </h1>
             <p className="text-sm text-[#575757]">
               Provide the documents requested, then submit for approval.
             </p>
@@ -191,9 +224,11 @@ export function CredentialsUploadStep({ data, updateData }: CredentialsUploadSte
           </span>
         </div>
         <div className="w-full bg-[#E5E7EB] rounded-full h-2">
-          <div 
+          <div
             className="bg-gradient-to-r from-[#3632F5] to-[#22D2FA] h-2 rounded-full transition-all duration-300"
-            style={{ width: `${(getUploadedCount() / getTotalCount()) * 100}%` }}
+            style={{
+              width: `${(getUploadedCount() / getTotalCount()) * 100}%`,
+            }}
           />
         </div>
       </div>
@@ -236,7 +271,8 @@ export function CredentialsUploadStep({ data, updateData }: CredentialsUploadSte
                     </div>
                     {isUploaded && (
                       <p className="text-xs text-[#575757] mt-1">
-                        Expires: {new Date(document.expiryDate).toLocaleDateString()}
+                        Expires:{" "}
+                        {new Date(document.expiryDate).toLocaleDateString()}
                       </p>
                     )}
                   </div>
@@ -247,7 +283,7 @@ export function CredentialsUploadStep({ data, updateData }: CredentialsUploadSte
                     <div className="flex items-center gap-2">
                       <CheckCircle className="h-4 w-4 text-[#1A963F]" />
                       <span className="text-sm text-[#1A963F] font-medium">
-                        {document.file?.name || 'Uploaded'}
+                        {document.file?.name || "Uploaded"}
                       </span>
                       <Button
                         variant="ghost"
@@ -263,11 +299,13 @@ export function CredentialsUploadStep({ data, updateData }: CredentialsUploadSte
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => handleDocumentUpload(docType.key, docType.label)}
+                    onClick={() =>
+                      handleDocumentUpload(docType.key, docType.label)
+                    }
                     className="border-[#E5E7EB] rounded-full text-[#3632F5] hover:bg-[#3632F5]/5"
                   >
                     <Plus className="w-4 h-4 mr-1" />
-                    {isUploaded ? 'Replace' : 'Add document'}
+                    {isUploaded ? "Replace" : "Add document"}
                   </Button>
                 </div>
               </div>
@@ -277,9 +315,12 @@ export function CredentialsUploadStep({ data, updateData }: CredentialsUploadSte
       </Card>
 
       {/* Document Upload Modal */}
-      <Dialog open={uploadModal.isOpen} onOpenChange={(open) => 
-        setUploadModal(prev => ({ ...prev, isOpen: open }))
-      }>
+      <Dialog
+        open={uploadModal.isOpen}
+        onOpenChange={(open) =>
+          setUploadModal((prev) => ({ ...prev, isOpen: open }))
+        }
+      >
         <DialogContent className="max-w-lg">
           <DialogHeader>
             <DialogTitle className="text-xl font-bold text-black">
@@ -289,7 +330,8 @@ export function CredentialsUploadStep({ data, updateData }: CredentialsUploadSte
 
           <div className="space-y-6">
             <p className="text-sm font-medium text-black">
-              Upload your "{uploadModal.documentLabel}" document and add its expiry date below.
+              Upload your "{uploadModal.documentLabel}" document and add its
+              expiry date below.
             </p>
 
             {/* File upload area */}
@@ -304,7 +346,9 @@ export function CredentialsUploadStep({ data, updateData }: CredentialsUploadSte
                   ) : (
                     <>
                       Drag file here, or{" "}
-                      <span className="underline text-[#3632F5] cursor-pointer">select file</span>
+                      <span className="underline text-[#3632F5] cursor-pointer">
+                        select file
+                      </span>
                     </>
                   )}
                 </p>
@@ -329,7 +373,7 @@ export function CredentialsUploadStep({ data, updateData }: CredentialsUploadSte
                   type="date"
                   value={uploadModal.expiryDate}
                   onChange={(e) =>
-                    setUploadModal(prev => ({
+                    setUploadModal((prev) => ({
                       ...prev,
                       expiryDate: e.target.value,
                     }))
@@ -339,7 +383,8 @@ export function CredentialsUploadStep({ data, updateData }: CredentialsUploadSte
                 />
               </div>
               <p className="text-xs text-[#575757]">
-                This must match any expiry date detailed in the uploaded document.
+                This must match any expiry date detailed in the uploaded
+                document.
               </p>
             </div>
 
@@ -347,7 +392,9 @@ export function CredentialsUploadStep({ data, updateData }: CredentialsUploadSte
             <div className="flex justify-end gap-3 pt-4 border-t border-[#E5E7EB]">
               <Button
                 variant="outline"
-                onClick={() => setUploadModal(prev => ({ ...prev, isOpen: false }))}
+                onClick={() =>
+                  setUploadModal((prev) => ({ ...prev, isOpen: false }))
+                }
                 className="border-[#A1A1A1]"
               >
                 Cancel
