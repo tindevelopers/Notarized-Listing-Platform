@@ -90,8 +90,10 @@ export function isValidEmail(email: string): boolean {
 }
 
 // Generate a random ID
+// WARNING: Do not use this during SSR/render as it will cause hydration mismatches
+// Use React.useId() for component IDs or generate in useEffect for client-only IDs
 export function generateId(length: number = 8): string {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  const chars = 'ABCDEFGHIJ KLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
   let result = ''
   for (let i = 0; i < length; i++) {
     result += chars.charAt(Math.floor(Math.random() * chars.length))
