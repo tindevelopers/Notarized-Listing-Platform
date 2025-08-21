@@ -1,15 +1,10 @@
-"use client";
-
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import MobileMenuToggle from "./MobileMenuToggle";
 
+// Server Component - most of the header is static
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const pathname = usePathname();
-
   return (
     <header className="w-full bg-white border-b border-gray-100 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -21,129 +16,47 @@ export default function Header() {
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation - Static, server-rendered */}
           <nav className="hidden md:flex items-center space-x-8">
             <Link
               href="/california-notaries"
-              className={`transition-colors ${
-                pathname === "/california-notaries"
-                  ? "text-primary font-semibold"
-                  : "text-gray-700 hover:text-primary"
-              }`}
+              className="transition-colors hover:text-primary"
             >
               Find a Notary
             </Link>
             <Link
               href="/about"
-              className={`transition-colors ${
-                pathname === "/about"
-                  ? "text-primary font-semibold"
-                  : "text-gray-700 hover:text-primary"
-              }`}
+              className="transition-colors hover:text-primary"
             >
               About
             </Link>
-            <a
+            <Link
               href="#services"
-              className="text-gray-700 hover:text-primary transition-colors"
+              className="transition-colors hover:text-primary"
             >
               Services
-            </a>
-            <a
+            </Link>
+            <Link
               href="#how-it-works"
-              className="text-gray-700 hover:text-primary transition-colors"
+              className="transition-colors hover:text-primary"
             >
               How it Works
-            </a>
+            </Link>
           </nav>
 
-          {/* Desktop Auth Buttons */}
+          {/* Desktop Actions - Static */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link href="/notary-signup">
-              <Button variant="ghost" className="text-gray-700">
-                List Your Business
-              </Button>
-            </Link>
-            <Link href="/california-notaries">
-              <Button>Search Notaries</Button>
-            </Link>
+            <Button variant="ghost" asChild>
+              <Link href="/notary-signup">List Your Business</Link>
+            </Button>
+            <Button asChild>
+              <Link href="/california-notaries">Search Notaries</Link>
+            </Button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
-          </button>
+          {/* Mobile Menu Toggle - Client Component */}
+          <MobileMenuToggle />
         </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden border-t border-gray-100 py-4">
-            <nav className="flex flex-col space-y-4">
-              <Link
-                href="/california-notaries"
-                className={`transition-colors ${
-                  pathname === "/california-notaries"
-                    ? "text-primary font-semibold"
-                    : "text-gray-700 hover:text-primary"
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Find a Notary
-              </Link>
-              <Link
-                href="/about"
-                className={`transition-colors ${
-                  pathname === "/about"
-                    ? "text-primary font-semibold"
-                    : "text-gray-700 hover:text-primary"
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                About
-              </Link>
-              <a
-                href="#services"
-                className="text-gray-700 hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Services
-              </a>
-              <a
-                href="#how-it-works"
-                className="text-gray-700 hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                How it Works
-              </a>
-              <div className="pt-4 border-t border-gray-100 flex flex-col space-y-2">
-                <Link href="/notary-signup">
-                  <Button
-                    variant="ghost"
-                    className="text-gray-700 justify-start w-full"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    List Your Business
-                  </Button>
-                </Link>
-                <Link href="/california-notaries">
-                  <Button
-                    className="justify-start w-full"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Search Notaries
-                  </Button>
-                </Link>
-              </div>
-            </nav>
-          </div>
-        )}
       </div>
     </header>
   );
