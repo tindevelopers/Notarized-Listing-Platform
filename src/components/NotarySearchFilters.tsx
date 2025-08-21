@@ -27,12 +27,12 @@ export default function NotarySearchFilters() {
 
   const handleClearFilters = () => {
     setSearchTerm("");
-    setSelectedService("");
-    setSelectedCity("");
-    setPriceRange("");
+    setSelectedService("all");
+    setSelectedCity("all");
+    setPriceRange("all");
     setIsOnline(false);
     setIsMobile(false);
-    setAvailability("");
+    setAvailability("all");
   };
 
   const handleSearch = () => {
