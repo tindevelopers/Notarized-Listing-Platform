@@ -1,9 +1,6 @@
 "use client";
 
 import { useState } from "react";
-
-// Force dynamic rendering for admin pages
-export const dynamic = 'force-dynamic';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
