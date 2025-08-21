@@ -37,6 +37,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { suppressResizeObserverErrors } from "@/lib/resize-observer-fix";
+import { NotaryProfileStep } from "@/components/onboarding/steps/NotaryProfileStep";
 
 type SignupStep =
   | "email"
@@ -63,6 +64,7 @@ export default function NotarySignupPage() {
   // Profile step data
   const [profileData, setProfileData] = useState({
     profilePicture: null as File | null,
+    profilePictureUrl: "",
     businessName: "",
     notaryState: "",
     notaryCounty: "",
@@ -196,7 +198,9 @@ export default function NotarySignupPage() {
   const isProfileValid =
     profileData.commissionNumber &&
     profileData.commissionExpiry &&
-    profileData.notaryType;
+    profileData.notaryType &&
+    profileData.languages.length > 0 &&
+    profileData.documentTypes.length > 0;
   const isSignatureValid =
     signatureData.signatureImage || signatureData.signatureText;
   const isCredentialsValid = Object.values(documents).every(
@@ -260,6 +264,8 @@ export default function NotarySignupPage() {
         className={`relative bg-white rounded-2xl border border-[#E5E7EB] shadow-sm overflow-hidden w-full min-h-[600px] flex flex-col lg:flex-row ${
           currentStep === "signature" || currentStep === "credentials"
             ? "max-w-3xl"
+            : currentStep === "profile"
+            ? "max-w-6xl"
             : "max-w-5xl"
         }`}
       >
@@ -267,6 +273,8 @@ export default function NotarySignupPage() {
         <div
           className={`p-6 lg:p-12 flex flex-col ${
             currentStep === "signature" || currentStep === "credentials"
+              ? "w-full"
+              : currentStep === "profile"
               ? "w-full"
               : "w-full lg:w-1/2"
           }`}
@@ -522,229 +530,13 @@ export default function NotarySignupPage() {
           )}
 
           {currentStep === "profile" && (
-            <form
-              onSubmit={handleProfileSubmit}
-              className="flex-1 flex flex-col"
-            >
-              <div className="space-y-6 flex-1">
-                <div className="space-y-3">
-                  <p className="text-sm text-[#575757]">Step 3 / 5</p>
-                  <h1 className="text-xl lg:text-2xl font-bold text-black">
-                    Your notary profile
-                  </h1>
-                </div>
-
-                <div className="space-y-4">
-                  {/* Profile Picture */}
-                  <div className="space-y-2">
-                    <Label className="text-sm text-black">
-                      Profile picture
-                      <span className="text-[#E42B38] ml-0.5">*</span>
-                    </Label>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      className="h-11 rounded-full border-[#A1A1A1]"
-                      onClick={() =>
-                        document.getElementById("profile-picture")?.click()
-                      }
-                    >
-                      <Upload className="w-5 h-5 mr-2" />
-                      Upload profile picture
-                    </Button>
-                    <input
-                      id="profile-picture"
-                      type="file"
-                      accept="image/*"
-                      className="hidden"
-                      onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        if (file) {
-                          setProfileData((prev) => ({
-                            ...prev,
-                            profilePicture: file,
-                          }));
-                        }
-                      }}
-                    />
-                  </div>
-
-                  {/* Business Name */}
-                  <div className="space-y-1">
-                    <Label className="text-sm text-black">
-                      Business name (optional)
-                    </Label>
-                    <Input
-                      value={profileData.businessName}
-                      onChange={(e) =>
-                        setProfileData((prev) => ({
-                          ...prev,
-                          businessName: e.target.value,
-                        }))
-                      }
-                      className="h-11 border-[#949494] rounded-md"
-                    />
-                  </div>
-
-                  {/* Notary State and County */}
-                  <div className="space-y-1">
-                    <Label className="text-sm text-black">
-                      Notary state and county:
-                      <span className="text-[#E42B38] ml-0.5">*</span>
-                    </Label>
-                    <div
-                      className="relative cursor-pointer"
-                      onClick={() => {
-                        // For demo, set a default state/county if empty
-                        if (!profileData.notaryState) {
-                          setProfileData((prev) => ({
-                            ...prev,
-                            notaryState: "California",
-                            notaryCounty: "Los Angeles",
-                          }));
-                        }
-                      }}
-                    >
-                      <Input
-                        value={`${profileData.notaryState} ${profileData.notaryCounty}`.trim()}
-                        placeholder="Select state and county"
-                        className="h-11 border-[#949494] rounded-md pr-10 cursor-pointer"
-                        readOnly
-                      />
-                      <Plus className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5" />
-                    </div>
-                  </div>
-
-                  {/* Commission Number */}
-                  <div className="space-y-1">
-                    <Label className="text-sm text-black">
-                      Commission number
-                      <span className="text-[#E42B38] ml-0.5">*</span>
-                    </Label>
-                    <Input
-                      value={profileData.commissionNumber}
-                      onChange={(e) =>
-                        setProfileData((prev) => ({
-                          ...prev,
-                          commissionNumber: e.target.value,
-                        }))
-                      }
-                      className="h-11 border-[#949494] rounded-md"
-                    />
-                  </div>
-
-                  {/* Commission Expiry */}
-                  <div className="space-y-1">
-                    <Label className="text-sm text-black">
-                      Commission expiration date:
-                      <span className="text-[#E42B38] ml-0.5">*</span>
-                    </Label>
-                    <div className="relative">
-                      <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5" />
-                      <Input
-                        type="date"
-                        value={profileData.commissionExpiry}
-                        onChange={(e) =>
-                          setProfileData((prev) => ({
-                            ...prev,
-                            commissionExpiry: e.target.value,
-                          }))
-                        }
-                        className="h-11 border-[#949494] rounded-md pl-10"
-                      />
-                    </div>
-                    <p className="text-xs text-[#575757]">
-                      You will need to upload proof of this later.
-                    </p>
-                  </div>
-
-                  {/* Type */}
-                  <div className="space-y-1">
-                    <Label className="text-sm text-black">
-                      Type<span className="text-[#E42B38] ml-0.5">*</span>
-                    </Label>
-                    <Select
-                      value={profileData.notaryType}
-                      onValueChange={(value) =>
-                        setProfileData((prev) => ({
-                          ...prev,
-                          notaryType: value,
-                        }))
-                      }
-                    >
-                      <SelectTrigger className="h-11 border-[#949494] rounded-md">
-                        <SelectValue placeholder="Select type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="traditional">
-                          Traditional Notary
-                        </SelectItem>
-                        <SelectItem value="electronic">
-                          Electronic Notary
-                        </SelectItem>
-                        <SelectItem value="remote">
-                          Remote Online Notary
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  {/* Languages */}
-                  <div className="space-y-1">
-                    <Label className="text-sm text-black">
-                      Languages you speak
-                      <span className="text-[#E42B38] ml-0.5">*</span>
-                    </Label>
-                    <div
-                      className="relative cursor-pointer"
-                      onClick={() => {
-                        // For demo, add English if empty
-                        if (profileData.languages.length === 0) {
-                          setProfileData((prev) => ({
-                            ...prev,
-                            languages: ["English"],
-                          }));
-                        }
-                      }}
-                    >
-                      <Input
-                        value={profileData.languages.join(", ") || ""}
-                        placeholder="Select languages"
-                        className="h-11 border-[#949494] rounded-md pr-10 cursor-pointer"
-                        readOnly
-                      />
-                      <Plus className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5" />
-                    </div>
-                  </div>
-
-                  {/* Document Types */}
-                  <div className="space-y-1">
-                    <Label className="text-sm text-black">
-                      Document types you can notarize
-                      <span className="text-[#E42B38] ml-0.5">*</span>
-                    </Label>
-                    <div
-                      className="relative cursor-pointer"
-                      onClick={() => {
-                        // For demo, add some document types if empty
-                        if (profileData.documentTypes.length === 0) {
-                          setProfileData((prev) => ({
-                            ...prev,
-                            documentTypes: ["Real Estate", "Legal Documents"],
-                          }));
-                        }
-                      }}
-                    >
-                      <Input
-                        value={profileData.documentTypes.join(", ") || ""}
-                        placeholder="Select document types"
-                        className="h-11 border-[#949494] rounded-md pr-10 cursor-pointer"
-                        readOnly
-                      />
-                      <Plus className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5" />
-                    </div>
-                  </div>
-                </div>
+            <div className="flex-1 flex flex-col">
+              <div className="flex-1">
+                <NotaryProfileStep
+                  data={profileData}
+                  updateData={setProfileData}
+                  userName={`${formData.firstName} ${formData.lastName}`.trim() || "Steven Wakeling"}
+                />
               </div>
 
               {/* Footer with button */}
@@ -761,7 +553,8 @@ export default function NotarySignupPage() {
                     Back
                   </Button>
                   <Button
-                    type="submit"
+                    type="button"
+                    onClick={handleProfileSubmit}
                     disabled={!isProfileValid}
                     className={`px-5 h-11 rounded-full font-semibold ${
                       isProfileValid
@@ -773,7 +566,7 @@ export default function NotarySignupPage() {
                   </Button>
                 </div>
               </div>
-            </form>
+            </div>
           )}
 
           {currentStep === "signature" && (
@@ -1024,11 +817,10 @@ export default function NotarySignupPage() {
           )}
         </div>
 
-        {/* Right Panel - Only show for steps 1-3 */}
+        {/* Right Panel - Only show for steps 1-2 and details step */}
         {(currentStep === "email" ||
           currentStep === "verification" ||
-          currentStep === "details" ||
-          currentStep === "profile") && (
+          currentStep === "details") && (
           <div className="w-full lg:w-1/2 bg-[#F7F9FC] p-6 lg:p-12 flex flex-col relative min-h-[400px] lg:min-h-[600px]">
             {/* Background blur effect for right panel */}
             {currentStep === "details" && (
@@ -1133,53 +925,6 @@ export default function NotarySignupPage() {
               </div>
             )}
 
-            {/* Show preview card for profile step */}
-            {currentStep === "profile" && (
-              <div className="flex-1 flex items-center justify-center">
-                <div className="w-full max-w-sm bg-white rounded-xl shadow-lg p-6 border border-[#E5E7EB]">
-                  {/* Avatar */}
-                  <div className="w-24 h-24 bg-[#E5E7EB] rounded-full mx-auto mb-4"></div>
-
-                  {/* Name */}
-                  <h3 className="text-xl font-bold text-center bg-gradient-to-r from-[#3632F5] to-[#22D2FA] bg-clip-text text-transparent mb-6">
-                    {formData.firstName} {formData.lastName}
-                  </h3>
-
-                  {/* Info sections */}
-                  <div className="space-y-4 text-sm">
-                    <div className="border-t border-[#E5E7EB] pt-4">
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <p className="text-[#575757] text-xs">
-                            Commission number:
-                          </p>
-                          <p className="text-black">-</p>
-                        </div>
-                        <div>
-                          <p className="text-[#575757] text-xs">
-                            Commission expiration date:
-                          </p>
-                          <p className="text-black">-</p>
-                        </div>
-                        <div>
-                          <p className="text-[#575757] text-xs">Type:</p>
-                          <p className="text-black">-</p>
-                        </div>
-                        <div>
-                          <p className="text-[#575757] text-xs">Languages:</p>
-                          <p className="text-black">-</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="border-t border-[#E5E7EB] pt-4 text-center">
-                      <p className="text-xs font-bold text-black">
-                        Document types notarized:
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         )}
       </div>
