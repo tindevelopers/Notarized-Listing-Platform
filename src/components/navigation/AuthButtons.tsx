@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { AuthModal } from "@/components/auth/AuthModal";
 import { useAuth } from "@/contexts/AuthContext";
 import { ProfileDropdown } from "@/components/auth/ProfileDropdown";
 
-export default function AuthButtons() {
+function AuthButtonsContent() {
   const searchParams = useSearchParams();
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [authModalTab, setAuthModalTab] = useState<"signin" | "signup">(
@@ -79,5 +79,18 @@ export default function AuthButtons() {
         defaultTab={authModalTab}
       />
     </>
+  );
+}
+
+export default function AuthButtons() {
+  return (
+    <Suspense fallback={
+      <div className="flex space-x-2">
+        <div className="w-20 h-8 bg-gray-200 rounded animate-pulse" />
+        <div className="w-20 h-8 bg-gray-200 rounded animate-pulse" />
+      </div>
+    }>
+      <AuthButtonsContent />
+    </Suspense>
   );
 }
