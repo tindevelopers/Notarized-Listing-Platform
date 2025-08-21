@@ -50,6 +50,7 @@ interface NotaryProfile {
 
 export default function DashboardPage() {
   const { user, loading } = useAuth();
+  const searchParams = useSearchParams();
   const [profileCompletion, setProfileCompletion] = useState<ProfileCompletion>({
     profileSetup: false,
     signatureCreated: false,
