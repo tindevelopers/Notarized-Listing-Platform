@@ -53,14 +53,7 @@ export default function Header() {
             <Button asChild>
               <Link href="/california-notaries">Search Notaries</Link>
             </Button>
-            <Suspense fallback={
-              <div className="flex space-x-2">
-                <div className="w-16 h-8 bg-gray-200 rounded animate-pulse" />
-                <div className="w-16 h-8 bg-gray-200 rounded animate-pulse" />
-              </div>
-            }>
-              <AuthButtons />
-            </Suspense>
+            <AuthButtons />
           </div>
 
           {/* Mobile Menu Toggle - Client Component */}
