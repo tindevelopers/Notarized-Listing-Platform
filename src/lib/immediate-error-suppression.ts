@@ -6,6 +6,40 @@
 import { errorMonitor } from "./error-monitor";
 
 if (typeof window !== "undefined") {
+  // Override console methods IMMEDIATELY before any other code runs
+  const originalConsoleError = console.error;
+  const originalConsoleWarn = console.warn;
+
+  console.error = (...args: any[]) => {
+    const message = args.join(" ");
+    if (
+      message.includes("ResizeObserver") ||
+      message.toLowerCase().includes("resizeobserver") ||
+      message.includes("loop completed with undelivered") ||
+      message.includes("observer loop") ||
+      /resize.*observer/i.test(message) ||
+      /observer.*loop/i.test(message)
+    ) {
+      return; // Completely suppress
+    }
+    originalConsoleError.apply(console, args);
+  };
+
+  console.warn = (...args: any[]) => {
+    const message = args.join(" ");
+    if (
+      message.includes("ResizeObserver") ||
+      message.toLowerCase().includes("resizeobserver") ||
+      message.includes("loop completed with undelivered") ||
+      message.includes("observer loop") ||
+      /resize.*observer/i.test(message) ||
+      /observer.*loop/i.test(message)
+    ) {
+      return; // Completely suppress
+    }
+    originalConsoleWarn.apply(console, args);
+  };
+
   // Immediate ResizeObserver error suppression
   const immediateErrorHandler = (event: ErrorEvent) => {
     const { message, error } = event;
