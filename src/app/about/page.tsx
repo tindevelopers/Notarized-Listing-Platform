@@ -284,9 +284,12 @@ export default function About() {
                   The values that drive everything we do
                 </h2>
                 <p className="text-lg text-gray-600">
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit ac non
-                  sit duis sollicitudin quam blandit amet id mi ac eget facilisi
-                  gravida.
+                  <div>
+                    Our core values are the foundation upon which we've built
+                    our platform. These values guide our daily operations, our
+                    long-term vision, and our commitment to both the notaries
+                    and the public we serve.
+                  </div>
                 </p>
               </div>
 
@@ -306,10 +309,12 @@ export default function About() {
                 <TrendingUp className="w-10 h-10 text-blue-500" />
               </div>
               <div className="space-y-4">
-                <h3 className="text-2xl font-bold text-gray-900">Growth</h3>
+                <h3 className="text-2xl font-bold text-gray-900">Integrity</h3>
                 <p className="text-gray-600">
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit nibh
-                  libero ultrices vulputate congue.
+                  <div>
+                    We hold ourselves to the highest standards of honesty and
+                    transparency in all our interactions and endeavors.
+                  </div>
                 </p>
               </div>
             </Card>
@@ -319,10 +324,13 @@ export default function About() {
                 <Trophy className="w-10 h-10 text-primary" />
               </div>
               <div className="space-y-4">
-                <h3 className="text-2xl font-bold text-gray-900">Quality</h3>
+                <h3 className="text-2xl font-bold text-gray-900">Excellence</h3>
                 <p className="text-gray-600">
-                  Semper id tellus hac duis vitae arcu dui elementum id in sed
-                  lectus pellentesque praesent.
+                  <div>
+                    We continuously strive for the highest quality in our
+                    services, ensuring that our members and users receive the
+                    best experience possible.
+                  </div>
                 </p>
               </div>
             </Card>
@@ -332,10 +340,13 @@ export default function About() {
                 <Users className="w-10 h-10 text-purple-500" />
               </div>
               <div className="space-y-4">
-                <h3 className="text-2xl font-bold text-gray-900">Teamwork</h3>
+                <h3 className="text-2xl font-bold text-gray-900">Community</h3>
                 <p className="text-gray-600">
-                  Tortor vitae nulla bibendum integer sociis blandit augue sit
-                  morbi aliquam vitae neque.
+                  <div>
+                    We value the power of collective strength and endeavor to
+                    create a supportive environment where notaries can
+                    connect, share, and grow together.
+                  </div>
                 </p>
               </div>
             </Card>
@@ -353,10 +364,12 @@ export default function About() {
                   Why join us?
                 </h2>
                 <p className="text-lg text-gray-600">
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit sapien
-                  eget eu elementum velit nunc tortor pulvinar ornare at mi sed
-                  nisl in proin sollicitudin ultricies aliquet malesuada
-                  aliquet.
+                  <div>
+                    Join our community and showcase your expertise to those
+                    who need it most. With Notarized, you're not just getting
+                    a listing; you're becoming part of a dedicated network
+                    committed to elevating the notary profession.
+                  </div>
                 </p>
               </div>
 
