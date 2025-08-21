@@ -212,6 +212,9 @@ export const suppressDevelopmentErrors = (
         message.includes("Warning: Extra attributes from the server") ||
         message.includes("Warning: Prop") ||
         message.includes("ResizeObserver") ||
+        message.toLowerCase().includes("resizeobserver") ||
+        message.includes("ResizeObserver loop completed") ||
+        message.includes("ResizeObserver loop limit") ||
         message.includes("chrome-extension") ||
         message.includes("fullstory") ||
         message.includes("NEXT_REDIRECT")
