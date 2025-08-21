@@ -138,7 +138,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       mounted = false;
       subscription.unsubscribe();
     };
-  }, []);
+  }, [router]);
 
   // Prevent hydration mismatch by not rendering auth-dependent content until hydrated
   if (!isHydrated) {
