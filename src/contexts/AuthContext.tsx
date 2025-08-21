@@ -172,7 +172,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             // Ignore AbortError as it's expected when requests are cancelled
             if (fetchError?.name === "AbortError") {
               console.log("Email verification request was cancelled");
-              return;
+              return { error: null, requiresVerification: true };
             }
             console.error("Error sending verification email:", fetchError);
             // Don't fail the signup if email fails
