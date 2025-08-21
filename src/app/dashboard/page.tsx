@@ -138,9 +138,11 @@ function DashboardContent() {
   }
 
   const completedTasks =
-    Object.values(profileCompletion).filter(Boolean).length +
-    (notaryProfileComplete ? 1 : 0);
-  const totalTasks = Object.keys(profileCompletion).length + 1; // +1 for notary profile
+    (notaryProfileComplete ? 1 : 0) +
+    (profileCompletion.credentialsUploaded ? 1 : 0) +
+    (profileCompletion.paymentDetailsAdded ? 1 : 0) +
+    (profileCompletion.firstTransactionAccepted ? 1 : 0);
+  const totalTasks = 4; // notary profile + credentials + payment + first transaction
 
   return (
     <div className="min-h-screen bg-[#F7F9FC] flex">
