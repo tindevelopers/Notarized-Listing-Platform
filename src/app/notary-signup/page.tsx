@@ -203,6 +203,14 @@ export default function NotarySignupPage() {
     (doc) => doc !== null,
   );
 
+  // Handle URL step parameter
+  useEffect(() => {
+    const stepParam = searchParams.get('step');
+    if (stepParam && ['email', 'verification', 'details', 'profile', 'signature', 'credentials'].includes(stepParam)) {
+      setCurrentStep(stepParam as SignupStep);
+    }
+  }, [searchParams]);
+
   // Layout stabilization and ResizeObserver error handling
   useEffect(() => {
     setIsLayoutReady(true);
