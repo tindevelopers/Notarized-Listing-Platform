@@ -2,19 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import MobileMenuToggle from "./MobileMenuToggle";
-import { Suspense } from "react";
-import dynamic from "next/dynamic";
-
-// Dynamically import AuthButtons to avoid SSR issues
-const AuthButtons = dynamic(() => import("./AuthButtons"), {
-  ssr: false,
-  loading: () => (
-    <div className="flex space-x-2">
-      <div className="w-16 h-8 bg-gray-200 rounded animate-pulse" />
-      <div className="w-16 h-8 bg-gray-200 rounded animate-pulse" />
-    </div>
-  ),
-});
+import AuthButtons from "./AuthButtons";
 
 // Server Component - most of the header is static
 export default function Header() {
