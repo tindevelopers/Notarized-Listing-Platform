@@ -14,7 +14,9 @@ import {
   CheckCircle,
   ChevronRight,
   House,
-  X
+  X,
+  AlertCircle,
+  User
 } from "lucide-react";
 import {
   PencilSimpleLine,
@@ -33,6 +35,18 @@ interface ProfileCompletion {
   firstTransactionAccepted: boolean;
 }
 
+interface NotaryProfile {
+  profilePicture: string;
+  businessName: string;
+  notaryState: string;
+  notaryCounty: string;
+  commissionNumber: string;
+  commissionExpiry: string;
+  notaryType: string;
+  languages: string[];
+  documentTypes: string[];
+}
+
 export default function DashboardPage() {
   const { user, loading } = useAuth();
   const [profileCompletion, setProfileCompletion] = useState<ProfileCompletion>({
@@ -43,6 +57,8 @@ export default function DashboardPage() {
     firstTransactionAccepted: false,
   });
   const [showSuccessBanner, setShowSuccessBanner] = useState(true);
+  const [notaryProfileComplete, setNotaryProfileComplete] = useState(false);
+  const [showProfileAlert, setShowProfileAlert] = useState(true);
 
   // Mock activity logs - in real app, fetch from API
   const [activityLogs] = useState([
@@ -59,6 +75,14 @@ export default function DashboardPage() {
 
   // Mock profile completion check - in real app, fetch from API
   useEffect(() => {
+    // Check if notary profile is complete
+    // This would be replaced with actual API calls to check completion status
+    const checkNotaryProfile = () => {
+      // Simulate checking if user has completed notary profile (Step 3)
+      const profileComplete = false; // Set to false to show the notification
+      setNotaryProfileComplete(profileComplete);
+    };
+
     // This would be replaced with actual API calls to check completion status
     setProfileCompletion({
       profileSetup: true, // Assume basic profile exists after signup
@@ -67,6 +91,8 @@ export default function DashboardPage() {
       paymentDetailsAdded: false, // Still needs payment setup
       firstTransactionAccepted: false, // Still needs first transaction
     });
+
+    checkNotaryProfile();
   }, []);
 
   if (loading) {
@@ -84,8 +110,8 @@ export default function DashboardPage() {
     return null;
   }
 
-  const completedTasks = Object.values(profileCompletion).filter(Boolean).length;
-  const totalTasks = Object.keys(profileCompletion).length;
+  const completedTasks = Object.values(profileCompletion).filter(Boolean).length + (notaryProfileComplete ? 1 : 0);
+  const totalTasks = Object.keys(profileCompletion).length + 1; // +1 for notary profile
 
   return (
     <div className="min-h-screen bg-[#F7F9FC] flex">
@@ -151,24 +177,57 @@ export default function DashboardPage() {
 
         {/* Content */}
         <div className="p-10 space-y-6">
+          {/* Profile Completion Alert */}
+          {!notaryProfileComplete && showProfileAlert && (
+            <Alert className="bg-[#FEF3C7] border-[#F59E0B] border">
+              <div className="flex items-start justify-between">
+                <div className="flex items-start gap-3">
+                  <AlertCircle className="h-5 w-5 text-[#D97706] mt-0.5" />
+                  <div>
+                    <AlertDescription className="text-[#92400E] font-semibold">
+                      Complete your notary profile to get listed!
+                    </AlertDescription>
+                    <AlertDescription className="text-[#78350F] text-sm mt-1">
+                      Add your notary credentials, commission details, and services to start accepting clients.
+                    </AlertDescription>
+                    <Link href="/complete-profile">
+                      <Button className="bg-[#F59E0B] hover:bg-[#D97706] text-white mt-3 h-9">
+                        <User className="h-4 w-4 mr-2" />
+                        Complete Profile
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="p-1 h-auto"
+                  onClick={() => setShowProfileAlert(false)}
+                >
+                  <X className="h-5 w-5" />
+                </Button>
+              </div>
+            </Alert>
+          )}
+
           {/* Success Banner */}
-          {showSuccessBanner && (
+          {showSuccessBanner && notaryProfileComplete && (
             <Alert className="bg-[#E8F5EB] border-[#1A963F] border">
               <div className="flex items-start justify-between">
                 <div className="flex items-start gap-3">
                   <CheckCircle className="h-5 w-5 text-[#1D4D35] mt-0.5" />
                   <div>
                     <AlertDescription className="text-[#1D4D35] font-semibold">
-                      Subscription complete!
+                      Profile complete!
                     </AlertDescription>
                     <AlertDescription className="text-black text-sm mt-1">
-                      Now add your payment details in order to receive your earnings.
+                      Your notary profile is now live and you can start accepting clients.
                     </AlertDescription>
                   </div>
                 </div>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
+                <Button
+                  variant="ghost"
+                  size="sm"
                   className="p-1 h-auto"
                   onClick={() => setShowSuccessBanner(false)}
                 >
@@ -211,7 +270,22 @@ export default function DashboardPage() {
                   </div>
 
                   {/* Pending Tasks */}
-                  <Link href="/notary-signup?step=credentials" className="flex items-center gap-3 hover:bg-gray-50 p-2 -m-2 rounded-md">
+                  {!notaryProfileComplete ? (
+                    <Link href="/complete-profile" className="flex items-center gap-3 hover:bg-gray-50 p-2 -m-2 rounded-md">
+                      <div className="w-7 h-7 border border-[#E5E7EB] rounded-full bg-white"></div>
+                      <span className="text-black">Complete your notary profile</span>
+                      <ChevronRight className="h-5 w-5 text-[#575757] ml-auto" />
+                    </Link>
+                  ) : (
+                    <div className="flex items-center gap-3">
+                      <div className="w-7 h-7 bg-[#1A963F] rounded-full flex items-center justify-center">
+                        <CheckCircle className="h-4 w-4 text-white" />
+                      </div>
+                      <span className="text-black line-through">Complete your notary profile</span>
+                    </div>
+                  )}
+
+                  <Link href="/complete-profile?step=credentials" className="flex items-center gap-3 hover:bg-gray-50 p-2 -m-2 rounded-md">
                     <div className="w-7 h-7 border border-[#E5E7EB] rounded-full bg-white"></div>
                     <span className="text-black">Add your earnings payment details</span>
                     <ChevronRight className="h-5 w-5 text-[#575757] ml-auto" />
