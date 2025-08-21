@@ -7,18 +7,27 @@ export async function GET(request: NextRequest) {
   try {
     const supabase = await createClient();
 
-    // Get the current user
+    // Get the current user session first
     const {
-      data: { user },
-      error: authError,
-    } = await supabase.auth.getUser();
+      data: { session },
+      error: sessionError,
+    } = await supabase.auth.getSession();
 
-    if (authError || !user) {
+    console.log('Superadmin API: Session check:', {
+      hasSession: !!session,
+      sessionError: sessionError?.message,
+      userEmail: session?.user?.email
+    });
+
+    if (sessionError || !session?.user) {
+      console.log('Superadmin API: No valid session found');
       return NextResponse.json(
-        { error: "Unauthorized" },
+        { error: "Unauthorized - No valid session" },
         { status: 401 }
       );
     }
+
+    const user = session.user;
 
     // Check if user is superadmin
     const superAdminEmails = [
