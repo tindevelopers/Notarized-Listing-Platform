@@ -451,14 +451,16 @@ function DashboardContent() {
 
 export default function DashboardPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-[#F7F9FC] flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-[#3632F5]"></div>
-          <p className="mt-4 text-[#575757]">Loading dashboard...</p>
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-[#F7F9FC] flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-[#3632F5]"></div>
+            <p className="mt-4 text-[#575757]">Loading dashboard...</p>
+          </div>
         </div>
-      </div>
-    }>
+      }
+    >
       <DashboardContent />
     </Suspense>
   );
