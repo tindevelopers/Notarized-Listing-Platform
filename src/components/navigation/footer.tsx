@@ -120,6 +120,11 @@ export default function Footer() {
 
         <div className="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
           <p>Copyright © Notarized Inc | Powered by TIN</p>
+          {process.env.NODE_ENV === 'development' && (
+            <p className="text-xs mt-2">
+              Dev: <a href="/superadmin/setup" className="text-blue-400 hover:text-blue-300">Superadmin Setup</a>
+            </p>
+          )}
         </div>
       </div>
     </footer>
