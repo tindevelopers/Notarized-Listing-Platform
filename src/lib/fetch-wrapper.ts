@@ -288,19 +288,24 @@ export const installGlobalFetchWrapper = () => {
         suppressErrors: true, // Don't double-log errors
       });
     } catch (error: any) {
-      // For third-party interference or critical errors, fall back silently
+      // For third-party interference, try to use original fetch silently
       if (error.isThirdPartyInterference) {
         console.debug(
-          "🔇 Suppressing third-party interference error",
+          "🔇 Third-party interference detected, attempting original fetch",
         );
-        // Return a fake response to prevent cascading errors
-        return new Response('{}', {
-          status: 200,
-          statusText: 'OK',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
+        try {
+          return await originalFetch(input, init);
+        } catch (originalError) {
+          console.debug("🔇 Original fetch also failed, suppressing error");
+          // Return a minimal successful response to prevent cascading errors
+          return new Response('{}', {
+            status: 200,
+            statusText: 'OK',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+        }
       }
       throw error;
     }
