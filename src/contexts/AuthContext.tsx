@@ -94,7 +94,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         // Auto-redirect to dashboard on successful sign in
         if (event === 'SIGNED_IN' && session?.user) {
           console.log('User signed in, redirecting to dashboard');
-          router.push('/dashboard');
+          // Only redirect if not already on dashboard or protected pages
+          const currentPath = window.location.pathname;
+          if (!currentPath.startsWith('/dashboard') &&
+              !currentPath.startsWith('/profile') &&
+              !currentPath.startsWith('/transactions') &&
+              !currentPath.startsWith('/documents') &&
+              !currentPath.startsWith('/meetings') &&
+              !currentPath.startsWith('/journal')) {
+            router.push('/dashboard');
+          }
         }
       },
     );
