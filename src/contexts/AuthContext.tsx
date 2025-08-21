@@ -122,30 +122,40 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           // Generate verification code and send email
           const verificationCode = generateVerificationToken() // This now generates a 6-digit code
           
-          const emailResponse = await fetch('/api/email/verify', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              email,
-              userName: fullName || email.split('@')[0],
-              verificationCode,
-            }),
-          })
+          try {
+            const emailResponse = await fetch('/api/email/verify', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                email,
+                userName: fullName || email.split('@')[0],
+                verificationCode,
+              }),
+            })
 
-          if (!emailResponse.ok) {
-            const errorData = await emailResponse.json().catch(() => ({}))
-            console.error('Failed to send verification email:', errorData)
-            // Don't fail the signup if email fails, just log it
-          } else {
-            const responseData = await emailResponse.json().catch(() => ({}))
-            console.log('✅ Verification email processed:', responseData.message || 'Success')
-            
-            // Check if this is development mode
-            if (responseData.error?.includes('Development mode')) {
-              console.log('📧 Check the server console for the email content that would be sent')
+            if (!emailResponse.ok) {
+              const errorData = await emailResponse.json().catch(() => ({}))
+              console.error('Failed to send verification email:', errorData)
+              // Don't fail the signup if email fails, just log it
+            } else {
+              const responseData = await emailResponse.json().catch(() => ({}))
+              console.log('✅ Verification email processed:', responseData.message || 'Success')
+
+              // Check if this is development mode
+              if (responseData.error?.includes('Development mode')) {
+                console.log('📧 Check the server console for the email content that would be sent')
+              }
             }
+          } catch (fetchError: any) {
+            // Ignore AbortError as it's expected when requests are cancelled
+            if (fetchError?.name === 'AbortError') {
+              console.log('Email verification request was cancelled')
+              return
+            }
+            console.error('Error sending verification email:', fetchError)
+            // Don't fail the signup if email fails
           }
         } catch (emailError) {
           console.error('Error sending verification email:', emailError)
