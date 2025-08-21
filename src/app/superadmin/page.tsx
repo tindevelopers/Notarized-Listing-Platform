@@ -11,17 +11,19 @@ import {
   ArrowUp,
   ChevronRight,
   House,
-  PencilSimpleLine,
   Files,
   CalendarBlank,
   BookBookmark,
   UserCircle,
+} from "lucide-react";
+import {
+  PencilSimpleLine,
   UsersThree,
   Receipt,
   Money,
   ClockCounterClockwise,
   Gear,
-} from "lucide-react";
+} from "@/components/icons/superadmin-icons";
 import Link from "next/link";
 
 interface DashboardStats {
