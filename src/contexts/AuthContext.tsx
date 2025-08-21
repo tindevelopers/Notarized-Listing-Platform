@@ -168,7 +168,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
             if (!emailResponse.ok) {
               const errorData = await emailResponse.json().catch(() => ({}));
-              console.error("Failed to send verification email:", errorData);
+              console.error("Failed to send verification email:", {
+                status: emailResponse.status,
+                statusText: emailResponse.statusText,
+                error: errorData.error || errorData.message || 'Unknown error',
+                details: errorData
+              });
               // Don't fail the signup if email fails, just log it
             } else {
               const responseData = await emailResponse.json().catch(() => ({}));
