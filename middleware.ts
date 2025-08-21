@@ -22,6 +22,34 @@ export async function middleware(request: NextRequest) {
     }
   }
 
+  // Protect superadmin routes
+  if (request.nextUrl.pathname.startsWith("/superadmin")) {
+    // Allow setup page without authentication
+    if (request.nextUrl.pathname === "/superadmin/setup") {
+      return response;
+    }
+
+    if (!session) {
+      return NextResponse.redirect(new URL("/?auth=signin", request.url));
+    }
+
+    // Check if user is superadmin
+    const userEmail = session.user.email;
+    const superAdminEmails = [
+      'admin@notarized.com',
+      'superadmin@notarized.com',
+      'support@notarized.com'
+    ];
+
+    const isSuperAdmin = superAdminEmails.includes(userEmail || '') ||
+                       userEmail?.endsWith('@notarized.com') ||
+                       session.user.user_metadata?.role === 'superadmin';
+
+    if (!isSuperAdmin) {
+      return NextResponse.redirect(new URL("/dashboard", request.url));
+    }
+  }
+
   return response;
 }
 
