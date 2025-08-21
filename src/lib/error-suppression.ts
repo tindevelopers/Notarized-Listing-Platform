@@ -45,9 +45,19 @@ export const suppressDevelopmentErrors = (
       ) ||
         message?.includes("ResizeObserver loop limit exceeded") ||
         message?.includes("ResizeObserver loop") ||
+        message?.includes("ResizeObserver") ||
         error?.message?.includes("ResizeObserver") ||
         error?.name === "ResizeObserver" ||
-        message?.toLowerCase().includes("resizeobserver"))
+        error?.constructor?.name === "ResizeObserver" ||
+        message?.toLowerCase().includes("resizeobserver") ||
+        error?.toString?.()?.includes("ResizeObserver") ||
+        message?.includes("loop completed with undelivered") ||
+        message?.includes("observer loop") ||
+        // Catch script errors that might be ResizeObserver related
+        (message?.includes("Script error") && filename?.includes("resize")) ||
+        // Catch any error mentioning resize observer in various formats
+        /resize.*observer/i.test(message || "") ||
+        /observer.*loop/i.test(message || ""))
     ) {
       shouldSuppress = true;
       suppressionReason = "ResizeObserver";
@@ -141,7 +151,13 @@ export const suppressDevelopmentErrors = (
     if (
       config.suppressResizeObserver &&
       (reason?.message?.includes("ResizeObserver") ||
-        reason?.toString?.()?.includes("ResizeObserver"))
+        reason?.toString?.()?.includes("ResizeObserver") ||
+        reason?.name === "ResizeObserver" ||
+        reason?.constructor?.name === "ResizeObserver" ||
+        /resize.*observer/i.test(reason?.message || "") ||
+        /observer.*loop/i.test(reason?.message || "") ||
+        reason?.message?.includes("loop completed with undelivered") ||
+        reason?.message?.includes("observer loop"))
     ) {
       shouldSuppress = true;
       suppressionReason = "ResizeObserver Promise";
@@ -215,6 +231,10 @@ export const suppressDevelopmentErrors = (
         message.toLowerCase().includes("resizeobserver") ||
         message.includes("ResizeObserver loop completed") ||
         message.includes("ResizeObserver loop limit") ||
+        message.includes("loop completed with undelivered") ||
+        message.includes("observer loop") ||
+        /resize.*observer/i.test(message) ||
+        /observer.*loop/i.test(message) ||
         message.includes("chrome-extension") ||
         message.includes("fullstory") ||
         message.includes("NEXT_REDIRECT")
@@ -242,7 +262,11 @@ export const suppressDevelopmentErrors = (
         message.includes("ResizeObserver") ||
         message.toLowerCase().includes("resizeobserver") ||
         message.includes("ResizeObserver loop completed") ||
-        message.includes("ResizeObserver loop limit")
+        message.includes("ResizeObserver loop limit") ||
+        message.includes("loop completed with undelivered") ||
+        message.includes("observer loop") ||
+        /resize.*observer/i.test(message) ||
+        /observer.*loop/i.test(message)
       ) {
         if (config.logSuppressedErrors) {
           console.debug("🔇 Suppressed console warning:", ...args);
