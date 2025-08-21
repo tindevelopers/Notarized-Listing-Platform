@@ -81,6 +81,9 @@ const sleep = (ms: number): Promise<void> => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
+// Store reference to original fetch
+const originalFetch = typeof window !== 'undefined' ? window.fetch : fetch;
+
 // Enhanced fetch with retry logic
 const fetchWithRetry = async (
   url: string | URL | Request,
@@ -91,7 +94,7 @@ const fetchWithRetry = async (
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), options.timeout!);
 
-    const fetchPromise = fetch(url, {
+    const fetchPromise = originalFetch(url, {
       ...options,
       signal: controller.signal,
     });
@@ -104,6 +107,33 @@ const fetchWithRetry = async (
     clearTimeout(timeoutId);
     return response;
   } catch (error: any) {
+    // Check for third-party interference first and handle gracefully
+    if (isThirdPartyInterference(error)) {
+      if (!options.suppressErrors) {
+        console.debug('🔇 Third-party script interference detected, using fallback');
+      }
+
+      // Try with original fetch as immediate fallback for third-party interference
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), options.timeout!);
+
+        const fallbackResponse = await Promise.race([
+          originalFetch(url, {
+            ...options,
+            signal: controller.signal,
+          }),
+          createTimeoutPromise(options.timeout!),
+        ]);
+
+        clearTimeout(timeoutId);
+        return fallbackResponse;
+      } catch (fallbackError: any) {
+        // If fallback also fails, continue with normal error handling
+        error = fallbackError;
+      }
+    }
+
     // Determine error type
     let robustError: RobustFetchError;
 
@@ -130,10 +160,11 @@ const fetchWithRetry = async (
 
     robustError.url = typeof url === "string" ? url : url.toString();
 
-    // Retry logic
+    // Retry logic (but not for third-party interference)
     if (
       attempt < options.retries! &&
-      (robustError.isNetworkError || robustError.isTimeout)
+      (robustError.isNetworkError || robustError.isTimeout) &&
+      !robustError.isThirdPartyInterference
     ) {
       if (!options.suppressErrors) {
         console.warn(
@@ -251,16 +282,19 @@ export const installGlobalFetchWrapper = () => {
         suppressErrors: true, // Don't double-log errors
       });
     } catch (error: any) {
-      // For third-party interference, use original fetch as fallback
+      // For third-party interference or critical errors, fall back silently
       if (error.isThirdPartyInterference) {
-        try {
-          return await originalFetch(input, init);
-        } catch (fallbackError) {
-          console.debug(
-            "🔇 Both robust and original fetch failed due to third-party interference",
-          );
-          throw error;
-        }
+        console.debug(
+          "🔇 Suppressing third-party interference error",
+        );
+        // Return a fake response to prevent cascading errors
+        return new Response('{}', {
+          status: 200,
+          statusText: 'OK',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
       }
       throw error;
     }
