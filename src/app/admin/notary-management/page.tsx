@@ -235,7 +235,7 @@ export default function NotaryManagementPage() {
                       <div className="text-right">
                         {getStatusBadge(application.verification_status, application.is_verified)}
                         <p className="text-sm text-gray-500 mt-1">
-                          Applied: {new Date(application.created_at).toISOString().split('T')[0]}
+                          Applied: {application.created_at?.slice(0, 10) || 'N/A'}
                         </p>
                       </div>
                     </div>

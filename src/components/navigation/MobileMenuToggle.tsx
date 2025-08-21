@@ -4,9 +4,10 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import { HydrationBoundary } from "../HydrationBoundary";
 
 // Minimal client component for mobile menu interactivity
-export default function MobileMenuToggle() {
+function MobileMenuToggleContent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -71,5 +72,22 @@ export default function MobileMenuToggle() {
         </div>
       )}
     </>
+  );
+}
+
+// Wrapper with hydration boundary
+export default function MobileMenuToggle() {
+  return (
+    <HydrationBoundary
+      fallback={
+        <div className="md:hidden">
+          <Button variant="ghost" size="sm" className="text-gray-600">
+            <Menu className="h-6 w-6" />
+          </Button>
+        </div>
+      }
+    >
+      <MobileMenuToggleContent />
+    </HydrationBoundary>
   );
 }
