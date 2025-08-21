@@ -128,7 +128,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       if (error) {
         console.error("Sign up error:", error);
-        return { error };
+        return { error, requiresVerification: false };
       }
 
       // If user creation was successful, send verification email
@@ -186,7 +186,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return { error: null, requiresVerification: true };
     } catch (error) {
       console.error("Sign up catch error:", error);
-      return { error };
+      return { error, requiresVerification: false };
     } finally {
       setLoading(false);
     }
