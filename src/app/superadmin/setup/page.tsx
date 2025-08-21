@@ -25,27 +25,27 @@ export default function SuperAdminSetup() {
   const router = useRouter();
 
   useEffect(() => {
-    checkSetupRequired();
-  }, []);
+    const checkSetupRequired = async () => {
+      try {
+        const response = await fetch("/api/superadmin/setup");
+        const data = await response.json();
 
-  const checkSetupRequired = async () => {
-    try {
-      const response = await fetch("/api/superadmin/setup");
-      const data = await response.json();
-      
-      if (data.setup_required) {
-        setSetupRequired(true);
-      } else {
-        // Redirect to login if setup is already complete
-        router.push("/");
+        if (data.setup_required) {
+          setSetupRequired(true);
+        } else {
+          // Redirect to login if setup is already complete
+          router.push("/");
+        }
+      } catch (error) {
+        console.error("Failed to check setup status:", error);
+        setError("Failed to check setup status");
+      } finally {
+        setCheckingSetup(false);
       }
-    } catch (error) {
-      console.error("Failed to check setup status:", error);
-      setError("Failed to check setup status");
-    } finally {
-      setCheckingSetup(false);
-    }
-  };
+    };
+
+    checkSetupRequired();
+  }, [router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
