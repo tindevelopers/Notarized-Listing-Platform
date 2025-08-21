@@ -72,6 +72,10 @@ const nextConfig = {
     }
     return [];
   },
+  // Skip static generation for admin pages
+  generateStaticParams: async () => {
+    return [];
+  },
   // Better error reporting
   typescript: {
     // Don't fail build on type errors in development
