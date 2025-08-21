@@ -233,7 +233,7 @@ export function NotaryProfileStep({ data, updateData, userName = "Steven Wakelin
               className="h-11 border-[#949494] rounded-md pr-10 cursor-pointer"
               readOnly
             />
-            <PencilIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+            <Pencil className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
           </div>
         </div>
 
@@ -302,7 +302,7 @@ export function NotaryProfileStep({ data, updateData, userName = "Steven Wakelin
               className="h-11 border-[#949494] rounded-md pr-10"
               readOnly
             />
-            <PencilIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+            <Pencil className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
           </div>
           {/* Language selection */}
           <div className="flex flex-wrap gap-2 mt-2">
@@ -333,7 +333,7 @@ export function NotaryProfileStep({ data, updateData, userName = "Steven Wakelin
               className="h-11 border-[#949494] rounded-md pr-10"
               readOnly
             />
-            <PencilIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+            <Pencil className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
           </div>
           {/* Document type selection */}
           <div className="flex flex-wrap gap-2 mt-2">
