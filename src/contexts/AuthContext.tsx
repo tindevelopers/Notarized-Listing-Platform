@@ -91,20 +91,40 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setUser(session?.user ?? null);
         setLoading(false);
 
-        // Auto-redirect to dashboard on successful sign in
+        // Auto-redirect to appropriate dashboard on successful sign in
         if (event === "SIGNED_IN" && session?.user) {
-          console.log("User signed in, redirecting to dashboard");
+          console.log("User signed in, determining redirect destination");
+
+          // Check if user is superadmin
+          const userEmail = session.user.email;
+          const superAdminEmails = [
+            'admin@notarized.com',
+            'superadmin@notarized.com',
+            'support@notarized.com'
+          ];
+
+          const isSuperAdmin = superAdminEmails.includes(userEmail || '') ||
+                             userEmail?.endsWith('@notarized.com') ||
+                             session.user.user_metadata?.role === 'superadmin';
+
           // Only redirect if not already on dashboard or protected pages
           const currentPath = window.location.pathname;
-          if (
-            !currentPath.startsWith("/dashboard") &&
-            !currentPath.startsWith("/profile") &&
-            !currentPath.startsWith("/transactions") &&
-            !currentPath.startsWith("/documents") &&
-            !currentPath.startsWith("/meetings") &&
-            !currentPath.startsWith("/journal")
-          ) {
-            router.push("/dashboard");
+          const isOnProtectedPage = currentPath.startsWith("/dashboard") ||
+                                   currentPath.startsWith("/superadmin") ||
+                                   currentPath.startsWith("/profile") ||
+                                   currentPath.startsWith("/transactions") ||
+                                   currentPath.startsWith("/documents") ||
+                                   currentPath.startsWith("/meetings") ||
+                                   currentPath.startsWith("/journal");
+
+          if (!isOnProtectedPage) {
+            if (isSuperAdmin) {
+              console.log("Superadmin user signed in, redirecting to /superadmin");
+              router.push("/superadmin");
+            } else {
+              console.log("Regular user signed in, redirecting to /dashboard");
+              router.push("/dashboard");
+            }
           }
         }
       },
