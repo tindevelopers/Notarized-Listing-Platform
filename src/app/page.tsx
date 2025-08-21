@@ -109,65 +109,56 @@ export default function HomePage() {
           </div>
 
           <div className="relative">
-            {/* US Map SVG */}
+            {/* US & Canada Map */}
             <div className="flex justify-center">
-              <svg viewBox="0 0 1000 600" className="w-full max-w-4xl h-auto">
-                {/* Simplified US Map - Main states as blue shapes */}
-                <g fill="#0066FF" stroke="#ffffff" strokeWidth="2">
-                  {/* California */}
+              <div className="relative w-full max-w-6xl">
+                <img
+                  src="https://api.builder.io/api/v1/image/assets/TEMP/99ad34bea74ab9f7c53ac0b88a0105b91cb97652?width=2800"
+                  alt="US & Canada Map - Find certified notaries in your state"
+                  className="w-full h-auto object-contain"
+                />
+
+                {/* Interactive hotspots for key states */}
+                <div className="absolute inset-0">
+                  {/* California - positioned over CA on the map */}
                   <Link href="/california-notaries">
-                    <path
-                      d="M50 150 L50 400 L150 450 L180 420 L160 380 L140 350 L120 300 L100 250 L80 200 Z"
-                      className="hover:fill-blue-600 cursor-pointer transition-colors"
-                    />
+                    <div className="absolute w-16 h-20 cursor-pointer group" style={{ left: '8%', top: '35%' }}>
+                      <div className="absolute inset-0 bg-blue-600/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                      <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white shadow-lg rounded px-2 py-1 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                        California Notaries
+                      </div>
+                    </div>
                   </Link>
+
                   {/* Texas */}
-                  <path
-                    d="M300 350 L450 340 L460 450 L420 480 L350 470 L320 440 Z"
-                    className="hover:fill-blue-600 cursor-pointer transition-colors"
-                  />
+                  <div className="absolute w-20 h-16 cursor-pointer group hover:bg-blue-600/20 rounded-lg transition-colors duration-200" style={{ left: '32%', top: '58%' }}>
+                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white shadow-lg rounded px-2 py-1 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                      Texas Notaries
+                    </div>
+                  </div>
+
                   {/* Florida */}
-                  <path
-                    d="M600 420 L750 430 L780 480 L720 500 L650 490 L620 450 Z"
-                    className="hover:fill-blue-600 cursor-pointer transition-colors"
-                  />
+                  <div className="absolute w-16 h-12 cursor-pointer group hover:bg-blue-600/20 rounded-lg transition-colors duration-200" style={{ left: '72%', top: '75%' }}>
+                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white shadow-lg rounded px-2 py-1 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                      Florida Notaries
+                    </div>
+                  </div>
+
                   {/* New York */}
-                  <path
-                    d="M700 150 L800 140 L820 200 L780 220 L720 200 Z"
-                    className="hover:fill-blue-600 cursor-pointer transition-colors"
-                  />
+                  <div className="absolute w-12 h-10 cursor-pointer group hover:bg-blue-600/20 rounded-lg transition-colors duration-200" style={{ left: '75%', top: '25%' }}>
+                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white shadow-lg rounded px-2 py-1 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                      New York Notaries
+                    </div>
+                  </div>
+
                   {/* Illinois */}
-                  <path
-                    d="M500 200 L550 190 L560 280 L520 290 L510 250 Z"
-                    className="hover:fill-blue-600 cursor-pointer transition-colors"
-                  />
-                  {/* Pennsylvania */}
-                  <path
-                    d="M650 180 L750 170 L760 220 L670 230 Z"
-                    className="hover:fill-blue-600 cursor-pointer transition-colors"
-                  />
-                  {/* Ohio */}
-                  <path
-                    d="M580 200 L650 190 L660 250 L590 260 Z"
-                    className="hover:fill-blue-600 cursor-pointer transition-colors"
-                  />
-                  {/* Georgia */}
-                  <path
-                    d="M620 320 L680 310 L700 380 L640 390 Z"
-                    className="hover:fill-blue-600 cursor-pointer transition-colors"
-                  />
-                  {/* North Carolina */}
-                  <path
-                    d="M650 280 L750 270 L770 320 L670 330 Z"
-                    className="hover:fill-blue-600 cursor-pointer transition-colors"
-                  />
-                  {/* Michigan */}
-                  <path
-                    d="M520 150 L580 140 L590 200 L530 210 Z"
-                    className="hover:fill-blue-600 cursor-pointer transition-colors"
-                  />
-                </g>
-              </svg>
+                  <div className="absolute w-10 h-14 cursor-pointer group hover:bg-blue-600/20 rounded-lg transition-colors duration-200" style={{ left: '56%', top: '38%' }}>
+                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white shadow-lg rounded px-2 py-1 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                      Illinois Notaries
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
