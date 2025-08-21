@@ -97,8 +97,7 @@ export default function NotarySignupPage() {
 
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // For testing purposes, always proceed to verification step
-    setEmail("gratia.ionescu@notaryservices.com");
+    // Proceed to verification step with the entered email
     setCurrentStep("verification");
   };
 
