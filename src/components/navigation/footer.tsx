@@ -103,7 +103,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/notary-signup"
+                  href="/?signup=true"
                   className="hover:text-white transition-colors"
                 >
                   List Your Business
