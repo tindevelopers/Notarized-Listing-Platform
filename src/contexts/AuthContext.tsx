@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { User, Session, AuthChangeEvent } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase/client";
 import { generateVerificationToken } from "@/lib/auth/client-verification";
+import { useRouter } from "next/navigation";
 
 interface AuthContextType {
   user: User | null;
@@ -31,6 +32,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const [isHydrated, setIsHydrated] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     let mounted = true;
@@ -88,6 +90,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setSession(session);
         setUser(session?.user ?? null);
         setLoading(false);
+
+        // Auto-redirect to dashboard on successful sign in
+        if (event === 'SIGNED_IN' && session?.user) {
+          console.log('User signed in, redirecting to dashboard');
+          router.push('/dashboard');
+        }
       },
     );
 
