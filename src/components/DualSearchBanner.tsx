@@ -32,9 +32,6 @@ export default function DualSearchBanner() {
             <Button
               size="lg"
               className="flex items-center gap-2 text-lg px-6 py-4 bg-white text-blue-600 border-2 border-white hover:bg-blue-50 hover:text-blue-700 transition-all duration-200 font-roboto-mono font-medium"
-              style={{
-                font: "500 18px/28px var(--font-roboto-mono), monospace",
-              }}
             >
               <MessageCircleQuestion className="w-5 h-5" />
               Ask Questions
