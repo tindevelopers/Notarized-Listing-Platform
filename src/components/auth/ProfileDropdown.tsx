@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useState } from 'react'
@@ -12,13 +11,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { 
-  User, 
-  Settings, 
-  BookOpen, 
-  LogOut, 
+import {
+  User,
+  Settings,
+  BookOpen,
+  LogOut,
   ChevronDown,
-  Loader2
+  Loader2,
+  LayoutDashboard
 } from 'lucide-react'
 import Link from 'next/link'
 
