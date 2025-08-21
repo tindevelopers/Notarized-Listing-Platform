@@ -146,8 +146,21 @@ export function NotaryProfileStep({ data, updateData, userName = "Steven Wakelin
       <div className="space-y-6">
         {/* Step indicator */}
         <div className="space-y-2">
-          <p className="text-sm text-[#575757]">Step 3 / 5</p>
-          <h1 className="text-2xl font-bold text-black">Your notary profile</h1>
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-[#575757]">Step 3 / 5</p>
+              <h1 className="text-2xl font-bold text-black">Your notary profile</h1>
+            </div>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={setDemoData}
+              className="text-xs"
+            >
+              Fill demo data
+            </Button>
+          </div>
         </div>
 
         {/* Profile Picture */}
