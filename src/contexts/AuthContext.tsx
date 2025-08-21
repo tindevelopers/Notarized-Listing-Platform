@@ -205,7 +205,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
               console.log("Email verification request was cancelled");
               return { error: null, requiresVerification: true };
             }
-            console.error("Error sending verification email:", fetchError);
+            console.error("Error sending verification email:", {
+              name: fetchError?.name,
+              message: fetchError?.message,
+              error: fetchError
+            });
             // Don't fail the signup if email fails
           }
         } catch (emailError) {
