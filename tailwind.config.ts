@@ -18,7 +18,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        "roboto-mono": ["var(--font-roboto-mono)", "monospace"],
+        sans: ["var(--font-inter)", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+        "roboto-mono": ["var(--font-roboto-mono)", "Roboto Mono", "ui-monospace", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",
