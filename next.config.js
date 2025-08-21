@@ -22,28 +22,28 @@ const nextConfig = {
       config.watchOptions = {
         poll: 1000,
         aggregateTimeout: 300,
-        ignored: ['**/node_modules/**', '**/.git/**', '**/.next/**'],
-      }
-      
+        ignored: ["**/node_modules/**", "**/.git/**", "**/.next/**"],
+      };
+
       // Better source maps for debugging
-      config.devtool = 'eval-source-map'
-      
+      config.devtool = "eval-source-map";
+
       // Reduce memory usage during development
       config.optimization = {
         ...config.optimization,
         splitChunks: {
-          chunks: 'all',
+          chunks: "all",
           cacheGroups: {
             vendor: {
               test: /[\\/]node_modules[\\/]/,
-              name: 'vendors',
-              chunks: 'all',
+              name: "vendors",
+              chunks: "all",
             },
           },
         },
-      }
+      };
     }
-    
+
     // Handle potential module resolution issues
     config.resolve.fallback = {
       ...config.resolve.fallback,
@@ -51,35 +51,35 @@ const nextConfig = {
       net: false,
       tls: false,
       crypto: false,
-    }
-    
-    return config
+    };
+
+    return config;
   },
   // Headers for better development experience
   async headers() {
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === "development") {
       return [
         {
-          source: '/(.*)',
+          source: "/(.*)",
           headers: [
             {
-              key: 'Cache-Control',
-              value: 'no-cache, no-store, must-revalidate',
+              key: "Cache-Control",
+              value: "no-cache, no-store, must-revalidate",
             },
           ],
         },
-      ]
+      ];
     }
-    return []
+    return [];
   },
   // Better error reporting
   typescript: {
     // Don't fail build on type errors in development
-    ignoreBuildErrors: process.env.NODE_ENV === 'development',
+    ignoreBuildErrors: process.env.NODE_ENV === "development",
   },
   eslint: {
     // Don't fail build on lint errors in development
-    ignoreDuringBuilds: process.env.NODE_ENV === 'development',
+    ignoreDuringBuilds: process.env.NODE_ENV === "development",
   },
 };
 

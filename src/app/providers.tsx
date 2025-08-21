@@ -28,11 +28,13 @@ export function Providers({ children }: { children: React.ReactNode }) {
       suppressThirdPartyScripts: true,
       suppressFetchErrors: true,
       suppressRSCErrors: true,
-      logSuppressedErrors: process.env.NODE_ENV === 'development' && process.env.DEBUG_ERRORS === 'true'
+      logSuppressedErrors:
+        process.env.NODE_ENV === "development" &&
+        process.env.DEBUG_ERRORS === "true",
     });
 
-    if (process.env.NODE_ENV === 'development') {
-      console.log('🛡️ Development error suppression enabled');
+    if (process.env.NODE_ENV === "development") {
+      console.log("🛡️ Development error suppression enabled");
     }
 
     return cleanup;
