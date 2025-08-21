@@ -30,8 +30,7 @@ export default function DualSearchBanner() {
             </Button>
             <Button
               size="lg"
-              variant="outline"
-              className="flex items-center gap-2 text-lg px-6 py-4 border-white border-2 text-white hover:bg-white hover:text-blue-600 transition-all duration-200 font-roboto-mono font-medium"
+              className="flex items-center gap-2 text-lg px-6 py-4 bg-white text-blue-600 border-2 border-white hover:bg-blue-50 hover:text-blue-700 transition-all duration-200 font-roboto-mono font-medium"
               style={{ font: "500 18px/28px var(--font-roboto-mono), monospace" }}
             >
               <MessageCircleQuestion className="w-5 h-5" />
@@ -47,23 +46,20 @@ export default function DualSearchBanner() {
             <p className="text-blue-100 mb-4">Popular searches:</p>
             <div className="flex flex-wrap justify-center gap-2">
               <Button
-                variant="outline"
                 size="sm"
-                className="border-white border text-white hover:bg-white hover:text-blue-600 transition-all duration-200 font-medium"
+                className="bg-white/10 border border-white text-white hover:bg-white hover:text-blue-600 transition-all duration-200 font-medium backdrop-blur-sm"
               >
                 Real Estate Notary
               </Button>
               <Button
-                variant="outline"
                 size="sm"
-                className="border-white border text-white hover:bg-white hover:text-blue-600 transition-all duration-200 font-medium"
+                className="bg-white/10 border border-white text-white hover:bg-white hover:text-blue-600 transition-all duration-200 font-medium backdrop-blur-sm"
               >
                 Mobile Notary
               </Button>
               <Button
-                variant="outline"
                 size="sm"
-                className="border-white border text-white hover:bg-white hover:text-blue-600 transition-all duration-200 font-medium"
+                className="bg-white/10 border border-white text-white hover:bg-white hover:text-blue-600 transition-all duration-200 font-medium backdrop-blur-sm"
               >
                 Online Notarization
               </Button>
