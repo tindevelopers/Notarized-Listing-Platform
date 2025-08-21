@@ -18,12 +18,12 @@ import { Search, Filter, X } from "lucide-react";
 // Client component for interactive search and filtering
 export default function NotarySearchFilters() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedService, setSelectedService] = useState("");
-  const [selectedCity, setSelectedCity] = useState("");
-  const [priceRange, setPriceRange] = useState("");
+  const [selectedService, setSelectedService] = useState("all");
+  const [selectedCity, setSelectedCity] = useState("all");
+  const [priceRange, setPriceRange] = useState("all");
   const [isOnline, setIsOnline] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [availability, setAvailability] = useState("");
+  const [availability, setAvailability] = useState("all");
 
   const handleClearFilters = () => {
     setSearchTerm("");
