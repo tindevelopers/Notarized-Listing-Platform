@@ -37,13 +37,17 @@ export const suppressDevelopmentErrors = (
     let shouldSuppress = false;
     let suppressionReason = "";
 
-    // ResizeObserver errors
+    // ResizeObserver errors (enhanced patterns)
     if (
       config.suppressResizeObserver &&
       (message?.includes(
         "ResizeObserver loop completed with undelivered notifications",
       ) ||
-        message?.includes("ResizeObserver loop limit exceeded"))
+        message?.includes("ResizeObserver loop limit exceeded") ||
+        message?.includes("ResizeObserver loop") ||
+        error?.message?.includes("ResizeObserver") ||
+        error?.name === "ResizeObserver" ||
+        message?.toLowerCase().includes("resizeobserver"))
     ) {
       shouldSuppress = true;
       suppressionReason = "ResizeObserver";
