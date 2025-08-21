@@ -16,6 +16,13 @@ const robotoMono = Roboto_Mono({
 export const metadata: Metadata = {
   title: "TIN Wizard - Notary Services",
   description: "Professional notary services platform",
+  icons: {
+    icon: [
+      { url: "/favicon.png", sizes: "any" },
+      { url: "/app-icon.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: "/app-icon.png",
+  },
 };
 
 export default function RootLayout({
