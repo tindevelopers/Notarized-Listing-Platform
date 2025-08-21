@@ -7,6 +7,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { NotaryProfileStep } from "@/components/onboarding/steps/NotaryProfileStep";
+import { CredentialsUploadStep } from "@/components/onboarding/steps/CredentialsUploadStep";
 import { ArrowLeft, CheckCircle } from "lucide-react";
 import Link from "next/link";
 
@@ -23,11 +24,29 @@ interface NotaryProfileData {
   documentTypes: string[];
 }
 
+interface DocumentUpload {
+  file: File | null;
+  expiryDate: string;
+  uploadedAt?: Date;
+}
+
+interface CredentialsData {
+  identification: DocumentUpload | null;
+  w9: DocumentUpload | null;
+  commissionCertificate: DocumentUpload | null;
+  bond: DocumentUpload | null;
+  eo: DocumentUpload | null;
+  backgroundCheck: DocumentUpload | null;
+}
+
+type Step = "profile" | "credentials";
+
 export default function CompleteProfilePage() {
   const { user, loading } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [currentStep, setCurrentStep] = useState<Step>("profile");
   
   // Profile data state
   const [profileData, setProfileData] = useState<NotaryProfileData>({
@@ -43,37 +62,82 @@ export default function CompleteProfilePage() {
     documentTypes: [],
   });
 
+  // Credentials data state
+  const [credentialsData, setCredentialsData] = useState<CredentialsData>({
+    identification: null,
+    w9: null,
+    commissionCertificate: null,
+    bond: null,
+    eo: null,
+    backgroundCheck: null,
+  });
+
   useEffect(() => {
     if (!loading && !user) {
       redirect("/");
     }
   }, [user, loading]);
 
+  // Handle step parameter from URL
+  useEffect(() => {
+    const step = searchParams.get("step");
+    if (step === "credentials") {
+      setCurrentStep("credentials");
+    } else {
+      setCurrentStep("profile");
+    }
+  }, [searchParams]);
+
   const handleSubmit = async () => {
     setIsSubmitting(true);
-    
+
     try {
-      // Here you would save the profile data to your backend
+      // Here you would save the data to your backend
       // For now, we'll simulate an API call
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      console.log("Saving profile data:", profileData);
-      
-      // Redirect back to dashboard with success
-      router.push("/dashboard?profile-complete=true");
+
+      if (currentStep === "profile") {
+        console.log("Saving profile data:", profileData);
+        // Move to credentials step
+        setCurrentStep("credentials");
+        router.push("/complete-profile?step=credentials");
+      } else {
+        console.log("Saving credentials data:", credentialsData);
+        // Redirect back to dashboard with success
+        router.push("/dashboard?profile-complete=true");
+      }
     } catch (error) {
-      console.error("Error saving profile:", error);
+      console.error("Error saving data:", error);
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const isProfileValid = 
+  const isProfileValid =
     profileData.commissionNumber &&
     profileData.commissionExpiry &&
     profileData.notaryType &&
     profileData.languages.length > 0 &&
     profileData.documentTypes.length > 0;
+
+  const isCredentialsValid =
+    Object.values(credentialsData).every(doc => doc !== null);
+
+  const isCurrentStepValid = currentStep === "profile" ? isProfileValid : isCredentialsValid;
+
+  const getBackHref = () => {
+    if (currentStep === "credentials") {
+      return "/complete-profile";
+    }
+    return "/dashboard";
+  };
+
+  const getBackLabel = () => {
+    if (currentStep === "credentials") {
+      return "Back to Profile";
+    }
+    return "Back to Dashboard";
+  };
 
   if (loading) {
     return (
@@ -96,9 +160,9 @@ export default function CompleteProfilePage() {
       <div className="bg-white border-b border-[#E5E7EB] px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link href="/dashboard" className="inline-flex items-center text-[#3632F5] hover:text-[#3632F5]/80">
+            <Link href={getBackHref()} className="inline-flex items-center text-[#3632F5] hover:text-[#3632F5]/80">
               <ArrowLeft className="h-5 w-5 mr-2" />
-              Back to Dashboard
+              {getBackLabel()}
             </Link>
             <div className="h-6 w-px bg-[#E5E7EB]" />
             <Link href="/" className="text-xl font-bold text-black">
@@ -119,29 +183,36 @@ export default function CompleteProfilePage() {
         <div className="max-w-7xl mx-auto px-6 py-8">
           <Card className="border-[#E5E7EB] shadow-sm overflow-hidden">
             <CardContent className="p-8">
-              <NotaryProfileStep
-                data={profileData}
-                updateData={setProfileData}
-                userName={user.user_metadata?.full_name || user.email?.split('@')[0] || "User"}
-              />
+              {currentStep === "profile" ? (
+                <NotaryProfileStep
+                  data={profileData}
+                  updateData={setProfileData}
+                  userName={user.user_metadata?.full_name || user.email?.split('@')[0] || "User"}
+                />
+              ) : (
+                <CredentialsUploadStep
+                  data={credentialsData}
+                  updateData={setCredentialsData}
+                />
+              )}
 
               {/* Footer with actions */}
               <div className="border-t border-[#E5E7EB] pt-6 mt-8">
                 <div className="flex justify-between items-center">
-                  <Link href="/dashboard">
+                  <Link href={getBackHref()}>
                     <Button
                       variant="outline"
                       className="px-6 h-11 rounded-full border-[#A1A1A1]"
                     >
-                      Cancel
+                      {currentStep === "credentials" ? "Back" : "Cancel"}
                     </Button>
                   </Link>
                   
                   <Button
                     onClick={handleSubmit}
-                    disabled={!isProfileValid || isSubmitting}
+                    disabled={!isCurrentStepValid || isSubmitting}
                     className={`px-6 h-11 rounded-full font-semibold ${
-                      isProfileValid && !isSubmitting
+                      isCurrentStepValid && !isSubmitting
                         ? "bg-[#3632F5] hover:bg-[#3632F5]/90 text-white"
                         : "bg-[#E5E7EB] text-[#A1A1A1] cursor-not-allowed"
                     }`}
@@ -149,12 +220,12 @@ export default function CompleteProfilePage() {
                     {isSubmitting ? (
                       <>
                         <div className="w-4 h-4 animate-spin rounded-full border-2 border-current border-t-transparent mr-2" />
-                        Saving Profile...
+                        {currentStep === "profile" ? "Saving Profile..." : "Submitting Documents..."}
                       </>
                     ) : (
                       <>
                         <CheckCircle className="w-4 h-4 mr-2" />
-                        Complete Profile
+                        {currentStep === "profile" ? "Continue to Documents" : "Submit Documents"}
                       </>
                     )}
                   </Button>
