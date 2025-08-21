@@ -16,7 +16,8 @@
     "typecheck": "tsc --noEmit",
     "vercel-build": "pnpm build",
     "setup:db": "node scripts/setup-verification-codes-table.js",
-    "setup:db-schema": "node scripts/setup-database.js"
+    "setup:db-schema": "node scripts/setup-database.js",
+    "create-superadmin": "node scripts/create-superadmin.js"
   },
   "dependencies": {
     "@aws-sdk/client-ses": "^3.872.0",
