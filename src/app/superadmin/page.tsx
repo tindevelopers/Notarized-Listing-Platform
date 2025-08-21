@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, Suspense } from "react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -48,6 +48,7 @@ interface DashboardStats {
 
 function SuperAdminContent() {
   const { user, loading } = useAuth();
+  const router = useRouter();
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [authLoading, setAuthLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -78,7 +79,7 @@ function SuperAdminContent() {
 
         if (!loading && !user) {
           console.log('Superadmin: No user found, redirecting to home');
-          redirect("/");
+          router.push("/?auth=signin");
           return;
         }
 
@@ -101,7 +102,7 @@ function SuperAdminContent() {
           if (!isSuperAdmin) {
             console.log('Superadmin: User not authorized, redirecting to dashboard');
             setError(`Access denied. Your email (${user.email}) does not have superadmin privileges.`);
-            setTimeout(() => redirect("/dashboard"), 3000);
+            setTimeout(() => router.push("/dashboard"), 3000);
             return;
           }
 
