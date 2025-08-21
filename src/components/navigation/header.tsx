@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import MobileMenuToggle from "./MobileMenuToggle";
+import AuthButtons from "./AuthButtons";
 
 // Server Component - most of the header is static
 export default function Header() {
@@ -52,6 +53,7 @@ export default function Header() {
             <Button asChild>
               <Link href="/california-notaries">Search Notaries</Link>
             </Button>
+            <AuthButtons />
           </div>
 
           {/* Mobile Menu Toggle - Client Component */}
