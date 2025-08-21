@@ -3,6 +3,8 @@
  * This catches errors that occur before React components mount
  */
 
+import { errorMonitor } from "./error-monitor";
+
 if (typeof window !== "undefined") {
   // Immediate ResizeObserver error suppression
   const immediateErrorHandler = (event: ErrorEvent) => {
