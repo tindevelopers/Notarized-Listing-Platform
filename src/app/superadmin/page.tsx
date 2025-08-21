@@ -123,7 +123,13 @@ function SuperAdminContent() {
     const fetchStats = async () => {
       try {
         console.log('Superadmin: Fetching stats from API');
-        const response = await fetch('/api/superadmin/stats');
+        const response = await fetch('/api/superadmin/stats', {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
         console.log('Superadmin: Stats API response status:', response.status);
 
         if (response.ok) {
