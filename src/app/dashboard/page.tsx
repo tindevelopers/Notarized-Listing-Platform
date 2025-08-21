@@ -311,26 +311,7 @@ function DashboardContent() {
               </CardHeader>
               <CardContent className="p-5">
                 <div className="space-y-5">
-                  {/* Completed Tasks */}
-                  <div className="flex items-center gap-3">
-                    <div className="w-7 h-7 bg-[#1A963F] rounded-full flex items-center justify-center">
-                      <CheckCircle className="h-4 w-4 text-white" />
-                    </div>
-                    <span className="text-black line-through">
-                      Credentials approved
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <div className="w-7 h-7 bg-[#1A963F] rounded-full flex items-center justify-center">
-                      <CheckCircle className="h-4 w-4 text-white" />
-                    </div>
-                    <span className="text-black line-through">
-                      Subscribe to the platform
-                    </span>
-                  </div>
-
-                  {/* Pending Tasks */}
+                  {/* Setup Tasks */}
                   {!notaryProfileComplete ? (
                     <Link
                       href="/complete-profile"
