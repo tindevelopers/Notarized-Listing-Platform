@@ -28,22 +28,29 @@ export function useUpdateProfile() {
   
   return useMutation({
     mutationFn: async (data: { full_name?: string; avatar_url?: string }) => {
-      const controller = new AbortController();
-      const response = await fetch("/api/auth/profile", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-        signal: controller.signal,
-      });
-      
-      if (!response.ok) {
-        throw new Error("Failed to update profile");
+      try {
+        const response = await fetch("/api/auth/profile", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to update profile");
+        }
+
+        return response.json();
+      } catch (error: any) {
+        // Ignore AbortError as it's expected when requests are cancelled
+        if (error?.name === 'AbortError') {
+          return;
+        }
+        throw error;
       }
-      
-      return response.json();
     },
+      
     onSuccess: () => {
       // Invalidate profile query to refetch latest data
       queryClient.invalidateQueries({ queryKey: ["profile", user?.id] });
@@ -84,22 +91,29 @@ export function useCreateBooking() {
       notes?: string
       total_cost?: number
     }) => {
-      const controller = new AbortController();
-      const response = await fetch("/api/bookings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-        signal: controller.signal,
-      });
-      
-      if (!response.ok) {
-        throw new Error("Failed to create booking");
+      try {
+        const response = await fetch("/api/bookings", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to create booking");
+        }
+
+        return response.json();
+      } catch (error: any) {
+        // Ignore AbortError as it's expected when requests are cancelled
+        if (error?.name === 'AbortError') {
+          return;
+        }
+        throw error;
       }
-      
-      return response.json();
     },
+      
     onSuccess: () => {
       // Invalidate bookings query to refetch latest data
       queryClient.invalidateQueries({ queryKey: ["bookings", user?.id] });
