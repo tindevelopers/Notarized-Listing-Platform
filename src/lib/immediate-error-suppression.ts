@@ -107,60 +107,7 @@ if (typeof window !== "undefined") {
   window.addEventListener("error", immediateErrorHandler, { passive: true });
   window.addEventListener("unhandledrejection", immediateRejectionHandler, { passive: true });
 
-  // Override console methods immediately for development
-  if (process.env.NODE_ENV === "development") {
-    const originalConsoleError = console.error;
-    console.error = (...args: any[]) => {
-      const message = args.join(" ");
-
-      if (
-        message.includes("ResizeObserver") ||
-        message.toLowerCase().includes("resizeobserver") ||
-        message.includes("loop completed with undelivered") ||
-        message.includes("observer loop") ||
-        /resize.*observer/i.test(message) ||
-        /observer.*loop/i.test(message)
-      ) {
-        // Log the suppressed console error
-        errorMonitor.logError({
-          type: 'error',
-          message: message,
-          suppressed: true,
-          reason: 'ResizeObserver',
-          details: { args }
-        });
-        return; // Suppress completely
-      }
-
-      originalConsoleError.apply(console, args);
-    };
-
-    const originalConsoleWarn = console.warn;
-    console.warn = (...args: any[]) => {
-      const message = args.join(" ");
-
-      if (
-        message.includes("ResizeObserver") ||
-        message.toLowerCase().includes("resizeobserver") ||
-        message.includes("loop completed with undelivered") ||
-        message.includes("observer loop") ||
-        /resize.*observer/i.test(message) ||
-        /observer.*loop/i.test(message)
-      ) {
-        // Log the suppressed console warning
-        errorMonitor.logError({
-          type: 'warning',
-          message: message,
-          suppressed: true,
-          reason: 'ResizeObserver',
-          details: { args }
-        });
-        return; // Suppress completely
-      }
-
-      originalConsoleWarn.apply(console, args);
-    };
-  }
+  // Console overrides are now handled immediately at the top of this file
 
   console.log("🛡️ Immediate ResizeObserver error suppression initialized");
 }
