@@ -13,7 +13,8 @@ export default function DualSearchBanner() {
             Your Notary Solution Hub
           </h1>
           <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-            Ask questions about notarization or find certified notaries in your area
+            Ask questions about notarization or find certified notaries in your
+            area
           </p>
         </div>
 
@@ -31,7 +32,9 @@ export default function DualSearchBanner() {
             <Button
               size="lg"
               className="flex items-center gap-2 text-lg px-6 py-4 bg-white text-blue-600 border-2 border-white hover:bg-blue-50 hover:text-blue-700 transition-all duration-200 font-roboto-mono font-medium"
-              style={{ font: "500 18px/28px var(--font-roboto-mono), monospace" }}
+              style={{
+                font: "500 18px/28px var(--font-roboto-mono), monospace",
+              }}
             >
               <MessageCircleQuestion className="w-5 h-5" />
               Ask Questions
@@ -72,7 +75,9 @@ export default function DualSearchBanner() {
               <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
                 ✓
               </div>
-              <h3 className="font-semibold mb-2">Licensed & Insured Notaries</h3>
+              <h3 className="font-semibold mb-2">
+                Licensed & Insured Notaries
+              </h3>
             </div>
             <div className="text-white">
               <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">

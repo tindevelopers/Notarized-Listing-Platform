@@ -20,7 +20,11 @@ function MobileMenuToggleContent() {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="text-gray-600"
         >
-          {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {isMenuOpen ? (
+            <X className="h-6 w-6" />
+          ) : (
+            <Menu className="h-6 w-6" />
+          )}
         </Button>
       </div>
 
@@ -58,12 +62,18 @@ function MobileMenuToggleContent() {
             </Link>
             <div className="pt-4 border-t border-gray-100 space-y-2">
               <Button variant="ghost" className="w-full" asChild>
-                <Link href="/notary-signup" onClick={() => setIsMenuOpen(false)}>
+                <Link
+                  href="/notary-signup"
+                  onClick={() => setIsMenuOpen(false)}
+                >
                   List Your Business
                 </Link>
               </Button>
               <Button className="w-full" asChild>
-                <Link href="/california-notaries" onClick={() => setIsMenuOpen(false)}>
+                <Link
+                  href="/california-notaries"
+                  onClick={() => setIsMenuOpen(false)}
+                >
                   Search Notaries
                 </Link>
               </Button>

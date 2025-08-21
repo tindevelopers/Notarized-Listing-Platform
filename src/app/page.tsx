@@ -26,7 +26,8 @@ const notariesData = [
     location: "New York, NY",
     rating: 4.9,
     reviews: 127,
-    image: "https://images.unsplash.com/photo-1494790108755-2616b39c0e6e?w=300&h=300&fit=crop&crop=face",
+    image:
+      "https://images.unsplash.com/photo-1494790108755-2616b39c0e6e?w=300&h=300&fit=crop&crop=face",
   },
   {
     id: "michael-chen",
@@ -34,7 +35,8 @@ const notariesData = [
     location: "Los Angeles, CA",
     rating: 5.0,
     reviews: 203,
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+    image:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
   },
   {
     id: "emily-davis",
@@ -42,7 +44,8 @@ const notariesData = [
     location: "Chicago, IL",
     rating: 4.8,
     reviews: 156,
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face",
+    image:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face",
   },
   {
     id: "david-wilson",
@@ -50,7 +53,8 @@ const notariesData = [
     location: "Houston, TX",
     rating: 4.9,
     reviews: 189,
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
+    image:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
   },
   {
     id: "lisa-rodriguez",
@@ -58,7 +62,8 @@ const notariesData = [
     location: "Phoenix, AZ",
     rating: 5.0,
     reviews: 234,
-    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face",
+    image:
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face",
   },
   {
     id: "james-taylor",
@@ -66,7 +71,8 @@ const notariesData = [
     location: "Miami, FL",
     rating: 4.7,
     reviews: 145,
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
+    image:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
   },
   {
     id: "maria-garcia",
@@ -74,7 +80,8 @@ const notariesData = [
     location: "Denver, CO",
     rating: 4.9,
     reviews: 178,
-    image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=300&h=300&fit=crop&crop=face",
+    image:
+      "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=300&h=300&fit=crop&crop=face",
   },
   {
     id: "robert-brown",
@@ -82,7 +89,8 @@ const notariesData = [
     location: "Seattle, WA",
     rating: 4.8,
     reviews: 167,
-    image: "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=300&h=300&fit=crop&crop=face",
+    image:
+      "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=300&h=300&fit=crop&crop=face",
   },
 ];
 
@@ -122,7 +130,10 @@ export default function HomePage() {
                 <div className="absolute inset-0">
                   {/* California - positioned over CA on the map */}
                   <Link href="/california-notaries">
-                    <div className="absolute w-16 h-20 cursor-pointer group" style={{ left: '8%', top: '35%' }}>
+                    <div
+                      className="absolute w-16 h-20 cursor-pointer group"
+                      style={{ left: "8%", top: "35%" }}
+                    >
                       <div className="absolute inset-0 bg-blue-600/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                       <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white shadow-lg rounded px-2 py-1 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                         California Notaries
@@ -131,28 +142,40 @@ export default function HomePage() {
                   </Link>
 
                   {/* Texas */}
-                  <div className="absolute w-20 h-16 cursor-pointer group hover:bg-blue-600/20 rounded-lg transition-colors duration-200" style={{ left: '32%', top: '58%' }}>
+                  <div
+                    className="absolute w-20 h-16 cursor-pointer group hover:bg-blue-600/20 rounded-lg transition-colors duration-200"
+                    style={{ left: "32%", top: "58%" }}
+                  >
                     <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white shadow-lg rounded px-2 py-1 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                       Texas Notaries
                     </div>
                   </div>
 
                   {/* Florida */}
-                  <div className="absolute w-16 h-12 cursor-pointer group hover:bg-blue-600/20 rounded-lg transition-colors duration-200" style={{ left: '72%', top: '75%' }}>
+                  <div
+                    className="absolute w-16 h-12 cursor-pointer group hover:bg-blue-600/20 rounded-lg transition-colors duration-200"
+                    style={{ left: "72%", top: "75%" }}
+                  >
                     <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white shadow-lg rounded px-2 py-1 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                       Florida Notaries
                     </div>
                   </div>
 
                   {/* New York */}
-                  <div className="absolute w-12 h-10 cursor-pointer group hover:bg-blue-600/20 rounded-lg transition-colors duration-200" style={{ left: '75%', top: '25%' }}>
+                  <div
+                    className="absolute w-12 h-10 cursor-pointer group hover:bg-blue-600/20 rounded-lg transition-colors duration-200"
+                    style={{ left: "75%", top: "25%" }}
+                  >
                     <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white shadow-lg rounded px-2 py-1 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                       New York Notaries
                     </div>
                   </div>
 
                   {/* Illinois */}
-                  <div className="absolute w-10 h-14 cursor-pointer group hover:bg-blue-600/20 rounded-lg transition-colors duration-200" style={{ left: '56%', top: '38%' }}>
+                  <div
+                    className="absolute w-10 h-14 cursor-pointer group hover:bg-blue-600/20 rounded-lg transition-colors duration-200"
+                    style={{ left: "56%", top: "38%" }}
+                  >
                     <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white shadow-lg rounded px-2 py-1 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                       Illinois Notaries
                     </div>

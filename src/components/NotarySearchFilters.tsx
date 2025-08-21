@@ -55,9 +55,9 @@ export default function NotarySearchFilters() {
           <Filter className="w-5 h-5 mr-2" />
           Filters
         </h3>
-        <Button 
-          variant="ghost" 
-          size="sm" 
+        <Button
+          variant="ghost"
+          size="sm"
           onClick={handleClearFilters}
           className="text-gray-500 hover:text-gray-700"
         >
@@ -107,9 +107,7 @@ export default function NotarySearchFilters() {
 
         {/* City */}
         <div>
-          <Label className="text-sm font-medium text-gray-700">
-            City
-          </Label>
+          <Label className="text-sm font-medium text-gray-700">City</Label>
           <Select value={selectedCity} onValueChange={setSelectedCity}>
             <SelectTrigger className="mt-1">
               <SelectValue placeholder="All cities" />

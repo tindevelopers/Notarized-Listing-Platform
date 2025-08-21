@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { 
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
   Mail,
   Send,
   CheckCircle,
@@ -16,149 +16,153 @@ import {
   Loader2,
   Lock,
   User,
-  Settings
-} from 'lucide-react'
-import { useAuth } from '@/contexts/AuthContext'
+  Settings,
+} from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function EmailTestPage() {
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [success, setSuccess] = useState<string | null>(null)
-  const { user } = useAuth()
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+  const { user } = useAuth();
 
   // Test forms
   const [verificationTest, setVerificationTest] = useState({
-    email: '',
-    userName: ''
-  })
+    email: "",
+    userName: "",
+  });
 
   const [passwordResetTest, setPasswordResetTest] = useState({
-    email: ''
-  })
+    email: "",
+  });
 
   const [notaryStatusTest, setNotaryStatusTest] = useState({
-    email: '',
-    notaryName: '',
-    status: 'approved' as 'approved' | 'rejected' | 'pending',
-    message: '',
-    nextSteps: ''
-  })
+    email: "",
+    notaryName: "",
+    status: "approved" as "approved" | "rejected" | "pending",
+    message: "",
+    nextSteps: "",
+  });
 
   const resetMessages = () => {
-    setError(null)
-    setSuccess(null)
-  }
+    setError(null);
+    setSuccess(null);
+  };
 
   const handleVerificationTest = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    resetMessages()
+    e.preventDefault();
+    setLoading(true);
+    resetMessages();
 
     try {
-      const response = await fetch('/api/email/verify', {
-        method: 'POST',
+      const response = await fetch("/api/email/verify", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email: verificationTest.email,
-          userName: verificationTest.userName || verificationTest.email.split('@')[0],
-          verificationToken: 'test-token-static-' + verificationTest.email.split('@')[0],
+          userName:
+            verificationTest.userName || verificationTest.email.split("@")[0],
+          verificationToken:
+            "test-token-static-" + verificationTest.email.split("@")[0],
         }),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (response.ok && data.success) {
-        setSuccess('Verification email sent successfully!')
-        setVerificationTest({ email: '', userName: '' })
+        setSuccess("Verification email sent successfully!");
+        setVerificationTest({ email: "", userName: "" });
       } else {
-        setError(data.error || 'Failed to send verification email')
+        setError(data.error || "Failed to send verification email");
       }
     } catch (error) {
-      console.error('Verification email test error:', error)
-      setError('An error occurred while sending the test email')
+      console.error("Verification email test error:", error);
+      setError("An error occurred while sending the test email");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const handlePasswordResetTest = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    resetMessages()
+    e.preventDefault();
+    setLoading(true);
+    resetMessages();
 
     try {
-      const response = await fetch('/api/email/reset-password', {
-        method: 'POST',
+      const response = await fetch("/api/email/reset-password", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email: passwordResetTest.email,
         }),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (response.ok) {
-        setSuccess('Password reset email sent successfully!')
-        setPasswordResetTest({ email: '' })
+        setSuccess("Password reset email sent successfully!");
+        setPasswordResetTest({ email: "" });
       } else {
-        setError(data.error || 'Failed to send password reset email')
+        setError(data.error || "Failed to send password reset email");
       }
     } catch (error) {
-      console.error('Password reset test error:', error)
-      setError('An error occurred while sending the test email')
+      console.error("Password reset test error:", error);
+      setError("An error occurred while sending the test email");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const handleNotaryStatusTest = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    resetMessages()
+    e.preventDefault();
+    setLoading(true);
+    resetMessages();
 
     try {
       // For testing, we'll create a mock notary ID
-      const mockNotaryId = 'test-notary-static-' + notaryStatusTest.email.split('@')[0]
+      const mockNotaryId =
+        "test-notary-static-" + notaryStatusTest.email.split("@")[0];
 
-      const response = await fetch('/api/email/test/notary-status', {
-        method: 'POST',
+      const response = await fetch("/api/email/test/notary-status", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email: notaryStatusTest.email,
-          notaryName: notaryStatusTest.notaryName || notaryStatusTest.email.split('@')[0],
+          notaryName:
+            notaryStatusTest.notaryName || notaryStatusTest.email.split("@")[0],
           status: notaryStatusTest.status,
           message: notaryStatusTest.message,
           nextSteps: notaryStatusTest.nextSteps,
         }),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (response.ok && data.success) {
-        setSuccess('Notary status email sent successfully!')
+        setSuccess("Notary status email sent successfully!");
         setNotaryStatusTest({
-          email: '',
-          notaryName: '',
-          status: 'approved',
-          message: '',
-          nextSteps: ''
-        })
+          email: "",
+          notaryName: "",
+          status: "approved",
+          message: "",
+          nextSteps: "",
+        });
       } else {
-        setError(data.error || 'Failed to send notary status email')
+        setError(data.error || "Failed to send notary status email");
       }
     } catch (error) {
-      console.error('Notary status test error:', error)
-      setError('An error occurred while sending the test email')
+      console.error("Notary status test error:", error);
+      setError("An error occurred while sending the test email");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   // Simple admin check
   if (!user) {
@@ -170,7 +174,7 @@ export default function EmailTestPage() {
           </CardContent>
         </Card>
       </div>
-    )
+    );
   }
 
   return (
@@ -180,7 +184,9 @@ export default function EmailTestPage() {
           <Mail className="mr-3 h-8 w-8" />
           Email System Testing
         </h1>
-        <p className="text-gray-600">Test the AWS SES integration and email templates</p>
+        <p className="text-gray-600">
+          Test the AWS SES integration and email templates
+        </p>
       </div>
 
       {error && (
@@ -221,10 +227,12 @@ export default function EmailTestPage() {
                     type="email"
                     placeholder="test@example.com"
                     value={verificationTest.email}
-                    onChange={(e) => setVerificationTest({
-                      ...verificationTest,
-                      email: e.target.value
-                    })}
+                    onChange={(e) =>
+                      setVerificationTest({
+                        ...verificationTest,
+                        email: e.target.value,
+                      })
+                    }
                     required
                   />
                 </div>
@@ -236,10 +244,12 @@ export default function EmailTestPage() {
                     type="text"
                     placeholder="John Doe"
                     value={verificationTest.userName}
-                    onChange={(e) => setVerificationTest({
-                      ...verificationTest,
-                      userName: e.target.value
-                    })}
+                    onChange={(e) =>
+                      setVerificationTest({
+                        ...verificationTest,
+                        userName: e.target.value,
+                      })
+                    }
                   />
                 </div>
 
@@ -278,10 +288,12 @@ export default function EmailTestPage() {
                     type="email"
                     placeholder="test@example.com"
                     value={passwordResetTest.email}
-                    onChange={(e) => setPasswordResetTest({
-                      ...passwordResetTest,
-                      email: e.target.value
-                    })}
+                    onChange={(e) =>
+                      setPasswordResetTest({
+                        ...passwordResetTest,
+                        email: e.target.value,
+                      })
+                    }
                     required
                   />
                 </div>
@@ -321,10 +333,12 @@ export default function EmailTestPage() {
                     type="email"
                     placeholder="notary@example.com"
                     value={notaryStatusTest.email}
-                    onChange={(e) => setNotaryStatusTest({
-                      ...notaryStatusTest,
-                      email: e.target.value
-                    })}
+                    onChange={(e) =>
+                      setNotaryStatusTest({
+                        ...notaryStatusTest,
+                        email: e.target.value,
+                      })
+                    }
                     required
                   />
                 </div>
@@ -336,10 +350,12 @@ export default function EmailTestPage() {
                     type="text"
                     placeholder="Jane Smith"
                     value={notaryStatusTest.notaryName}
-                    onChange={(e) => setNotaryStatusTest({
-                      ...notaryStatusTest,
-                      notaryName: e.target.value
-                    })}
+                    onChange={(e) =>
+                      setNotaryStatusTest({
+                        ...notaryStatusTest,
+                        notaryName: e.target.value,
+                      })
+                    }
                   />
                 </div>
 
@@ -348,10 +364,15 @@ export default function EmailTestPage() {
                   <select
                     id="notary-status"
                     value={notaryStatusTest.status}
-                    onChange={(e) => setNotaryStatusTest({
-                      ...notaryStatusTest,
-                      status: e.target.value as 'approved' | 'rejected' | 'pending'
-                    })}
+                    onChange={(e) =>
+                      setNotaryStatusTest({
+                        ...notaryStatusTest,
+                        status: e.target.value as
+                          | "approved"
+                          | "rejected"
+                          | "pending",
+                      })
+                    }
                     className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="approved">Approved</option>
@@ -366,24 +387,30 @@ export default function EmailTestPage() {
                     id="notary-message"
                     placeholder="Custom message for the notary..."
                     value={notaryStatusTest.message}
-                    onChange={(e) => setNotaryStatusTest({
-                      ...notaryStatusTest,
-                      message: e.target.value
-                    })}
+                    onChange={(e) =>
+                      setNotaryStatusTest({
+                        ...notaryStatusTest,
+                        message: e.target.value,
+                      })
+                    }
                     rows={3}
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="notary-next-steps">Next Steps (Optional)</Label>
+                  <Label htmlFor="notary-next-steps">
+                    Next Steps (Optional)
+                  </Label>
                   <Textarea
                     id="notary-next-steps"
                     placeholder="What should the notary do next..."
                     value={notaryStatusTest.nextSteps}
-                    onChange={(e) => setNotaryStatusTest({
-                      ...notaryStatusTest,
-                      nextSteps: e.target.value
-                    })}
+                    onChange={(e) =>
+                      setNotaryStatusTest({
+                        ...notaryStatusTest,
+                        nextSteps: e.target.value,
+                      })
+                    }
                     rows={3}
                   />
                 </div>
@@ -417,12 +444,22 @@ export default function EmailTestPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-2 text-sm">
-              <p><strong>AWS Region:</strong> {process.env.NEXT_PUBLIC_AWS_REGION || 'us-east-1'}</p>
-              <p><strong>From Email:</strong> {process.env.NEXT_PUBLIC_SES_FROM_EMAIL || 'Not configured'}</p>
-              <p><strong>From Name:</strong> {process.env.NEXT_PUBLIC_SES_FROM_NAME || 'Notarized Platform'}</p>
+              <p>
+                <strong>AWS Region:</strong>{" "}
+                {process.env.NEXT_PUBLIC_AWS_REGION || "us-east-1"}
+              </p>
+              <p>
+                <strong>From Email:</strong>{" "}
+                {process.env.NEXT_PUBLIC_SES_FROM_EMAIL || "Not configured"}
+              </p>
+              <p>
+                <strong>From Name:</strong>{" "}
+                {process.env.NEXT_PUBLIC_SES_FROM_NAME || "Notarized Platform"}
+              </p>
               <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-md">
                 <p className="text-yellow-800">
-                  <strong>Note:</strong> Make sure to update your .env file with actual AWS SES credentials before testing in production.
+                  <strong>Note:</strong> Make sure to update your .env file with
+                  actual AWS SES credentials before testing in production.
                 </p>
               </div>
             </div>
@@ -430,5 +467,5 @@ export default function EmailTestPage() {
         </Card>
       </div>
     </div>
-  )
+  );
 }

@@ -36,7 +36,7 @@ function SearchFormContent() {
         },
         (error) => {
           console.error("Location error:", error);
-        }
+        },
       );
     }
   };
@@ -150,7 +150,9 @@ export default function SearchForm() {
     <HydrationBoundary
       fallback={
         <div className="bg-white rounded-2xl p-8 shadow-2xl">
-          <div className="text-center text-gray-500">Loading search form...</div>
+          <div className="text-center text-gray-500">
+            Loading search form...
+          </div>
         </div>
       }
     >
