@@ -187,11 +187,23 @@ export function NotaryProfileStep({ data, updateData, userName = "Steven Wakelin
             Notary state and county:
             <span className="text-[#E42B38] ml-0.5">*</span>
           </Label>
-          <div className="relative">
+          <div
+            className="relative cursor-pointer"
+            onClick={() => {
+              // Set demo data if empty
+              if (!data.notaryState || !data.notaryCounty) {
+                updateData({
+                  ...data,
+                  notaryState: "New York",
+                  notaryCounty: "Bronx County"
+                });
+              }
+            }}
+          >
             <Input
               value={data.notaryState && data.notaryCounty ? `${data.notaryState}, ${data.notaryCounty}` : ""}
               placeholder="Select state and county"
-              className="h-11 border-[#949494] rounded-md pr-10"
+              className="h-11 border-[#949494] rounded-md pr-10 cursor-pointer"
               readOnly
             />
             <PencilIcon className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
