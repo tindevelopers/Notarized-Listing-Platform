@@ -78,7 +78,12 @@ export async function POST(request: NextRequest) {
       message: result.messageId?.startsWith('dev-mode-') 
         ? "Verification email logged to console (development mode)" 
         : "Verification email sent successfully",
-      error: result.error // Include development mode message if present
+      error: result.error, // Include development mode message if present
+      // In development mode, include the verification code so the UI can display it
+      ...(result.messageId?.startsWith('dev-mode-') && { 
+        developmentMode: true,
+        verificationCode: verificationCode 
+      })
     })
 
   } catch (error) {

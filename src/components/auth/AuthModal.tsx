@@ -25,6 +25,8 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
   const [showVerification, setShowVerification] = useState(false)
   const [verificationEmail, setVerificationEmail] = useState('')
   const [verificationCode, setVerificationCode] = useState('')
+  const [developmentMode, setDevelopmentMode] = useState(false)
+  const [developmentCode, setDevelopmentCode] = useState('')
 
   // Form states
   const [signInData, setSignInData] = useState({ email: '', password: '' })
@@ -45,6 +47,8 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
     setShowVerification(false)
     setVerificationEmail('')
     setVerificationCode('')
+    setDevelopmentMode(false)
+    setDevelopmentCode('')
   }
 
   const handleSignIn = async (e: React.FormEvent) => {
@@ -93,7 +97,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
       return
     }
 
-    const { error, requiresVerification } = await signUp(signUpData.email, signUpData.password, signUpData.fullName)
+    const { error, requiresVerification, developmentMode, verificationCode } = await signUp(signUpData.email, signUpData.password, signUpData.fullName)
     
     if (error) {
       setError(error.message || 'An error occurred during sign up')
@@ -102,6 +106,13 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
         // Show verification code input instead of success message
         setVerificationEmail(signUpData.email)
         setShowVerification(true)
+        
+        // If in development mode, store the verification code to display
+        if (developmentMode && verificationCode) {
+          setDevelopmentMode(true)
+          setDevelopmentCode(verificationCode)
+        }
+        
         setSignUpData({ email: '', password: '', confirmPassword: '', fullName: '' })
       } else {
         setSuccess('Account created successfully!')
@@ -220,6 +231,27 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
                   We've sent a 6-digit verification code to<br />
                   <strong>{verificationEmail}</strong>
                 </p>
+                
+                {/* Development Mode: Show the verification code directly */}
+                {developmentMode && developmentCode && (
+                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mt-4">
+                    <div className="flex items-center justify-center space-x-2">
+                      <AlertCircle className="h-4 w-4 text-yellow-600" />
+                      <span className="text-sm font-medium text-yellow-800">Development Mode</span>
+                    </div>
+                    <p className="text-xs text-yellow-700 mt-1 mb-3">
+                      AWS SES not configured. Your verification code is:
+                    </p>
+                    <div className="bg-white border rounded-lg p-3">
+                      <div className="text-2xl font-mono font-bold text-center tracking-wider text-blue-600">
+                        {developmentCode}
+                      </div>
+                    </div>
+                    <p className="text-xs text-yellow-700 mt-2">
+                      Enter this code in the form below to complete verification.
+                    </p>
+                  </div>
+                )}
               </div>
 
               <form onSubmit={handleVerifyCode} className="space-y-4">

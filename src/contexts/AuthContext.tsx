@@ -13,7 +13,7 @@ interface AuthContextType {
     email: string,
     password: string,
     fullName?: string,
-  ) => Promise<{ error?: any; requiresVerification?: boolean }>;
+  ) => Promise<{ error?: any; requiresVerification?: boolean; developmentMode?: boolean; verificationCode?: string }>;
   signIn: (email: string, password: string) => Promise<{ error?: any }>;
   signOut: () => Promise<{ error?: any }>;
 }
@@ -99,7 +99,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           user: null,
           session: null,
           loading: true,
-          signUp: async () => ({ error: new Error("Not hydrated") }),
+          signUp: async () => ({ error: new Error("Not hydrated"), requiresVerification: false }),
           signIn: async () => ({ error: new Error("Not hydrated") }),
           signOut: async () => ({ error: new Error("Not hydrated") }),
         }}
@@ -161,8 +161,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 responseData.message || "Success",
               );
 
-              // Check if this is development mode
-              if (responseData.error?.includes("Development mode")) {
+              // Check if this is development mode and return the data
+              if (responseData.developmentMode && responseData.verificationCode) {
+                console.log(
+                  "📧 Development mode: Verification code available for UI display",
+                );
+                return { 
+                  error: null, 
+                  requiresVerification: true, 
+                  developmentMode: true, 
+                  verificationCode: responseData.verificationCode 
+                };
+              } else if (responseData.error?.includes("Development mode")) {
                 console.log(
                   "📧 Check the server console for the email content that would be sent",
                 );
