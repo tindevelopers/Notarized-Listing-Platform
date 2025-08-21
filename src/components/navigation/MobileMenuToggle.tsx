@@ -63,7 +63,7 @@ function MobileMenuToggleContent() {
             <div className="pt-4 border-t border-gray-100 space-y-2">
               <Button variant="ghost" className="w-full" asChild>
                 <Link
-                  href="/notary-signup"
+                  href="/?signup=true"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   List Your Business
