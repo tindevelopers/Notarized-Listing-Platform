@@ -26,7 +26,7 @@ function VerifyEmailContent() {
     }
 
     verifyEmail()
-  }, [token, email, verifyEmail])
+  }, [token, email]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const verifyEmail = async () => {
     try {
