@@ -78,7 +78,7 @@ if (typeof window !== "undefined") {
     const originalConsoleError = console.error;
     console.error = (...args: any[]) => {
       const message = args.join(" ");
-      
+
       if (
         message.includes("ResizeObserver") ||
         message.toLowerCase().includes("resizeobserver") ||
@@ -87,9 +87,17 @@ if (typeof window !== "undefined") {
         /resize.*observer/i.test(message) ||
         /observer.*loop/i.test(message)
       ) {
+        // Log the suppressed console error
+        errorMonitor.logError({
+          type: 'error',
+          message: message,
+          suppressed: true,
+          reason: 'ResizeObserver',
+          details: { args }
+        });
         return; // Suppress completely
       }
-      
+
       originalConsoleError.apply(console, args);
     };
 
