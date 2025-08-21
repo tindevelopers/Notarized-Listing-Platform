@@ -13,17 +13,17 @@ export async function GET(request: NextRequest) {
       error: sessionError,
     } = await supabase.auth.getSession();
 
-    console.log('Superadmin API: Session check:', {
+    console.log("Superadmin API: Session check:", {
       hasSession: !!session,
       sessionError: sessionError?.message,
-      userEmail: session?.user?.email
+      userEmail: session?.user?.email,
     });
 
     if (sessionError || !session?.user) {
-      console.log('Superadmin API: No valid session found');
+      console.log("Superadmin API: No valid session found");
       return NextResponse.json(
         { error: "Unauthorized - No valid session" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -31,19 +31,20 @@ export async function GET(request: NextRequest) {
 
     // Check if user is superadmin
     const superAdminEmails = [
-      'admin@notarized.com',
-      'superadmin@notarized.com',
-      'support@notarized.com'
+      "admin@notarized.com",
+      "superadmin@notarized.com",
+      "support@notarized.com",
     ];
-    
-    const isSuperAdmin = superAdminEmails.includes(user.email || '') || 
-                       user.email?.endsWith('@notarized.com') ||
-                       user.user_metadata?.role === 'superadmin';
+
+    const isSuperAdmin =
+      superAdminEmails.includes(user.email || "") ||
+      user.email?.endsWith("@notarized.com") ||
+      user.user_metadata?.role === "superadmin";
 
     if (!isSuperAdmin) {
       return NextResponse.json(
         { error: "Forbidden - Superadmin access required" },
-        { status: 403 }
+        { status: 403 },
       );
     }
 
@@ -55,7 +56,7 @@ export async function GET(request: NextRequest) {
       activeNotaries: 50,
       totalNotaryApplications: 55,
       totalClients: 1500,
-      averageClientValue: 40.00,
+      averageClientValue: 40.0,
       monthlyInvoiceTotal: 50000,
       monthlyInvoiceCount: 1000,
       monthlyPayments: 20000,
@@ -104,12 +105,11 @@ export async function GET(request: NextRequest) {
     */
 
     return NextResponse.json(stats);
-
   } catch (error) {
     console.error("Superadmin stats error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

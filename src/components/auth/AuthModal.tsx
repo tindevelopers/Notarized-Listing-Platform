@@ -50,7 +50,6 @@ export function AuthModal({
 
   const { signIn, signUp } = useAuth();
 
-
   const resetForms = () => {
     setSignInData({ email: "", password: "" });
     setSignUpData({

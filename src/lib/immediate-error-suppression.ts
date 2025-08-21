@@ -43,10 +43,12 @@ if (typeof window !== "undefined") {
   // Immediate ResizeObserver error suppression
   const immediateErrorHandler = (event: ErrorEvent) => {
     const { message, error } = event;
-    
+
     // Check for ResizeObserver errors with comprehensive patterns
     if (
-      message?.includes("ResizeObserver loop completed with undelivered notifications") ||
+      message?.includes(
+        "ResizeObserver loop completed with undelivered notifications",
+      ) ||
       message?.includes("ResizeObserver loop limit exceeded") ||
       message?.includes("ResizeObserver loop") ||
       message?.includes("ResizeObserver") ||
@@ -62,11 +64,11 @@ if (typeof window !== "undefined") {
     ) {
       // Log the suppressed error
       errorMonitor.logError({
-        type: 'error',
-        message: message || 'ResizeObserver error',
+        type: "error",
+        message: message || "ResizeObserver error",
         suppressed: true,
-        reason: 'ResizeObserver',
-        details: { error, filename: event.filename }
+        reason: "ResizeObserver",
+        details: { error, filename: event.filename },
       });
 
       event.preventDefault();
@@ -78,7 +80,7 @@ if (typeof window !== "undefined") {
   // Immediate promise rejection handler
   const immediateRejectionHandler = (event: PromiseRejectionEvent) => {
     const reason = event.reason;
-    
+
     if (
       reason?.message?.includes("ResizeObserver") ||
       reason?.toString?.()?.includes("ResizeObserver") ||
@@ -91,11 +93,12 @@ if (typeof window !== "undefined") {
     ) {
       // Log the suppressed promise rejection
       errorMonitor.logError({
-        type: 'rejection',
-        message: reason?.message || reason?.toString?.() || 'ResizeObserver rejection',
+        type: "rejection",
+        message:
+          reason?.message || reason?.toString?.() || "ResizeObserver rejection",
         suppressed: true,
-        reason: 'ResizeObserver',
-        details: { reason }
+        reason: "ResizeObserver",
+        details: { reason },
       });
 
       event.preventDefault();
@@ -105,7 +108,9 @@ if (typeof window !== "undefined") {
 
   // Add event listeners immediately
   window.addEventListener("error", immediateErrorHandler, { passive: true });
-  window.addEventListener("unhandledrejection", immediateRejectionHandler, { passive: true });
+  window.addEventListener("unhandledrejection", immediateRejectionHandler, {
+    passive: true,
+  });
 
   // Console overrides are now handled immediately at the top of this file
 

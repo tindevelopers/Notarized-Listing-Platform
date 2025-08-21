@@ -25,14 +25,15 @@ export async function middleware(request: NextRequest) {
     if (request.nextUrl.pathname.startsWith("/dashboard") && session) {
       const userEmail = session.user.email;
       const superAdminEmails = [
-        'admin@notarized.com',
-        'superadmin@notarized.com',
-        'support@notarized.com'
+        "admin@notarized.com",
+        "superadmin@notarized.com",
+        "support@notarized.com",
       ];
 
-      const isSuperAdmin = superAdminEmails.includes(userEmail || '') ||
-                         userEmail?.endsWith('@notarized.com') ||
-                         session.user.user_metadata?.role === 'superadmin';
+      const isSuperAdmin =
+        superAdminEmails.includes(userEmail || "") ||
+        userEmail?.endsWith("@notarized.com") ||
+        session.user.user_metadata?.role === "superadmin";
 
       if (isSuperAdmin) {
         return NextResponse.redirect(new URL("/superadmin", request.url));
@@ -54,14 +55,15 @@ export async function middleware(request: NextRequest) {
     // Check if user is superadmin
     const userEmail = session.user.email;
     const superAdminEmails = [
-      'admin@notarized.com',
-      'superadmin@notarized.com',
-      'support@notarized.com'
+      "admin@notarized.com",
+      "superadmin@notarized.com",
+      "support@notarized.com",
     ];
 
-    const isSuperAdmin = superAdminEmails.includes(userEmail || '') ||
-                       userEmail?.endsWith('@notarized.com') ||
-                       session.user.user_metadata?.role === 'superadmin';
+    const isSuperAdmin =
+      superAdminEmails.includes(userEmail || "") ||
+      userEmail?.endsWith("@notarized.com") ||
+      session.user.user_metadata?.role === "superadmin";
 
     if (!isSuperAdmin) {
       return NextResponse.redirect(new URL("/dashboard", request.url));
