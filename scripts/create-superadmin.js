@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
 // Script to create a superadmin user directly in Supabase
-const { createClient } = require('@supabase/supabase-js');
+import { createClient } from '@supabase/supabase-js';
+import dotenv from 'dotenv';
 
 // Load environment variables
-require('dotenv').config();
+dotenv.config();
 
 async function createSuperAdmin() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
