@@ -93,7 +93,7 @@ export async function GET() {
     
     // Check if any superadmin users exist
     const { data: users } = await supabase.auth.admin.listUsers();
-    const superAdminExists = users?.users?.some(user => 
+    const superAdminExists = users?.users?.some((user: User) =>
       user.email?.endsWith('@notarized.com') ||
       ['admin@notarized.com', 'superadmin@notarized.com', 'support@notarized.com'].includes(user.email || '') ||
       user.user_metadata?.role === 'superadmin'
