@@ -298,6 +298,21 @@ export default function DashboardPage() {
                     </div>
                   )}
 
+                  {profileCompletion.credentialsUploaded ? (
+                    <div className="flex items-center gap-3">
+                      <div className="w-7 h-7 bg-[#1A963F] rounded-full flex items-center justify-center">
+                        <CheckCircle className="h-4 w-4 text-white" />
+                      </div>
+                      <span className="text-black line-through">Upload credentials</span>
+                    </div>
+                  ) : (
+                    <Link href="/complete-profile?step=credentials" className="flex items-center gap-3 hover:bg-gray-50 p-2 -m-2 rounded-md">
+                      <div className="w-7 h-7 border border-[#E5E7EB] rounded-full bg-white"></div>
+                      <span className="text-black">Upload credentials</span>
+                      <ChevronRight className="h-5 w-5 text-[#575757] ml-auto" />
+                    </Link>
+                  )}
+
                   <Link href="/complete-profile?step=credentials" className="flex items-center gap-3 hover:bg-gray-50 p-2 -m-2 rounded-md">
                     <div className="w-7 h-7 border border-[#E5E7EB] rounded-full bg-white"></div>
                     <span className="text-black">Add your earnings payment details</span>
