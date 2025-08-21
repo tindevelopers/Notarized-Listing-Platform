@@ -75,15 +75,28 @@ export default function DashboardPage() {
     }
   }, [user, loading]);
 
-  // Mock profile completion check - in real app, fetch from API
+  // Check profile completion status
   useEffect(() => {
-    // Check if notary profile is complete
-    // This would be replaced with actual API calls to check completion status
-    const checkNotaryProfile = () => {
-      // Simulate checking if user has completed notary profile (Step 3)
-      const profileComplete = false; // Set to false to show the notification
-      setNotaryProfileComplete(profileComplete);
-    };
+    // Check if user just completed their profile
+    const profileCompleteParam = searchParams.get('profile-complete');
+    if (profileCompleteParam === 'true') {
+      setNotaryProfileComplete(true);
+      setShowProfileAlert(false);
+      setShowSuccessBanner(true);
+
+      // Clean up URL params
+      window.history.replaceState({}, '', '/dashboard');
+    } else {
+      // Check if notary profile is complete
+      // This would be replaced with actual API calls to check completion status
+      const checkNotaryProfile = () => {
+        // Simulate checking if user has completed notary profile (Step 3)
+        const profileComplete = false; // Set to false to show the notification
+        setNotaryProfileComplete(profileComplete);
+      };
+
+      checkNotaryProfile();
+    }
 
     // This would be replaced with actual API calls to check completion status
     setProfileCompletion({
@@ -93,9 +106,7 @@ export default function DashboardPage() {
       paymentDetailsAdded: false, // Still needs payment setup
       firstTransactionAccepted: false, // Still needs first transaction
     });
-
-    checkNotaryProfile();
-  }, []);
+  }, [searchParams]);
 
   if (loading) {
     return (
