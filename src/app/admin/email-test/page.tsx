@@ -1,5 +1,3 @@
-
-
 "use client"
 
 import { useState } from 'react'
@@ -65,7 +63,7 @@ export default function EmailTestPage() {
         body: JSON.stringify({
           email: verificationTest.email,
           userName: verificationTest.userName || verificationTest.email.split('@')[0],
-          verificationToken: 'test-token-' + Date.now().toString(36) + Math.random().toString(36).substr(2),
+          verificationToken: 'test-token-static-' + verificationTest.email.split('@')[0],
         }),
       })
 
@@ -124,7 +122,7 @@ export default function EmailTestPage() {
 
     try {
       // For testing, we'll create a mock notary ID
-      const mockNotaryId = 'test-notary-' + Date.now().toString(36)
+      const mockNotaryId = 'test-notary-static-' + notaryStatusTest.email.split('@')[0]
 
       const response = await fetch('/api/email/test/notary-status', {
         method: 'POST',
