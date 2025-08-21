@@ -51,8 +51,8 @@ export default function About() {
                               Notarized, Inc. is here to assist you with
                               notaries for all your signings and notarization
                               needs. Cultivated by Real Estate Industry
-                              Professionals with over 15 years of experience,
-                              we know and understand what it takes to complete
+                              Professionals with over 15 years of experience, we
+                              know and understand what it takes to complete
                               closings properly, and we will be with you every
                               step of the way. Our customer service team is
                               available 24/7 for signing appointments and
@@ -95,16 +95,16 @@ export default function About() {
 
               <div className="space-y-6">
                 <div className="text-lg text-gray-600 leading-relaxed">
-                  Notarized, Inc. is here to assist you with notaries for
-                  all your signings and notarization needs. Cultivated by
-                  Real Estate Industry Professionals with over 15 years of
-                  experience, we know and understand what it takes to
-                  complete closings properly, and we will be with you every
-                  step of the way. Our customer service team is available
-                  24/7 for signing appointments and questions. At Notarized,
-                  Inc., we have a vast range of signing knowledge to support
-                  you, in combination with the experience and skill set to
-                  handle your signings properly the first time.
+                  Notarized, Inc. is here to assist you with notaries for all
+                  your signings and notarization needs. Cultivated by Real
+                  Estate Industry Professionals with over 15 years of
+                  experience, we know and understand what it takes to complete
+                  closings properly, and we will be with you every step of the
+                  way. Our customer service team is available 24/7 for signing
+                  appointments and questions. At Notarized, Inc., we have a vast
+                  range of signing knowledge to support you, in combination with
+                  the experience and skill set to handle your signings properly
+                  the first time.
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4">
@@ -167,7 +167,9 @@ export default function About() {
               <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto">
                 <TrendingUp className="w-6 h-6 text-white" />
               </div>
-              <div className="text-5xl font-bold text-gray-900">All 50 States</div>
+              <div className="text-5xl font-bold text-gray-900">
+                All 50 States
+              </div>
               <div className="text-xl font-bold text-gray-900">
                 Happy clients
               </div>
@@ -181,9 +183,7 @@ export default function About() {
                 <Star className="w-6 h-6 text-white" />
               </div>
               <div className="text-5xl font-bold text-gray-900">20Y +</div>
-              <div className="text-xl font-bold text-gray-900">
-                Experience
-              </div>
+              <div className="text-xl font-bold text-gray-900">Experience</div>
               <p className="text-gray-600">
                 Lorem ipsum dolor sit amet consectetur adipiscing elit.
               </p>
@@ -278,10 +278,10 @@ export default function About() {
                   The values that drive everything we do
                 </h2>
                 <div className="text-lg text-gray-600">
-                  Our core values are the foundation upon which we've built
-                  our platform. These values guide our daily operations, our
-                  long-term vision, and our commitment to both the notaries
-                  and the public we serve.
+                  Our core values are the foundation upon which we've built our
+                  platform. These values guide our daily operations, our
+                  long-term vision, and our commitment to both the notaries and
+                  the public we serve.
                 </div>
               </div>
 
@@ -317,8 +317,8 @@ export default function About() {
                 <h3 className="text-2xl font-bold text-gray-900">Excellence</h3>
                 <div className="text-gray-600">
                   We continuously strive for the highest quality in our
-                  services, ensuring that our members and users receive the
-                  best experience possible.
+                  services, ensuring that our members and users receive the best
+                  experience possible.
                 </div>
               </div>
             </Card>
@@ -331,8 +331,8 @@ export default function About() {
                 <h3 className="text-2xl font-bold text-gray-900">Community</h3>
                 <div className="text-gray-600">
                   We value the power of collective strength and endeavor to
-                  create a supportive environment where notaries can
-                  connect, share, and grow together.
+                  create a supportive environment where notaries can connect,
+                  share, and grow together.
                 </div>
               </div>
             </Card>
@@ -350,10 +350,10 @@ export default function About() {
                   Why join us?
                 </h2>
                 <div className="text-lg text-gray-600">
-                  Join our community and showcase your expertise to those
-                  who need it most. With Notarized, you're not just getting
-                  a listing; you're becoming part of a dedicated network
-                  committed to elevating the notary profession.
+                  Join our community and showcase your expertise to those who
+                  need it most. With Notarized, you're not just getting a
+                  listing; you're becoming part of a dedicated network committed
+                  to elevating the notary profession.
                 </div>
               </div>
 
