@@ -58,12 +58,18 @@ const isThirdPartyInterference = (error: any): boolean => {
   const errorMessage = error?.message || "";
   const errorStack = error?.stack || "";
 
+  // Only consider it third-party interference if we have clear indicators
   return (
     errorStack.includes("chrome-extension://") ||
+    errorStack.includes("moz-extension://") ||
+    errorStack.includes("safari-extension://") ||
     errorStack.includes("fullstory.com") ||
     errorStack.includes("frame_ant.js") ||
-    errorMessage.includes("Extension context") ||
-    errorMessage.includes("Script error")
+    errorStack.includes("googletagmanager.com") ||
+    errorStack.includes("google-analytics.com") ||
+    errorMessage.includes("Extension context invalidated") ||
+    errorMessage.includes("chrome.runtime") ||
+    (errorMessage.includes("Script error") && errorStack.includes("chrome-extension"))
   );
 };
 
