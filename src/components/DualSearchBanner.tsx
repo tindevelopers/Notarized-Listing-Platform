@@ -31,7 +31,7 @@ export default function DualSearchBanner() {
             <Button
               size="lg"
               variant="outline"
-              className="flex items-center gap-2 text-lg px-6 py-4 border-white/20 text-white hover:bg-white/10 font-roboto-mono font-medium"
+              className="flex items-center gap-2 text-lg px-6 py-4 border-white border-2 text-white hover:bg-white hover:text-blue-600 transition-all duration-200 font-roboto-mono font-medium"
               style={{ font: "500 18px/28px var(--font-roboto-mono), monospace" }}
             >
               <MessageCircleQuestion className="w-5 h-5" />
@@ -49,21 +49,21 @@ export default function DualSearchBanner() {
               <Button
                 variant="outline"
                 size="sm"
-                className="border-white/20 text-white hover:bg-white/10"
+                className="border-white border text-white hover:bg-white hover:text-blue-600 transition-all duration-200 font-medium"
               >
                 Real Estate Notary
               </Button>
               <Button
                 variant="outline"
                 size="sm"
-                className="border-white/20 text-white hover:bg-white/10"
+                className="border-white border text-white hover:bg-white hover:text-blue-600 transition-all duration-200 font-medium"
               >
                 Mobile Notary
               </Button>
               <Button
                 variant="outline"
                 size="sm"
-                className="border-white/20 text-white hover:bg-white/10"
+                className="border-white border text-white hover:bg-white hover:text-blue-600 transition-all duration-200 font-medium"
               >
                 Online Notarization
               </Button>
