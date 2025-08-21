@@ -39,13 +39,21 @@ export function useNotaries(params: SearchParams = {}) {
       if (params.limit) searchParams.set("limit", params.limit.toString());
       if (params.offset) searchParams.set("offset", params.offset.toString());
 
-      const response = await fetch(`/api/notaries?${searchParams}`, { signal });
-      
-      if (!response.ok) {
-        throw new Error("Failed to fetch notaries");
+      try {
+        const response = await fetch(`/api/notaries?${searchParams}`, { signal });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch notaries");
+        }
+
+        return response.json();
+      } catch (error: any) {
+        // Ignore AbortError as it's expected when requests are cancelled
+        if (error?.name === 'AbortError') {
+          return { notaries: [], total: 0, limit: 0, offset: 0 };
+        }
+        throw error;
       }
-      
-      return response.json();
     },
     staleTime: 5 * 60 * 1000, // 5 minutes
   });
@@ -66,13 +74,21 @@ export function useNotary(id: string) {
         return result;
       }
 
-      const response = await fetch(`/api/notaries/${id}`, { signal });
-      
-      if (!response.ok) {
-        throw new Error("Failed to fetch notary");
+      try {
+        const response = await fetch(`/api/notaries/${id}`, { signal });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch notary");
+        }
+
+        return response.json();
+      } catch (error: any) {
+        // Ignore AbortError as it's expected when requests are cancelled
+        if (error?.name === 'AbortError') {
+          return null;
+        }
+        throw error;
       }
-      
-      return response.json();
     },
     enabled: !!id,
     staleTime: 5 * 60 * 1000, // 5 minutes
@@ -119,13 +135,21 @@ export function useSearchNotaries(params: SearchNotariesParams) {
       if (params.radius) searchParams.set("radius", params.radius.toString());
       if (params.limit) searchParams.set("limit", params.limit.toString());
 
-      const response = await fetch(`/api/notaries/search?${searchParams}`, { signal });
-      
-      if (!response.ok) {
-        throw new Error("Failed to search notaries");
+      try {
+        const response = await fetch(`/api/notaries/search?${searchParams}`, { signal });
+
+        if (!response.ok) {
+          throw new Error("Failed to search notaries");
+        }
+
+        return response.json();
+      } catch (error: any) {
+        // Ignore AbortError as it's expected when requests are cancelled
+        if (error?.name === 'AbortError') {
+          return { notaries: [], total: 0, query: params };
+        }
+        throw error;
       }
-      
-      return response.json();
     },
     enabled: !!(params.q || params.state || params.city || params.zip),
     staleTime: 2 * 60 * 1000, // 2 minutes for searches
