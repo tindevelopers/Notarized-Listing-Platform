@@ -18,8 +18,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["var(--font-inter)", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-        "roboto-mono": ["var(--font-roboto-mono)", "Roboto Mono", "ui-monospace", "monospace"],
+        sans: ["Inter", "var(--font-inter)", "ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+        "roboto-mono": ["Roboto Mono", "var(--font-roboto-mono)", "ui-monospace", "SF Mono", "Monaco", "Cascadia Code", "Consolas", "Courier New", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",
