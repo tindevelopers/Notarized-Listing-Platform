@@ -3,7 +3,8 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 import { AuthProvider } from "@/contexts/AuthContext";
-import { suppressResizeObserverErrors } from "@/lib/resize-observer-fix";
+import { suppressDevelopmentErrors } from "@/lib/error-suppression";
+import "@/lib/fetch-wrapper"; // Initialize fetch wrapper
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(
