@@ -13,7 +13,7 @@ interface AuthContextType {
     email: string,
     password: string,
     fullName?: string,
-  ) => Promise<{ error?: any; requiresVerification?: boolean; developmentMode?: boolean; verificationCode?: string }>;
+  ) => Promise<{ error?: any; requiresVerification?: boolean; developmentMode?: boolean; verificationCode?: string; isDuplicate?: boolean }>;
   signIn: (email: string, password: string) => Promise<{ error?: any }>;
   signOut: () => Promise<{ error?: any }>;
 }
@@ -99,7 +99,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           user: null,
           session: null,
           loading: true,
-          signUp: async () => ({ error: new Error("Not hydrated"), requiresVerification: false }),
+          signUp: async () => ({ error: new Error("Not hydrated"), requiresVerification: false, isDuplicate: false }),
           signIn: async () => ({ error: new Error("Not hydrated") }),
           signOut: async () => ({ error: new Error("Not hydrated") }),
         }}
@@ -128,7 +128,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       if (error) {
         console.error("Sign up error:", error);
-        return { error, requiresVerification: false };
+        
+        // Check if this is a duplicate registration error
+        const errorMessage = error.message?.toLowerCase() || '';
+        const isDuplicateError = 
+          errorMessage.includes('user already registered') ||
+          errorMessage.includes('email already registered') ||
+          errorMessage.includes('email already exists') ||
+          errorMessage.includes('already been registered') ||
+          error.status === 422 || // Supabase status for existing user
+          error.code === 'email_already_confirmed';
+        
+        if (isDuplicateError) {
+          console.log('Detected duplicate registration attempt for:', email);
+          return { error, requiresVerification: false, isDuplicate: true };
+        }
+        
+        return { error, requiresVerification: false, isDuplicate: false };
       }
 
       // If user creation was successful, send verification email

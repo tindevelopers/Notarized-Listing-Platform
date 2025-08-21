@@ -12,6 +12,7 @@ import { Loader2, Mail, Lock, User, AlertCircle } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
 import { EmailVerificationPopup } from './EmailVerificationPopup'
 import { OnboardingWizard } from '../onboarding/OnboardingWizard'
+import { DuplicateRegistrationPopup } from './DuplicateRegistrationPopup'
 
 interface AuthModalProps {
   open: boolean
@@ -26,7 +27,9 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
   const [success, setSuccess] = useState<string | null>(null)
   const [showVerification, setShowVerification] = useState(false)
   const [showOnboarding, setShowOnboarding] = useState(false)
+  const [showDuplicateRegistration, setShowDuplicateRegistration] = useState(false)
   const [verificationEmail, setVerificationEmail] = useState('')
+  const [duplicateEmail, setDuplicateEmail] = useState('')
   const [developmentMode, setDevelopmentMode] = useState(false)
   const [developmentCode, setDevelopmentCode] = useState('')
 
@@ -48,7 +51,9 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
     setSuccess(null)
     setShowVerification(false)
     setShowOnboarding(false)
+    setShowDuplicateRegistration(false)
     setVerificationEmail('')
+    setDuplicateEmail('')
     setDevelopmentMode(false)
     setDevelopmentCode('')
   }
@@ -99,11 +104,17 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
       return
     }
 
-    const { error, requiresVerification, developmentMode, verificationCode } = await signUp(signUpData.email, signUpData.password, signUpData.fullName)
+    const { error, requiresVerification, developmentMode, verificationCode, isDuplicate } = await signUp(signUpData.email, signUpData.password, signUpData.fullName)
     
-    console.log('Sign up result:', { error, requiresVerification, developmentMode, verificationCode })
+    console.log('Sign up result:', { error, requiresVerification, developmentMode, verificationCode, isDuplicate })
     
-    if (error) {
+    if (error && isDuplicate) {
+      // Handle duplicate registration
+      console.log('Showing duplicate registration popup for:', signUpData.email)
+      setDuplicateEmail(signUpData.email)
+      setShowDuplicateRegistration(true)
+      setSignUpData({ email: '', password: '', confirmPassword: '', fullName: '' })
+    } else if (error) {
       setError(error.message || 'An error occurred during sign up')
     } else {
       // Always require verification for the new flow
@@ -136,10 +147,25 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
     onOpenChange(false)
   }
 
+  const handleDuplicateTryAgain = () => {
+    setShowDuplicateRegistration(false)
+    setDuplicateEmail('')
+    setActiveTab('signup')
+    // The signup form will be cleared but the user can enter a new email
+  }
+
+  const handleDuplicateResetPassword = () => {
+    setShowDuplicateRegistration(false)
+    onOpenChange(false)
+    // Navigate to reset password page with the email pre-filled
+    const resetUrl = `/auth/reset-password?email=${encodeURIComponent(duplicateEmail)}`
+    window.location.href = resetUrl
+  }
+
   return (
     <>
       {/* Main Auth Modal */}
-      <Dialog open={open && !showVerification && !showOnboarding} onOpenChange={(newOpen) => {
+      <Dialog open={open && !showVerification && !showOnboarding && !showDuplicateRegistration} onOpenChange={(newOpen) => {
         if (!newOpen) resetForms()
         onOpenChange(newOpen)
       }}>
@@ -328,6 +354,15 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
         onOpenChange={setShowOnboarding}
         onComplete={handleOnboardingComplete}
         userEmail={verificationEmail}
+      />
+
+      {/* Duplicate Registration Popup */}
+      <DuplicateRegistrationPopup
+        open={showDuplicateRegistration}
+        onOpenChange={setShowDuplicateRegistration}
+        email={duplicateEmail}
+        onTryAgain={handleDuplicateTryAgain}
+        onResetPassword={handleDuplicateResetPassword}
       />
     </>
   )

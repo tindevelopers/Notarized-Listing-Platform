@@ -34,6 +34,9 @@ function ResetPasswordContent() {
     if (token && emailFromUrl) {
       setStep('reset')
       setEmail(emailFromUrl)
+    } else if (emailFromUrl) {
+      // Pre-fill email from URL parameter (e.g., from duplicate registration popup)
+      setEmail(emailFromUrl)
     }
   }, [token, emailFromUrl])
 
