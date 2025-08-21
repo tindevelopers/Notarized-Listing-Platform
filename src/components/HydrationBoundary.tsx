@@ -11,7 +11,10 @@ interface HydrationBoundaryProps {
  * HydrationBoundary prevents hydration mismatches by only rendering
  * client-specific content after hydration is complete.
  */
-export function HydrationBoundary({ children, fallback = null }: HydrationBoundaryProps) {
+export function HydrationBoundary({
+  children,
+  fallback = null,
+}: HydrationBoundaryProps) {
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {

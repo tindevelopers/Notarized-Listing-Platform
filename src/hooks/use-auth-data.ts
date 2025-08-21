@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "@/contexts/AuthContext";
 
 export function useProfile() {
   const { user } = useAuth();
-  
+
   return useQuery({
     queryKey: ["profile", user?.id],
     queryFn: async ({ signal }) => {
@@ -19,7 +19,7 @@ export function useProfile() {
         return response.json();
       } catch (error: any) {
         // Ignore AbortError as it's expected when requests are cancelled
-        if (error?.name === 'AbortError') {
+        if (error?.name === "AbortError") {
           return null;
         }
         throw error;
@@ -33,7 +33,7 @@ export function useProfile() {
 export function useUpdateProfile() {
   const queryClient = useQueryClient();
   const { user } = useAuth();
-  
+
   return useMutation({
     mutationFn: async (data: { full_name?: string; avatar_url?: string }) => {
       try {
@@ -52,13 +52,13 @@ export function useUpdateProfile() {
         return response.json();
       } catch (error: any) {
         // Ignore AbortError as it's expected when requests are cancelled
-        if (error?.name === 'AbortError') {
+        if (error?.name === "AbortError") {
           return;
         }
         throw error;
       }
     },
-      
+
     onSuccess: () => {
       // Invalidate profile query to refetch latest data
       queryClient.invalidateQueries({ queryKey: ["profile", user?.id] });
@@ -68,7 +68,7 @@ export function useUpdateProfile() {
 
 export function useBookings() {
   const { user } = useAuth();
-  
+
   return useQuery({
     queryKey: ["bookings", user?.id],
     queryFn: async ({ signal }) => {
@@ -82,7 +82,7 @@ export function useBookings() {
         return response.json();
       } catch (error: any) {
         // Ignore AbortError as it's expected when requests are cancelled
-        if (error?.name === 'AbortError') {
+        if (error?.name === "AbortError") {
           return [];
         }
         throw error;
@@ -96,16 +96,16 @@ export function useBookings() {
 export function useCreateBooking() {
   const queryClient = useQueryClient();
   const { user } = useAuth();
-  
+
   return useMutation({
     mutationFn: async (data: {
-      notary_id: string
-      service_type: string
-      service_date: string
-      service_time: string
-      location?: string
-      notes?: string
-      total_cost?: number
+      notary_id: string;
+      service_type: string;
+      service_date: string;
+      service_time: string;
+      location?: string;
+      notes?: string;
+      total_cost?: number;
     }) => {
       try {
         const response = await fetch("/api/bookings", {
@@ -123,13 +123,13 @@ export function useCreateBooking() {
         return response.json();
       } catch (error: any) {
         // Ignore AbortError as it's expected when requests are cancelled
-        if (error?.name === 'AbortError') {
+        if (error?.name === "AbortError") {
           return;
         }
         throw error;
       }
     },
-      
+
     onSuccess: () => {
       // Invalidate bookings query to refetch latest data
       queryClient.invalidateQueries({ queryKey: ["bookings", user?.id] });
