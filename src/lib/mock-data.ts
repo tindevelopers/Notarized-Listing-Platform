@@ -1,4 +1,3 @@
-
 import { NotaryWithProfile } from "@/types/supabase";
 
 export const mockNotaries: NotaryWithProfile[] = [
@@ -352,7 +351,12 @@ function generateSlug(name: string): string {
 export function getMockNotaryWithReviews(identifier: string) {
   // Try to find by ID first
   let notary = mockNotaries.find(n => n.id === identifier);
-  
+
+  // If not found by ID, try with "mock-" prefix for numeric IDs
+  if (!notary && /^\d+$/.test(identifier)) {
+    notary = mockNotaries.find(n => n.id === `mock-${identifier}`);
+  }
+
   // If not found by ID, try to find by slug (generated from full_name)
   if (!notary) {
     notary = mockNotaries.find(n => {
@@ -360,7 +364,7 @@ export function getMockNotaryWithReviews(identifier: string) {
       return slug === identifier;
     });
   }
-  
+
   if (!notary) return null;
   
   const reviews = mockReviews.filter(r => r.notary_id === notary.id);
