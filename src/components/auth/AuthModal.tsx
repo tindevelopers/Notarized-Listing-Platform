@@ -50,11 +50,6 @@ export function AuthModal({
 
   const { signIn, signUp } = useAuth();
 
-  // Suppress ResizeObserver errors
-  useEffect(() => {
-    const cleanup = suppressResizeObserverErrors();
-    return cleanup;
-  }, []);
 
   const resetForms = () => {
     setSignInData({ email: "", password: "" });
