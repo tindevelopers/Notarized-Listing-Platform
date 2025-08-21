@@ -41,7 +41,7 @@ export default function About() {
                 <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
                   About our company
                 </h1>
-                <p className="text-lg text-gray-600 leading-relaxed font-light text-left">
+                <div className="text-lg text-gray-600 leading-relaxed font-light text-left">
                   <div className="mb-20">
                     <div className="max-w-4xl mx-auto">
                       <div className="text-center">
@@ -66,11 +66,7 @@ export default function About() {
                       </div>
                     </div>
                   </div>
-                  <div className="relative text-gray-600">
-                    <div className="max-w-3xl mx-auto">
-                    </div>
-                  </div>
-                </p>
+                </div>
               </div>
 
               {/* Left image */}
@@ -98,20 +94,18 @@ export default function About() {
               </div>
 
               <div className="space-y-6">
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  <div>
-                    Notarized, Inc. is here to assist you with notaries for
-                    all your signings and notarization needs. Cultivated by
-                    Real Estate Industry Professionals with over 15 years of
-                    experience, we know and understand what it takes to
-                    complete closings properly, and we will be with you every
-                    step of the way. Our customer service team is available
-                    24/7 for signing appointments and questions. At Notarized,
-                    Inc., we have a vast range of signing knowledge to support
-                    you, in combination with the experience and skill set to
-                    handle your signings properly the first time.
-                  </div>
-                </p>
+                <div className="text-lg text-gray-600 leading-relaxed">
+                  Notarized, Inc. is here to assist you with notaries for
+                  all your signings and notarization needs. Cultivated by
+                  Real Estate Industry Professionals with over 15 years of
+                  experience, we know and understand what it takes to
+                  complete closings properly, and we will be with you every
+                  step of the way. Our customer service team is available
+                  24/7 for signing appointments and questions. At Notarized,
+                  Inc., we have a vast range of signing knowledge to support
+                  you, in combination with the experience and skill set to
+                  handle your signings properly the first time.
+                </div>
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button size="lg" className="text-lg px-8 py-6">
