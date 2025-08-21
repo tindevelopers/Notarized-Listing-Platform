@@ -171,6 +171,11 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
         onOpenChange(newOpen)
       }}>
         <DialogContent className="sm:max-w-5xl p-0 overflow-hidden">
+          <VisuallyHidden>
+            <DialogTitle>
+              {activeTab === 'signin' ? 'Sign In to Notarized' : 'Create Notarized Account'}
+            </DialogTitle>
+          </VisuallyHidden>
           {/* Background blur effect */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute left-1/2 top-1/4 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] rounded-full opacity-7 bg-gradient-to-r from-[#3632F5] to-[#22D2FA] blur-[100px]" />
