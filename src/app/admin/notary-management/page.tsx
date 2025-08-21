@@ -1,5 +1,3 @@
-
-
 "use client"
 
 import { useState, useEffect } from 'react'
@@ -237,7 +235,7 @@ export default function NotaryManagementPage() {
                       <div className="text-right">
                         {getStatusBadge(application.verification_status, application.is_verified)}
                         <p className="text-sm text-gray-500 mt-1">
-                          Applied: {new Date(application.created_at).toLocaleDateString()}
+                          Applied: {new Date(application.created_at).toISOString().split('T')[0]}
                         </p>
                       </div>
                     </div>
