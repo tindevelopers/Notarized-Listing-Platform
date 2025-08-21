@@ -193,6 +193,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
       }
 
+      // Always require verification for the Phase A implementation
+      console.log('Sign up completed, requiring verification for:', email);
       return { error: null, requiresVerification: true };
     } catch (error) {
       console.error("Sign up catch error:", error);

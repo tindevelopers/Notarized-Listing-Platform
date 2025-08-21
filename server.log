@@ -1,15 +1,1 @@
-
-> fusion-starter-nextjs@0.1.0 dev /home/ubuntu/Notarized-Listing-Platform
-> next dev --port 3001
-
-  ▲ Next.js 14.2.8
-  - Local:        http://localhost:3001
-  - Environments: .env
-
- ✓ Starting...
- ✓ Ready in 4.2s
- ○ Compiling / ...
- ✓ Compiled / in 7.4s (1153 modules)
- GET / 200 in 8154ms
- ✓ Compiled in 856ms (559 modules)
- GET / 200 in 221ms
+This project is configured to use pnpm because /home/ubuntu/Notarized-Listing-Platform/package.json has a "packageManager" field

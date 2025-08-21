@@ -101,25 +101,23 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
 
     const { error, requiresVerification, developmentMode, verificationCode } = await signUp(signUpData.email, signUpData.password, signUpData.fullName)
     
+    console.log('Sign up result:', { error, requiresVerification, developmentMode, verificationCode })
+    
     if (error) {
       setError(error.message || 'An error occurred during sign up')
     } else {
-      if (requiresVerification) {
-        // Show verification popup instead of inline form
-        setVerificationEmail(signUpData.email)
-        setShowVerification(true)
-        
-        // If in development mode, store the verification code to display
-        if (developmentMode && verificationCode) {
-          setDevelopmentMode(true)
-          setDevelopmentCode(verificationCode)
-        }
-        
-        setSignUpData({ email: '', password: '', confirmPassword: '', fullName: '' })
-      } else {
-        setSuccess('Account created successfully!')
-        setSignUpData({ email: '', password: '', confirmPassword: '', fullName: '' })
+      // Always require verification for the new flow
+      console.log('Showing verification popup for:', signUpData.email)
+      setVerificationEmail(signUpData.email)
+      setShowVerification(true)
+      
+      // If in development mode, store the verification code to display
+      if (developmentMode && verificationCode) {
+        setDevelopmentMode(true)
+        setDevelopmentCode(verificationCode)
       }
+      
+      setSignUpData({ email: '', password: '', confirmPassword: '', fullName: '' })
     }
     
     setLoading(false)
