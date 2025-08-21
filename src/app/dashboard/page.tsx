@@ -114,8 +114,8 @@ function DashboardContent() {
 
     // This would be replaced with actual API calls to check completion status
     setProfileCompletion({
-      profileSetup: true, // Assume basic profile exists after signup
-      signatureCreated: true, // Assume signature was created during signup
+      profileSetup: false, // Basic profile setup
+      signatureCreated: false, // Signature creation
       credentialsUploaded: false, // Still needs to upload credentials
       paymentDetailsAdded: false, // Still needs payment setup
       firstTransactionAccepted: false, // Still needs first transaction
