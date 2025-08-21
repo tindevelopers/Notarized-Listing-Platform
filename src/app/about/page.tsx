@@ -277,14 +277,12 @@ export default function About() {
                 <h2 className="text-4xl font-bold text-gray-900 leading-tight">
                   The values that drive everything we do
                 </h2>
-                <p className="text-lg text-gray-600">
-                  <div>
-                    Our core values are the foundation upon which we've built
-                    our platform. These values guide our daily operations, our
-                    long-term vision, and our commitment to both the notaries
-                    and the public we serve.
-                  </div>
-                </p>
+                <div className="text-lg text-gray-600">
+                  Our core values are the foundation upon which we've built
+                  our platform. These values guide our daily operations, our
+                  long-term vision, and our commitment to both the notaries
+                  and the public we serve.
+                </div>
               </div>
 
               <div className="flex items-center space-x-4">
@@ -304,12 +302,10 @@ export default function About() {
               </div>
               <div className="space-y-4">
                 <h3 className="text-2xl font-bold text-gray-900">Integrity</h3>
-                <p className="text-gray-600">
-                  <div>
-                    We hold ourselves to the highest standards of honesty and
-                    transparency in all our interactions and endeavors.
-                  </div>
-                </p>
+                <div className="text-gray-600">
+                  We hold ourselves to the highest standards of honesty and
+                  transparency in all our interactions and endeavors.
+                </div>
               </div>
             </Card>
 
@@ -319,13 +315,11 @@ export default function About() {
               </div>
               <div className="space-y-4">
                 <h3 className="text-2xl font-bold text-gray-900">Excellence</h3>
-                <p className="text-gray-600">
-                  <div>
-                    We continuously strive for the highest quality in our
-                    services, ensuring that our members and users receive the
-                    best experience possible.
-                  </div>
-                </p>
+                <div className="text-gray-600">
+                  We continuously strive for the highest quality in our
+                  services, ensuring that our members and users receive the
+                  best experience possible.
+                </div>
               </div>
             </Card>
 
@@ -335,13 +329,11 @@ export default function About() {
               </div>
               <div className="space-y-4">
                 <h3 className="text-2xl font-bold text-gray-900">Community</h3>
-                <p className="text-gray-600">
-                  <div>
-                    We value the power of collective strength and endeavor to
-                    create a supportive environment where notaries can
-                    connect, share, and grow together.
-                  </div>
-                </p>
+                <div className="text-gray-600">
+                  We value the power of collective strength and endeavor to
+                  create a supportive environment where notaries can
+                  connect, share, and grow together.
+                </div>
               </div>
             </Card>
           </div>
@@ -357,14 +349,12 @@ export default function About() {
                 <h2 className="text-4xl font-bold text-gray-900">
                   Why join us?
                 </h2>
-                <p className="text-lg text-gray-600">
-                  <div>
-                    Join our community and showcase your expertise to those
-                    who need it most. With Notarized, you're not just getting
-                    a listing; you're becoming part of a dedicated network
-                    committed to elevating the notary profession.
-                  </div>
-                </p>
+                <div className="text-lg text-gray-600">
+                  Join our community and showcase your expertise to those
+                  who need it most. With Notarized, you're not just getting
+                  a listing; you're becoming part of a dedicated network
+                  committed to elevating the notary profession.
+                </div>
               </div>
 
               {/* Benefits list */}
