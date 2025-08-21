@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useQuery } from "@tanstack/react-query";
@@ -24,7 +23,7 @@ interface SearchParams {
 export function useNotaries(params: SearchParams = {}) {
   return useQuery<NotariesResponse>({
     queryKey: ["notaries", params],
-    queryFn: async () => {
+    queryFn: async ({ signal }) => {
       // Use mock data if Supabase is not configured
       if (!isSupabaseConfigured) {
         // Simulate API delay
@@ -40,7 +39,7 @@ export function useNotaries(params: SearchParams = {}) {
       if (params.limit) searchParams.set("limit", params.limit.toString());
       if (params.offset) searchParams.set("offset", params.offset.toString());
 
-      const response = await fetch(`/api/notaries?${searchParams}`);
+      const response = await fetch(`/api/notaries?${searchParams}`, { signal });
       
       if (!response.ok) {
         throw new Error("Failed to fetch notaries");
@@ -55,7 +54,7 @@ export function useNotaries(params: SearchParams = {}) {
 export function useNotary(id: string) {
   return useQuery<{ notary: NotaryWithProfile & { reviews: any[] } }>({
     queryKey: ["notary", id],
-    queryFn: async () => {
+    queryFn: async ({ signal }) => {
       // Use mock data if Supabase is not configured
       if (!isSupabaseConfigured) {
         // Simulate API delay
@@ -67,7 +66,7 @@ export function useNotary(id: string) {
         return result;
       }
 
-      const response = await fetch(`/api/notaries/${id}`);
+      const response = await fetch(`/api/notaries/${id}`, { signal });
       
       if (!response.ok) {
         throw new Error("Failed to fetch notary");
@@ -97,7 +96,7 @@ export function useSearchNotaries(params: SearchNotariesParams) {
     query: SearchNotariesParams
   }>({
     queryKey: ["search-notaries", params],
-    queryFn: async () => {
+    queryFn: async ({ signal }) => {
       // Use mock data if Supabase is not configured
       if (!isSupabaseConfigured) {
         // Simulate API delay
@@ -120,7 +119,7 @@ export function useSearchNotaries(params: SearchNotariesParams) {
       if (params.radius) searchParams.set("radius", params.radius.toString());
       if (params.limit) searchParams.set("limit", params.limit.toString());
 
-      const response = await fetch(`/api/notaries/search?${searchParams}`);
+      const response = await fetch(`/api/notaries/search?${searchParams}`, { signal });
       
       if (!response.ok) {
         throw new Error("Failed to search notaries");

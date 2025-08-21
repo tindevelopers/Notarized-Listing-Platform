@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -9,8 +8,8 @@ export function useProfile() {
   
   return useQuery({
     queryKey: ["profile", user?.id],
-    queryFn: async () => {
-      const response = await fetch("/api/auth/profile");
+    queryFn: async ({ signal }) => {
+      const response = await fetch("/api/auth/profile", { signal });
       
       if (!response.ok) {
         throw new Error("Failed to fetch profile");
@@ -29,12 +28,14 @@ export function useUpdateProfile() {
   
   return useMutation({
     mutationFn: async (data: { full_name?: string; avatar_url?: string }) => {
+      const controller = new AbortController();
       const response = await fetch("/api/auth/profile", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
+        signal: controller.signal,
       });
       
       if (!response.ok) {
@@ -55,8 +56,8 @@ export function useBookings() {
   
   return useQuery({
     queryKey: ["bookings", user?.id],
-    queryFn: async () => {
-      const response = await fetch("/api/bookings");
+    queryFn: async ({ signal }) => {
+      const response = await fetch("/api/bookings", { signal });
       
       if (!response.ok) {
         throw new Error("Failed to fetch bookings");
@@ -83,12 +84,14 @@ export function useCreateBooking() {
       notes?: string
       total_cost?: number
     }) => {
+      const controller = new AbortController();
       const response = await fetch("/api/bookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
+        signal: controller.signal,
       });
       
       if (!response.ok) {
