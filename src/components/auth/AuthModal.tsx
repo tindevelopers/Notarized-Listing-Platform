@@ -1,186 +1,239 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from 'react'
-import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
-import { VisuallyHidden } from '@/components/ui/visually-hidden'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Loader2, Mail, Lock, User, AlertCircle, X } from 'lucide-react'
-import { useAuth } from '@/contexts/AuthContext'
-import { EmailVerificationPopup } from './EmailVerificationPopup'
-import { OnboardingWizard } from '../onboarding/OnboardingWizard'
-import { DuplicateRegistrationPopup } from './DuplicateRegistrationPopup'
-import { suppressResizeObserverErrors } from '@/lib/resize-observer-fix'
-import Link from 'next/link'
+import { useState, useEffect } from "react";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { VisuallyHidden } from "@/components/ui/visually-hidden";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Loader2, Mail, Lock, User, AlertCircle, X } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { EmailVerificationPopup } from "./EmailVerificationPopup";
+import { OnboardingWizard } from "../onboarding/OnboardingWizard";
+import { DuplicateRegistrationPopup } from "./DuplicateRegistrationPopup";
+import { suppressResizeObserverErrors } from "@/lib/resize-observer-fix";
+import Link from "next/link";
 
 interface AuthModalProps {
-  open: boolean
-  onOpenChange: (open: boolean) => void
-  defaultTab?: 'signin' | 'signup'
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  defaultTab?: "signin" | "signup";
 }
 
-export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthModalProps) {
-  const [activeTab, setActiveTab] = useState(defaultTab)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [success, setSuccess] = useState<string | null>(null)
-  const [showVerification, setShowVerification] = useState(false)
-  const [showOnboarding, setShowOnboarding] = useState(false)
-  const [showDuplicateRegistration, setShowDuplicateRegistration] = useState(false)
-  const [verificationEmail, setVerificationEmail] = useState('')
-  const [duplicateEmail, setDuplicateEmail] = useState('')
-  const [developmentMode, setDevelopmentMode] = useState(false)
-  const [developmentCode, setDevelopmentCode] = useState('')
+export function AuthModal({
+  open,
+  onOpenChange,
+  defaultTab = "signin",
+}: AuthModalProps) {
+  const [activeTab, setActiveTab] = useState(defaultTab);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+  const [showVerification, setShowVerification] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(false);
+  const [showDuplicateRegistration, setShowDuplicateRegistration] =
+    useState(false);
+  const [verificationEmail, setVerificationEmail] = useState("");
+  const [duplicateEmail, setDuplicateEmail] = useState("");
+  const [developmentMode, setDevelopmentMode] = useState(false);
+  const [developmentCode, setDevelopmentCode] = useState("");
 
   // Form states
-  const [signInData, setSignInData] = useState({ email: '', password: '' })
-  const [signUpData, setSignUpData] = useState({ 
-    email: '', 
-    password: '', 
-    confirmPassword: '', 
-    fullName: '' 
-  })
+  const [signInData, setSignInData] = useState({ email: "", password: "" });
+  const [signUpData, setSignUpData] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+    fullName: "",
+  });
 
-  const { signIn, signUp } = useAuth()
+  const { signIn, signUp } = useAuth();
 
   // Suppress ResizeObserver errors
   useEffect(() => {
-    const cleanup = suppressResizeObserverErrors()
-    return cleanup
-  }, [])
+    const cleanup = suppressResizeObserverErrors();
+    return cleanup;
+  }, []);
 
   const resetForms = () => {
-    setSignInData({ email: '', password: '' })
-    setSignUpData({ email: '', password: '', confirmPassword: '', fullName: '' })
-    setError(null)
-    setSuccess(null)
-    setShowVerification(false)
-    setShowOnboarding(false)
-    setShowDuplicateRegistration(false)
-    setVerificationEmail('')
-    setDuplicateEmail('')
-    setDevelopmentMode(false)
-    setDevelopmentCode('')
-  }
+    setSignInData({ email: "", password: "" });
+    setSignUpData({
+      email: "",
+      password: "",
+      confirmPassword: "",
+      fullName: "",
+    });
+    setError(null);
+    setSuccess(null);
+    setShowVerification(false);
+    setShowOnboarding(false);
+    setShowDuplicateRegistration(false);
+    setVerificationEmail("");
+    setDuplicateEmail("");
+    setDevelopmentMode(false);
+    setDevelopmentCode("");
+  };
 
   const handleSignIn = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setError(null)
-    
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
     if (!signInData.email || !signInData.password) {
-      setError('Please fill in all fields')
-      setLoading(false)
-      return
+      setError("Please fill in all fields");
+      setLoading(false);
+      return;
     }
 
-    const { error } = await signIn(signInData.email, signInData.password)
-    
+    const { error } = await signIn(signInData.email, signInData.password);
+
     if (error) {
-      setError(error.message || 'An error occurred during sign in')
+      setError(error.message || "An error occurred during sign in");
     } else {
-      resetForms()
-      onOpenChange(false)
+      resetForms();
+      onOpenChange(false);
     }
-    
-    setLoading(false)
-  }
+
+    setLoading(false);
+  };
 
   const handleSignUp = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setError(null)
-    
-    if (!signUpData.email || !signUpData.password || !signUpData.confirmPassword) {
-      setError('Please fill in all required fields')
-      setLoading(false)
-      return
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    if (
+      !signUpData.email ||
+      !signUpData.password ||
+      !signUpData.confirmPassword
+    ) {
+      setError("Please fill in all required fields");
+      setLoading(false);
+      return;
     }
 
     if (signUpData.password !== signUpData.confirmPassword) {
-      setError('Passwords do not match')
-      setLoading(false)
-      return
+      setError("Passwords do not match");
+      setLoading(false);
+      return;
     }
 
     if (signUpData.password.length < 6) {
-      setError('Password must be at least 6 characters long')
-      setLoading(false)
-      return
+      setError("Password must be at least 6 characters long");
+      setLoading(false);
+      return;
     }
 
-    const { error, requiresVerification, developmentMode, verificationCode, isDuplicate } = await signUp(signUpData.email, signUpData.password, signUpData.fullName)
-    
-    console.log('Sign up result:', { error, requiresVerification, developmentMode, verificationCode, isDuplicate })
-    
+    const {
+      error,
+      requiresVerification,
+      developmentMode,
+      verificationCode,
+      isDuplicate,
+    } = await signUp(
+      signUpData.email,
+      signUpData.password,
+      signUpData.fullName,
+    );
+
+    console.log("Sign up result:", {
+      error,
+      requiresVerification,
+      developmentMode,
+      verificationCode,
+      isDuplicate,
+    });
+
     if (error && isDuplicate) {
       // Handle duplicate registration
-      console.log('Showing duplicate registration popup for:', signUpData.email)
-      setDuplicateEmail(signUpData.email)
-      setShowDuplicateRegistration(true)
-      setSignUpData({ email: '', password: '', confirmPassword: '', fullName: '' })
+      console.log(
+        "Showing duplicate registration popup for:",
+        signUpData.email,
+      );
+      setDuplicateEmail(signUpData.email);
+      setShowDuplicateRegistration(true);
+      setSignUpData({
+        email: "",
+        password: "",
+        confirmPassword: "",
+        fullName: "",
+      });
     } else if (error) {
-      setError(error.message || 'An error occurred during sign up')
+      setError(error.message || "An error occurred during sign up");
     } else {
       // Always require verification for the new flow
-      console.log('Showing verification popup for:', signUpData.email)
-      setVerificationEmail(signUpData.email)
-      setShowVerification(true)
-      
+      console.log("Showing verification popup for:", signUpData.email);
+      setVerificationEmail(signUpData.email);
+      setShowVerification(true);
+
       // If in development mode, store the verification code to display
       if (developmentMode && verificationCode) {
-        setDevelopmentMode(true)
-        setDevelopmentCode(verificationCode)
+        setDevelopmentMode(true);
+        setDevelopmentCode(verificationCode);
       }
-      
-      setSignUpData({ email: '', password: '', confirmPassword: '', fullName: '' })
+
+      setSignUpData({
+        email: "",
+        password: "",
+        confirmPassword: "",
+        fullName: "",
+      });
     }
-    
-    setLoading(false)
-  }
+
+    setLoading(false);
+  };
 
   const handleVerificationSuccess = () => {
-    setShowVerification(false)
-    setShowOnboarding(true)
-  }
+    setShowVerification(false);
+    setShowOnboarding(true);
+  };
 
   const handleOnboardingComplete = () => {
-    setShowOnboarding(false)
-    setSuccess('Welcome! Your profile has been created successfully.')
+    setShowOnboarding(false);
+    setSuccess("Welcome! Your profile has been created successfully.");
     // The user will be automatically signed in via the verification process
-    resetForms()
-    onOpenChange(false)
-  }
+    resetForms();
+    onOpenChange(false);
+  };
 
   const handleDuplicateTryAgain = () => {
-    setShowDuplicateRegistration(false)
-    setDuplicateEmail('')
-    setActiveTab('signup')
+    setShowDuplicateRegistration(false);
+    setDuplicateEmail("");
+    setActiveTab("signup");
     // The signup form will be cleared but the user can enter a new email
-  }
+  };
 
   const handleDuplicateResetPassword = () => {
-    setShowDuplicateRegistration(false)
-    onOpenChange(false)
+    setShowDuplicateRegistration(false);
+    onOpenChange(false);
     // Navigate to reset password page with the email pre-filled
-    const resetUrl = `/auth/reset-password?email=${encodeURIComponent(duplicateEmail)}`
-    window.location.href = resetUrl
-  }
+    const resetUrl = `/auth/reset-password?email=${encodeURIComponent(duplicateEmail)}`;
+    window.location.href = resetUrl;
+  };
 
   return (
     <>
       {/* Main Auth Modal */}
-      <Dialog open={open && !showVerification && !showOnboarding && !showDuplicateRegistration} onOpenChange={(newOpen) => {
-        if (!newOpen) resetForms()
-        onOpenChange(newOpen)
-      }}>
+      <Dialog
+        open={
+          open &&
+          !showVerification &&
+          !showOnboarding &&
+          !showDuplicateRegistration
+        }
+        onOpenChange={(newOpen) => {
+          if (!newOpen) resetForms();
+          onOpenChange(newOpen);
+        }}
+      >
         <DialogContent className="sm:max-w-5xl p-0 overflow-hidden">
           <VisuallyHidden>
             <DialogTitle>
-              {activeTab === 'signin' ? 'Sign In to Notarized' : 'Create Notarized Account'}
+              {activeTab === "signin"
+                ? "Sign In to Notarized"
+                : "Create Notarized Account"}
             </DialogTitle>
           </VisuallyHidden>
           {/* Background blur effect */}
@@ -216,39 +269,49 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
                       Welcome to Notarized
                     </h1>
                     <p className="text-sm text-[#575757]">
-                      {activeTab === 'signin' 
-                        ? 'Sign in to your account to continue.' 
-                        : 'Create your account to get started.'}
+                      {activeTab === "signin"
+                        ? "Sign in to your account to continue."
+                        : "Create your account to get started."}
                     </p>
                   </div>
 
                   {error && (
-                    <Alert variant="destructive" className="border-red-200 bg-red-50">
+                    <Alert
+                      variant="destructive"
+                      className="border-red-200 bg-red-50"
+                    >
                       <AlertCircle className="h-4 w-4" />
-                      <AlertDescription className="text-red-800">{error}</AlertDescription>
+                      <AlertDescription className="text-red-800">
+                        {error}
+                      </AlertDescription>
                     </Alert>
                   )}
 
                   {success && (
                     <Alert className="border-green-200 bg-green-50">
                       <AlertCircle className="h-4 w-4 text-green-600" />
-                      <AlertDescription className="text-green-800">{success}</AlertDescription>
+                      <AlertDescription className="text-green-800">
+                        {success}
+                      </AlertDescription>
                     </Alert>
                   )}
 
-                  <Tabs value={activeTab} onValueChange={(value) => {
-                    setActiveTab(value as 'signin' | 'signup')
-                    setError(null)
-                    setSuccess(null)
-                  }}>
+                  <Tabs
+                    value={activeTab}
+                    onValueChange={(value) => {
+                      setActiveTab(value as "signin" | "signup");
+                      setError(null);
+                      setSuccess(null);
+                    }}
+                  >
                     <TabsList className="grid w-full grid-cols-2 bg-[#F7F9FC] rounded-full h-12">
-                      <TabsTrigger 
-                        value="signin" 
+                      <TabsTrigger
+                        value="signin"
                         className="rounded-full font-semibold data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-sm"
                       >
                         Sign In
                       </TabsTrigger>
-                      <TabsTrigger 
+                      <TabsTrigger
                         value="signup"
                         className="rounded-full font-semibold data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-sm"
                       >
@@ -260,8 +323,12 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
                     <TabsContent value="signin" className="space-y-4 mt-6">
                       <form onSubmit={handleSignIn} className="space-y-4">
                         <div className="space-y-1">
-                          <Label htmlFor="signin-email" className="text-sm text-black">
-                            Email<span className="text-[#E42B38] ml-0.5">*</span>
+                          <Label
+                            htmlFor="signin-email"
+                            className="text-sm text-black"
+                          >
+                            Email
+                            <span className="text-[#E42B38] ml-0.5">*</span>
                           </Label>
                           <Input
                             id="signin-email"
@@ -269,15 +336,24 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
                             placeholder="Enter your email"
                             className="h-11 border-[#949494] rounded-md"
                             value={signInData.email}
-                            onChange={(e) => setSignInData({ ...signInData, email: e.target.value })}
+                            onChange={(e) =>
+                              setSignInData({
+                                ...signInData,
+                                email: e.target.value,
+                              })
+                            }
                             disabled={loading}
                             required
                           />
                         </div>
 
                         <div className="space-y-1">
-                          <Label htmlFor="signin-password" className="text-sm text-black">
-                            Password<span className="text-[#E42B38] ml-0.5">*</span>
+                          <Label
+                            htmlFor="signin-password"
+                            className="text-sm text-black"
+                          >
+                            Password
+                            <span className="text-[#E42B38] ml-0.5">*</span>
                           </Label>
                           <Input
                             id="signin-password"
@@ -285,18 +361,25 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
                             placeholder="Enter your password"
                             className="h-11 border-[#949494] rounded-md"
                             value={signInData.password}
-                            onChange={(e) => setSignInData({ ...signInData, password: e.target.value })}
+                            onChange={(e) =>
+                              setSignInData({
+                                ...signInData,
+                                password: e.target.value,
+                              })
+                            }
                             disabled={loading}
                             required
                           />
                         </div>
 
-                        <Button 
-                          type="submit" 
-                          className="w-full h-11 rounded-full font-semibold bg-[#3632F5] hover:bg-[#3632F5]/90 text-white" 
+                        <Button
+                          type="submit"
+                          className="w-full h-11 rounded-full font-semibold bg-[#3632F5] hover:bg-[#3632F5]/90 text-white"
                           disabled={loading}
                         >
-                          {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                          {loading && (
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          )}
                           Sign In
                         </Button>
 
@@ -306,8 +389,8 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
                             variant="ghost"
                             className="text-sm text-[#3632F5] hover:text-[#3632F5]/80 font-semibold"
                             onClick={() => {
-                              onOpenChange(false)
-                              window.location.href = '/auth/reset-password'
+                              onOpenChange(false);
+                              window.location.href = "/auth/reset-password";
                             }}
                           >
                             Forgot your password?
@@ -320,7 +403,10 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
                     <TabsContent value="signup" className="space-y-4 mt-6">
                       <form onSubmit={handleSignUp} className="space-y-4">
                         <div className="space-y-1">
-                          <Label htmlFor="signup-name" className="text-sm text-black">
+                          <Label
+                            htmlFor="signup-name"
+                            className="text-sm text-black"
+                          >
                             Full Name
                           </Label>
                           <Input
@@ -329,14 +415,23 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
                             placeholder="Enter your full name"
                             className="h-11 border-[#949494] rounded-md"
                             value={signUpData.fullName}
-                            onChange={(e) => setSignUpData({ ...signUpData, fullName: e.target.value })}
+                            onChange={(e) =>
+                              setSignUpData({
+                                ...signUpData,
+                                fullName: e.target.value,
+                              })
+                            }
                             disabled={loading}
                           />
                         </div>
 
                         <div className="space-y-1">
-                          <Label htmlFor="signup-email" className="text-sm text-black">
-                            Email<span className="text-[#E42B38] ml-0.5">*</span>
+                          <Label
+                            htmlFor="signup-email"
+                            className="text-sm text-black"
+                          >
+                            Email
+                            <span className="text-[#E42B38] ml-0.5">*</span>
                           </Label>
                           <Input
                             id="signup-email"
@@ -344,15 +439,24 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
                             placeholder="Enter your email"
                             className="h-11 border-[#949494] rounded-md"
                             value={signUpData.email}
-                            onChange={(e) => setSignUpData({ ...signUpData, email: e.target.value })}
+                            onChange={(e) =>
+                              setSignUpData({
+                                ...signUpData,
+                                email: e.target.value,
+                              })
+                            }
                             disabled={loading}
                             required
                           />
                         </div>
 
                         <div className="space-y-1">
-                          <Label htmlFor="signup-password" className="text-sm text-black">
-                            Password<span className="text-[#E42B38] ml-0.5">*</span>
+                          <Label
+                            htmlFor="signup-password"
+                            className="text-sm text-black"
+                          >
+                            Password
+                            <span className="text-[#E42B38] ml-0.5">*</span>
                           </Label>
                           <Input
                             id="signup-password"
@@ -360,15 +464,24 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
                             placeholder="Enter your password (min 6 characters)"
                             className="h-11 border-[#949494] rounded-md"
                             value={signUpData.password}
-                            onChange={(e) => setSignUpData({ ...signUpData, password: e.target.value })}
+                            onChange={(e) =>
+                              setSignUpData({
+                                ...signUpData,
+                                password: e.target.value,
+                              })
+                            }
                             disabled={loading}
                             required
                           />
                         </div>
 
                         <div className="space-y-1">
-                          <Label htmlFor="signup-confirm-password" className="text-sm text-black">
-                            Confirm Password<span className="text-[#E42B38] ml-0.5">*</span>
+                          <Label
+                            htmlFor="signup-confirm-password"
+                            className="text-sm text-black"
+                          >
+                            Confirm Password
+                            <span className="text-[#E42B38] ml-0.5">*</span>
                           </Label>
                           <Input
                             id="signup-confirm-password"
@@ -376,18 +489,25 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
                             placeholder="Confirm your password"
                             className="h-11 border-[#949494] rounded-md"
                             value={signUpData.confirmPassword}
-                            onChange={(e) => setSignUpData({ ...signUpData, confirmPassword: e.target.value })}
+                            onChange={(e) =>
+                              setSignUpData({
+                                ...signUpData,
+                                confirmPassword: e.target.value,
+                              })
+                            }
                             disabled={loading}
                             required
                           />
                         </div>
 
-                        <Button 
-                          type="submit" 
-                          className="w-full h-11 rounded-full font-semibold bg-[#3632F5] hover:bg-[#3632F5]/90 text-white" 
+                        <Button
+                          type="submit"
+                          className="w-full h-11 rounded-full font-semibold bg-[#3632F5] hover:bg-[#3632F5]/90 text-white"
                           disabled={loading}
                         >
-                          {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                          {loading && (
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          )}
                           Create Account
                         </Button>
 
@@ -397,7 +517,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
                           </span>
                           <button
                             type="button"
-                            onClick={() => setActiveTab('signin')}
+                            onClick={() => setActiveTab("signin")}
                             className="text-[#3632F5] font-semibold hover:underline"
                           >
                             Sign in
@@ -414,7 +534,7 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
             <div className="w-full lg:w-1/2 bg-[#F7F9FC] p-6 lg:p-12 flex flex-col relative min-h-[400px] lg:min-h-[600px]">
               {/* Background blur effect for right panel */}
               <div className="absolute bottom-0 left-0 w-full h-[435px] rounded-full opacity-7 bg-gradient-to-r from-[#3632F5] to-[#22D2FA] blur-[100px]" />
-              
+
               <div className="relative z-10">
                 {/* Title */}
                 <div className="mb-6 lg:mb-12">
@@ -483,5 +603,5 @@ export function AuthModal({ open, onOpenChange, defaultTab = 'signin' }: AuthMod
         onResetPassword={handleDuplicateResetPassword}
       />
     </>
-  )
+  );
 }

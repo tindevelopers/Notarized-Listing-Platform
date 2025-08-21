@@ -13,7 +13,13 @@ interface AuthContextType {
     email: string,
     password: string,
     fullName?: string,
-  ) => Promise<{ error?: any; requiresVerification?: boolean; developmentMode?: boolean; verificationCode?: string; isDuplicate?: boolean }>;
+  ) => Promise<{
+    error?: any;
+    requiresVerification?: boolean;
+    developmentMode?: boolean;
+    verificationCode?: string;
+    isDuplicate?: boolean;
+  }>;
   signIn: (email: string, password: string) => Promise<{ error?: any }>;
   signOut: () => Promise<{ error?: any }>;
 }
@@ -99,7 +105,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           user: null,
           session: null,
           loading: true,
-          signUp: async () => ({ error: new Error("Not hydrated"), requiresVerification: false, isDuplicate: false }),
+          signUp: async () => ({
+            error: new Error("Not hydrated"),
+            requiresVerification: false,
+            isDuplicate: false,
+          }),
           signIn: async () => ({ error: new Error("Not hydrated") }),
           signOut: async () => ({ error: new Error("Not hydrated") }),
         }}
@@ -128,22 +138,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       if (error) {
         console.error("Sign up error:", error);
-        
+
         // Check if this is a duplicate registration error
-        const errorMessage = error.message?.toLowerCase() || '';
-        const isDuplicateError = 
-          errorMessage.includes('user already registered') ||
-          errorMessage.includes('email already registered') ||
-          errorMessage.includes('email already exists') ||
-          errorMessage.includes('already been registered') ||
+        const errorMessage = error.message?.toLowerCase() || "";
+        const isDuplicateError =
+          errorMessage.includes("user already registered") ||
+          errorMessage.includes("email already registered") ||
+          errorMessage.includes("email already exists") ||
+          errorMessage.includes("already been registered") ||
           error.status === 422 || // Supabase status for existing user
-          error.code === 'email_already_confirmed';
-        
+          error.code === "email_already_confirmed";
+
         if (isDuplicateError) {
-          console.log('Detected duplicate registration attempt for:', email);
+          console.log("Detected duplicate registration attempt for:", email);
           return { error, requiresVerification: false, isDuplicate: true };
         }
-        
+
         return { error, requiresVerification: false, isDuplicate: false };
       }
 
@@ -171,8 +181,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
               console.error("Failed to send verification email:", {
                 status: emailResponse.status,
                 statusText: emailResponse.statusText,
-                error: errorData.error || errorData.message || 'Unknown error',
-                details: errorData
+                error: errorData.error || errorData.message || "Unknown error",
+                details: errorData,
               });
               // Don't fail the signup if email fails, just log it
             } else {
@@ -183,15 +193,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
               );
 
               // Check if this is development mode and return the data
-              if (responseData.developmentMode && responseData.verificationCode) {
+              if (
+                responseData.developmentMode &&
+                responseData.verificationCode
+              ) {
                 console.log(
                   "📧 Development mode: Verification code available for UI display",
                 );
-                return { 
-                  error: null, 
-                  requiresVerification: true, 
-                  developmentMode: true, 
-                  verificationCode: responseData.verificationCode 
+                return {
+                  error: null,
+                  requiresVerification: true,
+                  developmentMode: true,
+                  verificationCode: responseData.verificationCode,
                 };
               } else if (responseData.error?.includes("Development mode")) {
                 console.log(
@@ -208,7 +221,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             console.error("Error sending verification email:", {
               name: fetchError?.name,
               message: fetchError?.message,
-              error: fetchError
+              error: fetchError,
             });
             // Don't fail the signup if email fails
           }
@@ -219,7 +232,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
 
       // Always require verification for the Phase A implementation
-      console.log('Sign up completed, requiring verification for:', email);
+      console.log("Sign up completed, requiring verification for:", email);
       return { error: null, requiresVerification: true };
     } catch (error) {
       console.error("Sign up catch error:", error);
