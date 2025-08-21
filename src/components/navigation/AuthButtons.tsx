@@ -1,14 +1,12 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { AuthModal } from "@/components/auth/AuthModal";
 import { useAuth } from "@/contexts/AuthContext";
 import { ProfileDropdown } from "@/components/auth/ProfileDropdown";
 
-function AuthButtonsContent() {
-  const searchParams = useSearchParams();
+export default function AuthButtons() {
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [authModalTab, setAuthModalTab] = useState<"signin" | "signup">(
     "signin",
@@ -17,8 +15,9 @@ function AuthButtonsContent() {
 
   // Check URL parameters to auto-open auth modal
   useEffect(() => {
-    const signupParam = searchParams.get("signup");
-    const authParam = searchParams.get("auth");
+    const urlParams = new URLSearchParams(window.location.search);
+    const signupParam = urlParams.get("signup");
+    const authParam = urlParams.get("auth");
 
     if (signupParam === "true" || authParam === "signup") {
       setAuthModalTab("signup");
@@ -31,7 +30,7 @@ function AuthButtonsContent() {
       // Clean up URL
       window.history.replaceState({}, "", window.location.pathname);
     }
-  }, [searchParams]);
+  }, []);
 
   // Don't render during loading
   if (loading) {
