@@ -19,48 +19,23 @@ export function Providers({ children }: { children: React.ReactNode }) {
       }),
   );
 
-  // Global error handling
+  // Comprehensive error handling for development
   useEffect(() => {
-    // Suppress ResizeObserver errors
-    const resizeCleanup = suppressResizeObserverErrors();
+    const cleanup = suppressDevelopmentErrors({
+      suppressResizeObserver: true,
+      suppressNextRedirect: true,
+      suppressBrowserExtensions: true,
+      suppressThirdPartyScripts: true,
+      suppressFetchErrors: true,
+      suppressRSCErrors: true,
+      logSuppressedErrors: process.env.NODE_ENV === 'development' && process.env.DEBUG_ERRORS === 'true'
+    });
 
-    // Suppress NEXT_REDIRECT errors (these are expected Next.js behavior)
-    const handleError = (event: ErrorEvent) => {
-      if (
-        event.message?.includes("NEXT_REDIRECT") ||
-        event.error?.digest?.includes("NEXT_REDIRECT")
-      ) {
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        return false;
-      }
-    };
-
-    const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
-      if (
-        event.reason?.message?.includes("NEXT_REDIRECT") ||
-        event.reason?.digest?.includes("NEXT_REDIRECT")
-      ) {
-        event.preventDefault();
-        return false;
-      }
-    };
-
-    if (typeof window !== "undefined") {
-      window.addEventListener("error", handleError);
-      window.addEventListener("unhandledrejection", handleUnhandledRejection);
+    if (process.env.NODE_ENV === 'development') {
+      console.log('🛡️ Development error suppression enabled');
     }
 
-    return () => {
-      resizeCleanup?.();
-      if (typeof window !== "undefined") {
-        window.removeEventListener("error", handleError);
-        window.removeEventListener(
-          "unhandledrejection",
-          handleUnhandledRejection,
-        );
-      }
-    };
+    return cleanup;
   }, []);
 
   return (
