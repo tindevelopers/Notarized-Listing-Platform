@@ -142,7 +142,7 @@ function SuperAdminContent() {
     };
 
     checkAuthorization();
-  }, [user, loading]);
+  }, [user, loading, router]);
 
   if (loading || authLoading) {
     return (
