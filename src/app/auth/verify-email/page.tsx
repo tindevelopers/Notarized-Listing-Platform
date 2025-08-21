@@ -1,5 +1,3 @@
-
-
 "use client"
 
 import { useEffect, useState, Suspense } from 'react'
@@ -28,7 +26,7 @@ function VerifyEmailContent() {
     }
 
     verifyEmail()
-  }, [token, email])
+  }, [token, email, verifyEmail])
 
   const verifyEmail = async () => {
     try {
