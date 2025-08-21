@@ -20,8 +20,8 @@ export async function POST(request: NextRequest) {
 
     // Check if superadmin already exists
     const { data: existingUsers } = await supabase.auth.admin.listUsers();
-    const superAdminExists = existingUsers?.users?.some(user => 
-      user.email === email || 
+    const superAdminExists = existingUsers?.users?.some((user: User) =>
+      user.email === email ||
       user.email?.endsWith('@notarized.com') ||
       ['admin@notarized.com', 'superadmin@notarized.com', 'support@notarized.com'].includes(user.email || '')
     );
