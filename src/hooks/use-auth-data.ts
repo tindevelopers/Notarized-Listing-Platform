@@ -9,13 +9,21 @@ export function useProfile() {
   return useQuery({
     queryKey: ["profile", user?.id],
     queryFn: async ({ signal }) => {
-      const response = await fetch("/api/auth/profile", { signal });
-      
-      if (!response.ok) {
-        throw new Error("Failed to fetch profile");
+      try {
+        const response = await fetch("/api/auth/profile", { signal });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch profile");
+        }
+
+        return response.json();
+      } catch (error: any) {
+        // Ignore AbortError as it's expected when requests are cancelled
+        if (error?.name === 'AbortError') {
+          return null;
+        }
+        throw error;
       }
-      
-      return response.json();
     },
     enabled: !!user,
     staleTime: 5 * 60 * 1000, // 5 minutes
@@ -64,13 +72,21 @@ export function useBookings() {
   return useQuery({
     queryKey: ["bookings", user?.id],
     queryFn: async ({ signal }) => {
-      const response = await fetch("/api/bookings", { signal });
-      
-      if (!response.ok) {
-        throw new Error("Failed to fetch bookings");
+      try {
+        const response = await fetch("/api/bookings", { signal });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch bookings");
+        }
+
+        return response.json();
+      } catch (error: any) {
+        // Ignore AbortError as it's expected when requests are cancelled
+        if (error?.name === 'AbortError') {
+          return [];
+        }
+        throw error;
       }
-      
-      return response.json();
     },
     enabled: !!user,
     staleTime: 2 * 60 * 1000, // 2 minutes
