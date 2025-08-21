@@ -9,6 +9,7 @@ import {
   getSupabaseConfigInstructions
 } from './config'
 
+
 // Log configuration status for debugging
 logSupabaseConfig('client')
 
@@ -60,7 +61,13 @@ export function createClient() {
     } as any
   }
 
-  return createBrowserClient<Database>(env.supabaseUrl!, env.supabaseAnonKey!)
+  return createBrowserClient<Database>(env.supabaseUrl!, env.supabaseAnonKey!, {
+    auth: {
+      autoRefreshToken: true,
+      persistSession: true,
+      detectSessionInUrl: true
+    }
+  })
 }
 
 export const supabase = createClient()

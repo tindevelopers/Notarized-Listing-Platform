@@ -10,6 +10,7 @@ import {
   getSupabaseConfigInstructions
 } from './config'
 
+
 // Log configuration status for debugging (server-side)
 logSupabaseConfig('server')
 
@@ -69,6 +70,11 @@ export async function createClient() {
     env.supabaseUrl!,
     env.supabaseAnonKey!,
     {
+      auth: {
+        autoRefreshToken: true,
+        persistSession: true,
+        detectSessionInUrl: true
+      },
       cookies: {
         getAll() {
           return cookieStore.getAll()

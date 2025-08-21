@@ -3,6 +3,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { sendPasswordReset, isValidEmail, checkEmailRateLimit } from "@/lib/ses/email-service"
 import { createClient } from "@/lib/supabase/server"
+import { getSiteUrl, createUrl } from "@/lib/utils/site-url"
 import { z } from "zod"
 
 export const dynamic = "force-dynamic"
@@ -48,7 +49,7 @@ export async function POST(request: NextRequest) {
     try {
       // Generate password reset token using Supabase
       const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${request.headers.get('origin') || 'http://localhost:3000'}/auth/reset-password`,
+        redirectTo: createUrl('/auth/reset-password', request),
       })
 
       if (error) {
@@ -66,7 +67,7 @@ export async function POST(request: NextRequest) {
       const userName = profiles?.full_name || email.split('@')[0]
 
       // Create reset link (you might want to implement your own token system)
-      const baseUrl = request.headers.get('origin') || 'http://localhost:3000'
+      const baseUrl = getSiteUrl(request)
       const resetToken = generateResetToken() // Implement this function
       const resetLink = `${baseUrl}/auth/reset-password?token=${resetToken}&email=${encodeURIComponent(email)}`
 

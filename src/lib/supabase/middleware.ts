@@ -1,42 +1,53 @@
 
 import { createServerClient } from '@supabase/ssr'
-import { NextResponse, type NextRequest } from 'next/server'
+import { type NextRequest, NextResponse } from 'next/server'
+import { Database } from '@/types/supabase'
+import { 
+  env, 
+  isSupabaseConfigured, 
+  configValidation,
+  logSupabaseConfig 
+} from './config'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+// Log configuration status for debugging (middleware runs on server)
+logSupabaseConfig('server')
 
-// Check if Supabase is properly configured
-const isSupabaseConfigured = 
-  supabaseUrl && 
-  supabaseKey && 
-  supabaseUrl !== 'your-supabase-url-here' && 
-  supabaseKey !== 'your-supabase-anon-key-here' &&
-  supabaseUrl.startsWith('https://')
-
-export async function updateSession(request: NextRequest) {
-  let response = NextResponse.next({
-    request: {
-      headers: request.headers,
-    },
-  })
-
+export function createClient(request: NextRequest, response: NextResponse) {
   if (!isSupabaseConfigured) {
-    return response
+    console.error('[Supabase Middleware] Configuration error:', configValidation.error)
+    
+    // Return a mock client that provides fallback behavior for middleware
+    const errorMessage = `Supabase not configured: ${configValidation.error}`
+    
+    return {
+      auth: {
+        getSession: async () => ({ 
+          data: { session: null }, 
+          error: new Error(errorMessage) 
+        }),
+        getUser: async () => ({ 
+          data: { user: null }, 
+          error: new Error(errorMessage) 
+        }),
+      },
+    } as any
   }
 
-  const supabase = createServerClient(
-    supabaseUrl,
-    supabaseKey,
+  return createServerClient<Database>(
+    env.supabaseUrl!,
+    env.supabaseAnonKey!,
     {
+      auth: {
+        autoRefreshToken: true,
+        persistSession: true,
+        detectSessionInUrl: true
+      },
       cookies: {
         getAll() {
           return request.cookies.getAll()
         },
         setAll(cookiesToSet) {
           cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
-          response = NextResponse.next({
-            request,
-          })
           cookiesToSet.forEach(({ name, value, options }) =>
             response.cookies.set(name, value, options)
           )
@@ -44,15 +55,4 @@ export async function updateSession(request: NextRequest) {
       },
     }
   )
-
-  // This will refresh session if expired - required for Server Components
-  // https://supabase.com/docs/guides/auth/server-side/nextjs
-  try {
-    await supabase.auth.getUser()
-  } catch (error) {
-    // Ignore errors during development when Supabase might not be configured
-    console.warn('Supabase auth error in middleware:', error)
-  }
-
-  return response
 }
