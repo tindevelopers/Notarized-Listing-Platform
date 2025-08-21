@@ -1,4 +1,3 @@
-
 "use client"
 
 import { createContext, useContext, useEffect, useState } from 'react'
@@ -23,10 +22,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    let mounted = true
+
     // Get initial session
     const getSession = async () => {
       try {
         const { data: { session }, error } = await supabase.auth.getSession()
+
+        // Prevent state updates if component is unmounted
+        if (!mounted) return
+
         if (error) {
           console.error('Error getting session:', error)
           // If it's a configuration error, provide more helpful logging
@@ -45,7 +50,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       } catch (error) {
         console.error('Error in getSession:', error)
       } finally {
-        setLoading(false)
+        if (mounted) {
+          setLoading(false)
+        }
       }
     }
 
@@ -54,6 +61,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event: AuthChangeEvent, session: Session | null) => {
+        if (!mounted) return
+
         console.log('Auth state changed:', event, session?.user?.email)
         setSession(session)
         setUser(session?.user ?? null)
@@ -62,6 +71,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     )
 
     return () => {
+      mounted = false
       subscription.unsubscribe()
     }
   }, [])
