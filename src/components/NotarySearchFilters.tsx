@@ -95,7 +95,7 @@ export default function NotarySearchFilters() {
               <SelectValue placeholder="All services" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Services</SelectItem>
+              <SelectItem value="all">All Services</SelectItem>
               <SelectItem value="real-estate">Real Estate</SelectItem>
               <SelectItem value="business">Business Documents</SelectItem>
               <SelectItem value="legal">Legal Documents</SelectItem>
@@ -115,7 +115,7 @@ export default function NotarySearchFilters() {
               <SelectValue placeholder="All cities" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Cities</SelectItem>
+              <SelectItem value="all">All Cities</SelectItem>
               <SelectItem value="los-angeles">Los Angeles</SelectItem>
               <SelectItem value="san-francisco">San Francisco</SelectItem>
               <SelectItem value="san-diego">San Diego</SelectItem>
@@ -136,7 +136,7 @@ export default function NotarySearchFilters() {
               <SelectValue placeholder="Any price" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">Any Price</SelectItem>
+              <SelectItem value="all">Any Price</SelectItem>
               <SelectItem value="0-50">$0 - $50</SelectItem>
               <SelectItem value="50-75">$50 - $75</SelectItem>
               <SelectItem value="75-100">$75 - $100</SelectItem>
@@ -184,7 +184,7 @@ export default function NotarySearchFilters() {
               <SelectValue placeholder="Any time" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">Any Time</SelectItem>
+              <SelectItem value="all">Any Time</SelectItem>
               <SelectItem value="24-7">24/7 Available</SelectItem>
               <SelectItem value="business-hours">Business Hours</SelectItem>
               <SelectItem value="evenings">Evenings</SelectItem>
