@@ -91,8 +91,12 @@ export function NotaryProfileStep({ data, updateData, userName = "Steven Wakelin
   };
 
   const setDemoData = () => {
+    // Create demo profile picture URL
+    const demoImageUrl = "https://api.builder.io/api/v1/image/assets/TEMP/a451632811dd5018fbcf03aa54327d1b4e59ca84?width=414";
+
     updateData({
       ...data,
+      profilePictureUrl: demoImageUrl,
       businessName: "Your Top Notary",
       notaryState: "New York",
       notaryCounty: "Bronx County",
