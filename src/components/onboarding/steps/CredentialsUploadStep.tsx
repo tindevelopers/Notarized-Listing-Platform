@@ -115,11 +115,24 @@ export function CredentialsUploadStep({ data, updateData }: CredentialsUploadSte
     <div className="space-y-6">
       {/* Step indicator */}
       <div className="space-y-2">
-        <p className="text-sm text-[#575757]">Step 4 / 5</p>
-        <h1 className="text-2xl font-bold text-black">Upload your credentials</h1>
-        <p className="text-sm text-[#575757]">
-          Provide the documents requested, then submit for approval.
-        </p>
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-sm text-[#575757]">Step 4 / 5</p>
+            <h1 className="text-2xl font-bold text-black">Upload your credentials</h1>
+            <p className="text-sm text-[#575757]">
+              Provide the documents requested, then submit for approval.
+            </p>
+          </div>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={addDemoDocuments}
+            className="text-xs"
+          >
+            Add demo documents
+          </Button>
+        </div>
       </div>
 
       {/* Progress indicator */}
