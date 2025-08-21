@@ -91,10 +91,13 @@ export const suppressDevelopmentErrors = (
     // Fetch errors from extensions/third-parties
     if (
       config.suppressFetchErrors &&
-      message?.includes("Failed to fetch") &&
+      (message?.includes("Failed to fetch") ||
+       message?.includes("RobustFetchError") ||
+       message?.includes("Third-party script interference")) &&
       (filename?.includes("chrome-extension://") ||
         filename?.includes("fullstory.com") ||
-        filename?.includes("frame_ant.js"))
+        filename?.includes("frame_ant.js") ||
+        filename?.includes("fetch-wrapper"))
     ) {
       shouldSuppress = true;
       suppressionReason = "Third-party Fetch";
