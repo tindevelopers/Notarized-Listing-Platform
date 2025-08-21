@@ -231,6 +231,31 @@ export const suppressDevelopmentErrors = (
     cleanupFunctions.push(() => {
       console.error = originalConsoleError;
     });
+
+    // Override console.warn for ResizeObserver warnings
+    const originalConsoleWarn = console.warn;
+    console.warn = (...args: any[]) => {
+      const message = args.join(" ");
+
+      // Suppress ResizeObserver warnings
+      if (
+        message.includes("ResizeObserver") ||
+        message.toLowerCase().includes("resizeobserver") ||
+        message.includes("ResizeObserver loop completed") ||
+        message.includes("ResizeObserver loop limit")
+      ) {
+        if (config.logSuppressedErrors) {
+          console.debug("🔇 Suppressed console warning:", ...args);
+        }
+        return;
+      }
+
+      originalConsoleWarn.apply(console, args);
+    };
+
+    cleanupFunctions.push(() => {
+      console.warn = originalConsoleWarn;
+    });
   }
 
   // Return cleanup function
