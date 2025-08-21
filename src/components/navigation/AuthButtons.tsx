@@ -80,16 +80,3 @@ export default function AuthButtons() {
     </>
   );
 }
-
-export default function AuthButtons() {
-  return (
-    <Suspense fallback={
-      <div className="flex space-x-2">
-        <div className="w-20 h-8 bg-gray-200 rounded animate-pulse" />
-        <div className="w-20 h-8 bg-gray-200 rounded animate-pulse" />
-      </div>
-    }>
-      <AuthButtonsContent />
-    </Suspense>
-  );
-}
