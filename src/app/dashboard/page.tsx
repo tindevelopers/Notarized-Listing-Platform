@@ -48,7 +48,7 @@ interface NotaryProfile {
   documentTypes: string[];
 }
 
-export default function DashboardPage() {
+function DashboardContent() {
   const { user, loading } = useAuth();
   const searchParams = useSearchParams();
   const [profileCompletion, setProfileCompletion] = useState<ProfileCompletion>(
