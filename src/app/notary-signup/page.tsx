@@ -1,9 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-
-// Force dynamic rendering for auth pages
-export const dynamic = 'force-dynamic';
 import { redirect } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 
