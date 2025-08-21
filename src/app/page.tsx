@@ -1,5 +1,3 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -20,7 +18,76 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-export default function Index() {
+// Static notary data - in a real app, this would come from a database
+const notariesData = [
+  {
+    id: "sarah-johnson",
+    name: "Sarah Johnson",
+    location: "New York, NY",
+    rating: 4.9,
+    reviews: 127,
+    image: "https://images.unsplash.com/photo-1494790108755-2616b39c0e6e?w=300&h=300&fit=crop&crop=face",
+  },
+  {
+    id: "michael-chen",
+    name: "Michael Chen",
+    location: "Los Angeles, CA",
+    rating: 5.0,
+    reviews: 203,
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+  },
+  {
+    id: "emily-davis",
+    name: "Emily Davis",
+    location: "Chicago, IL",
+    rating: 4.8,
+    reviews: 156,
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face",
+  },
+  {
+    id: "david-wilson",
+    name: "David Wilson",
+    location: "Houston, TX",
+    rating: 4.9,
+    reviews: 189,
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
+  },
+  {
+    id: "lisa-rodriguez",
+    name: "Lisa Rodriguez",
+    location: "Phoenix, AZ",
+    rating: 5.0,
+    reviews: 234,
+    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face",
+  },
+  {
+    id: "james-taylor",
+    name: "James Taylor",
+    location: "Miami, FL",
+    rating: 4.7,
+    reviews: 145,
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
+  },
+  {
+    id: "maria-garcia",
+    name: "Maria Garcia",
+    location: "Denver, CO",
+    rating: 4.9,
+    reviews: 178,
+    image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=300&h=300&fit=crop&crop=face",
+  },
+  {
+    id: "robert-brown",
+    name: "Robert Brown",
+    location: "Seattle, WA",
+    rating: 4.8,
+    reviews: 167,
+    image: "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=300&h=300&fit=crop&crop=face",
+  },
+];
+
+// Server Component - renders on the server
+export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
@@ -221,7 +288,7 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Our Notaries */}
+      {/* Our Notaries - Server-rendered */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
@@ -232,74 +299,9 @@ export default function Index() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                name: "Sarah Johnson",
-                location: "New York, NY",
-                rating: 4.9,
-                reviews: 127,
-                image:
-                  "https://images.unsplash.com/photo-1494790108755-2616b39c0e6e?w=300&h=300&fit=crop&crop=face",
-              },
-              {
-                name: "Michael Chen",
-                location: "Los Angeles, CA",
-                rating: 5.0,
-                reviews: 203,
-                image:
-                  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-              },
-              {
-                name: "Emily Davis",
-                location: "Chicago, IL",
-                rating: 4.8,
-                reviews: 156,
-                image:
-                  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face",
-              },
-              {
-                name: "David Wilson",
-                location: "Houston, TX",
-                rating: 4.9,
-                reviews: 189,
-                image:
-                  "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
-              },
-              {
-                name: "Lisa Rodriguez",
-                location: "Phoenix, AZ",
-                rating: 5.0,
-                reviews: 234,
-                image:
-                  "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face",
-              },
-              {
-                name: "James Taylor",
-                location: "Miami, FL",
-                rating: 4.7,
-                reviews: 145,
-                image:
-                  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-              },
-              {
-                name: "Maria Garcia",
-                location: "Denver, CO",
-                rating: 4.9,
-                reviews: 178,
-                image:
-                  "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=300&h=300&fit=crop&crop=face",
-              },
-              {
-                name: "Robert Brown",
-                location: "Seattle, WA",
-                rating: 4.8,
-                reviews: 167,
-                image:
-                  "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=300&h=300&fit=crop&crop=face",
-              },
-            ].map((notary, index) => (
+            {notariesData.map((notary) => (
               <Card
-                key={index}
+                key={notary.id}
                 className="p-6 text-center space-y-4 hover:shadow-lg transition-shadow"
               >
                 <Avatar className="w-20 h-20 mx-auto">
@@ -329,7 +331,7 @@ export default function Index() {
                   <Button variant="outline" size="sm" className="flex-1">
                     Book Now
                   </Button>
-                  <Link href={`/notary/${notary.name.toLowerCase().replace(/\s+/g, '-')}`}>
+                  <Link href={`/notary/${notary.id}`}>
                     <Button size="sm" className="px-4">
                       View Profile
                     </Button>
