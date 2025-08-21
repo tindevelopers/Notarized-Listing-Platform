@@ -73,43 +73,70 @@ function SuperAdminContent() {
 
   useEffect(() => {
     const checkAuthorization = async () => {
-      if (!loading && !user) {
-        redirect("/");
-        return;
-      }
+      try {
+        console.log('Superadmin: Checking authorization, loading:', loading, 'user:', user?.email);
 
-      if (user) {
-        // Check if user is superadmin
-        const superAdminEmails = [
-          'admin@notarized.com',
-          'superadmin@notarized.com',
-          'support@notarized.com'
-        ];
-
-        const isSuperAdmin = superAdminEmails.includes(user.email || '') ||
-                           user.email?.endsWith('@notarized.com');
-
-        if (!isSuperAdmin) {
-          redirect("/dashboard");
+        if (!loading && !user) {
+          console.log('Superadmin: No user found, redirecting to home');
+          redirect("/");
           return;
         }
 
-        setIsAuthorized(true);
-        // Fetch stats after authorization
-        fetchStats();
+        if (user) {
+          console.log('Superadmin: User found:', user.email, 'metadata:', user.user_metadata);
+
+          // Check if user is superadmin
+          const superAdminEmails = [
+            'admin@notarized.com',
+            'superadmin@notarized.com',
+            'support@notarized.com'
+          ];
+
+          const isSuperAdmin = superAdminEmails.includes(user.email || '') ||
+                             user.email?.endsWith('@notarized.com') ||
+                             user.user_metadata?.role === 'superadmin';
+
+          console.log('Superadmin: Is superadmin?', isSuperAdmin, 'Email check:', superAdminEmails.includes(user.email || ''), 'Domain check:', user.email?.endsWith('@notarized.com'), 'Role check:', user.user_metadata?.role);
+
+          if (!isSuperAdmin) {
+            console.log('Superadmin: User not authorized, redirecting to dashboard');
+            setError(`Access denied. Your email (${user.email}) does not have superadmin privileges.`);
+            setTimeout(() => redirect("/dashboard"), 3000);
+            return;
+          }
+
+          console.log('Superadmin: User authorized, fetching stats');
+          setIsAuthorized(true);
+          setError(null);
+          // Fetch stats after authorization
+          fetchStats();
+        }
+      } catch (err) {
+        console.error('Superadmin: Error in authorization check:', err);
+        setError(`Authorization error: ${err instanceof Error ? err.message : 'Unknown error'}`);
+      } finally {
+        setAuthLoading(false);
       }
-      setAuthLoading(false);
     };
 
     const fetchStats = async () => {
       try {
+        console.log('Superadmin: Fetching stats from API');
         const response = await fetch('/api/superadmin/stats');
+        console.log('Superadmin: Stats API response status:', response.status);
+
         if (response.ok) {
           const newStats = await response.json();
+          console.log('Superadmin: Stats fetched successfully:', newStats);
           setStats(newStats);
+        } else {
+          const errorText = await response.text();
+          console.error('Superadmin: Stats API error:', response.status, errorText);
+          setError(`Failed to fetch dashboard stats: ${response.status} ${response.statusText}`);
         }
       } catch (error) {
-        console.error('Failed to fetch stats:', error);
+        console.error('Superadmin: Stats fetch error:', error);
+        setError(`Network error while fetching stats: ${error instanceof Error ? error.message : 'Unknown error'}`);
       }
     };
 
@@ -122,6 +149,29 @@ function SuperAdminContent() {
         <div className="text-center">
           <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-[#3632F5]"></div>
           <p className="mt-4 text-[#575757]">Loading dashboard...</p>
+          {error && (
+            <Alert className="mt-4 max-w-md">
+              <AlertDescription className="text-red-600">{error}</AlertDescription>
+            </Alert>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-[#F7F9FC] flex items-center justify-center">
+        <div className="text-center max-w-md">
+          <Alert className="border-red-200 bg-red-50">
+            <AlertDescription className="text-red-700">
+              <strong>Superadmin Access Error:</strong><br />
+              {error}
+            </AlertDescription>
+          </Alert>
+          <p className="mt-4 text-sm text-[#575757]">
+            If you believe this is an error, please contact support.
+          </p>
         </div>
       </div>
     );
