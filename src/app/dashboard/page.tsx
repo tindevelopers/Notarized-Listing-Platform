@@ -25,6 +25,7 @@ import {
   CalendarBlank,
   BookBookmark,
   UserCircle,
+  Article,
 } from "@/components/icons/dashboard-icons";
 import Link from "next/link";
 
