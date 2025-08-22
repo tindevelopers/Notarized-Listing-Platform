@@ -6,7 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 import Header from "@/components/navigation/header";
 import Footer from "@/components/navigation/footer";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 // Mock blog data - replace with API calls
 const blogPosts = [

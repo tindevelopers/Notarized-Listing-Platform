@@ -1,6 +1,6 @@
 "use client";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -37,7 +37,7 @@ interface PageProps {
 
 export default function NotaryProfile({ params }: PageProps) {
   const { data, error, isLoading } = useNotary(params.id);
-  
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-white">
@@ -47,7 +47,7 @@ export default function NotaryProfile({ params }: PageProps) {
             <div className="animate-pulse">
               {/* Back button placeholder */}
               <div className="h-6 bg-gray-200 rounded w-32 mb-8" />
-              
+
               {/* Profile card placeholder */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div className="lg:col-span-2">
@@ -67,7 +67,7 @@ export default function NotaryProfile({ params }: PageProps) {
                     </div>
                   </Card>
                 </div>
-                
+
                 <div className="lg:col-span-1">
                   <Card className="p-6 bg-white shadow-sm">
                     <div className="space-y-4">
@@ -117,9 +117,7 @@ export default function NotaryProfile({ params }: PageProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <Alert>
             <AlertCircle className="h-4 w-4" />
-            <AlertDescription>
-              Notary profile not found.
-            </AlertDescription>
+            <AlertDescription>Notary profile not found.</AlertDescription>
           </Alert>
         </div>
         <Footer />
@@ -187,22 +185,26 @@ export default function NotaryProfile({ params }: PageProps) {
                         </p>
                       )}
                       <p className="text-gray-600 text-lg leading-relaxed">
-                        {notary?.description || "Professional notary services available."}
+                        {notary?.description ||
+                          "Professional notary services available."}
                       </p>
                     </div>
 
                     {/* Service Badges */}
                     <div className="flex flex-wrap gap-2">
                       {notary?.services?.slice(0, 4)?.map((service) => (
-                        <Badge 
-                          key={service} 
+                        <Badge
+                          key={service}
                           className="bg-primary text-white px-4 py-2 text-sm rounded-full"
                         >
                           {service}
                         </Badge>
                       ))}
                       {notary?.services && notary.services.length > 4 && (
-                        <Badge variant="outline" className="px-4 py-2 text-sm rounded-full">
+                        <Badge
+                          variant="outline"
+                          className="px-4 py-2 text-sm rounded-full"
+                        >
                           +{notary.services.length - 4} more services
                         </Badge>
                       )}
@@ -230,7 +232,8 @@ export default function NotaryProfile({ params }: PageProps) {
                     ))}
                   </div>
                   <div className="text-gray-600">
-                    {notary?.rating?.toFixed(1) || "0.0"} ({notary?.review_count || 0} Reviews)
+                    {notary?.rating?.toFixed(1) || "0.0"} (
+                    {notary?.review_count || 0} Reviews)
                   </div>
                 </div>
 
@@ -252,9 +255,7 @@ export default function NotaryProfile({ params }: PageProps) {
                       <div className="w-5 h-5 text-primary">
                         <Mail className="w-5 h-5" />
                       </div>
-                      <div className="text-gray-600">
-                        {profile.email}
-                      </div>
+                      <div className="text-gray-600">{profile.email}</div>
                     </div>
                   )}
 
@@ -370,50 +371,66 @@ export default function NotaryProfile({ params }: PageProps) {
 
               <div className="space-y-6 text-gray-600 leading-relaxed">
                 <p>
-                  {notary?.description || "Professional notary services available with attention to detail and commitment to excellence."}
+                  {notary?.description ||
+                    "Professional notary services available with attention to detail and commitment to excellence."}
                 </p>
-                
+
                 {notary?.business_name && (
                   <p>
-                    Operating as <strong>{notary.business_name}</strong>, providing reliable notarization services
-                    {notary.city && notary.state && ` in the ${notary.city}, ${notary.state} area`}.
+                    Operating as <strong>{notary.business_name}</strong>,
+                    providing reliable notarization services
+                    {notary.city &&
+                      notary.state &&
+                      ` in the ${notary.city}, ${notary.state} area`}
+                    .
                   </p>
                 )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
                   <div>
-                    <h4 className="font-semibold text-gray-900 mb-2">Service Area</h4>
+                    <h4 className="font-semibold text-gray-900 mb-2">
+                      Service Area
+                    </h4>
                     <p className="text-gray-600">
                       {notary?.city}, {notary?.state}
-                      {notary?.travel_radius && ` • ${notary.travel_radius} mile radius`}
+                      {notary?.travel_radius &&
+                        ` • ${notary.travel_radius} mile radius`}
                     </p>
                   </div>
-                  
+
                   {notary?.hourly_rate && (
                     <div>
-                      <h4 className="font-semibold text-gray-900 mb-2">Service Rate</h4>
+                      <h4 className="font-semibold text-gray-900 mb-2">
+                        Service Rate
+                      </h4>
                       <p className="text-gray-600">
                         {formatCurrency(notary.hourly_rate)} per hour
                       </p>
                     </div>
                   )}
-                  
+
                   {notary?.languages && notary.languages.length > 0 && (
                     <div>
-                      <h4 className="font-semibold text-gray-900 mb-2">Languages</h4>
+                      <h4 className="font-semibold text-gray-900 mb-2">
+                        Languages
+                      </h4>
                       <p className="text-gray-600">
                         {notary.languages.join(", ")}
                       </p>
                     </div>
                   )}
-                  
+
                   <div>
-                    <h4 className="font-semibold text-gray-900 mb-2">Service Types</h4>
+                    <h4 className="font-semibold text-gray-900 mb-2">
+                      Service Types
+                    </h4>
                     <p className="text-gray-600">
                       {notary?.is_mobile && "Mobile Service"}
                       {notary?.is_mobile && notary?.is_online && " • "}
                       {notary?.is_online && "Online Notarization"}
-                      {(!notary?.is_mobile && !notary?.is_online) && "In-Office Service"}
+                      {!notary?.is_mobile &&
+                        !notary?.is_online &&
+                        "In-Office Service"}
                     </p>
                   </div>
                 </div>
@@ -474,9 +491,7 @@ export default function NotaryProfile({ params }: PageProps) {
                         ))}
                       </div>
                       {review.comment && (
-                        <p className="text-gray-600 mb-4">
-                          "{review.comment}"
-                        </p>
+                        <p className="text-gray-600 mb-4">"{review.comment}"</p>
                       )}
                       <div className="border-t pt-4">
                         <div className="font-bold text-gray-900">

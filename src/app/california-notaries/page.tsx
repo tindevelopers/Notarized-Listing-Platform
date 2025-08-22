@@ -11,7 +11,7 @@ import NotarySearchFilters from "@/components/NotarySearchFilters";
 import { SupabaseNotice } from "@/components/dev/SupabaseNotice";
 import { isSupabaseConfigured } from "@/lib/supabase/client";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 // Mock data for California notaries - in a real app, this would be fetched from a database
 const mockNotaries = [
