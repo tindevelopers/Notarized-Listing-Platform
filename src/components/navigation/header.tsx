@@ -31,10 +31,7 @@ export default function Header() {
             >
               About
             </Link>
-            <Link
-              href="/blog"
-              className="transition-colors hover:text-primary"
-            >
+            <Link href="/blog" className="transition-colors hover:text-primary">
               Blog
             </Link>
             <Link
