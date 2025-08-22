@@ -4,6 +4,8 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Header from "@/components/navigation/header";
 import Footer from "@/components/navigation/footer";
+
+export const dynamic = 'force-dynamic';
 import { Star, MapPin, Phone, Mail, Clock, Search, Filter } from "lucide-react";
 import Link from "next/link";
 import { formatPhoneNumber, formatCurrency } from "@/lib/utils";
