@@ -12,7 +12,7 @@ import {
   ChevronRight,
   House,
   Files,
-  BookBookmark,
+  Bookmark,
   UserCircle,
 } from "lucide-react";
 import {
