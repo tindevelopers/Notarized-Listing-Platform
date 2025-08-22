@@ -18,6 +18,8 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
+export const dynamic = 'force-dynamic';
+
 // Static notary data - in a real app, this would come from a database
 const notariesData = [
   {
