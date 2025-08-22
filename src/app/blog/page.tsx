@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowUpRight } from "lucide-react";
+import Header from "@/components/navigation/header";
+import Footer from "@/components/navigation/footer";
 
 // Mock blog data - replace with API calls
 const blogPosts = [
@@ -249,17 +251,21 @@ function BlogContent() {
 
 export default function BlogPage() {
   return (
-    <Suspense
-      fallback={
-        <div className="min-h-screen bg-white flex items-center justify-center">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-[#005DFF]"></div>
-            <p className="mt-4 text-[#5F687A]">Loading blog...</p>
+    <>
+      <Header />
+      <Suspense
+        fallback={
+          <div className="min-h-screen bg-white flex items-center justify-center">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-[#005DFF]"></div>
+              <p className="mt-4 text-[#5F687A]">Loading blog...</p>
+            </div>
           </div>
-        </div>
-      }
-    >
-      <BlogContent />
-    </Suspense>
+        }
+      >
+        <BlogContent />
+      </Suspense>
+      <Footer />
+    </>
   );
 }
