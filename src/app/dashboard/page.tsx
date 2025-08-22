@@ -197,6 +197,13 @@ function DashboardContent() {
               <BookBookmark className="mr-3 h-5 w-5 text-[#22D2FA]" />
               Journal
             </Link>
+            <Link
+              href="/blog"
+              className="flex items-center px-3 py-2.5 text-sm font-medium text-white hover:bg-white/10 rounded-md"
+            >
+              <Article className="mr-3 h-5 w-5 text-[#22D2FA]" />
+              Blog
+            </Link>
           </nav>
         </div>
 
