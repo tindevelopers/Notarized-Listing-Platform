@@ -6,8 +6,6 @@ import DualSearchBanner from "@/components/DualSearchBanner";
 import { Star, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
-export const dynamic = "force-dynamic";
-
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
