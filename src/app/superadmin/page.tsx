@@ -23,7 +23,6 @@ import {
   ClockCounterClockwise,
   Gear,
 } from "@/components/icons/superadmin-icons";
-import { CalendarBlank } from "@/components/icons/dashboard-icons";
 import Link from "next/link";
 
 interface DashboardStats {
