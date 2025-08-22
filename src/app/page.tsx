@@ -5,8 +5,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import DualSearchBanner from "@/components/DualSearchBanner";
 import Header from "@/components/navigation/header";
 import Footer from "@/components/navigation/footer";
-
-export const dynamic = 'force-dynamic';
 import {
   Star,
   MapPin,
