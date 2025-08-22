@@ -47,6 +47,13 @@ function MobileMenuToggleContent() {
               About
             </Link>
             <Link
+              href="/blog"
+              className="block text-gray-900 hover:text-primary transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Blog
+            </Link>
+            <Link
               href="#services"
               className="block text-gray-900 hover:text-primary transition-colors"
               onClick={() => setIsMenuOpen(false)}
