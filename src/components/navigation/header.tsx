@@ -20,12 +20,6 @@ export default function Header() {
           {/* Desktop Navigation - Static, server-rendered */}
           <nav className="hidden md:flex items-center space-x-8">
             <Link
-              href="/california-notaries"
-              className="transition-colors hover:text-primary"
-            >
-              Find a Notary
-            </Link>
-            <Link
               href="/about"
               className="transition-colors hover:text-primary"
             >
