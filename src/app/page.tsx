@@ -550,8 +550,7 @@ export default function HomePage() {
                 3. Book an appointment
               </h3>
               <p className="text-base text-[#5F687A] leading-relaxed">
-                Nec mattis semper vel etiam eu nisi dolor interdum proin et urna
-                consectetur amet et sit in viverra lectus vel at ut velit lacus.
+                Once you've made your choice, get in touch directly through our platform. Set up an appointment or ask any questions you might have.
               </p>
             </div>
           </div>
