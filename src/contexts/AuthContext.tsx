@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { User, Session, AuthChangeEvent } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase/client";
 import { generateVerificationToken } from "@/lib/auth/client-verification";
+import { useRouter } from "next/navigation";
 
 interface AuthContextType {
   user: User | null;
@@ -13,7 +14,13 @@ interface AuthContextType {
     email: string,
     password: string,
     fullName?: string,
-  ) => Promise<{ error?: any; requiresVerification?: boolean; developmentMode?: boolean; verificationCode?: string; isDuplicate?: boolean }>;
+  ) => Promise<{
+    error?: any;
+    requiresVerification?: boolean;
+    developmentMode?: boolean;
+    verificationCode?: string;
+    isDuplicate?: boolean;
+  }>;
   signIn: (email: string, password: string) => Promise<{ error?: any }>;
   signOut: () => Promise<{ error?: any }>;
 }
@@ -25,6 +32,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const [isHydrated, setIsHydrated] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     let mounted = true;
@@ -82,6 +90,47 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setSession(session);
         setUser(session?.user ?? null);
         setLoading(false);
+
+        // Auto-redirect to appropriate dashboard on successful sign in
+        if (event === "SIGNED_IN" && session?.user) {
+          console.log("User signed in, determining redirect destination");
+
+          // Check if user is superadmin
+          const userEmail = session.user.email;
+          const superAdminEmails = [
+            "admin@notarized.com",
+            "superadmin@notarized.com",
+            "support@notarized.com",
+          ];
+
+          const isSuperAdmin =
+            superAdminEmails.includes(userEmail || "") ||
+            userEmail?.endsWith("@notarized.com") ||
+            session.user.user_metadata?.role === "superadmin";
+
+          // Only redirect if not already on dashboard or protected pages
+          const currentPath = window.location.pathname;
+          const isOnProtectedPage =
+            currentPath.startsWith("/dashboard") ||
+            currentPath.startsWith("/superadmin") ||
+            currentPath.startsWith("/profile") ||
+            currentPath.startsWith("/transactions") ||
+            currentPath.startsWith("/documents") ||
+            currentPath.startsWith("/meetings") ||
+            currentPath.startsWith("/journal");
+
+          if (!isOnProtectedPage) {
+            if (isSuperAdmin) {
+              console.log(
+                "Superadmin user signed in, redirecting to /superadmin",
+              );
+              router.push("/superadmin");
+            } else {
+              console.log("Regular user signed in, redirecting to /dashboard");
+              router.push("/dashboard");
+            }
+          }
+        }
       },
     );
 
@@ -89,7 +138,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       mounted = false;
       subscription.unsubscribe();
     };
-  }, []);
+  }, [router]);
 
   // Prevent hydration mismatch by not rendering auth-dependent content until hydrated
   if (!isHydrated) {
@@ -99,7 +148,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           user: null,
           session: null,
           loading: true,
-          signUp: async () => ({ error: new Error("Not hydrated"), requiresVerification: false, isDuplicate: false }),
+          signUp: async () => ({
+            error: new Error("Not hydrated"),
+            requiresVerification: false,
+            isDuplicate: false,
+          }),
           signIn: async () => ({ error: new Error("Not hydrated") }),
           signOut: async () => ({ error: new Error("Not hydrated") }),
         }}
@@ -128,22 +181,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       if (error) {
         console.error("Sign up error:", error);
-        
+
         // Check if this is a duplicate registration error
-        const errorMessage = error.message?.toLowerCase() || '';
-        const isDuplicateError = 
-          errorMessage.includes('user already registered') ||
-          errorMessage.includes('email already registered') ||
-          errorMessage.includes('email already exists') ||
-          errorMessage.includes('already been registered') ||
+        const errorMessage = error.message?.toLowerCase() || "";
+        const isDuplicateError =
+          errorMessage.includes("user already registered") ||
+          errorMessage.includes("email already registered") ||
+          errorMessage.includes("email already exists") ||
+          errorMessage.includes("already been registered") ||
           error.status === 422 || // Supabase status for existing user
-          error.code === 'email_already_confirmed';
-        
+          error.code === "email_already_confirmed";
+
         if (isDuplicateError) {
-          console.log('Detected duplicate registration attempt for:', email);
+          console.log("Detected duplicate registration attempt for:", email);
           return { error, requiresVerification: false, isDuplicate: true };
         }
-        
+
         return { error, requiresVerification: false, isDuplicate: false };
       }
 
@@ -168,7 +221,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
             if (!emailResponse.ok) {
               const errorData = await emailResponse.json().catch(() => ({}));
-              console.error("Failed to send verification email:", errorData);
+              console.error("Failed to send verification email:", {
+                status: emailResponse.status,
+                statusText: emailResponse.statusText,
+                error: errorData.error || errorData.message || "Unknown error",
+                details: errorData,
+              });
               // Don't fail the signup if email fails, just log it
             } else {
               const responseData = await emailResponse.json().catch(() => ({}));
@@ -178,15 +236,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
               );
 
               // Check if this is development mode and return the data
-              if (responseData.developmentMode && responseData.verificationCode) {
+              if (
+                responseData.developmentMode &&
+                responseData.verificationCode
+              ) {
                 console.log(
                   "📧 Development mode: Verification code available for UI display",
                 );
-                return { 
-                  error: null, 
-                  requiresVerification: true, 
-                  developmentMode: true, 
-                  verificationCode: responseData.verificationCode 
+                return {
+                  error: null,
+                  requiresVerification: true,
+                  developmentMode: true,
+                  verificationCode: responseData.verificationCode,
                 };
               } else if (responseData.error?.includes("Development mode")) {
                 console.log(
@@ -200,7 +261,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
               console.log("Email verification request was cancelled");
               return { error: null, requiresVerification: true };
             }
-            console.error("Error sending verification email:", fetchError);
+            console.error("Error sending verification email:", {
+              name: fetchError?.name,
+              message: fetchError?.message,
+              error: fetchError,
+            });
             // Don't fail the signup if email fails
           }
         } catch (emailError) {
@@ -210,7 +275,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
 
       // Always require verification for the Phase A implementation
-      console.log('Sign up completed, requiring verification for:', email);
+      console.log("Sign up completed, requiring verification for:", email);
       return { error: null, requiresVerification: true };
     } catch (error) {
       console.error("Sign up catch error:", error);

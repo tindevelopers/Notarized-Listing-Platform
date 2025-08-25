@@ -26,6 +26,8 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 export default function About() {
   return (
     <div className="min-h-screen bg-white">
@@ -41,12 +43,32 @@ export default function About() {
                 <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
                   About our company
                 </h1>
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit donec
-                  magna pharetra dignissim nibh turpis pretium id leo sit dolor
-                  vitae mi arcu sit est sem fames integer placerat in magna
-                  laoreet nibh.
-                </p>
+                <div className="text-lg text-gray-600 leading-relaxed font-light text-left">
+                  <div className="mb-20">
+                    <div className="max-w-4xl mx-auto">
+                      <div className="text-center">
+                        <div className="max-w-3xl mx-auto">
+                          <p className="text-gray-600 mb-0">
+                            <span className="font-inter text-left">
+                              Notarized, Inc. is here to assist you with
+                              notaries for all your signings and notarization
+                              needs. Cultivated by Real Estate Industry
+                              Professionals with over 15 years of experience, we
+                              know and understand what it takes to complete
+                              closings properly, and we will be with you every
+                              step of the way. Our customer service team is
+                              available 24/7 for signing appointments and
+                              questions. At Notarized, Inc., we have a vast
+                              range of signing knowledge to support you, in
+                              combination with the experience and skill set to
+                              handle your signings properly the first time.
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Left image */}
@@ -74,12 +96,18 @@ export default function About() {
               </div>
 
               <div className="space-y-6">
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  Sit pellentesque eget arcu elementum phasellus et risus
-                  convallis nulla porttitor diam porttitor euismod quis senectus
-                  lobortis ut consequat neque tempor tortor tincidunt posuere
-                  tincidunt arcu.
-                </p>
+                <div className="text-lg text-gray-600 leading-relaxed">
+                  Notarized, Inc. is here to assist you with notaries for all
+                  your signings and notarization needs. Cultivated by Real
+                  Estate Industry Professionals with over 15 years of
+                  experience, we know and understand what it takes to complete
+                  closings properly, and we will be with you every step of the
+                  way. Our customer service team is available 24/7 for signing
+                  appointments and questions. At Notarized, Inc., we have a vast
+                  range of signing knowledge to support you, in combination with
+                  the experience and skill set to handle your signings properly
+                  the first time.
+                </div>
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button size="lg" className="text-lg px-8 py-6">
@@ -117,8 +145,8 @@ export default function About() {
               <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto">
                 <Users className="w-6 h-6 text-white" />
               </div>
-              <div className="text-5xl font-bold text-gray-900">2,000</div>
-              <div className="text-xl font-bold text-gray-900">Notarys</div>
+              <div className="text-5xl font-bold text-gray-900">200K</div>
+              <div className="text-xl font-bold text-gray-900">Notaries</div>
               <p className="text-gray-600">
                 Lorem ipsum dolor sit amet consectetur adipiscing elit.
               </p>
@@ -128,9 +156,9 @@ export default function About() {
               <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto">
                 <CheckCircle className="w-6 h-6 text-white" />
               </div>
-              <div className="text-5xl font-bold text-gray-900">30,000+</div>
+              <div className="text-5xl font-bold text-gray-900">Over 1K</div>
               <div className="text-xl font-bold text-gray-900">
-                Successful projects
+                Active Clients
               </div>
               <p className="text-gray-600">
                 Lorem ipsum dolor sit amet consectetur adipiscing elit.
@@ -141,7 +169,9 @@ export default function About() {
               <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto">
                 <TrendingUp className="w-6 h-6 text-white" />
               </div>
-              <div className="text-5xl font-bold text-gray-900">1,500</div>
+              <div className="text-5xl font-bold text-gray-900">
+                All 50 States
+              </div>
               <div className="text-xl font-bold text-gray-900">
                 Happy clients
               </div>
@@ -154,10 +184,8 @@ export default function About() {
               <div className="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center mx-auto">
                 <Star className="w-6 h-6 text-white" />
               </div>
-              <div className="text-5xl font-bold text-gray-900">500</div>
-              <div className="text-xl font-bold text-gray-900">
-                5 stars reviews
-              </div>
+              <div className="text-5xl font-bold text-gray-900">20Y +</div>
+              <div className="text-xl font-bold text-gray-900">Experience</div>
               <p className="text-gray-600">
                 Lorem ipsum dolor sit amet consectetur adipiscing elit.
               </p>
@@ -251,11 +279,12 @@ export default function About() {
                 <h2 className="text-4xl font-bold text-gray-900 leading-tight">
                   The values that drive everything we do
                 </h2>
-                <p className="text-lg text-gray-600">
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit ac non
-                  sit duis sollicitudin quam blandit amet id mi ac eget facilisi
-                  gravida.
-                </p>
+                <div className="text-lg text-gray-600">
+                  Our core values are the foundation upon which we've built our
+                  platform. These values guide our daily operations, our
+                  long-term vision, and our commitment to both the notaries and
+                  the public we serve.
+                </div>
               </div>
 
               <div className="flex items-center space-x-4">
@@ -274,11 +303,11 @@ export default function About() {
                 <TrendingUp className="w-10 h-10 text-blue-500" />
               </div>
               <div className="space-y-4">
-                <h3 className="text-2xl font-bold text-gray-900">Growth</h3>
-                <p className="text-gray-600">
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit nibh
-                  libero ultrices vulputate congue.
-                </p>
+                <h3 className="text-2xl font-bold text-gray-900">Integrity</h3>
+                <div className="text-gray-600">
+                  We hold ourselves to the highest standards of honesty and
+                  transparency in all our interactions and endeavors.
+                </div>
               </div>
             </Card>
 
@@ -287,11 +316,12 @@ export default function About() {
                 <Trophy className="w-10 h-10 text-primary" />
               </div>
               <div className="space-y-4">
-                <h3 className="text-2xl font-bold text-gray-900">Quality</h3>
-                <p className="text-gray-600">
-                  Semper id tellus hac duis vitae arcu dui elementum id in sed
-                  lectus pellentesque praesent.
-                </p>
+                <h3 className="text-2xl font-bold text-gray-900">Excellence</h3>
+                <div className="text-gray-600">
+                  We continuously strive for the highest quality in our
+                  services, ensuring that our members and users receive the best
+                  experience possible.
+                </div>
               </div>
             </Card>
 
@@ -300,11 +330,12 @@ export default function About() {
                 <Users className="w-10 h-10 text-purple-500" />
               </div>
               <div className="space-y-4">
-                <h3 className="text-2xl font-bold text-gray-900">Teamwork</h3>
-                <p className="text-gray-600">
-                  Tortor vitae nulla bibendum integer sociis blandit augue sit
-                  morbi aliquam vitae neque.
-                </p>
+                <h3 className="text-2xl font-bold text-gray-900">Community</h3>
+                <div className="text-gray-600">
+                  We value the power of collective strength and endeavor to
+                  create a supportive environment where notaries can connect,
+                  share, and grow together.
+                </div>
               </div>
             </Card>
           </div>
@@ -320,12 +351,12 @@ export default function About() {
                 <h2 className="text-4xl font-bold text-gray-900">
                   Why join us?
                 </h2>
-                <p className="text-lg text-gray-600">
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit sapien
-                  eget eu elementum velit nunc tortor pulvinar ornare at mi sed
-                  nisl in proin sollicitudin ultricies aliquet malesuada
-                  aliquet.
-                </p>
+                <div className="text-lg text-gray-600">
+                  Join our community and showcase your expertise to those who
+                  need it most. With Notarized, you're not just getting a
+                  listing; you're becoming part of a dedicated network committed
+                  to elevating the notary profession.
+                </div>
               </div>
 
               {/* Benefits list */}

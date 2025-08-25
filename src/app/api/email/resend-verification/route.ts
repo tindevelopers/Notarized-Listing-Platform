@@ -1,8 +1,10 @@
-
-
 import { NextRequest, NextResponse } from "next/server"
 import { sendEmailVerification, checkEmailRateLimit } from "@/lib/ses/email-service"
-import { generateVerificationToken, storeVerificationToken } from "@/lib/auth/verification"
+import { 
+  generateVerificationCode, 
+  storeVerificationCode, 
+  hasRecentVerificationCode 
+} from "@/lib/auth/verification-codes"
 import { createClient } from "@/lib/supabase/server"
 import { z } from "zod"
 
@@ -28,7 +30,7 @@ export async function POST(request: NextRequest) {
 
     const { email } = validation.data
 
-    // Check rate limiting
+    // Check rate limiting for emails
     const rateCheck = checkEmailRateLimit(email)
     if (!rateCheck.allowed) {
       const remainingMinutes = Math.ceil((rateCheck.remainingTime || 0) / (1000 * 60))
@@ -36,6 +38,20 @@ export async function POST(request: NextRequest) {
         { 
           error: "Too many email requests", 
           message: `Please wait ${remainingMinutes} minutes before requesting another email` 
+        },
+        { status: 429 }
+      )
+    }
+
+    // Check if user has requested a code recently (prevent spam)
+    const recentCodeCheck = await hasRecentVerificationCode(email, 'email_verification', 1)
+    if (recentCodeCheck.error) {
+      console.error('Error checking recent verification codes:', recentCodeCheck.error)
+    } else if (recentCodeCheck.hasRecent) {
+      return NextResponse.json(
+        { 
+          error: "Verification code already sent", 
+          message: "Please wait at least 1 minute before requesting another verification code" 
         },
         { status: 429 }
       )
@@ -58,48 +74,58 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    // Generate new verification token
-    const verificationToken = generateVerificationToken()
+    // Generate new verification code
+    const verificationCode = generateVerificationCode()
     
-    // Store the token
-    const storeResult = await storeVerificationToken(email, verificationToken, 'email_verification')
-    
+    // Store verification code in database with 15-minute expiration
+    const expiresAt = new Date(Date.now() + (15 * 60 * 1000)) // 15 minutes
+    const storeResult = await storeVerificationCode({
+      email: email.toLowerCase(),
+      code: verificationCode,
+      type: 'email_verification',
+      expiresAt
+    })
+
     if (!storeResult.success) {
-      console.error('Failed to store verification token:', storeResult.error)
+      console.error('Failed to store verification code:', storeResult.error)
       return NextResponse.json(
-        { error: "Failed to generate verification link" },
+        { error: "Failed to generate verification code", details: storeResult.error },
         { status: 500 }
       )
     }
-
-    // Store verification code in global store (15 minutes expiration)
-    ;(global as any).verificationCodes = (global as any).verificationCodes || new Map()
-    ;(global as any).verificationCodes.set(email.toLowerCase(), {
-      code: verificationToken, // This is now a 6-digit code
-      expiresAt: Date.now() + (15 * 60 * 1000), // 15 minutes
-      createdAt: Date.now()
-    })
 
     // Send email
     const result = await sendEmailVerification(email, {
       userName: profile.full_name || email.split('@')[0],
-      verificationCode: verificationToken, // This is now a 6-digit code
+      verificationCode: verificationCode,
       supportEmail: process.env.SUPPORT_EMAIL || 'support@notarized.com'
     })
 
-    if (!result.success) {
+    if (!result.success && !result.messageId) {
       console.error('Failed to resend verification email:', result.error)
       return NextResponse.json(
-        { error: "Failed to send verification email" },
+        { error: "Failed to send verification email", details: result.error },
         { status: 500 }
       )
     }
 
-    console.log(`Verification email resent successfully to ${email}`)
+    // Log successful send
+    if (result.messageId?.startsWith('dev-mode-')) {
+      console.log(`📧 Verification email resent and logged to console for ${email} (development mode)`)
+    } else {
+      console.log(`✅ Verification email resent successfully to ${email}`)
+    }
 
     return NextResponse.json({
       success: true,
-      message: "Verification email sent successfully"
+      message: result.messageId?.startsWith('dev-mode-') 
+        ? "Verification email logged to console (development mode)" 
+        : "Verification email sent successfully",
+      // In development mode, include the verification code so the UI can display it
+      ...(result.messageId?.startsWith('dev-mode-') && { 
+        developmentMode: true,
+        verificationCode: verificationCode 
+      })
     })
 
   } catch (error) {

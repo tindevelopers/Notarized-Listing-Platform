@@ -1,16 +1,36 @@
+"use client";
 
-"use client"
-
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { AuthModal } from '@/components/auth/AuthModal'
-import { useAuth } from '@/contexts/AuthContext'
-import { ProfileDropdown } from '@/components/auth/ProfileDropdown'
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { AuthModal } from "@/components/auth/AuthModal";
+import { useAuth } from "@/contexts/AuthContext";
+import { ProfileDropdown } from "@/components/auth/ProfileDropdown";
 
 export default function AuthButtons() {
-  const [authModalOpen, setAuthModalOpen] = useState(false)
-  const [authModalTab, setAuthModalTab] = useState<'signin' | 'signup'>('signin')
-  const { user, loading } = useAuth()
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authModalTab, setAuthModalTab] = useState<"signin" | "signup">(
+    "signin",
+  );
+  const { user, loading } = useAuth();
+
+  // Check URL parameters to auto-open auth modal
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const signupParam = urlParams.get("signup");
+    const authParam = urlParams.get("auth");
+
+    if (signupParam === "true" || authParam === "signup") {
+      setAuthModalTab("signup");
+      setAuthModalOpen(true);
+      // Clean up URL
+      window.history.replaceState({}, "", window.location.pathname);
+    } else if (authParam === "signin") {
+      setAuthModalTab("signin");
+      setAuthModalOpen(true);
+      // Clean up URL
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+  }, []);
 
   // Don't render during loading
   if (loading) {
@@ -19,12 +39,12 @@ export default function AuthButtons() {
         <div className="w-20 h-8 bg-gray-200 rounded animate-pulse" />
         <div className="w-20 h-8 bg-gray-200 rounded animate-pulse" />
       </div>
-    )
+    );
   }
 
   // Show profile dropdown if user is authenticated
   if (user) {
-    return <ProfileDropdown />
+    return <ProfileDropdown />;
   }
 
   // Show auth buttons for unauthenticated users
@@ -35,8 +55,8 @@ export default function AuthButtons() {
           variant="ghost"
           size="sm"
           onClick={() => {
-            setAuthModalTab('signin')
-            setAuthModalOpen(true)
+            setAuthModalTab("signin");
+            setAuthModalOpen(true);
           }}
         >
           Sign In
@@ -44,8 +64,8 @@ export default function AuthButtons() {
         <Button
           size="sm"
           onClick={() => {
-            setAuthModalTab('signup')
-            setAuthModalOpen(true)
+            setAuthModalTab("signup");
+            setAuthModalOpen(true);
           }}
         >
           Sign Up
@@ -58,5 +78,5 @@ export default function AuthButtons() {
         defaultTab={authModalTab}
       />
     </>
-  )
+  );
 }

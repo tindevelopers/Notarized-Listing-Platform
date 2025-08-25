@@ -12,10 +12,8 @@ import {
 } from "@/components/ui/select";
 import { Search, MapPin } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { HydrationBoundary } from "./HydrationBoundary";
 
-// Client Component for interactive search functionality
-function SearchFormContent() {
+export default function SearchForm() {
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [zipCode, setZipCode] = useState("");
@@ -141,22 +139,5 @@ function SearchFormContent() {
         </Button>
       </div>
     </div>
-  );
-}
-
-// Wrapper with hydration boundary
-export default function SearchForm() {
-  return (
-    <HydrationBoundary
-      fallback={
-        <div className="bg-white rounded-2xl p-8 shadow-2xl">
-          <div className="text-center text-gray-500">
-            Loading search form...
-          </div>
-        </div>
-      }
-    >
-      <SearchFormContent />
-    </HydrationBoundary>
   );
 }

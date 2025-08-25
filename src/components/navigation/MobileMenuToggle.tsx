@@ -47,6 +47,13 @@ function MobileMenuToggleContent() {
               About
             </Link>
             <Link
+              href="/blog"
+              className="block text-gray-900 hover:text-primary transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Blog
+            </Link>
+            <Link
               href="#services"
               className="block text-gray-900 hover:text-primary transition-colors"
               onClick={() => setIsMenuOpen(false)}
@@ -62,10 +69,7 @@ function MobileMenuToggleContent() {
             </Link>
             <div className="pt-4 border-t border-gray-100 space-y-2">
               <Button variant="ghost" className="w-full" asChild>
-                <Link
-                  href="/notary-signup"
-                  onClick={() => setIsMenuOpen(false)}
-                >
+                <Link href="/?signup=true" onClick={() => setIsMenuOpen(false)}>
                   List Your Business
                 </Link>
               </Button>

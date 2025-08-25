@@ -1,7 +1,6 @@
-
-
 import { NextRequest, NextResponse } from "next/server"
 import { createClient } from "@/lib/supabase/server"
+import { verifyVerificationCode } from "@/lib/auth/verification-codes"
 import { z } from "zod"
 
 export const dynamic = "force-dynamic"
@@ -27,31 +26,25 @@ export async function POST(request: NextRequest) {
 
     const { email, code } = validation.data
 
-    // Check if verification code exists and is valid
-    const verificationCodes = (global as any).verificationCodes || new Map()
-    const storedData = verificationCodes.get(email.toLowerCase())
+    // Verify the code using our database helper
+    const verificationResult = await verifyVerificationCode(
+      email.toLowerCase(),
+      code,
+      'email_verification'
+    )
 
-    if (!storedData) {
+    if (!verificationResult.valid) {
+      if (verificationResult.expired) {
+        return NextResponse.json(
+          { error: "Verification code has expired. Please request a new code." },
+          { status: 410 }
+        )
+      }
+      
       return NextResponse.json(
-        { error: "No verification code found for this email. Please request a new code." },
-        { status: 404 }
-      )
-    }
-
-    // Check if code has expired
-    if (Date.now() > storedData.expiresAt) {
-      // Clean up expired code
-      verificationCodes.delete(email.toLowerCase())
-      return NextResponse.json(
-        { error: "Verification code has expired. Please request a new code." },
-        { status: 410 }
-      )
-    }
-
-    // Check if code matches
-    if (storedData.code !== code) {
-      return NextResponse.json(
-        { error: "Invalid verification code. Please check and try again." },
+        { 
+          error: verificationResult.error || "Invalid verification code. Please check and try again." 
+        },
         { status: 400 }
       )
     }
@@ -95,9 +88,6 @@ export async function POST(request: NextRequest) {
         )
       }
 
-      // Clean up the verification code since it's been used
-      verificationCodes.delete(email.toLowerCase())
-
       console.log(`✅ Email verified successfully for ${email}`)
 
       return NextResponse.json({
@@ -121,16 +111,3 @@ export async function POST(request: NextRequest) {
     )
   }
 }
-
-// Clean up expired verification codes periodically
-setInterval(() => {
-  const verificationCodes = (global as any).verificationCodes
-  if (verificationCodes) {
-    const now = Date.now()
-    for (const [email, data] of verificationCodes.entries()) {
-      if (now > data.expiresAt) {
-        verificationCodes.delete(email)
-      }
-    }
-  }
-}, 5 * 60 * 1000) // Clean up every 5 minutes

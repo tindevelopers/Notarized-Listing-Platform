@@ -1,8 +1,11 @@
-
-
 import { NextRequest, NextResponse } from "next/server"
 import { sendEmailVerification, isValidEmail, checkEmailRateLimit } from "@/lib/ses/email-service"
 import { createClient } from "@/lib/supabase/server"
+import { 
+  generateVerificationCode, 
+  storeVerificationCode, 
+  hasRecentVerificationCode 
+} from "@/lib/auth/verification-codes"
 import { z } from "zod"
 
 export const dynamic = "force-dynamic"
@@ -11,7 +14,7 @@ export const dynamic = "force-dynamic"
 const verifyEmailSchema = z.object({
   email: z.string().email("Invalid email address"),
   userName: z.string().min(1, "User name is required"),
-  verificationCode: z.string().length(6, "Verification code must be 6 digits").regex(/^\d{6}$/, "Verification code must contain only digits"),
+  verificationCode: z.string().length(6, "Verification code must be 6 digits").regex(/^\d{6}$/, "Verification code must contain only digits").optional(),
 })
 
 export async function POST(request: NextRequest) {
@@ -27,9 +30,12 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const { email, userName, verificationCode } = validation.data
+    const { email, userName } = validation.data
+    
+    // Generate verification code if not provided
+    const verificationCode = validation.data.verificationCode || generateVerificationCode()
 
-    // Check rate limiting
+    // Check rate limiting for emails
     const rateCheck = checkEmailRateLimit(email)
     if (!rateCheck.allowed) {
       const remainingMinutes = Math.ceil((rateCheck.remainingTime || 0) / (1000 * 60))
@@ -42,13 +48,36 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Store verification code in a simple in-memory store with expiration (15 minutes)
-    ;(global as any).verificationCodes = (global as any).verificationCodes || new Map()
-    ;(global as any).verificationCodes.set(email.toLowerCase(), {
+    // Check if user has requested a code recently (prevent spam)
+    const recentCodeCheck = await hasRecentVerificationCode(email, 'email_verification', 1)
+    if (recentCodeCheck.error) {
+      console.error('Error checking recent verification codes:', recentCodeCheck.error)
+    } else if (recentCodeCheck.hasRecent) {
+      return NextResponse.json(
+        { 
+          error: "Verification code already sent", 
+          message: "Please wait at least 1 minute before requesting another verification code" 
+        },
+        { status: 429 }
+      )
+    }
+
+    // Store verification code in database with 15-minute expiration
+    const expiresAt = new Date(Date.now() + (15 * 60 * 1000)) // 15 minutes
+    const storeResult = await storeVerificationCode({
+      email: email.toLowerCase(),
       code: verificationCode,
-      expiresAt: Date.now() + (15 * 60 * 1000), // 15 minutes
-      createdAt: Date.now()
+      type: 'email_verification',
+      expiresAt
     })
+
+    if (!storeResult.success) {
+      console.error('Failed to store verification code:', storeResult.error)
+      return NextResponse.json(
+        { error: "Failed to store verification code", details: storeResult.error },
+        { status: 500 }
+      )
+    }
 
     // Send email with verification code
     const result = await sendEmailVerification(email, {

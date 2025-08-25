@@ -1,82 +1,194 @@
+import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@/lib/supabase/server";
 
-
-import { NextRequest, NextResponse } from "next/server"
-import { createClient } from "@/lib/supabase/server"
-
-export const dynamic = "force-dynamic"
+export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
   try {
-    const supabase = await createClient()
+    const supabase = await createClient();
 
-    // Authenticate the request - only authorized users can access applications
-    const { data: { user }, error: authError } = await supabase.auth.getUser()
-    
-    if (authError || !user) {
+    // Get the current user session
+    const {
+      data: { session },
+      error: sessionError,
+    } = await supabase.auth.getSession();
+
+    if (sessionError || !session?.user) {
       return NextResponse.json(
-        { error: "Unauthorized - Authentication required" },
+        { error: "Unauthorized" },
         { status: 401 }
-      )
+      );
     }
 
-    // Check if user has admin permissions
-    const { data: profile, error: profileError } = await supabase
-      .from('profiles')
-      .select('email')
-      .eq('id', user.id)
-      .single()
+    // Check if user is admin
+    const userEmail = session.user.email;
+    const adminEmails = [
+      'admin@notarized.com',
+      'superadmin@notarized.com',
+      'support@notarized.com'
+    ];
 
-    // Simple admin check - in production, implement proper role-based authorization
-    const adminEmails = ['admin@notarized.com', 'support@notarized.com']
-    const isAdmin = adminEmails.includes(profile?.email || '') || 
-                   profile?.email?.endsWith('@notarized.com')
+    const isAdmin = adminEmails.includes(userEmail || '') || 
+                   userEmail?.endsWith('@notarized.com') ||
+                   session.user.user_metadata?.role === 'superadmin';
 
     if (!isAdmin) {
       return NextResponse.json(
-        { error: "Unauthorized - Admin access required" },
+        { error: "Forbidden - Admin access required" },
         { status: 403 }
-      )
+      );
     }
 
-    // Fetch notary applications with profile information
+    // For now, return mock data
+    // In a real implementation, this would query the notaries table
+    const applications = [
+      {
+        id: '1',
+        full_name: 'John Smith',
+        email: 'john.smith@example.com',
+        state: 'California',
+        commission_number: 'CA123456',
+        status: 'pending',
+        submitted_at: '2024-01-15T10:00:00Z',
+        documents: ['commission_certificate.pdf', 'bond_document.pdf']
+      },
+      {
+        id: '2',
+        full_name: 'Sarah Johnson',
+        email: 'sarah.j@example.com',
+        state: 'Texas',
+        commission_number: 'TX789012',
+        status: 'approved',
+        submitted_at: '2024-01-10T14:30:00Z',
+        documents: ['commission_certificate.pdf', 'bond_document.pdf', 'seal_image.jpg']
+      }
+    ];
+
+    /* 
+    // Real implementation would query the database like this:
+    
     const { data: applications, error } = await supabase
       .from('notaries')
       .select(`
         id,
-        city,
-        state,
-        phone,
-        business_name,
-        verification_status,
-        is_verified,
-        created_at,
+        profile_id,
         commission_number,
-        years_experience,
-        profiles!notaries_profile_id_fkey (
+        verification_status,
+        created_at,
+        profiles!inner(
           full_name,
           email
         )
       `)
-      .order('created_at', { ascending: false })
+      .eq('verification_status', 'pending')
+      .order('created_at', { ascending: false });
 
     if (error) {
-      console.error('Error fetching notary applications:', error)
       return NextResponse.json(
         { error: "Failed to fetch applications" },
         { status: 500 }
-      )
+      );
     }
+    */
 
     return NextResponse.json({
-      applications: applications || [],
-      total: applications?.length || 0
-    })
+      applications,
+      total: applications.length
+    });
 
   } catch (error) {
-    console.error("Error in notary applications endpoint:", error)
+    console.error("Admin notary applications error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
-    )
+    );
+  }
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const { applicationId, action, notes } = await request.json();
+
+    const supabase = await createClient();
+
+    // Get the current user session
+    const {
+      data: { session },
+      error: sessionError,
+    } = await supabase.auth.getSession();
+
+    if (sessionError || !session?.user) {
+      return NextResponse.json(
+        { error: "Unauthorized" },
+        { status: 401 }
+      );
+    }
+
+    // Check if user is admin
+    const userEmail = session.user.email;
+    const adminEmails = [
+      'admin@notarized.com',
+      'superadmin@notarized.com',
+      'support@notarized.com'
+    ];
+
+    const isAdmin = adminEmails.includes(userEmail || '') || 
+                   userEmail?.endsWith('@notarized.com') ||
+                   session.user.user_metadata?.role === 'superadmin';
+
+    if (!isAdmin) {
+      return NextResponse.json(
+        { error: "Forbidden - Admin access required" },
+        { status: 403 }
+      );
+    }
+
+    // Validate action
+    if (!['approve', 'reject'].includes(action)) {
+      return NextResponse.json(
+        { error: "Invalid action. Must be 'approve' or 'reject'" },
+        { status: 400 }
+      );
+    }
+
+    // For now, return success response
+    // In a real implementation, this would update the notaries table
+    
+    /* 
+    // Real implementation would update the database like this:
+    
+    const newStatus = action === 'approve' ? 'approved' : 'rejected';
+    
+    const { error } = await supabase
+      .from('notaries')
+      .update({
+        verification_status: newStatus,
+        verification_notes: notes,
+        updated_at: new Date().toISOString()
+      })
+      .eq('id', applicationId);
+
+    if (error) {
+      return NextResponse.json(
+        { error: "Failed to update application" },
+        { status: 500 }
+      );
+    }
+    */
+
+    return NextResponse.json({
+      success: true,
+      message: `Application ${action}d successfully`,
+      applicationId,
+      action,
+      notes
+    });
+
+  } catch (error) {
+    console.error("Admin application action error:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
 }

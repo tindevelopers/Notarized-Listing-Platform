@@ -31,6 +31,9 @@ export default function Header() {
             >
               About
             </Link>
+            <Link href="/blog" className="transition-colors hover:text-primary">
+              Blog
+            </Link>
             <Link
               href="#services"
               className="transition-colors hover:text-primary"
@@ -48,7 +51,7 @@ export default function Header() {
           {/* Desktop Actions - Static */}
           <div className="hidden md:flex items-center space-x-4">
             <Button variant="ghost" asChild>
-              <Link href="/notary-signup">List Your Business</Link>
+              <Link href="/?signup=true">List Your Business</Link>
             </Button>
             <Button asChild>
               <Link href="/california-notaries">Search Notaries</Link>
