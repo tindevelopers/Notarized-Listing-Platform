@@ -40,7 +40,7 @@ export default function SearchForm() {
   };
 
   return (
-    <div className="bg-white rounded-[18px] border border-[#EAECF2] p-8 lg:p-10" style={{ boxShadow: '0 4px 20px 0 rgba(0, 93, 255, 0.08)' }}>
+    <div className="bg-white rounded-[18px] border border-[#EAECF2] p-8 lg:p-10 shadow-xl">
       {/* Search Form Header */}
       <div className="text-center mb-8">
         <h3 className="text-xl font-bold text-[#1C1F23] mb-2">Find Your Perfect Notary</h3>
