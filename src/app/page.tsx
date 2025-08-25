@@ -601,6 +601,7 @@ export default function HomePage() {
                     viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
+                    className="text-white"
                   >
                     <path
                       d="M11.4785 3.7749L3.29968 11.9537L11.4785 20.1326"
