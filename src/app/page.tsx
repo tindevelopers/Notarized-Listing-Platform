@@ -363,6 +363,155 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Featured Blogs Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-12 gap-6">
+            <h2 className="text-2xl md:text-3xl font-bold text-[#1C1F23] max-w-md">
+              Browse articles & news
+            </h2>
+            <p className="text-base text-[#5F687A] leading-relaxed max-w-md lg:text-right">
+              Lorem ipsum dolor sit amet consectetur adipiscing elit amet nisl fringilla lectus dignissim euismod mauris enim leo lorem.
+            </p>
+          </div>
+
+          {/* Articles Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {/* Article 1 */}
+            <article className="group">
+              <div className="relative mb-6">
+                <div className="w-full h-[273px] rounded-[18px] bg-[#F9FAFC] overflow-hidden">
+                  <img
+                    src="https://api.builder.io/api/v1/image/assets/TEMP/4d8ab46e1a621708164fea6a050dbf3639851652?width=776"
+                    alt="How to stay organized and productive as a Notary"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="absolute top-6 left-6">
+                  <span className="inline-flex items-center px-3 py-2 rounded-full bg-[#4BA9FF] text-white text-sm font-medium">
+                    Articles
+                  </span>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <h3 className="text-xl md:text-[22px] font-bold text-[#1C1F23] leading-tight">
+                  How to stay organized and productive as a Notary
+                </h3>
+                <p className="text-base text-[#5F687A] leading-relaxed">
+                  Porta mauris at sem placerat vulputate porttitor arcu suspendisse dui mi duis non tristique.
+                </p>
+                <div className="flex items-center justify-between">
+                  <span className="text-base font-bold text-[#1C1F23]">Jan 30, 2024</span>
+                  <Link
+                    href="/blog/stay-organized-productive-notary"
+                    className="inline-flex items-center gap-2 text-base font-bold text-[#005DFF] hover:text-[#0052E6] transition-colors"
+                  >
+                    Read more
+                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M2.66781 13.8213L13.3345 3.15462" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M13.3345 13.2109V3.15437H3.2779" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+            </article>
+
+            {/* Article 2 */}
+            <article className="group">
+              <div className="relative mb-6">
+                <div className="w-full h-[273px] rounded-[18px] bg-[#F9FAFC] overflow-hidden">
+                  <img
+                    src="https://api.builder.io/api/v1/image/assets/TEMP/a5db12b1cbbb6de511dc37dfcd8ad7db604d47db?width=776"
+                    alt="Essential tips on how much to charge for your freelance work"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="absolute top-6 left-6">
+                  <span className="inline-flex items-center px-3 py-2 rounded-full bg-[#6C38FF] text-white text-sm font-medium">
+                    Resources
+                  </span>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <h3 className="text-xl md:text-[22px] font-bold text-[#1C1F23] leading-tight">
+                  Essential tips on how much to charge for your freelance work
+                </h3>
+                <p className="text-base text-[#5F687A] leading-relaxed">
+                  Aliquam senectus turpis quam odio proin nis nec massa nisl ac etiam sed feugiat nullam neque.
+                </p>
+                <div className="flex items-center justify-between">
+                  <span className="text-base font-bold text-[#1C1F23]">Jan 27, 2024</span>
+                  <Link
+                    href="/blog/freelance-pricing-tips"
+                    className="inline-flex items-center gap-2 text-base font-bold text-[#005DFF] hover:text-[#0052E6] transition-colors"
+                  >
+                    Read more
+                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M2.66781 13.8213L13.3345 3.15462" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M13.3345 13.2109V3.15437H3.2779" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+            </article>
+
+            {/* Article 3 */}
+            <article className="group">
+              <div className="relative mb-6">
+                <div className="w-full h-[273px] rounded-[18px] bg-[#F9FAFC] overflow-hidden">
+                  <img
+                    src="https://api.builder.io/api/v1/image/assets/TEMP/36c030a610162c3a32906a742b971cc2c4671e5d?width=776"
+                    alt="7 tips to help you succeed as Notary professional"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="absolute top-6 left-6">
+                  <span className="inline-flex items-center px-3 py-2 rounded-full bg-[#005DFF] text-white text-sm font-medium">
+                    Tips
+                  </span>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <h3 className="text-xl md:text-[22px] font-bold text-[#1C1F23] leading-tight">
+                  7 tips to help you succeed as Notary professional
+                </h3>
+                <p className="text-base text-[#5F687A] leading-relaxed">
+                  Lorem ipsum dolor sit amet consectetur adipiscing elit amet nisl fringilla lectus lorem ipsum.
+                </p>
+                <div className="flex items-center justify-between">
+                  <span className="text-base font-bold text-[#1C1F23]">Jan 24, 2024</span>
+                  <Link
+                    href="/blog/succeed-notary-professional"
+                    className="inline-flex items-center gap-2 text-base font-bold text-[#005DFF] hover:text-[#0052E6] transition-colors"
+                  >
+                    Read more
+                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M2.66781 13.8213L13.3345 3.15462" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M13.3345 13.2109V3.15437H3.2779" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          {/* Browse All Articles Button */}
+          <div className="text-center">
+            <Button
+              variant="outline"
+              size="lg"
+              asChild
+              className="border-[#101B44] text-[#101B44] hover:bg-[#101B44] hover:text-white rounded-full px-7 py-5 text-base font-normal"
+            >
+              <Link href="/blog">
+                Browse all articles
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
