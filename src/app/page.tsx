@@ -203,7 +203,7 @@ export default function HomePage() {
                 <div className="flex justify-center">
                   <Button
                     asChild
-                    className="w-full bg-[#005DFF] hover:bg-[#0052E6] text-white font-medium"
+                    className="w-full bg-[#005DFF] hover:bg-[#0052E6] text-white font-medium rounded-full overflow-hidden"
                   >
                     <Link href={`/notary/${index + 1}`}>View Profile</Link>
                   </Button>
