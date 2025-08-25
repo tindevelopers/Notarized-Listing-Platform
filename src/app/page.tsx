@@ -288,6 +288,81 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Customer Testimonials Section */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#F9FAFC]">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col lg:flex-row items-start justify-between gap-12">
+            {/* Left Content */}
+            <div className="flex-1 max-w-md">
+              <h2 className="text-2xl md:text-3xl font-bold text-[#1C1F23] mb-6 leading-tight">
+                Here's what our great customers say.
+              </h2>
+              <p className="text-base text-[#5F687A] leading-relaxed mb-8">
+                Lorem ipsum dolor sit amet consectetur adipiscing elit sed accumsan ultrices aliquam nibh lectus non feugiat placerat ut facilisis velit neque.
+              </p>
+
+              {/* Navigation Arrows */}
+              <div className="flex items-center gap-4">
+                {/* Left Arrow - Outlined */}
+                <button
+                  className="w-[58px] h-[58px] rounded-full border border-[#1C1F23] flex items-center justify-center hover:bg-[#1C1F23] hover:text-white transition-colors group"
+                  aria-label="Previous testimonial"
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M11.4785 3.7749L3.29968 11.9537L11.4785 20.1326"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M3.2998 11.9536L20.6997 11.9536"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+
+                {/* Right Arrow - Filled */}
+                <button
+                  className="w-[58px] h-[58px] rounded-full bg-[#005DFF] hover:bg-[#0052E6] flex items-center justify-center transition-colors"
+                  aria-label="Next testimonial"
+                >
+                  <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M13.0542 3.7749L21.233 11.9537L13.0542 20.1326"
+                      stroke="white"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M21.2329 11.9536L3.83301 11.9536"
+                      stroke="white"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            {/* Right Content - Testimonial Carousel Area */}
+            <div className="flex-1 min-h-[200px] flex items-center justify-center">
+              {/* Placeholder for testimonial content - can be expanded later */}
+              <div className="text-center text-[#5F687A]">
+                <p className="text-lg italic">Testimonial content area</p>
+                <p className="text-sm mt-2">Ready for testimonial carousel implementation</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
