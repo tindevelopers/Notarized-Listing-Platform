@@ -281,10 +281,10 @@ export default function HomePage() {
                   </div>
                   <div>
                     <h3 className="text-lg font-bold text-[#1C1F23] mb-2">
-                      The best for every budget
+                      Informative Guides
                     </h3>
                     <p className="text-base text-[#5F687A] leading-relaxed">
-                      Lectus tempus massa faucibus velit tincidunt cras vulputate commodo mattis amet tempor arcu.
+                      Dive deep into the world of notarization. Learn its importance, how it works, and when you might require it.
                     </p>
                   </div>
                 </div>
