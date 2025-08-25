@@ -27,14 +27,6 @@ export default function DualSearchBanner() {
           <div className="flex flex-col sm:flex-row gap-4 mb-8 justify-center">
             <Button
               size="lg"
-              variant="secondary"
-              className="flex items-center gap-2 text-lg px-6 py-4"
-            >
-              <MapPin className="w-5 h-5" />
-              Find a Notary
-            </Button>
-            <Button
-              size="lg"
               onClick={() => setIsChatOpen(true)}
               className="flex items-center gap-2 text-lg px-6 py-4 bg-white text-blue-600 border-2 border-white hover:bg-blue-50 hover:text-blue-700 transition-all duration-200 font-roboto-mono font-medium"
             >
