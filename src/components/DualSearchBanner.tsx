@@ -1,9 +1,13 @@
+"use client";
+
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Search, MapPin, MessageCircleQuestion } from "lucide-react";
 import SearchForm from "./SearchForm";
+import ChatModal from "./chat/ChatModal";
 
-// Server Component - static content rendered on server
 export default function DualSearchBanner() {
+  const [isChatOpen, setIsChatOpen] = useState(false);
   return (
     <section className="bg-[#005DFF] py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -31,6 +35,7 @@ export default function DualSearchBanner() {
             </Button>
             <Button
               size="lg"
+              onClick={() => setIsChatOpen(true)}
               className="flex items-center gap-2 text-lg px-6 py-4 bg-white text-blue-600 border-2 border-white hover:bg-blue-50 hover:text-blue-700 transition-all duration-200 font-roboto-mono font-medium"
             >
               <MessageCircleQuestion className="w-5 h-5" />
@@ -91,6 +96,12 @@ export default function DualSearchBanner() {
           </div>
         </div>
       </div>
+
+      {/* Chat Modal */}
+      <ChatModal 
+        isOpen={isChatOpen} 
+        onClose={() => setIsChatOpen(false)} 
+      />
     </section>
   );
 }
