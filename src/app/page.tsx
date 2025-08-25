@@ -658,8 +658,7 @@ export default function HomePage() {
               Browse articles & news
             </h2>
             <p className="text-base text-[#5F687A] leading-relaxed max-w-md lg:text-right">
-              Lorem ipsum dolor sit amet consectetur adipiscing elit amet nisl
-              fringilla lectus dignissim euismod mauris enim leo lorem.
+              Dive into the world of notarization with our curated collection of articles. At Notarized, we don't just connect you with the best notaries; we also ensure you're well-informed.
             </p>
           </div>
 
