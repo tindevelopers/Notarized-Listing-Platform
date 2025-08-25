@@ -241,9 +241,24 @@ export default function HomePage() {
                 {/* Play Button Overlay */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <button className="group">
-                    <div className="w-[102px] h-[100px] bg-white rounded-full shadow-2xl flex items-center justify-center hover:scale-105 transition-transform duration-200" style={{ filter: 'drop-shadow(0px 2px 12px rgba(30, 30, 30, 0.08))' }}>
-                      <svg width="24" height="24" viewBox="0 0 21 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20.5576 10.3906C22.584 11.54 22.584 14.4599 20.5576 15.6094L5.40136 24.2067C3.40151 25.3412 0.921265 23.8966 0.921265 21.5973L0.921265 4.40268C0.921265 2.10343 3.40151 0.658798 5.40136 1.79322L20.5576 10.3906Z" fill="#4BA9FF"/>
+                    <div
+                      className="w-[102px] h-[100px] bg-white rounded-full shadow-2xl flex items-center justify-center hover:scale-105 transition-transform duration-200"
+                      style={{
+                        filter:
+                          "drop-shadow(0px 2px 12px rgba(30, 30, 30, 0.08))",
+                      }}
+                    >
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 21 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M20.5576 10.3906C22.584 11.54 22.584 14.4599 20.5576 15.6094L5.40136 24.2067C3.40151 25.3412 0.921265 23.8966 0.921265 21.5973L0.921265 4.40268C0.921265 2.10343 3.40151 0.658798 5.40136 1.79322L20.5576 10.3906Z"
+                          fill="#4BA9FF"
+                        />
                       </svg>
                     </div>
                   </button>
@@ -265,18 +280,90 @@ export default function HomePage() {
                 {/* Feature 1: Budget */}
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0 relative">
-                    <svg width="50" height="49" viewBox="0 0 50 49" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="0.778809" y="6.99756" width="34.781" height="41.3701" rx="4" stroke="#1C1F23" strokeWidth="1.2" strokeLinecap="round"/>
-                      <rect x="5.46094" y="0.367676" width="34.971" height="42.4647" rx="4" fill="white"/>
-                      <path d="M34.6839 19.96H12.3691" stroke="#1C1F23" strokeWidth="1.2" strokeLinecap="round"/>
-                      <path d="M34.6839 24.96H12.3691" stroke="#1C1F23" strokeWidth="1.2" strokeLinecap="round"/>
-                      <path d="M26.0284 29.96H12.3691" stroke="#1C1F23" strokeWidth="1.2" strokeLinecap="round"/>
-                      <path d="M15.75 4.93018L15.75 6.1416" stroke="#1C1F23" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M15.75 14.2185L15.75 15.4299" stroke="#1C1F23" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M18.5767 8.16083C18.5767 7.89566 18.5245 7.63309 18.423 7.38811C18.3216 7.14312 18.1728 6.92052 17.9853 6.73302C17.7978 6.54552 17.5752 6.39678 17.3302 6.29531C17.0852 6.19383 16.8227 6.1416 16.5575 6.1416H14.7402C14.2047 6.1416 13.6911 6.35434 13.3124 6.73302C12.9337 7.1117 12.721 7.6253 12.721 8.16083C12.721 8.69637 12.9337 9.20997 13.3124 9.58864C13.6911 9.96732 14.2047 10.1801 14.7402 10.1801H16.9614C17.4969 10.1801 18.0105 10.3928 18.3892 10.7715C18.7678 11.1502 18.9806 11.6638 18.9806 12.1993C18.9806 12.7348 18.7678 13.2484 18.3892 13.6271C18.0105 14.0058 17.4969 14.2185 16.9614 14.2185H14.5383C14.0027 14.2185 13.4891 14.0058 13.1105 13.6271C12.7318 13.2484 12.519 12.7348 12.519 12.1993" stroke="#1C1F23" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <circle cx="40.3645" cy="36.1445" r="9.39427" fill="#005DFF"/>
-                      <path d="M36.8118 39.697L43.917 32.5918" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M43.917 39.2905V32.5917H37.2182" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <svg
+                      width="50"
+                      height="49"
+                      viewBox="0 0 50 49"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <rect
+                        x="0.778809"
+                        y="6.99756"
+                        width="34.781"
+                        height="41.3701"
+                        rx="4"
+                        stroke="#1C1F23"
+                        strokeWidth="1.2"
+                        strokeLinecap="round"
+                      />
+                      <rect
+                        x="5.46094"
+                        y="0.367676"
+                        width="34.971"
+                        height="42.4647"
+                        rx="4"
+                        fill="white"
+                      />
+                      <path
+                        d="M34.6839 19.96H12.3691"
+                        stroke="#1C1F23"
+                        strokeWidth="1.2"
+                        strokeLinecap="round"
+                      />
+                      <path
+                        d="M34.6839 24.96H12.3691"
+                        stroke="#1C1F23"
+                        strokeWidth="1.2"
+                        strokeLinecap="round"
+                      />
+                      <path
+                        d="M26.0284 29.96H12.3691"
+                        stroke="#1C1F23"
+                        strokeWidth="1.2"
+                        strokeLinecap="round"
+                      />
+                      <path
+                        d="M15.75 4.93018L15.75 6.1416"
+                        stroke="#1C1F23"
+                        strokeWidth="1.2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M15.75 14.2185L15.75 15.4299"
+                        stroke="#1C1F23"
+                        strokeWidth="1.2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M18.5767 8.16083C18.5767 7.89566 18.5245 7.63309 18.423 7.38811C18.3216 7.14312 18.1728 6.92052 17.9853 6.73302C17.7978 6.54552 17.5752 6.39678 17.3302 6.29531C17.0852 6.19383 16.8227 6.1416 16.5575 6.1416H14.7402C14.2047 6.1416 13.6911 6.35434 13.3124 6.73302C12.9337 7.1117 12.721 7.6253 12.721 8.16083C12.721 8.69637 12.9337 9.20997 13.3124 9.58864C13.6911 9.96732 14.2047 10.1801 14.7402 10.1801H16.9614C17.4969 10.1801 18.0105 10.3928 18.3892 10.7715C18.7678 11.1502 18.9806 11.6638 18.9806 12.1993C18.9806 12.7348 18.7678 13.2484 18.3892 13.6271C18.0105 14.0058 17.4969 14.2185 16.9614 14.2185H14.5383C14.0027 14.2185 13.4891 14.0058 13.1105 13.6271C12.7318 13.2484 12.519 12.7348 12.519 12.1993"
+                        stroke="#1C1F23"
+                        strokeWidth="1.2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <circle
+                        cx="40.3645"
+                        cy="36.1445"
+                        r="9.39427"
+                        fill="#005DFF"
+                      />
+                      <path
+                        d="M36.8118 39.697L43.917 32.5918"
+                        stroke="white"
+                        strokeWidth="1.2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M43.917 39.2905V32.5917H37.2182"
+                        stroke="white"
+                        strokeWidth="1.2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
                     </svg>
                   </div>
                   <div>
@@ -284,7 +371,8 @@ export default function HomePage() {
                       Informative Guides
                     </h3>
                     <p className="text-base text-[#5F687A] leading-relaxed">
-                      Dive deep into the world of notarization. Learn its importance, how it works, and when you might require it.
+                      Dive deep into the world of notarization. Learn its
+                      importance, how it works, and when you might require it.
                     </p>
                   </div>
                 </div>
@@ -292,11 +380,39 @@ export default function HomePage() {
                 {/* Feature 2: Quality */}
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0 relative">
-                    <svg width="49" height="49" viewBox="0 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M1 23.3894C1 21.1803 2.79086 19.3894 5 19.3894H25.9783C28.1875 19.3894 29.9783 21.1803 29.9783 23.3894V44.3677C29.9783 46.5769 28.1875 48.3677 25.9783 48.3677H5C2.79086 48.3677 1 46.5769 1 44.3677V23.3894Z" stroke="#1C1F23" strokeWidth="1.2" strokeLinecap="round" strokeDasharray="5 5"/>
-                      <rect x="9.47021" y="0.367676" width="39.5293" height="39.5293" rx="4" fill="white"/>
-                      <path d="M29.2349 30.1323C34.7577 30.1323 39.2349 25.6552 39.2349 20.1323C39.2349 14.6095 34.7577 10.1323 29.2349 10.1323C23.712 10.1323 19.2349 14.6095 19.2349 20.1323C19.2349 25.6552 23.712 30.1323 29.2349 30.1323Z" fill="#6C38FF"/>
-                      <path d="M29.2349 14.2991V20.1324H35.0682" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <svg
+                      width="49"
+                      height="49"
+                      viewBox="0 0 49 49"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M1 23.3894C1 21.1803 2.79086 19.3894 5 19.3894H25.9783C28.1875 19.3894 29.9783 21.1803 29.9783 23.3894V44.3677C29.9783 46.5769 28.1875 48.3677 25.9783 48.3677H5C2.79086 48.3677 1 46.5769 1 44.3677V23.3894Z"
+                        stroke="#1C1F23"
+                        strokeWidth="1.2"
+                        strokeLinecap="round"
+                        strokeDasharray="5 5"
+                      />
+                      <rect
+                        x="9.47021"
+                        y="0.367676"
+                        width="39.5293"
+                        height="39.5293"
+                        rx="4"
+                        fill="white"
+                      />
+                      <path
+                        d="M29.2349 30.1323C34.7577 30.1323 39.2349 25.6552 39.2349 20.1323C39.2349 14.6095 34.7577 10.1323 29.2349 10.1323C23.712 10.1323 19.2349 14.6095 19.2349 20.1323C19.2349 25.6552 23.712 30.1323 29.2349 30.1323Z"
+                        fill="#6C38FF"
+                      />
+                      <path
+                        d="M29.2349 14.2991V20.1324H35.0682"
+                        stroke="white"
+                        strokeWidth="1.2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
                     </svg>
                   </div>
                   <div>
@@ -304,7 +420,8 @@ export default function HomePage() {
                       Nationwide Listings
                     </h3>
                     <p className="text-base text-[#5F687A] leading-relaxed">
-                      Find trusted notaries across all 50 states with our comprehensive directory.
+                      Find trusted notaries across all 50 states with our
+                      comprehensive directory.
                     </p>
                   </div>
                 </div>
@@ -317,9 +434,7 @@ export default function HomePage() {
                   asChild
                   className="bg-[#005DFF] hover:bg-[#0052E6] text-white rounded-full px-8 py-4 text-base font-bold transition-all duration-200"
                 >
-                  <Link href="/california-notaries">
-                    Find A Notary
-                  </Link>
+                  <Link href="/california-notaries">Find A Notary</Link>
                 </Button>
               </div>
             </div>
@@ -336,7 +451,9 @@ export default function HomePage() {
               How it works
             </h2>
             <p className="text-base text-[#5F687A] leading-relaxed max-w-lg mx-auto">
-              Navigating the world of notarization can be daunting, but we've streamlined the process. Whether you're an individual or a business, find your notary match in just three easy steps:
+              Navigating the world of notarization can be daunting, but we've
+              streamlined the process. Whether you're an individual or a
+              business, find your notary match in just three easy steps:
             </p>
           </div>
 
@@ -409,7 +526,8 @@ export default function HomePage() {
                 1. Search for Notaries
               </h3>
               <p className="text-base text-[#5F687A] leading-relaxed">
-                Our directory is designed to provide you with a comprehensive view of each notary's expertise and credentials.
+                Our directory is designed to provide you with a comprehensive
+                view of each notary's expertise and credentials.
               </p>
             </div>
 
@@ -490,7 +608,9 @@ export default function HomePage() {
                 2. Review their profile
               </h3>
               <p className="text-base text-[#5F687A] leading-relaxed">
-                Go through detailed profiles of notaries, read reviews from previous clients, and select the one that aligns best with your needs.
+                Go through detailed profiles of notaries, read reviews from
+                previous clients, and select the one that aligns best with your
+                needs.
               </p>
             </div>
 
@@ -550,7 +670,9 @@ export default function HomePage() {
                 3. Book an appointment
               </h3>
               <p className="text-base text-[#5F687A] leading-relaxed">
-                Once you've made your choice, get in touch directly through our platform. Set up an appointment or ask any questions you might have.
+                Once you've made your choice, get in touch directly through our
+                platform. Set up an appointment or ask any questions you might
+                have.
               </p>
             </div>
           </div>
@@ -658,7 +780,9 @@ export default function HomePage() {
               Browse articles & news
             </h2>
             <p className="text-base text-[#5F687A] leading-relaxed max-w-md lg:text-right">
-              Dive into the world of notarization with our curated collection of articles. At Notarized, we don't just connect you with the best notaries; we also ensure you're well-informed.
+              Dive into the world of notarization with our curated collection of
+              articles. At Notarized, we don't just connect you with the best
+              notaries; we also ensure you're well-informed.
             </p>
           </div>
 

@@ -40,7 +40,9 @@ export default function DualSearchBanner() {
 
           {/* Popular Searches - Server Rendered */}
           <div className="mt-10 text-center">
-            <p className="text-blue-100 mb-6 text-lg font-medium">Popular searches:</p>
+            <p className="text-blue-100 mb-6 text-lg font-medium">
+              Popular searches:
+            </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Button
                 size="sm"
@@ -72,21 +74,29 @@ export default function DualSearchBanner() {
               <h3 className="font-semibold mb-2 text-lg">
                 Licensed & Insured Notaries
               </h3>
-              <p className="text-blue-100 text-sm">Verified professionals you can trust</p>
+              <p className="text-blue-100 text-sm">
+                Verified professionals you can trust
+              </p>
             </div>
             <div className="text-white">
               <div className="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
                 <span className="text-xl font-bold">⏰</span>
               </div>
               <h3 className="font-semibold mb-2 text-lg">Available 24/7</h3>
-              <p className="text-blue-100 text-sm">Round-the-clock service when you need it</p>
+              <p className="text-blue-100 text-sm">
+                Round-the-clock service when you need it
+              </p>
             </div>
             <div className="text-white">
               <div className="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
                 <span className="text-xl font-bold">🤖</span>
               </div>
-              <h3 className="font-semibold mb-2 text-lg">Instant AI Assistance</h3>
-              <p className="text-blue-100 text-sm">Get answers to your questions immediately</p>
+              <h3 className="font-semibold mb-2 text-lg">
+                Instant AI Assistance
+              </h3>
+              <p className="text-blue-100 text-sm">
+                Get answers to your questions immediately
+              </p>
             </div>
           </div>
         </div>

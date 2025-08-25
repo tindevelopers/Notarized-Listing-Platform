@@ -43,8 +43,13 @@ export default function SearchForm() {
     <div className="bg-white rounded-[18px] border border-[#EAECF2] p-8 lg:p-10 shadow-xl">
       {/* Search Form Header */}
       <div className="text-center mb-8">
-        <h3 className="text-xl font-bold text-[#1C1F23] mb-2">Find Your Perfect Notary</h3>
-        <p className="text-base text-[#5F687A]">Search by location and preferences to connect with certified professionals</p>
+        <h3 className="text-xl font-bold text-[#1C1F23] mb-2">
+          Find Your Perfect Notary
+        </h3>
+        <p className="text-base text-[#5F687A]">
+          Search by location and preferences to connect with certified
+          professionals
+        </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8">
@@ -57,7 +62,10 @@ export default function SearchForm() {
             <MapPin className="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-[#5F687A] z-10" />
             <Select value={selectedState} onValueChange={setSelectedState}>
               <SelectTrigger className="w-full pl-12 h-12 border-[#EAECF2] rounded-lg bg-white hover:border-[#005DFF] focus:border-[#005DFF] transition-colors">
-                <SelectValue placeholder="Select State" className="text-[#5F687A]" />
+                <SelectValue
+                  placeholder="Select State"
+                  className="text-[#5F687A]"
+                />
               </SelectTrigger>
               <SelectContent className="rounded-lg border-[#EAECF2]">
                 <SelectItem value="ca">California</SelectItem>
@@ -79,7 +87,10 @@ export default function SearchForm() {
             <MapPin className="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-[#5F687A] z-10" />
             <Select value={selectedCity} onValueChange={setSelectedCity}>
               <SelectTrigger className="w-full pl-12 h-12 border-[#EAECF2] rounded-lg bg-white hover:border-[#005DFF] focus:border-[#005DFF] transition-colors">
-                <SelectValue placeholder="Select City" className="text-[#5F687A]" />
+                <SelectValue
+                  placeholder="Select City"
+                  className="text-[#5F687A]"
+                />
               </SelectTrigger>
               <SelectContent className="rounded-lg border-[#EAECF2]">
                 <SelectItem value="los-angeles">Los Angeles</SelectItem>
@@ -150,7 +161,8 @@ export default function SearchForm() {
       {/* Search Tips */}
       <div className="mt-6 text-center">
         <p className="text-sm text-[#5F687A]">
-          💡 Tip: Leave fields blank to search all available notaries in your area
+          💡 Tip: Leave fields blank to search all available notaries in your
+          area
         </p>
       </div>
     </div>
