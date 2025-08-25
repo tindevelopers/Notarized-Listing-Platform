@@ -574,15 +574,15 @@ export default function HomePage() {
       </section>
 
       {/* Customer Testimonials Section */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#F9FAFC]">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#101B44]">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row items-start justify-between gap-12">
             {/* Left Content */}
             <div className="flex-1 max-w-md">
-              <h2 className="text-2xl md:text-3xl font-bold text-[#1C1F23] mb-6 leading-tight">
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 leading-tight">
                 Here's what our great customers say.
               </h2>
-              <p className="text-base text-[#5F687A] leading-relaxed mb-8">
+              <p className="text-base text-white leading-relaxed mb-8">
                 Lorem ipsum dolor sit amet consectetur adipiscing elit sed
                 accumsan ultrices aliquam nibh lectus non feugiat placerat ut
                 facilisis velit neque.
@@ -592,7 +592,7 @@ export default function HomePage() {
               <div className="flex items-center gap-4">
                 {/* Left Arrow - Outlined */}
                 <button
-                  className="w-[58px] h-[58px] rounded-full border border-[#1C1F23] flex items-center justify-center hover:bg-[#1C1F23] hover:text-white transition-colors group"
+                  className="w-[58px] h-[58px] rounded-full border border-white flex items-center justify-center hover:bg-white hover:text-[#101B44] transition-colors group"
                   aria-label="Previous testimonial"
                 >
                   <svg
