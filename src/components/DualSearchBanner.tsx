@@ -23,15 +23,15 @@ export default function DualSearchBanner() {
         </div>
 
         {/* Tab Selection - Server Rendered with Client Interactivity */}
-        <div className="max-w-4xl mx-auto">
-          <div className="flex flex-col sm:flex-row gap-4 mb-8 justify-center">
+        <div className="max-w-5xl mx-auto">
+          <div className="flex flex-col sm:flex-row gap-4 mb-10 justify-center">
             <Button
               size="lg"
               onClick={() => setIsChatOpen(true)}
-              className="flex items-center gap-2 text-lg px-6 py-4 bg-white text-blue-600 border-2 border-white hover:bg-blue-50 hover:text-blue-700 transition-all duration-200 font-roboto-mono font-medium"
+              className="flex items-center gap-3 text-lg px-8 py-4 bg-white text-[#005DFF] border-2 border-white hover:bg-blue-50 hover:text-[#0052E6] transition-all duration-200 font-semibold rounded-lg shadow-lg hover:shadow-xl"
             >
               <MessageCircleQuestion className="w-5 h-5" />
-              Ask Questions
+              Ask Questions About Notarization
             </Button>
           </div>
 
