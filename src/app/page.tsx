@@ -554,16 +554,6 @@ export default function HomePage() {
               </p>
             </div>
           </div>
-
-          {/* Hire Notary Button */}
-          <div className="text-center">
-            <Button
-              asChild
-              className="bg-[#005DFF] hover:bg-[#0052E6] text-white rounded-full px-7 py-5 text-base font-bold"
-            >
-              <Link href="/california-notaries">Hire Notary</Link>
-            </Button>
-          </div>
         </div>
       </section>
 
