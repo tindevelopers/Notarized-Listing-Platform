@@ -336,9 +336,7 @@ export default function HomePage() {
               How it works
             </h2>
             <p className="text-base text-[#5F687A] leading-relaxed max-w-lg mx-auto">
-              Lorem ipsum dolor sit amet consectetur adipiscing elit vitae
-              pretium nunc velit facilisis vulputate accumsan pellentesque
-              ultricies.
+              Navigating the world of notarization can be daunting, but we've streamlined the process. Whether you're an individual or a business, find your notary match in just three easy steps:
             </p>
           </div>
 
