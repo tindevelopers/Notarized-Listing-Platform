@@ -47,19 +47,21 @@ export default function SearchForm() {
           <label className="block text-sm font-medium text-gray-700 mb-2">
             State
           </label>
-          <Select value={selectedState} onValueChange={setSelectedState}>
-            <SelectTrigger className="w-full">
-              <MapPin className="w-4 h-4 mr-2 text-gray-400" />
-              <SelectValue placeholder="Select State" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="ca">California</SelectItem>
-              <SelectItem value="ny">New York</SelectItem>
-              <SelectItem value="tx">Texas</SelectItem>
-              <SelectItem value="fl">Florida</SelectItem>
-              <SelectItem value="il">Illinois</SelectItem>
-            </SelectContent>
-          </Select>
+          <div className="relative">
+            <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 z-10" />
+            <Select value={selectedState} onValueChange={setSelectedState}>
+              <SelectTrigger className="w-full pl-10">
+                <SelectValue placeholder="Select State" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="ca">California</SelectItem>
+                <SelectItem value="ny">New York</SelectItem>
+                <SelectItem value="tx">Texas</SelectItem>
+                <SelectItem value="fl">Florida</SelectItem>
+                <SelectItem value="il">Illinois</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
 
         {/* City Selection */}
@@ -67,18 +69,20 @@ export default function SearchForm() {
           <label className="block text-sm font-medium text-gray-700 mb-2">
             City
           </label>
-          <Select value={selectedCity} onValueChange={setSelectedCity}>
-            <SelectTrigger className="w-full">
-              <MapPin className="w-4 h-4 mr-2 text-gray-400" />
-              <SelectValue placeholder="Select City" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="los-angeles">Los Angeles</SelectItem>
-              <SelectItem value="san-francisco">San Francisco</SelectItem>
-              <SelectItem value="san-diego">San Diego</SelectItem>
-              <SelectItem value="sacramento">Sacramento</SelectItem>
-            </SelectContent>
-          </Select>
+          <div className="relative">
+            <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 z-10" />
+            <Select value={selectedCity} onValueChange={setSelectedCity}>
+              <SelectTrigger className="w-full pl-10">
+                <SelectValue placeholder="Select City" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="los-angeles">Los Angeles</SelectItem>
+                <SelectItem value="san-francisco">San Francisco</SelectItem>
+                <SelectItem value="san-diego">San Diego</SelectItem>
+                <SelectItem value="sacramento">Sacramento</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
 
         {/* ZIP Code */}
