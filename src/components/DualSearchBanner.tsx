@@ -90,10 +90,7 @@ export default function DualSearchBanner() {
       </div>
 
       {/* Chat Modal */}
-      <ChatModal 
-        isOpen={isChatOpen} 
-        onClose={() => setIsChatOpen(false)} 
-      />
+      <ChatModal isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
     </section>
   );
 }

@@ -23,7 +23,9 @@ export default function HomePage() {
               Our Notaries
             </h2>
             <div className="flex items-center gap-4">
-              <span className="text-base font-medium text-black">Filter by:</span>
+              <span className="text-base font-medium text-black">
+                Filter by:
+              </span>
               <div className="relative">
                 <select className="appearance-none bg-white border border-[#EAECF2] rounded-full px-6 py-4 pr-12 text-sm text-[#5F687A] focus:outline-none focus:ring-2 focus:ring-[#005DFF] min-w-[226px]">
                   <option value="">Category</option>
@@ -32,14 +34,42 @@ export default function HomePage() {
                   <option value="marketing">Marketing</option>
                 </select>
                 <div className="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3.75 6.44287L9 11.4012L14.25 6.44287" stroke="#005DFF" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 18 18"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M3.75 6.44287L9 11.4012L14.25 6.44287"
+                      stroke="#005DFF"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </div>
                 <div className="absolute left-6 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                  <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M15.5 5.92188H2.5C1.94772 5.92188 1.5 6.36959 1.5 6.92188V14.9219C1.5 15.4742 1.94772 15.9219 2.5 15.9219H15.5C16.0523 15.9219 16.5 15.4742 16.5 14.9219V6.92188C16.5 6.36959 16.0523 5.92188 15.5 5.92188Z" stroke="#5F687A" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M12 5.92188C12 5.12623 11.6839 4.36316 11.1213 3.80055C10.5587 3.23795 9.79565 2.92188 9 2.92188C8.20435 2.92188 7.44129 3.23795 6.87868 3.80055C6.31607 4.36316 6 5.12623 6 5.92188" stroke="#5F687A" strokeLinecap="round" strokeLinejoin="round"/>
+                  <svg
+                    width="18"
+                    height="19"
+                    viewBox="0 0 18 19"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M15.5 5.92188H2.5C1.94772 5.92188 1.5 6.36959 1.5 6.92188V14.9219C1.5 15.4742 1.94772 15.9219 2.5 15.9219H15.5C16.0523 15.9219 16.5 15.4742 16.5 14.9219V6.92188C16.5 6.36959 16.0523 5.92188 15.5 5.92188Z"
+                      stroke="#5F687A"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M12 5.92188C12 5.12623 11.6839 4.36316 11.1213 3.80055C10.5587 3.23795 9.79565 2.92188 9 2.92188C8.20435 2.92188 7.44129 3.23795 6.87868 3.80055C6.31607 4.36316 6 5.12623 6 5.92188"
+                      stroke="#5F687A"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </div>
               </div>
@@ -51,73 +81,89 @@ export default function HomePage() {
             {[
               {
                 name: "Andy Smith",
-                description: "At donec morbi in urna nunc quis ac ipsum sem purus orci.",
+                description:
+                  "At donec morbi in urna nunc quis ac ipsum sem purus orci.",
                 category: "Marketing",
                 categoryColor: "#6C38FF",
                 price: "$120/hr",
-                image: "https://api.builder.io/api/v1/image/assets/TEMP/4ac93c89ff6980e3834fecf2040e4a02a58ba61d?width=330"
+                image:
+                  "https://api.builder.io/api/v1/image/assets/TEMP/4ac93c89ff6980e3834fecf2040e4a02a58ba61d?width=330",
               },
               {
                 name: "John Carter",
-                description: "Lorem ipsum dolor sit amet id consectetur adipiscing elit.",
+                description:
+                  "Lorem ipsum dolor sit amet id consectetur adipiscing elit.",
                 category: "Design",
                 categoryColor: "#4BA9FF",
                 price: "$80/hr",
-                image: "https://api.builder.io/api/v1/image/assets/TEMP/a2c900ca27f2d7045807d4c11987aab4da9e662c?width=301"
+                image:
+                  "https://api.builder.io/api/v1/image/assets/TEMP/a2c900ca27f2d7045807d4c11987aab4da9e662c?width=301",
               },
               {
                 name: "Kathie Corl",
-                description: "Lorem ipsum dolor sit amet id consectetur adipiscing elit.",
+                description:
+                  "Lorem ipsum dolor sit amet id consectetur adipiscing elit.",
                 category: "Development",
                 categoryColor: "#005DFF",
                 price: "$240/hr",
-                image: "https://api.builder.io/api/v1/image/assets/TEMP/9503a637df9aeaa8fc9a4bab07c2f51e18786f2e?width=342"
+                image:
+                  "https://api.builder.io/api/v1/image/assets/TEMP/9503a637df9aeaa8fc9a4bab07c2f51e18786f2e?width=342",
               },
               {
                 name: "Lilly Woods",
-                description: "Enim etiam nisi id convallis id non luctus enim, et venenatis.",
+                description:
+                  "Enim etiam nisi id convallis id non luctus enim, et venenatis.",
                 category: "Design",
                 categoryColor: "#4BA9FF",
                 price: "$160/hr",
-                image: "https://api.builder.io/api/v1/image/assets/TEMP/e425efddc3e88381ae17de7b13b8ba5a64f8f4fc?width=342"
+                image:
+                  "https://api.builder.io/api/v1/image/assets/TEMP/e425efddc3e88381ae17de7b13b8ba5a64f8f4fc?width=342",
               },
               {
                 name: "Matt Cannon",
-                description: "Amet tincidunt non congue vel massa molestie magna eget.",
+                description:
+                  "Amet tincidunt non congue vel massa molestie magna eget.",
                 category: "Development",
                 categoryColor: "#005DFF",
                 price: "$280/hr",
-                image: "https://api.builder.io/api/v1/image/assets/TEMP/e51c99e2304ada58e0f7516d39a019c78158ca83?width=340"
+                image:
+                  "https://api.builder.io/api/v1/image/assets/TEMP/e51c99e2304ada58e0f7516d39a019c78158ca83?width=340",
               },
               {
                 name: "Patrick Meyer",
-                description: "Donec tincidunt magna lorem elementum non nullam lectus.",
+                description:
+                  "Donec tincidunt magna lorem elementum non nullam lectus.",
                 category: "Marketing",
                 categoryColor: "#6C38FF",
                 price: "$140/hr",
-                image: "https://api.builder.io/api/v1/image/assets/TEMP/600b8b95cefeab2fd8ca5975947b32bb87b31067?width=342"
+                image:
+                  "https://api.builder.io/api/v1/image/assets/TEMP/600b8b95cefeab2fd8ca5975947b32bb87b31067?width=342",
               },
               {
                 name: "Sandy Hung",
-                description: "Ut nibh pulvinar nisi et sit ac venenatis at cursus semper.",
+                description:
+                  "Ut nibh pulvinar nisi et sit ac venenatis at cursus semper.",
                 category: "Design",
                 categoryColor: "#4BA9FF",
                 price: "$210/hr",
-                image: "https://api.builder.io/api/v1/image/assets/TEMP/f250c1247811d56a2207e6f0a2eabe020a1db5c6?width=870"
+                image:
+                  "https://api.builder.io/api/v1/image/assets/TEMP/f250c1247811d56a2207e6f0a2eabe020a1db5c6?width=870",
               },
               {
                 name: "Sophie Moore",
-                description: "Vulputate faucibus arcu nunc vestibulum mauris etiam ut.",
+                description:
+                  "Vulputate faucibus arcu nunc vestibulum mauris etiam ut.",
                 category: "Marketing",
                 categoryColor: "#6C38FF",
                 price: "$120/hr",
-                image: "https://api.builder.io/api/v1/image/assets/TEMP/62525cbaaf1cb812c41d0500c4e4341425b61d8d?width=365"
+                image:
+                  "https://api.builder.io/api/v1/image/assets/TEMP/62525cbaaf1cb812c41d0500c4e4341425b61d8d?width=365",
               },
             ].map((notary, index) => (
               <div
                 key={index}
                 className="bg-white rounded-[18px] border border-[#EAECF2] p-6 hover:shadow-lg transition-shadow"
-                style={{ boxShadow: '0 2px 8px 0 rgba(42, 42, 43, 0.06)' }}
+                style={{ boxShadow: "0 2px 8px 0 rgba(42, 42, 43, 0.06)" }}
               >
                 {/* Profile Image */}
                 <div className="flex justify-center mb-4">
@@ -155,10 +201,11 @@ export default function HomePage() {
 
                 {/* View Profile Button */}
                 <div className="flex justify-center">
-                  <Button asChild className="w-full bg-[#005DFF] hover:bg-[#0052E6] text-white font-medium">
-                    <Link href={`/notary/${index + 1}`}>
-                      View Profile
-                    </Link>
+                  <Button
+                    asChild
+                    className="w-full bg-[#005DFF] hover:bg-[#0052E6] text-white font-medium"
+                  >
+                    <Link href={`/notary/${index + 1}`}>View Profile</Link>
                   </Button>
                 </div>
               </div>
@@ -173,9 +220,7 @@ export default function HomePage() {
               asChild
               className="border-[#101B44] text-[#101B44] hover:bg-[#101B44] hover:text-white rounded-full px-7 py-5 text-base font-normal"
             >
-              <Link href="/california-notaries">
-                Browse all Notaries
-              </Link>
+              <Link href="/california-notaries">Browse all Notaries</Link>
             </Button>
           </div>
         </div>
@@ -190,28 +235,74 @@ export default function HomePage() {
               How it works
             </h2>
             <p className="text-base text-[#5F687A] leading-relaxed max-w-lg mx-auto">
-              Lorem ipsum dolor sit amet consectetur adipiscing elit vitae pretium nunc velit facilisis vulputate accumsan pellentesque ultricies.
+              Lorem ipsum dolor sit amet consectetur adipiscing elit vitae
+              pretium nunc velit facilisis vulputate accumsan pellentesque
+              ultricies.
             </p>
           </div>
 
           {/* Steps Cards */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
             {/* Step 1: Search for Notaries */}
-            <div className="bg-white rounded-[18px] border border-[#DFE5EE] p-6 lg:p-8 text-center" style={{ boxShadow: '0 2px 8px 0 rgba(42, 42, 43, 0.06)' }}>
+            <div
+              className="bg-white rounded-[18px] border border-[#DFE5EE] p-6 lg:p-8 text-center"
+              style={{ boxShadow: "0 2px 8px 0 rgba(42, 42, 43, 0.06)" }}
+            >
               <div className="flex justify-center mb-8">
                 <div className="w-[140px] h-[140px] bg-[#EFF3FA] rounded-full flex items-center justify-center relative">
                   {/* Dashed Rectangle */}
                   <div className="w-[55px] h-[55px] border-[1.5px] border-dashed border-[#1C1F23] bg-[#EFF3FA] rounded-lg absolute"></div>
                   {/* User Icon */}
-                  <svg width="55" height="55" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute">
-                    <rect x="0.375" y="0.116211" width="54.5" height="54.5" rx="7" fill="white"/>
-                    <circle cx="27.6248" cy="20.8416" r="7.28596" fill="#4BA9FF"/>
-                    <path d="M39.8441 41.1767C40.5147 41.1767 41.0641 40.6319 41.0036 39.964C40.8813 38.6156 40.5557 37.291 40.0358 36.0359C39.3607 34.4061 38.3712 32.9252 37.1238 31.6777C35.8764 30.4303 34.3955 29.4408 32.7657 28.7657C31.1359 28.0906 29.389 27.7432 27.6249 27.7432C25.8608 27.7432 24.114 28.0906 22.4841 28.7657C20.8543 29.4408 19.3734 30.4303 18.126 31.6777C16.8786 32.9252 15.8891 34.4061 15.214 36.0359C14.6941 37.291 14.3685 38.6156 14.2463 39.964C14.1857 40.6319 14.7351 41.1767 15.4057 41.1767L27.6249 41.1767H39.8441Z" fill="#4BA9FF"/>
+                  <svg
+                    width="55"
+                    height="55"
+                    viewBox="0 0 55 55"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="absolute"
+                  >
+                    <rect
+                      x="0.375"
+                      y="0.116211"
+                      width="54.5"
+                      height="54.5"
+                      rx="7"
+                      fill="white"
+                    />
+                    <circle
+                      cx="27.6248"
+                      cy="20.8416"
+                      r="7.28596"
+                      fill="#4BA9FF"
+                    />
+                    <path
+                      d="M39.8441 41.1767C40.5147 41.1767 41.0641 40.6319 41.0036 39.964C40.8813 38.6156 40.5557 37.291 40.0358 36.0359C39.3607 34.4061 38.3712 32.9252 37.1238 31.6777C35.8764 30.4303 34.3955 29.4408 32.7657 28.7657C31.1359 28.0906 29.389 27.7432 27.6249 27.7432C25.8608 27.7432 24.114 28.0906 22.4841 28.7657C20.8543 29.4408 19.3734 30.4303 18.126 31.6777C16.8786 32.9252 15.8891 34.4061 15.214 36.0359C14.6941 37.291 14.3685 38.6156 14.2463 39.964C14.1857 40.6319 14.7351 41.1767 15.4057 41.1767L27.6249 41.1767H39.8441Z"
+                      fill="#4BA9FF"
+                    />
                   </svg>
                   {/* Search Icon */}
-                  <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute bottom-2 right-2">
-                    <path d="M18.7733 33.1052C26.9553 33.1052 33.5881 26.4724 33.5881 18.2904C33.5881 10.1084 26.9553 3.47559 18.7733 3.47559C10.5913 3.47559 3.9585 10.1084 3.9585 18.2904C3.9585 26.4724 10.5913 33.1052 18.7733 33.1052Z" stroke="#1C1F23" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M37.2914 36.809L29.2358 28.7534" stroke="#1C1F23" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <svg
+                    width="41"
+                    height="41"
+                    viewBox="0 0 41 41"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="absolute bottom-2 right-2"
+                  >
+                    <path
+                      d="M18.7733 33.1052C26.9553 33.1052 33.5881 26.4724 33.5881 18.2904C33.5881 10.1084 26.9553 3.47559 18.7733 3.47559C10.5913 3.47559 3.9585 10.1084 3.9585 18.2904C3.9585 26.4724 10.5913 33.1052 18.7733 33.1052Z"
+                      stroke="#1C1F23"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M37.2914 36.809L29.2358 28.7534"
+                      stroke="#1C1F23"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </div>
               </div>
@@ -219,25 +310,81 @@ export default function HomePage() {
                 1. Search for Notaries
               </h3>
               <p className="text-base text-[#5F687A] leading-relaxed">
-                Lorem ipsum dolor sit amet consectetur adipiscing elit venenatis rhoncus facilisi eu tempus et tempor velit viverra enim nibh.
+                Lorem ipsum dolor sit amet consectetur adipiscing elit venenatis
+                rhoncus facilisi eu tempus et tempor velit viverra enim nibh.
               </p>
             </div>
 
             {/* Step 2: Review their profile */}
-            <div className="bg-white rounded-[18px] border border-[#DFE5EE] p-6 lg:p-8 text-center" style={{ boxShadow: '0 2px 8px 0 rgba(42, 42, 43, 0.06)' }}>
+            <div
+              className="bg-white rounded-[18px] border border-[#DFE5EE] p-6 lg:p-8 text-center"
+              style={{ boxShadow: "0 2px 8px 0 rgba(42, 42, 43, 0.06)" }}
+            >
               <div className="flex justify-center mb-8">
                 <div className="w-[140px] h-[140px] bg-[#EFF3FA] rounded-full flex items-center justify-center relative">
                   {/* Document with Arrow */}
-                  <svg width="80" height="79" viewBox="0 0 80 79" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="9.44287" y="9.50879" width="56.125" height="68.6923" rx="7" fill="white"/>
-                    <path d="M56.0091 30.3418H19.002" stroke="#1C1F23" strokeWidth="1.5" strokeLinecap="round"/>
-                    <path d="M56.0091 38.3418H19.002" stroke="#1C1F23" strokeWidth="1.5" strokeLinecap="round"/>
-                    <path d="M41.6546 46.3418H19.002" stroke="#1C1F23" strokeWidth="1.5" strokeLinecap="round"/>
-                    <path d="M70.5615 51.0713L79.0224 59.1796L70.5615 67.288" stroke="#1C1F23" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M79.0224 59.1797L41.6548 59.1797" stroke="#1C1F23" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <circle cx="12.9775" cy="12.1582" r="12" fill="#005DFF"/>
-                    <path d="M12.9771 6.84766V17.0582" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M7.87158 11.9531H18.0821" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <svg
+                    width="80"
+                    height="79"
+                    viewBox="0 0 80 79"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      x="9.44287"
+                      y="9.50879"
+                      width="56.125"
+                      height="68.6923"
+                      rx="7"
+                      fill="white"
+                    />
+                    <path
+                      d="M56.0091 30.3418H19.002"
+                      stroke="#1C1F23"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M56.0091 38.3418H19.002"
+                      stroke="#1C1F23"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M41.6546 46.3418H19.002"
+                      stroke="#1C1F23"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M70.5615 51.0713L79.0224 59.1796L70.5615 67.288"
+                      stroke="#1C1F23"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M79.0224 59.1797L41.6548 59.1797"
+                      stroke="#1C1F23"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <circle cx="12.9775" cy="12.1582" r="12" fill="#005DFF" />
+                    <path
+                      d="M12.9771 6.84766V17.0582"
+                      stroke="white"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M7.87158 11.9531H18.0821"
+                      stroke="white"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </div>
               </div>
@@ -245,12 +392,17 @@ export default function HomePage() {
                 2. Review their profile
               </h3>
               <p className="text-base text-[#5F687A] leading-relaxed">
-                Aliquam sed quam urna mauris laoreet non arcu tellus quisque volutpat enim aliquet et porttitor scelerisque arcu ultrices lorem.
+                Aliquam sed quam urna mauris laoreet non arcu tellus quisque
+                volutpat enim aliquet et porttitor scelerisque arcu ultrices
+                lorem.
               </p>
             </div>
 
             {/* Step 3: Book an appointment */}
-            <div className="bg-white rounded-[18px] border border-[#DFE5EE] p-6 lg:p-8 text-center" style={{ boxShadow: '0 2px 8px 0 rgba(42, 42, 43, 0.06)' }}>
+            <div
+              className="bg-white rounded-[18px] border border-[#DFE5EE] p-6 lg:p-8 text-center"
+              style={{ boxShadow: "0 2px 8px 0 rgba(42, 42, 43, 0.06)" }}
+            >
               <div className="flex justify-center mb-8">
                 <div className="w-[140px] h-[140px] bg-[#EFF3FA] rounded-full flex items-center justify-center relative">
                   {/* Booking/Calendar Icon */}
@@ -261,14 +413,38 @@ export default function HomePage() {
                     <div className="w-[35px] h-[35px] bg-white rounded-md absolute -top-4 -left-4"></div>
                     {/* Purple Rectangle with Check */}
                     <div className="w-[35px] h-[35px] bg-[#6C38FF] rounded-md absolute -bottom-4 -right-4 flex items-center justify-center">
-                      <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2.18994 9.36662L5.93858 13.1153L15.3102 3.74365" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <svg
+                        width="17"
+                        height="17"
+                        viewBox="0 0 17 17"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M2.18994 9.36662L5.93858 13.1153L15.3102 3.74365"
+                          stroke="white"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
                       </svg>
                     </div>
                     {/* Purple Check on White */}
                     <div className="absolute -top-3 -left-3">
-                      <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1.68994 9.86662L5.43858 13.6153L14.8102 4.24365" stroke="#6C38FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <svg
+                        width="17"
+                        height="17"
+                        viewBox="0 0 17 17"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M1.68994 9.86662L5.43858 13.6153L14.8102 4.24365"
+                          stroke="#6C38FF"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
                       </svg>
                     </div>
                   </div>
@@ -278,7 +454,8 @@ export default function HomePage() {
                 3. Book an appointment
               </h3>
               <p className="text-base text-[#5F687A] leading-relaxed">
-                Nec mattis semper vel etiam eu nisi dolor interdum proin et urna consectetur amet et sit in viverra lectus vel at ut velit lacus.
+                Nec mattis semper vel etiam eu nisi dolor interdum proin et urna
+                consectetur amet et sit in viverra lectus vel at ut velit lacus.
               </p>
             </div>
           </div>
@@ -289,9 +466,7 @@ export default function HomePage() {
               asChild
               className="bg-[#005DFF] hover:bg-[#0052E6] text-white rounded-full px-7 py-5 text-base font-bold"
             >
-              <Link href="/california-notaries">
-                Hire Notary
-              </Link>
+              <Link href="/california-notaries">Hire Notary</Link>
             </Button>
           </div>
         </div>
@@ -307,7 +482,9 @@ export default function HomePage() {
                 Here's what our great customers say.
               </h2>
               <p className="text-base text-[#5F687A] leading-relaxed mb-8">
-                Lorem ipsum dolor sit amet consectetur adipiscing elit sed accumsan ultrices aliquam nibh lectus non feugiat placerat ut facilisis velit neque.
+                Lorem ipsum dolor sit amet consectetur adipiscing elit sed
+                accumsan ultrices aliquam nibh lectus non feugiat placerat ut
+                facilisis velit neque.
               </p>
 
               {/* Navigation Arrows */}
@@ -317,7 +494,13 @@ export default function HomePage() {
                   className="w-[58px] h-[58px] rounded-full border border-[#1C1F23] flex items-center justify-center hover:bg-[#1C1F23] hover:text-white transition-colors group"
                   aria-label="Previous testimonial"
                 >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path
                       d="M11.4785 3.7749L3.29968 11.9537L11.4785 20.1326"
                       stroke="currentColor"
@@ -340,7 +523,13 @@ export default function HomePage() {
                   className="w-[58px] h-[58px] rounded-full bg-[#005DFF] hover:bg-[#0052E6] flex items-center justify-center transition-colors"
                   aria-label="Next testimonial"
                 >
-                  <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg
+                    width="25"
+                    height="24"
+                    viewBox="0 0 25 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path
                       d="M13.0542 3.7749L21.233 11.9537L13.0542 20.1326"
                       stroke="white"
@@ -365,7 +554,9 @@ export default function HomePage() {
               {/* Placeholder for testimonial content - can be expanded later */}
               <div className="text-center text-[#5F687A]">
                 <p className="text-lg italic">Testimonial content area</p>
-                <p className="text-sm mt-2">Ready for testimonial carousel implementation</p>
+                <p className="text-sm mt-2">
+                  Ready for testimonial carousel implementation
+                </p>
               </div>
             </div>
           </div>
@@ -381,7 +572,8 @@ export default function HomePage() {
               Browse articles & news
             </h2>
             <p className="text-base text-[#5F687A] leading-relaxed max-w-md lg:text-right">
-              Lorem ipsum dolor sit amet consectetur adipiscing elit amet nisl fringilla lectus dignissim euismod mauris enim leo lorem.
+              Lorem ipsum dolor sit amet consectetur adipiscing elit amet nisl
+              fringilla lectus dignissim euismod mauris enim leo lorem.
             </p>
           </div>
 
@@ -408,18 +600,39 @@ export default function HomePage() {
                   How to stay organized and productive as a Notary
                 </h3>
                 <p className="text-base text-[#5F687A] leading-relaxed">
-                  Porta mauris at sem placerat vulputate porttitor arcu suspendisse dui mi duis non tristique.
+                  Porta mauris at sem placerat vulputate porttitor arcu
+                  suspendisse dui mi duis non tristique.
                 </p>
                 <div className="flex items-center justify-between">
-                  <span className="text-base font-bold text-[#1C1F23]">Jan 30, 2024</span>
+                  <span className="text-base font-bold text-[#1C1F23]">
+                    Jan 30, 2024
+                  </span>
                   <Link
                     href="/blog/stay-organized-productive-notary"
                     className="inline-flex items-center gap-2 text-base font-bold text-[#005DFF] hover:text-[#0052E6] transition-colors"
                   >
                     Read more
-                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M2.66781 13.8213L13.3345 3.15462" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M13.3345 13.2109V3.15437H3.2779" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <svg
+                      width="16"
+                      height="17"
+                      viewBox="0 0 16 17"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M2.66781 13.8213L13.3345 3.15462"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M13.3345 13.2109V3.15437H3.2779"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
                     </svg>
                   </Link>
                 </div>
@@ -447,18 +660,39 @@ export default function HomePage() {
                   Essential tips on how much to charge for your freelance work
                 </h3>
                 <p className="text-base text-[#5F687A] leading-relaxed">
-                  Aliquam senectus turpis quam odio proin nis nec massa nisl ac etiam sed feugiat nullam neque.
+                  Aliquam senectus turpis quam odio proin nis nec massa nisl ac
+                  etiam sed feugiat nullam neque.
                 </p>
                 <div className="flex items-center justify-between">
-                  <span className="text-base font-bold text-[#1C1F23]">Jan 27, 2024</span>
+                  <span className="text-base font-bold text-[#1C1F23]">
+                    Jan 27, 2024
+                  </span>
                   <Link
                     href="/blog/freelance-pricing-tips"
                     className="inline-flex items-center gap-2 text-base font-bold text-[#005DFF] hover:text-[#0052E6] transition-colors"
                   >
                     Read more
-                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M2.66781 13.8213L13.3345 3.15462" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M13.3345 13.2109V3.15437H3.2779" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <svg
+                      width="16"
+                      height="17"
+                      viewBox="0 0 16 17"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M2.66781 13.8213L13.3345 3.15462"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M13.3345 13.2109V3.15437H3.2779"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
                     </svg>
                   </Link>
                 </div>
@@ -486,18 +720,39 @@ export default function HomePage() {
                   7 tips to help you succeed as Notary professional
                 </h3>
                 <p className="text-base text-[#5F687A] leading-relaxed">
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit amet nisl fringilla lectus lorem ipsum.
+                  Lorem ipsum dolor sit amet consectetur adipiscing elit amet
+                  nisl fringilla lectus lorem ipsum.
                 </p>
                 <div className="flex items-center justify-between">
-                  <span className="text-base font-bold text-[#1C1F23]">Jan 24, 2024</span>
+                  <span className="text-base font-bold text-[#1C1F23]">
+                    Jan 24, 2024
+                  </span>
                   <Link
                     href="/blog/succeed-notary-professional"
                     className="inline-flex items-center gap-2 text-base font-bold text-[#005DFF] hover:text-[#0052E6] transition-colors"
                   >
                     Read more
-                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M2.66781 13.8213L13.3345 3.15462" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M13.3345 13.2109V3.15437H3.2779" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <svg
+                      width="16"
+                      height="17"
+                      viewBox="0 0 16 17"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M2.66781 13.8213L13.3345 3.15462"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M13.3345 13.2109V3.15437H3.2779"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
                     </svg>
                   </Link>
                 </div>
@@ -513,9 +768,7 @@ export default function HomePage() {
               asChild
               className="border-[#101B44] text-[#101B44] hover:bg-[#101B44] hover:text-white rounded-full px-7 py-5 text-base font-normal"
             >
-              <Link href="/blog">
-                Browse all articles
-              </Link>
+              <Link href="/blog">Browse all articles</Link>
             </Button>
           </div>
         </div>
