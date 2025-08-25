@@ -318,7 +318,7 @@ export default function HomePage() {
                   className="bg-[#005DFF] hover:bg-[#0052E6] text-white rounded-full px-8 py-4 text-base font-bold transition-all duration-200"
                 >
                   <Link href="/california-notaries">
-                    Hire Notary
+                    Find A Notary
                   </Link>
                 </Button>
               </div>
