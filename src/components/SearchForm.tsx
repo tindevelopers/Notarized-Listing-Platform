@@ -130,7 +130,7 @@ export default function SearchForm() {
         <Button
           onClick={handleSearch}
           size="lg"
-          className="w-full sm:w-auto bg-[#005DFF] hover:bg-[#0052E6] text-white px-8 py-4 text-base font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
+          className="w-full sm:w-auto bg-[#005DFF] hover:bg-[#0052E6] text-white px-8 py-4 text-base font-semibold rounded-full transition-all duration-200 shadow-lg hover:shadow-xl overflow-hidden"
         >
           <Search className="w-5 h-5 mr-2" />
           Find Notaries
@@ -140,7 +140,7 @@ export default function SearchForm() {
           variant="outline"
           size="lg"
           onClick={handleUseLocation}
-          className="w-full sm:w-auto border-[#005DFF] text-[#005DFF] hover:bg-[#005DFF] hover:text-white px-6 py-4 text-base font-medium rounded-lg transition-all duration-200"
+          className="w-full sm:w-auto border-[#005DFF] text-[#005DFF] hover:bg-[#005DFF] hover:text-white px-6 py-4 text-base font-medium rounded-full transition-all duration-200 overflow-hidden"
         >
           <MapPin className="w-4 h-4 mr-2" />
           Use My Location
