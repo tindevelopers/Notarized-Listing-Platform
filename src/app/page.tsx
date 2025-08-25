@@ -301,10 +301,10 @@ export default function HomePage() {
                   </div>
                   <div>
                     <h3 className="text-lg font-bold text-[#1C1F23] mb-2">
-                      Quality work done quickly
+                      Nationwide Listings
                     </h3>
                     <p className="text-base text-[#5F687A] leading-relaxed">
-                      Bibendum odio habitasse quis a nulla est eu sed dictum in id facilisi urna maecenas semper non.
+                      Find trusted notaries across all 50 states with our comprehensive directory.
                     </p>
                   </div>
                 </div>
