@@ -69,10 +69,8 @@ export default function SearchForm() {
           </label>
           <Select value={selectedCity} onValueChange={setSelectedCity}>
             <SelectTrigger className="w-full">
-              <div className="flex items-center">
-                <MapPin className="w-4 h-4 mr-2 text-gray-400" />
-                <SelectValue placeholder="Select City" />
-              </div>
+              <MapPin className="w-4 h-4 mr-2 text-gray-400" />
+              <SelectValue placeholder="Select City" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="los-angeles">Los Angeles</SelectItem>
