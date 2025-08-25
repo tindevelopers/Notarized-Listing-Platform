@@ -173,46 +173,117 @@ export default function HomePage() {
       </section>
 
       {/* How It Works */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            How It Works
-          </h2>
-          <p className="text-xl text-gray-600 mb-12">
-            Get your documents notarized in three simple steps
-          </p>
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-2xl md:text-3xl font-bold text-[#1C1F23] mb-4">
+              How it works
+            </h2>
+            <p className="text-base text-[#5F687A] leading-relaxed max-w-lg mx-auto">
+              Lorem ipsum dolor sit amet consectetur adipiscing elit vitae pretium nunc velit facilisis vulputate accumsan pellentesque ultricies.
+            </p>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                step: "1",
-                title: "Find a Notary",
-                description:
-                  "Search for certified notaries in your area or book an online session",
-              },
-              {
-                step: "2",
-                title: "Schedule Appointment",
-                description:
-                  "Choose a convenient time and location for your notarization",
-              },
-              {
-                step: "3",
-                title: "Get Notarized",
-                description:
-                  "Meet with your notary and get your documents officially notarized",
-              },
-            ].map((item, index) => (
-              <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
-                  {item.step}
+          {/* Steps Cards */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+            {/* Step 1: Search for Notaries */}
+            <div className="bg-white rounded-[18px] border border-[#DFE5EE] p-6 lg:p-8 text-center" style={{ boxShadow: '0 2px 8px 0 rgba(42, 42, 43, 0.06)' }}>
+              <div className="flex justify-center mb-8">
+                <div className="w-[140px] h-[140px] bg-[#EFF3FA] rounded-full flex items-center justify-center relative">
+                  {/* Dashed Rectangle */}
+                  <div className="w-[55px] h-[55px] border-[1.5px] border-dashed border-[#1C1F23] bg-[#EFF3FA] rounded-lg absolute"></div>
+                  {/* User Icon */}
+                  <svg width="55" height="55" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute">
+                    <rect x="0.375" y="0.116211" width="54.5" height="54.5" rx="7" fill="white"/>
+                    <circle cx="27.6248" cy="20.8416" r="7.28596" fill="#4BA9FF"/>
+                    <path d="M39.8441 41.1767C40.5147 41.1767 41.0641 40.6319 41.0036 39.964C40.8813 38.6156 40.5557 37.291 40.0358 36.0359C39.3607 34.4061 38.3712 32.9252 37.1238 31.6777C35.8764 30.4303 34.3955 29.4408 32.7657 28.7657C31.1359 28.0906 29.389 27.7432 27.6249 27.7432C25.8608 27.7432 24.114 28.0906 22.4841 28.7657C20.8543 29.4408 19.3734 30.4303 18.126 31.6777C16.8786 32.9252 15.8891 34.4061 15.214 36.0359C14.6941 37.291 14.3685 38.6156 14.2463 39.964C14.1857 40.6319 14.7351 41.1767 15.4057 41.1767L27.6249 41.1767H39.8441Z" fill="#4BA9FF"/>
+                  </svg>
+                  {/* Search Icon */}
+                  <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute bottom-2 right-2">
+                    <path d="M18.7733 33.1052C26.9553 33.1052 33.5881 26.4724 33.5881 18.2904C33.5881 10.1084 26.9553 3.47559 18.7733 3.47559C10.5913 3.47559 3.9585 10.1084 3.9585 18.2904C3.9585 26.4724 10.5913 33.1052 18.7733 33.1052Z" stroke="#1C1F23" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M37.2914 36.809L29.2358 28.7534" stroke="#1C1F23" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-gray-600">{item.description}</p>
               </div>
-            ))}
+              <h3 className="text-2xl font-bold text-[#1C1F23] mb-4">
+                1. Search for Notaries
+              </h3>
+              <p className="text-base text-[#5F687A] leading-relaxed">
+                Lorem ipsum dolor sit amet consectetur adipiscing elit venenatis rhoncus facilisi eu tempus et tempor velit viverra enim nibh.
+              </p>
+            </div>
+
+            {/* Step 2: Review their profile */}
+            <div className="bg-white rounded-[18px] border border-[#DFE5EE] p-6 lg:p-8 text-center" style={{ boxShadow: '0 2px 8px 0 rgba(42, 42, 43, 0.06)' }}>
+              <div className="flex justify-center mb-8">
+                <div className="w-[140px] h-[140px] bg-[#EFF3FA] rounded-full flex items-center justify-center relative">
+                  {/* Document with Arrow */}
+                  <svg width="80" height="79" viewBox="0 0 80 79" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="9.44287" y="9.50879" width="56.125" height="68.6923" rx="7" fill="white"/>
+                    <path d="M56.0091 30.3418H19.002" stroke="#1C1F23" strokeWidth="1.5" strokeLinecap="round"/>
+                    <path d="M56.0091 38.3418H19.002" stroke="#1C1F23" strokeWidth="1.5" strokeLinecap="round"/>
+                    <path d="M41.6546 46.3418H19.002" stroke="#1C1F23" strokeWidth="1.5" strokeLinecap="round"/>
+                    <path d="M70.5615 51.0713L79.0224 59.1796L70.5615 67.288" stroke="#1C1F23" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M79.0224 59.1797L41.6548 59.1797" stroke="#1C1F23" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <circle cx="12.9775" cy="12.1582" r="12" fill="#005DFF"/>
+                    <path d="M12.9771 6.84766V17.0582" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M7.87158 11.9531H18.0821" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+              <h3 className="text-2xl font-bold text-[#1C1F23] mb-4">
+                2. Review their profile
+              </h3>
+              <p className="text-base text-[#5F687A] leading-relaxed">
+                Aliquam sed quam urna mauris laoreet non arcu tellus quisque volutpat enim aliquet et porttitor scelerisque arcu ultrices lorem.
+              </p>
+            </div>
+
+            {/* Step 3: Book an appointment */}
+            <div className="bg-white rounded-[18px] border border-[#DFE5EE] p-6 lg:p-8 text-center" style={{ boxShadow: '0 2px 8px 0 rgba(42, 42, 43, 0.06)' }}>
+              <div className="flex justify-center mb-8">
+                <div className="w-[140px] h-[140px] bg-[#EFF3FA] rounded-full flex items-center justify-center relative">
+                  {/* Booking/Calendar Icon */}
+                  <div className="relative">
+                    {/* Dashed Rectangle */}
+                    <div className="w-[55px] h-[55px] border-[1.5px] border-dashed border-[#1C1F23] bg-[#EAECF2] rounded-lg"></div>
+                    {/* White Rectangle */}
+                    <div className="w-[35px] h-[35px] bg-white rounded-md absolute -top-4 -left-4"></div>
+                    {/* Purple Rectangle with Check */}
+                    <div className="w-[35px] h-[35px] bg-[#6C38FF] rounded-md absolute -bottom-4 -right-4 flex items-center justify-center">
+                      <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.18994 9.36662L5.93858 13.1153L15.3102 3.74365" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </div>
+                    {/* Purple Check on White */}
+                    <div className="absolute -top-3 -left-3">
+                      <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.68994 9.86662L5.43858 13.6153L14.8102 4.24365" stroke="#6C38FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h3 className="text-2xl font-bold text-[#1C1F23] mb-4">
+                3. Book an appointment
+              </h3>
+              <p className="text-base text-[#5F687A] leading-relaxed">
+                Nec mattis semper vel etiam eu nisi dolor interdum proin et urna consectetur amet et sit in viverra lectus vel at ut velit lacus.
+              </p>
+            </div>
+          </div>
+
+          {/* Hire Notary Button */}
+          <div className="text-center">
+            <Button
+              asChild
+              className="bg-[#005DFF] hover:bg-[#0052E6] text-white rounded-full px-7 py-5 text-base font-bold"
+            >
+              <Link href="/california-notaries">
+                Hire Notary
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
