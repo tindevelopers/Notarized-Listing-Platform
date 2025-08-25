@@ -108,6 +108,10 @@ interface SearchNotariesParams {
   service?: string;
   radius?: number;
   limit?: number;
+  priceRange?: string;
+  isOnline?: boolean;
+  isMobile?: boolean;
+  availability?: string;
 }
 
 export function useSearchNotaries(params: SearchNotariesParams) {
@@ -139,6 +143,10 @@ export function useSearchNotaries(params: SearchNotariesParams) {
       if (params.service) searchParams.set("service", params.service);
       if (params.radius) searchParams.set("radius", params.radius.toString());
       if (params.limit) searchParams.set("limit", params.limit.toString());
+      if (params.priceRange) searchParams.set("priceRange", params.priceRange);
+      if (params.isOnline !== undefined) searchParams.set("isOnline", params.isOnline.toString());
+      if (params.isMobile !== undefined) searchParams.set("isMobile", params.isMobile.toString());
+      if (params.availability) searchParams.set("availability", params.availability);
 
       try {
         const response = await fetch(`/api/notaries/search?${searchParams}`, {

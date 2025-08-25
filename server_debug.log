@@ -1,11 +1,50 @@
-
-> fusion-starter-nextjs@0.1.0 dev
-> next dev
-
   ▲ Next.js 14.2.8
-  - Local:        http://localhost:3000
+  - Local:        http://localhost:3002
   - Environments: .env
 
  ✓ Starting...
- ✓ Ready in 4.5s
-[?25h
+ ✓ Ready in 1658ms
+ ○ Compiling /middleware ...
+ ✓ Compiled /middleware in 574ms (144 modules)
+[Supabase Config] Server-side status: {
+  configured: true,
+  error: undefined,
+  errorCode: 'OK',
+  hasUrl: true,
+  hasKey: true,
+  urlPreview: 'https://kigzjlmfpxirlikstwmg.s...',
+  keyPreview: 'eyJhbGciOiJIUzI1NiIs...',
+  nodeEnv: 'development',
+  context: 'server'
+}
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 1600ms (430 modules)
+ HEAD / 404 in 1737ms
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (108kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+ ⨯ Error [ReferenceError]: exports is not defined
+    at <unknown> (file:///home/ubuntu/Notarized-Listing-Platform/.next/server/vendors.js:9)
+    at <unknown> (file:///home/ubuntu/Notarized-Listing-Platform/.next/server/vendors.js:9:1)
+    at Script.runInContext (node:vm:149:12)
+    at runInContext (node:vm:301:6)
+    at evaluateInContext (file:///home/ubuntu/Notarized-Listing-Platform/node_modules/.pnpm/next@14.2.8_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/server/web/sandbox/context.js:407:38)
+    at getRuntimeContext (file:///home/ubuntu/Notarized-Listing-Platform/node_modules/.pnpm/next@14.2.8_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/server/web/sandbox/sandbox.js:71:9)
+    at async runWithTaggedErrors (file:///home/ubuntu/Notarized-Listing-Platform/node_modules/.pnpm/next@14.2.8_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/server/web/sandbox/sandbox.js:77:21)
+    at async DevServer.runMiddleware (file:///home/ubuntu/Notarized-Listing-Platform/node_modules/.pnpm/next@14.2.8_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/server/next-server.js:1062:24)
+    at async DevServer.runMiddleware (file:///home/ubuntu/Notarized-Listing-Platform/node_modules/.pnpm/next@14.2.8_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/server/dev/next-dev-server.js:268:28)
+    at async NextNodeServer.handleCatchallMiddlewareRequest (file:///home/ubuntu/Notarized-Listing-Platform/node_modules/.pnpm/next@14.2.8_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/server/next-server.js:322:26)
+    at async DevServer.handleRequestImpl (file:///home/ubuntu/Notarized-Listing-Platform/node_modules/.pnpm/next@14.2.8_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/server/base-server.js:819:28)
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 1104ms (656 modules)
+ ⨯ Error [ReferenceError]: exports is not defined
+    at <unknown> (file:///home/ubuntu/Notarized-Listing-Platform/.next/server/vendors.js:9)
+    at <unknown> (file:///home/ubuntu/Notarized-Listing-Platform/.next/server/vendors.js:9:1)
+    at Script.runInContext (node:vm:149:12)
+    at runInContext (node:vm:301:6)
+    at evaluateInContext (file:///home/ubuntu/Notarized-Listing-Platform/node_modules/.pnpm/next@14.2.8_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/server/web/sandbox/context.js:407:38)
+    at getRuntimeContext (file:///home/ubuntu/Notarized-Listing-Platform/node_modules/.pnpm/next@14.2.8_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/server/web/sandbox/sandbox.js:71:9)
+    at async runWithTaggedErrors (file:///home/ubuntu/Notarized-Listing-Platform/node_modules/.pnpm/next@14.2.8_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/server/web/sandbox/sandbox.js:77:21)
+    at async DevServer.runMiddleware (file:///home/ubuntu/Notarized-Listing-Platform/node_modules/.pnpm/next@14.2.8_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/server/next-server.js:1062:24)
+    at async DevServer.runMiddleware (file:///home/ubuntu/Notarized-Listing-Platform/node_modules/.pnpm/next@14.2.8_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/server/dev/next-dev-server.js:268:28)
+    at async NextNodeServer.handleCatchallMiddlewareRequest (file:///home/ubuntu/Notarized-Listing-Platform/node_modules/.pnpm/next@14.2.8_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/server/next-server.js:322:26)
+    at async DevServer.handleRequestImpl (file:///home/ubuntu/Notarized-Listing-Platform/node_modules/.pnpm/next@14.2.8_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/server/base-server.js:819:28)
+ ✓ Compiled in 25ms

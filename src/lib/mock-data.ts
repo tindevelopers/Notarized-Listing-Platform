@@ -1,6 +1,7 @@
 import { NotaryWithProfile } from "@/types/supabase";
 
 export const mockNotaries: NotaryWithProfile[] = [
+  // Los Angeles Area - Premium Real Estate
   {
     id: "mock-1",
     profile_id: "profile-1",
@@ -23,8 +24,16 @@ export const mockNotaries: NotaryWithProfile[] = [
       "Business Documents",
     ],
     specializations: ["Real Estate", "Loan Signings"],
-    availability: null,
-    availability_schedule: null,
+    availability: "24/7 Available",
+    availability_schedule: { 
+      "monday": "9:00-21:00",
+      "tuesday": "9:00-21:00", 
+      "wednesday": "9:00-21:00",
+      "thursday": "9:00-21:00",
+      "friday": "9:00-21:00",
+      "saturday": "10:00-18:00",
+      "sunday": "12:00-17:00"
+    },
     hourly_rate: 85.0,
     travel_radius: 50,
     is_mobile: true,
@@ -53,6 +62,7 @@ export const mockNotaries: NotaryWithProfile[] = [
       updated_at: "2024-01-01T00:00:00Z",
     },
   },
+  // San Francisco - Business & Immigration
   {
     id: "mock-2",
     profile_id: "profile-2",
@@ -75,8 +85,16 @@ export const mockNotaries: NotaryWithProfile[] = [
       "Wills & Trusts",
     ],
     specializations: ["Business Documents", "Immigration"],
-    availability: null,
-    availability_schedule: null,
+    availability: "Business Hours",
+    availability_schedule: { 
+      "monday": "8:00-17:00",
+      "tuesday": "8:00-17:00", 
+      "wednesday": "8:00-17:00",
+      "thursday": "8:00-17:00",
+      "friday": "8:00-17:00",
+      "saturday": "closed",
+      "sunday": "closed"
+    },
     hourly_rate: 90.0,
     travel_radius: 30,
     is_mobile: true,
@@ -105,6 +123,7 @@ export const mockNotaries: NotaryWithProfile[] = [
       updated_at: "2024-01-01T00:00:00Z",
     },
   },
+  // San Diego - Emergency Services
   {
     id: "mock-3",
     profile_id: "profile-3",
@@ -127,7 +146,7 @@ export const mockNotaries: NotaryWithProfile[] = [
       "Power of Attorney",
     ],
     specializations: ["Emergency Services", "Real Estate"],
-    availability: null,
+    availability: "24/7 Available",
     availability_schedule: null,
     hourly_rate: 80.0,
     travel_radius: 40,
@@ -157,6 +176,7 @@ export const mockNotaries: NotaryWithProfile[] = [
       updated_at: "2024-01-01T00:00:00Z",
     },
   },
+  // Sacramento - Corporate/Legal
   {
     id: "mock-4",
     profile_id: "profile-4",
@@ -172,10 +192,18 @@ export const mockNotaries: NotaryWithProfile[] = [
     latitude: 38.5816,
     longitude: -121.4944,
     languages: ["English", "Spanish"],
-    services: ["Corporate Documents", "Legal Forms", "Affidavits", "Contracts"],
-    specializations: ["Corporate Documents", "Legal Forms"],
-    availability: null,
-    availability_schedule: null,
+    services: ["Corporate Documents", "Legal Documents", "Affidavits", "Contracts"],
+    specializations: ["Corporate Documents", "Legal Documents"],
+    availability: "Business Hours",
+    availability_schedule: { 
+      "monday": "9:00-17:00",
+      "tuesday": "9:00-17:00", 
+      "wednesday": "9:00-17:00",
+      "thursday": "9:00-17:00",
+      "friday": "9:00-17:00",
+      "saturday": "closed",
+      "sunday": "closed"
+    },
     hourly_rate: 75.0,
     travel_radius: 35,
     is_mobile: false,
@@ -204,6 +232,7 @@ export const mockNotaries: NotaryWithProfile[] = [
       updated_at: "2024-01-01T00:00:00Z",
     },
   },
+  // Fresno - Immigration & Family Law
   {
     id: "mock-5",
     profile_id: "profile-5",
@@ -223,11 +252,19 @@ export const mockNotaries: NotaryWithProfile[] = [
       "Immigration",
       "Family Law",
       "Personal Documents",
-      "School Forms",
+      "School Documents",
     ],
     specializations: ["Immigration", "Family Law"],
-    availability: null,
-    availability_schedule: null,
+    availability: "Evenings",
+    availability_schedule: { 
+      "monday": "17:00-21:00",
+      "tuesday": "17:00-21:00", 
+      "wednesday": "17:00-21:00",
+      "thursday": "17:00-21:00",
+      "friday": "17:00-21:00",
+      "saturday": "9:00-17:00",
+      "sunday": "9:00-15:00"
+    },
     hourly_rate: 70.0,
     travel_radius: 25,
     is_mobile: true,
@@ -256,6 +293,7 @@ export const mockNotaries: NotaryWithProfile[] = [
       updated_at: "2024-01-01T00:00:00Z",
     },
   },
+  // Orange County - Express Services
   {
     id: "mock-6",
     profile_id: "profile-6",
@@ -275,11 +313,19 @@ export const mockNotaries: NotaryWithProfile[] = [
       "Real Estate",
       "Loan Modifications",
       "Refinancing",
-      "Quick Services",
+      "Express Services",
     ],
     specializations: ["Real Estate", "Loan Modifications"],
-    availability: null,
-    availability_schedule: null,
+    availability: "Weekends",
+    availability_schedule: { 
+      "monday": "closed",
+      "tuesday": "closed", 
+      "wednesday": "closed",
+      "thursday": "closed",
+      "friday": "18:00-21:00",
+      "saturday": "8:00-20:00",
+      "sunday": "8:00-20:00"
+    },
     hourly_rate: 95.0,
     travel_radius: 45,
     is_mobile: true,
@@ -304,6 +350,356 @@ export const mockNotaries: NotaryWithProfile[] = [
       full_name: "James Taylor",
       avatar_url:
         "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
+      created_at: "2024-01-01T00:00:00Z",
+      updated_at: "2024-01-01T00:00:00Z",
+    },
+  },
+  // Oakland - Online Specialist
+  {
+    id: "mock-7",
+    profile_id: "profile-7",
+    business_name: "Martinez Digital Notary",
+    description:
+      "California's premier online notarization service. RON certified with advanced digital security. Available for remote signings 24/7.",
+    phone: "(555) 789-0123",
+    address: "555 Tech Plaza",
+    business_address: "555 Tech Plaza",
+    city: "Oakland",
+    state: "CA",
+    zip_code: "94612",
+    latitude: 37.8044,
+    longitude: -122.2712,
+    languages: ["English", "Spanish", "Portuguese"],
+    services: [
+      "Online Notarization",
+      "Digital Documents",
+      "Remote Signing",
+      "Tech Startups",
+    ],
+    specializations: ["Online Notarization", "Digital Documents"],
+    availability: "24/7 Available",
+    availability_schedule: null,
+    hourly_rate: 100.0,
+    travel_radius: 0,
+    is_mobile: false,
+    is_online: true,
+    is_verified: true,
+    rating: 4.95,
+    review_count: 89,
+    commission_number: "CN-2024-007890",
+    commission_expiry_date: "2027-04-15",
+    notary_county: "Alameda",
+    notary_type: "remote",
+    verification_status: "verified",
+    years_experience: 4,
+    profile_completed: true,
+    seal_image_url: null,
+    signature_image_url: null,
+    created_at: "2024-01-01T00:00:00Z",
+    updated_at: "2024-01-01T00:00:00Z",
+    profiles: {
+      id: "profile-7",
+      email: "carlos.martinez@notary.com",
+      full_name: "Carlos Martinez",
+      avatar_url:
+        "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop&crop=face",
+      created_at: "2024-01-01T00:00:00Z",
+      updated_at: "2024-01-01T00:00:00Z",
+    },
+  },
+  // Riverside - Healthcare & Medical
+  {
+    id: "mock-8",
+    profile_id: "profile-8",
+    business_name: "Thompson Medical Notary",
+    description:
+      "Specialized notary services for healthcare institutions, medical practices, and patient documents. HIPAA compliant and mobile.",
+    phone: "(555) 890-1234",
+    address: "432 Health Center Dr",
+    business_address: "432 Health Center Dr",
+    city: "Riverside",
+    state: "CA",
+    zip_code: "92501",
+    latitude: 33.9533,
+    longitude: -117.3962,
+    languages: ["English"],
+    services: [
+      "Medical Documents",
+      "Healthcare Forms",
+      "HIPAA Compliance",
+      "Patient Advocacy",
+    ],
+    specializations: ["Medical Documents", "Healthcare Forms"],
+    availability: "Business Hours",
+    availability_schedule: { 
+      "monday": "7:00-19:00",
+      "tuesday": "7:00-19:00", 
+      "wednesday": "7:00-19:00",
+      "thursday": "7:00-19:00",
+      "friday": "7:00-19:00",
+      "saturday": "8:00-16:00",
+      "sunday": "closed"
+    },
+    hourly_rate: 65.0,
+    travel_radius: 30,
+    is_mobile: true,
+    is_online: false,
+    is_verified: true,
+    rating: 4.85,
+    review_count: 178,
+    commission_number: "CN-2024-008901",
+    commission_expiry_date: "2026-11-22",
+    notary_county: "Riverside",
+    notary_type: "traditional",
+    verification_status: "verified",
+    years_experience: 11,
+    profile_completed: true,
+    seal_image_url: null,
+    signature_image_url: null,
+    created_at: "2024-01-01T00:00:00Z",
+    updated_at: "2024-01-01T00:00:00Z",
+    profiles: {
+      id: "profile-8",
+      email: "rebecca.thompson@notary.com",
+      full_name: "Rebecca Thompson",
+      avatar_url:
+        "https://i.pinimg.com/736x/83/22/39/832239d0dd351a9f6b9e56de9131c325.jpg",
+      created_at: "2024-01-01T00:00:00Z",
+      updated_at: "2024-01-01T00:00:00Z",
+    },
+  },
+  // Bakersfield - Agricultural/Rural
+  {
+    id: "mock-9",
+    profile_id: "profile-9",
+    business_name: "Williams Rural Notary",
+    description:
+      "Serving agricultural communities and rural areas throughout Kern County. Specializing in farm documents, land transfers, and estate planning.",
+    phone: "(555) 901-2345",
+    address: "876 Country Road",
+    business_address: "876 Country Road",
+    city: "Bakersfield",
+    state: "CA",
+    zip_code: "93301",
+    latitude: 35.3733,
+    longitude: -119.0187,
+    languages: ["English", "Spanish"],
+    services: [
+      "Agricultural Documents",
+      "Land Transfers",
+      "Estate Planning", 
+      "Rural Services",
+    ],
+    specializations: ["Agricultural Documents", "Estate Planning"],
+    availability: "Weekends",
+    availability_schedule: { 
+      "monday": "closed",
+      "tuesday": "closed", 
+      "wednesday": "closed",
+      "thursday": "closed",
+      "friday": "closed",
+      "saturday": "6:00-18:00",
+      "sunday": "8:00-16:00"
+    },
+    hourly_rate: 60.0,
+    travel_radius: 75,
+    is_mobile: true,
+    is_online: false,
+    is_verified: true,
+    rating: 4.6,
+    review_count: 92,
+    commission_number: "CN-2024-009012",
+    commission_expiry_date: "2025-08-30",
+    notary_county: "Kern",
+    notary_type: "traditional",
+    verification_status: "verified",
+    years_experience: 13,
+    profile_completed: true,
+    seal_image_url: null,
+    signature_image_url: null,
+    created_at: "2024-01-01T00:00:00Z",
+    updated_at: "2024-01-01T00:00:00Z",
+    profiles: {
+      id: "profile-9",
+      email: "john.williams@notary.com",
+      full_name: "John Williams",
+      avatar_url:
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
+      created_at: "2024-01-01T00:00:00Z",
+      updated_at: "2024-01-01T00:00:00Z",
+    },
+  },
+  // Modesto - Affordable Services
+  {
+    id: "mock-10",
+    profile_id: "profile-10",
+    business_name: "Garcia Affordable Notary",
+    description:
+      "Budget-friendly notary services without compromising quality. Serving Central Valley families and small businesses with care.",
+    phone: "(555) 012-3456",
+    address: "123 Budget Lane",
+    business_address: "123 Budget Lane",
+    city: "Modesto",
+    state: "CA",
+    zip_code: "95354",
+    latitude: 37.6391,
+    longitude: -120.9969,
+    languages: ["English", "Spanish"],
+    services: [
+      "Personal Documents",
+      "Small Business",
+      "Family Services",
+      "Budget Notary",
+    ],
+    specializations: ["Personal Documents", "Small Business"],
+    availability: "Evenings",
+    availability_schedule: { 
+      "monday": "18:00-21:00",
+      "tuesday": "18:00-21:00", 
+      "wednesday": "18:00-21:00",
+      "thursday": "18:00-21:00",
+      "friday": "18:00-21:00",
+      "saturday": "10:00-16:00",
+      "sunday": "12:00-17:00"
+    },
+    hourly_rate: 45.0,
+    travel_radius: 20,
+    is_mobile: true,
+    is_online: true,
+    is_verified: true,
+    rating: 4.7,
+    review_count: 267,
+    commission_number: "CN-2024-010123",
+    commission_expiry_date: "2026-12-15",
+    notary_county: "Stanislaus",
+    notary_type: "traditional",
+    verification_status: "verified",
+    years_experience: 5,
+    profile_completed: true,
+    seal_image_url: null,
+    signature_image_url: null,
+    created_at: "2024-01-01T00:00:00Z",
+    updated_at: "2024-01-01T00:00:00Z",
+    profiles: {
+      id: "profile-10",
+      email: "maria.garcia@notary.com",
+      full_name: "Maria Garcia",
+      avatar_url:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face",
+      created_at: "2024-01-01T00:00:00Z",
+      updated_at: "2024-01-01T00:00:00Z",
+    },
+  },
+  // Long Beach - Port/Maritime
+  {
+    id: "mock-11",
+    profile_id: "profile-11",
+    business_name: "Harbor Notary Services",
+    description:
+      "Maritime and shipping document specialist. Available at ports, customs offices, and shipping facilities throughout Long Beach area.",
+    phone: "(555) 123-4567",
+    address: "789 Harbor Blvd",
+    business_address: "789 Harbor Blvd",
+    city: "Long Beach",
+    state: "CA",
+    zip_code: "90802",
+    latitude: 33.7701,
+    longitude: -118.1937,
+    languages: ["English", "Spanish", "Korean"],
+    services: [
+      "Maritime Documents",
+      "Shipping Papers",
+      "Customs Forms",
+      "International Trade",
+    ],
+    specializations: ["Maritime Documents", "International Trade"],
+    availability: "Business Hours",
+    availability_schedule: { 
+      "monday": "5:00-17:00",
+      "tuesday": "5:00-17:00", 
+      "wednesday": "5:00-17:00",
+      "thursday": "5:00-17:00",
+      "friday": "5:00-17:00",
+      "saturday": "6:00-14:00",
+      "sunday": "closed"
+    },
+    hourly_rate: 110.0,
+    travel_radius: 25,
+    is_mobile: true,
+    is_online: false,
+    is_verified: true,
+    rating: 4.8,
+    review_count: 134,
+    commission_number: "CN-2024-011234",
+    commission_expiry_date: "2027-03-10",
+    notary_county: "Los Angeles",
+    notary_type: "traditional",
+    verification_status: "verified",
+    years_experience: 16,
+    profile_completed: true,
+    seal_image_url: null,
+    signature_image_url: null,
+    created_at: "2024-01-01T00:00:00Z",
+    updated_at: "2024-01-01T00:00:00Z",
+    profiles: {
+      id: "profile-11",
+      email: "steven.kim@notary.com",
+      full_name: "Steven Kim",
+      avatar_url:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+      created_at: "2024-01-01T00:00:00Z",
+      updated_at: "2024-01-01T00:00:00Z",
+    },
+  },
+  // Santa Barbara - Luxury/High-End
+  {
+    id: "mock-12",
+    profile_id: "profile-12",
+    business_name: "Elite Notary Concierge",
+    description:
+      "Premium notary services for luxury properties, high-value transactions, and discerning clientele. White-glove service with complete discretion.",
+    phone: "(555) 234-5678",
+    address: "456 Luxury Row",
+    business_address: "456 Luxury Row", 
+    city: "Santa Barbara",
+    state: "CA",
+    zip_code: "93101",
+    latitude: 34.4208,
+    longitude: -119.6982,
+    languages: ["English", "French"],
+    services: [
+      "Luxury Real Estate",
+      "High-Value Transactions",
+      "Concierge Services",
+      "Private Clients",
+    ],
+    specializations: ["Luxury Real Estate", "High-Value Transactions"],
+    availability: "24/7 Available",
+    availability_schedule: null,
+    hourly_rate: 150.0,
+    travel_radius: 60,
+    is_mobile: true,
+    is_online: true,
+    is_verified: true,
+    rating: 5.0,
+    review_count: 78,
+    commission_number: "CN-2024-012345",
+    commission_expiry_date: "2027-05-20",
+    notary_county: "Santa Barbara",
+    notary_type: "traditional",
+    verification_status: "verified",
+    years_experience: 18,
+    profile_completed: true,
+    seal_image_url: null,
+    signature_image_url: null,
+    created_at: "2024-01-01T00:00:00Z",
+    updated_at: "2024-01-01T00:00:00Z",
+    profiles: {
+      id: "profile-12",
+      email: "alexandra.beaumont@notary.com",
+      full_name: "Alexandra Beaumont",
+      avatar_url:
+        "https://images.pexels.com/photos/6383206/pexels-photo-6383206.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
       created_at: "2024-01-01T00:00:00Z",
       updated_at: "2024-01-01T00:00:00Z",
     },
@@ -356,20 +752,102 @@ export const mockReviews = [
 export function getMockNotariesResponse(params: any = {}) {
   let filteredNotaries = [...mockNotaries];
 
-  // Apply basic filtering
-  if (params.city) {
+  // Search by name or specialty (q parameter)
+  if (params.q && params.q.trim()) {
+    const searchTerm = params.q.toLowerCase().trim();
     filteredNotaries = filteredNotaries.filter((n) =>
-      n.city.toLowerCase().includes(params.city.toLowerCase()),
+      n.profiles?.full_name?.toLowerCase()?.includes(searchTerm) ||
+      n.business_name?.toLowerCase()?.includes(searchTerm) ||
+      n.description?.toLowerCase()?.includes(searchTerm) ||
+      n.services?.some(service => service?.toLowerCase()?.includes(searchTerm)) ||
+      n.specializations?.some(spec => spec?.toLowerCase()?.includes(searchTerm))
     );
   }
 
-  if (params.service) {
+  // City filter
+  if (params.city && params.city !== 'all') {
+    const citySearchTerm = params.city.toLowerCase().replace('-', ' ');
     filteredNotaries = filteredNotaries.filter((n) =>
-      n.services?.includes(params.service),
+      n.city?.toLowerCase()?.includes(citySearchTerm)
     );
   }
 
-  const limit = params.limit || 10;
+  // Service type filter
+  if (params.service && params.service !== 'all') {
+    const serviceMap = {
+      'real-estate': 'Real Estate',
+      'business': 'Business Documents', 
+      'legal': 'Legal Documents',
+      'healthcare': 'Medical Documents',
+      'online': 'Online Notarization',
+      'immigration': 'Immigration',
+      'family-law': 'Family Law'
+    };
+    const mappedService = serviceMap[params.service as keyof typeof serviceMap] || params.service;
+    filteredNotaries = filteredNotaries.filter((n) =>
+      n.services?.some(service => 
+        service?.toLowerCase()?.includes(mappedService?.toLowerCase())
+      )
+    );
+  }
+
+  // Price range filter
+  if (params.priceRange && params.priceRange !== 'all') {
+    filteredNotaries = filteredNotaries.filter((n) => {
+      const rate = n.hourly_rate || 0;
+      switch (params.priceRange) {
+        case '0-50': return rate >= 0 && rate <= 50;
+        case '50-75': return rate > 50 && rate <= 75;
+        case '75-100': return rate > 75 && rate <= 100;
+        case '100+': return rate > 100;
+        default: return true;
+      }
+    });
+  }
+
+  // Service options filters
+  if (params.isOnline === true || params.isOnline === 'true') {
+    filteredNotaries = filteredNotaries.filter((n) => n.is_online === true);
+  }
+  
+  if (params.isMobile === true || params.isMobile === 'true') {
+    filteredNotaries = filteredNotaries.filter((n) => n.is_mobile === true);
+  }
+
+  // Availability filter
+  if (params.availability && params.availability !== 'all') {
+    filteredNotaries = filteredNotaries.filter((n) => {
+      const availability = (n.availability as string)?.toLowerCase();
+      switch (params.availability) {
+        case '24-7': return availability?.includes('24/7');
+        case 'business-hours': return availability?.includes('business hours');
+        case 'evenings': return availability?.includes('evenings');
+        case 'weekends': return availability?.includes('weekends');
+        default: return true;
+      }
+    });
+  }
+
+  // State filter
+  if (params.state) {
+    filteredNotaries = filteredNotaries.filter((n) =>
+      n.state?.toLowerCase() === params.state?.toLowerCase()
+    );
+  }
+
+  // ZIP code filter
+  if (params.zip) {
+    filteredNotaries = filteredNotaries.filter((n) => n.zip_code === params.zip);
+  }
+
+  // Sort results (default by rating, then review count)
+  filteredNotaries.sort((a, b) => {
+    const ratingDiff = (b.rating || 0) - (a.rating || 0);
+    if (ratingDiff !== 0) return ratingDiff;
+    return (b.review_count || 0) - (a.review_count || 0);
+  });
+
+  const limit = params.limit || 20;
   const offset = params.offset || 0;
 
   return {

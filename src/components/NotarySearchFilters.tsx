@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -16,14 +16,43 @@ import {
 import { Search, Filter, X } from "lucide-react";
 
 // Client component for interactive search and filtering
-export default function NotarySearchFilters() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedService, setSelectedService] = useState("all");
-  const [selectedCity, setSelectedCity] = useState("all");
-  const [priceRange, setPriceRange] = useState("all");
-  const [isOnline, setIsOnline] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const [availability, setAvailability] = useState("all");
+interface NotarySearchFiltersProps {
+  onFiltersChange: (filters: SearchFilters) => void;
+  initialFilters?: Partial<SearchFilters>;
+}
+
+export interface SearchFilters {
+  q: string;
+  service: string;
+  city: string;
+  priceRange: string;
+  isOnline: boolean;
+  isMobile: boolean;
+  availability: string;
+}
+
+export default function NotarySearchFilters({ onFiltersChange, initialFilters }: NotarySearchFiltersProps) {
+  const [searchTerm, setSearchTerm] = useState(initialFilters?.q || "");
+  const [selectedService, setSelectedService] = useState(initialFilters?.service || "all");
+  const [selectedCity, setSelectedCity] = useState(initialFilters?.city || "all");
+  const [priceRange, setPriceRange] = useState(initialFilters?.priceRange || "all");
+  const [isOnline, setIsOnline] = useState(initialFilters?.isOnline || false);
+  const [isMobile, setIsMobile] = useState(initialFilters?.isMobile || false);
+  const [availability, setAvailability] = useState(initialFilters?.availability || "all");
+
+  // Trigger filter change when any filter updates
+  useEffect(() => {
+    const filters: SearchFilters = {
+      q: searchTerm,
+      service: selectedService,
+      city: selectedCity,
+      priceRange,
+      isOnline,
+      isMobile,
+      availability,
+    };
+    onFiltersChange?.(filters);
+  }, [searchTerm, selectedService, selectedCity, priceRange, isOnline, isMobile, availability, onFiltersChange]);
 
   const handleClearFilters = () => {
     setSearchTerm("");
@@ -36,16 +65,17 @@ export default function NotarySearchFilters() {
   };
 
   const handleSearch = () => {
-    // In a real app, this would trigger a new search with the current filters
-    console.log("Searching with filters:", {
-      searchTerm,
-      selectedService,
-      selectedCity,
+    // Trigger immediate search with current filters
+    const filters: SearchFilters = {
+      q: searchTerm,
+      service: selectedService,
+      city: selectedCity,
       priceRange,
       isOnline,
       isMobile,
       availability,
-    });
+    };
+    onFiltersChange?.(filters);
   };
 
   return (
@@ -99,8 +129,10 @@ export default function NotarySearchFilters() {
               <SelectItem value="real-estate">Real Estate</SelectItem>
               <SelectItem value="business">Business Documents</SelectItem>
               <SelectItem value="legal">Legal Documents</SelectItem>
-              <SelectItem value="healthcare">Healthcare</SelectItem>
+              <SelectItem value="healthcare">Medical Documents</SelectItem>
               <SelectItem value="online">Online Notarization</SelectItem>
+              <SelectItem value="immigration">Immigration</SelectItem>
+              <SelectItem value="family-law">Family Law</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -120,6 +152,12 @@ export default function NotarySearchFilters() {
               <SelectItem value="sacramento">Sacramento</SelectItem>
               <SelectItem value="fresno">Fresno</SelectItem>
               <SelectItem value="oakland">Oakland</SelectItem>
+              <SelectItem value="anaheim">Anaheim</SelectItem>
+              <SelectItem value="riverside">Riverside</SelectItem>
+              <SelectItem value="bakersfield">Bakersfield</SelectItem>
+              <SelectItem value="modesto">Modesto</SelectItem>
+              <SelectItem value="long-beach">Long Beach</SelectItem>
+              <SelectItem value="santa-barbara">Santa Barbara</SelectItem>
             </SelectContent>
           </Select>
         </div>

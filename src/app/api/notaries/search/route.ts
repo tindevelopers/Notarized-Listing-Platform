@@ -1,12 +1,13 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { isSupabaseConfigured } from "@/lib/supabase/client";
+import { getMockNotariesResponse } from "@/lib/mock-data";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
   try {
-    const supabase = await createClient();
     const { searchParams } = new URL(request.url);
     
     const query = searchParams.get("q");
@@ -16,13 +17,46 @@ export async function GET(request: NextRequest) {
     const service = searchParams.get("service");
     const radius = parseInt(searchParams.get("radius") || "25");
     const limit = parseInt(searchParams.get("limit") || "20");
+    const priceRange = searchParams.get("priceRange");
+    const isOnline = searchParams.get("isOnline") === 'true';
+    const isMobile = searchParams.get("isMobile") === 'true';
+    const availability = searchParams.get("availability");
     
-    if (!query && !state && !city && !zipCode) {
-      return NextResponse.json(
-        { error: "At least one search parameter is required" },
-        { status: 400 }
-      );
+    // Use mock data if Supabase is not configured
+    if (!isSupabaseConfigured) {
+      const mockResponse = getMockNotariesResponse({
+        q: query,
+        state,
+        city,
+        zip: zipCode,
+        service,
+        radius,
+        limit,
+        priceRange,
+        isOnline,
+        isMobile,
+        availability
+      });
+      return NextResponse.json({
+        notaries: mockResponse.notaries,
+        total: mockResponse.total,
+        query: {
+          q: query,
+          state,
+          city,
+          zipCode,
+          service,
+          radius,
+          limit,
+          priceRange,
+          isOnline,
+          isMobile,
+          availability
+        }
+      });
     }
+    
+    const supabase = await createClient();
 
     let supabaseQuery = supabase
       .from("notaries")
