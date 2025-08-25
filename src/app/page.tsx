@@ -256,7 +256,7 @@ export default function HomePage() {
               {/* Main Headline */}
               <div>
                 <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1C1F23] leading-tight mb-8">
-                  A whole world of Notary talent at your fingertips.
+                  Why Notarized?
                 </h2>
               </div>
 
