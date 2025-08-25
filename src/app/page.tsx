@@ -141,7 +141,7 @@ export default function HomePage() {
                 </p>
 
                 {/* Badges */}
-                <div className="flex justify-center items-center gap-3 mb-4">
+                <div className="flex justify-center items-center gap-3 mb-6">
                   <span
                     className="px-3 py-2 rounded-full text-white text-sm font-medium"
                     style={{ backgroundColor: notary.categoryColor }}
@@ -151,6 +151,15 @@ export default function HomePage() {
                   <span className="px-3 py-2 rounded-full border border-[#B1B9CA] text-[#1C1F23] text-sm">
                     {notary.price}
                   </span>
+                </div>
+
+                {/* View Profile Button */}
+                <div className="flex justify-center">
+                  <Button asChild className="w-full bg-[#005DFF] hover:bg-[#0052E6] text-white font-medium">
+                    <Link href={`/notary/${index + 1}`}>
+                      View Profile
+                    </Link>
+                  </Button>
                 </div>
               </div>
             ))}
