@@ -490,9 +490,7 @@ export default function HomePage() {
                 2. Review their profile
               </h3>
               <p className="text-base text-[#5F687A] leading-relaxed">
-                Aliquam sed quam urna mauris laoreet non arcu tellus quisque
-                volutpat enim aliquet et porttitor scelerisque arcu ultrices
-                lorem.
+                Go through detailed profiles of notaries, read reviews from previous clients, and select the one that aligns best with your needs.
               </p>
             </div>
 
