@@ -40,20 +40,26 @@ export default function SearchForm() {
   };
 
   return (
-    <div className="bg-white rounded-2xl p-8 shadow-2xl">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+    <div className="bg-white rounded-[18px] border border-[#EAECF2] p-8 lg:p-10" style={{ boxShadow: '0 4px 20px 0 rgba(0, 93, 255, 0.08)' }}>
+      {/* Search Form Header */}
+      <div className="text-center mb-8">
+        <h3 className="text-xl font-bold text-[#1C1F23] mb-2">Find Your Perfect Notary</h3>
+        <p className="text-base text-[#5F687A]">Search by location and preferences to connect with certified professionals</p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8">
         {/* State Selection */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-semibold text-[#1C1F23] mb-3">
             State
           </label>
           <div className="relative">
-            <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 z-10" />
+            <MapPin className="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-[#5F687A] z-10" />
             <Select value={selectedState} onValueChange={setSelectedState}>
-              <SelectTrigger className="w-full pl-10">
-                <SelectValue placeholder="Select State" />
+              <SelectTrigger className="w-full pl-12 h-12 border-[#EAECF2] rounded-lg bg-white hover:border-[#005DFF] focus:border-[#005DFF] transition-colors">
+                <SelectValue placeholder="Select State" className="text-[#5F687A]" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="rounded-lg border-[#EAECF2]">
                 <SelectItem value="ca">California</SelectItem>
                 <SelectItem value="ny">New York</SelectItem>
                 <SelectItem value="tx">Texas</SelectItem>
@@ -66,16 +72,16 @@ export default function SearchForm() {
 
         {/* City Selection */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-semibold text-[#1C1F23] mb-3">
             City
           </label>
           <div className="relative">
-            <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 z-10" />
+            <MapPin className="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-[#5F687A] z-10" />
             <Select value={selectedCity} onValueChange={setSelectedCity}>
-              <SelectTrigger className="w-full pl-10">
-                <SelectValue placeholder="Select City" />
+              <SelectTrigger className="w-full pl-12 h-12 border-[#EAECF2] rounded-lg bg-white hover:border-[#005DFF] focus:border-[#005DFF] transition-colors">
+                <SelectValue placeholder="Select City" className="text-[#5F687A]" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="rounded-lg border-[#EAECF2]">
                 <SelectItem value="los-angeles">Los Angeles</SelectItem>
                 <SelectItem value="san-francisco">San Francisco</SelectItem>
                 <SelectItem value="san-diego">San Diego</SelectItem>
@@ -87,28 +93,28 @@ export default function SearchForm() {
 
         {/* ZIP Code */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-semibold text-[#1C1F23] mb-3">
             ZIP Code
           </label>
           <Input
             type="text"
-            placeholder="ZIP Code"
+            placeholder="Enter ZIP"
             value={zipCode}
             onChange={(e) => setZipCode(e.target.value)}
-            className="w-full"
+            className="w-full h-12 border-[#EAECF2] rounded-lg bg-white hover:border-[#005DFF] focus:border-[#005DFF] transition-colors px-4 placeholder:text-[#5F687A]"
           />
         </div>
 
         {/* Distance */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Distance
+          <label className="block text-sm font-semibold text-[#1C1F23] mb-3">
+            Radius
           </label>
           <Select value={distance} onValueChange={setDistance}>
-            <SelectTrigger className="w-full">
-              <SelectValue />
+            <SelectTrigger className="w-full h-12 border-[#EAECF2] rounded-lg bg-white hover:border-[#005DFF] focus:border-[#005DFF] transition-colors">
+              <SelectValue className="text-[#1C1F23]" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="rounded-lg border-[#EAECF2]">
               <SelectItem value="5">5 miles</SelectItem>
               <SelectItem value="10">10 miles</SelectItem>
               <SelectItem value="25">25 miles</SelectItem>
@@ -119,24 +125,33 @@ export default function SearchForm() {
         </div>
       </div>
 
-      {/* Search Button */}
-      <div className="flex flex-col sm:flex-row gap-4 items-center">
+      {/* Action Buttons */}
+      <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
         <Button
           onClick={handleSearch}
-          className="w-full sm:w-auto bg-[#005DFF] hover:bg-[#0052E6] text-white px-8 py-3 text-lg font-semibold"
+          size="lg"
+          className="w-full sm:w-auto bg-[#005DFF] hover:bg-[#0052E6] text-white px-8 py-4 text-base font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
         >
           <Search className="w-5 h-5 mr-2" />
-          Search
+          Find Notaries
         </Button>
 
         <Button
           variant="outline"
+          size="lg"
           onClick={handleUseLocation}
-          className="w-full sm:w-auto"
+          className="w-full sm:w-auto border-[#005DFF] text-[#005DFF] hover:bg-[#005DFF] hover:text-white px-6 py-4 text-base font-medium rounded-lg transition-all duration-200"
         >
           <MapPin className="w-4 h-4 mr-2" />
           Use My Location
         </Button>
+      </div>
+
+      {/* Search Tips */}
+      <div className="mt-6 text-center">
+        <p className="text-sm text-[#5F687A]">
+          💡 Tip: Leave fields blank to search all available notaries in your area
+        </p>
       </div>
     </div>
   );
