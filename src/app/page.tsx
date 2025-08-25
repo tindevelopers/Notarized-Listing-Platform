@@ -409,8 +409,7 @@ export default function HomePage() {
                 1. Search for Notaries
               </h3>
               <p className="text-base text-[#5F687A] leading-relaxed">
-                Lorem ipsum dolor sit amet consectetur adipiscing elit venenatis
-                rhoncus facilisi eu tempus et tempor velit viverra enim nibh.
+                Our directory is designed to provide you with a comprehensive view of each notary's expertise and credentials.
               </p>
             </div>
 
